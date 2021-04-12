@@ -6,17 +6,21 @@
 //
 
 import SwiftUI
-import SafariServices
 import Alamofire
 
 let userDefault = UserDefaults.standard
 
 struct Register: View {
     
-    @State private var result: String = ""
     @State private var email: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
+    @State private var termsPresented: Bool = false
+    @State private var conditionsPresented: Bool = false
+    
+    @State private var emailTyping: Bool = false
+    @State private var passwordTyping: Bool = false
+    @State private var usernameTyping: Bool = false
     
     var allfieldsCompleted: Bool {
         return email != "" && username != "" && password != ""
@@ -27,12 +31,11 @@ struct Register: View {
             ScrollView(showsIndicators: false) {
                 logoArea
                 messageArea
-                Text(result)
-                    .font(.largeTitle)
                 inputArea
                 agreement
                 getStartedButton
                 goToLogin
+                Spacer()
             }
             .padding([.leading, .trailing], 24)
             .background(Color.lightPurple)
@@ -86,9 +89,11 @@ struct Register: View {
     var inputArea: some View {
         VStack(alignment: .leading) {
             
-            InputField(inputfield: $email, fieldText: "Email Address", image: "close-img", isSecuredField: false)
-            InputField(inputfield: $username, fieldText: "Username", image: "close-img", isSecuredField: false)
-            InputField(inputfield: $password, fieldText: "Password", image: "eye-img", isSecuredField: true)
+
+            InputField(activeField: $emailTyping, inputfield: $email, fieldText: "Email Address", image: "close-img", isSecuredField: false)
+            InputField(activeField: $usernameTyping, inputfield: $username, fieldText: "Username", image: "close-img", isSecuredField: false)
+            InputField(activeField: $passwordTyping, inputfield: $password, fieldText: "Password", image: "eye-img", isSecuredField: true)
+            
         }
     }
     
@@ -127,57 +132,65 @@ struct Register: View {
     }
     
     var agreement: some View {
-        Text("By continuing you agree to Move’s")
-            .foregroundColor(.white)
-            +  Text(" and Privacy Policy")
+        VStack {
+            HStack {
+                Text("By continuing you agree to Move’s")
+                    .foregroundColor(.white)
+                    .font(.custom(FontManager.BaiJamjuree.medium, size: 14))
+                Spacer()
+            }
+            HStack {
+                Button(action: {
+                    termsPresented.toggle()
+                }, label: {
+                    Text("Terms and Conditions")
+                        .foregroundColor(.white)
+                        .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
+                        .bold()
+                })
+                Text("and")
+                    .foregroundColor(.white)
+                    .font(.custom(FontManager.BaiJamjuree.medium, size: 14))
+                    .padding([.trailing, .leading], -3)
+                Button(action: {
+                    
+                }, label: {
+                    Text("Privacy Policy")
+                        .foregroundColor(.white)
+                        .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
+                        .bold()
+                })
+                Spacer()
+            }
+          
+        }
     }
-   
+    
     var goToLogin: some View {
         HStack {
             Spacer()
-            Text("You already have an account? You can log in here")
-                .font(Font.custom(FontManager.BaiJamjuree.regular, size: 12))
+            Text("You already have an account? You can")
+                .font(Font.custom(FontManager.BaiJamjuree.regular, size: 14))
                 .foregroundColor(.white)
+            Button(action: {
+                //go to login
+            }, label: {
+                Text("log in here")
+                    .foregroundColor(.white)
+                    .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
+                    .bold()
+            })
+            .padding(.leading, -3)
             Spacer()
         }
         .padding(.bottom, 25)
     }
 }
 
-struct Safarilink: View {
-    @State var showSafari = false
-    @State var urlString = "https://duckduckgo.com"
-    
-    var body: some View {
-        Button(action: {
-            self.urlString = "https://duckduckgo.com"
-            self.showSafari = true
-        }) {
-            Text("Present Safari")
-        }
-        .sheet(isPresented: $showSafari) {
-            SafariView(url:URL(string: self.urlString)!)
-        }
-    }
-}
-
-struct SafariView: UIViewControllerRepresentable {
-    
-    let url: URL
-    
-    func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
-        return SFSafariViewController(url: url)
-    }
-    
-    func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
-        
-    }
-    
-}
- 
 struct InputField: View {
+    
+    @Binding var activeField: Bool
     @Binding var inputfield: String
-    @State private var isTyping: Bool = false
     @State private var inputText: String = ""
     @State private var isSecured: Bool = false
     
@@ -187,27 +200,27 @@ struct InputField: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if isTyping || !inputText.isEmpty {
+            if activeField || !inputText.isEmpty {
                 Text(fieldText)
                     .foregroundColor(.fadePurple)
                     .font(Font.custom(FontManager.BaiJamjuree.regular, size: 12))
             }
             HStack {
                 if isSecuredField {
-                    SecureField( isTyping ? "" : fieldText, text: $inputfield)
+                    SecureField( activeField ? "" : fieldText, text: $inputfield)
                         .foregroundColor(.white)
                         .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
                         .padding(.bottom, 25)
                         .onTapGesture(perform: {
-                            isTyping = true
+                            activeField = true
                         })
                 } else {
-                    TextField( isTyping ? "" : fieldText, text: $inputfield)
+                    TextField( activeField ? "" : fieldText, text: $inputfield)
                         .foregroundColor(.white)
                         .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
                         .padding(.bottom, 25)
                         .onTapGesture(perform: {
-                            isTyping = true
+                            activeField = true
                         })
                 }
                 Spacer()
@@ -217,7 +230,7 @@ struct InputField: View {
                             isSecured.toggle()
                         } else {
                             inputText = ""
-                            isTyping = false
+                            activeField = false
                         }
                     }, label: {
                         if isSecuredField {
@@ -234,8 +247,8 @@ struct InputField: View {
                 }
             }
             Divider()
-                .padding(.bottom, isTyping ? 2 : 1)
-                .background(isTyping ? Color.white : Color.fadePurple)
+                .padding(.bottom, activeField ? 2 : 1)
+                .background(activeField ? Color.white : Color.fadePurple)
         }.padding(.bottom, 12)
     }
 }
