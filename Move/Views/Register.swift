@@ -9,8 +9,11 @@ import SwiftUI
 import SafariServices
 import Alamofire
 
+let userDefault = UserDefaults.standard
+
 struct Register: View {
     
+    @State private var result: String = ""
     @State private var email: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
@@ -24,6 +27,8 @@ struct Register: View {
             ScrollView(showsIndicators: false) {
                 logoArea
                 messageArea
+                Text(result)
+                    .font(.largeTitle)
                 inputArea
                 agreement
                 getStartedButton
@@ -90,7 +95,18 @@ struct Register: View {
     var getStartedButton: some View {
         HStack {
             Button(action: {
-               
+                API.register(username: username, email: email, password: password) { (result) in
+                    switch result {
+                    case .success(let user):
+                        userDefault.setValue(username, forKey: user.username)
+                        userDefault.setValue(email, forKey: user.email)
+                        userDefault.setValue(password, forKey: user.password)
+                        print(user.email)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+              
             }, label: {
                 Spacer()
                 Text("Get started")
@@ -111,7 +127,9 @@ struct Register: View {
     }
     
     var agreement: some View {
-        Text("By continuing you agree to Move’s") +  Text("and Privacy Policy")
+        Text("By continuing you agree to Move’s")
+            .foregroundColor(.white)
+            +  Text(" and Privacy Policy")
     }
    
     var goToLogin: some View {
@@ -123,17 +141,6 @@ struct Register: View {
             Spacer()
         }
         .padding(.bottom, 25)
-    }
-    
-    private func getApiCall() {
-        
-        /* AF.request(api).response { response in
-         if let data = response.data {
-         let dataString = String(data: data, encoding: .utf8)
-         result = dataString ?? "No response"
-         print(result)
-         }
-         }*/
     }
 }
 
@@ -184,14 +191,13 @@ struct InputField: View {
                 Text(fieldText)
                     .foregroundColor(.fadePurple)
                     .font(Font.custom(FontManager.BaiJamjuree.regular, size: 12))
-                    .padding(.bottom, 3)
             }
             HStack {
                 if isSecuredField {
                     SecureField( isTyping ? "" : fieldText, text: $inputfield)
                         .foregroundColor(.white)
                         .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
-                        .padding([.bottom, .top], 15)
+                        .padding(.bottom, 25)
                         .onTapGesture(perform: {
                             isTyping = true
                         })
@@ -199,7 +205,7 @@ struct InputField: View {
                     TextField( isTyping ? "" : fieldText, text: $inputfield)
                         .foregroundColor(.white)
                         .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
-                        .padding([.bottom, .top], 15)
+                        .padding(.bottom, 25)
                         .onTapGesture(perform: {
                             isTyping = true
                         })
@@ -236,11 +242,11 @@ struct InputField: View {
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
+      //  ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
             Register()
-                .previewDevice(PreviewDevice(rawValue: deviceName))
-                .previewDisplayName(deviceName)
-        }
+          //      .previewDevice(PreviewDevice(rawValue: deviceName))
+        //        .previewDisplayName(deviceName)
+       // }
             .preferredColorScheme(.dark)
     }
 }

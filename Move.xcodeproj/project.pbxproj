@@ -28,6 +28,8 @@
 		ECDD400026242985003C659F /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFD26242985003C659F /* Map.swift */; };
 		ECDD400126242985003C659F /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFF26242985003C659F /* Onboarding.swift */; };
 		ECDD400626242B49003C659F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* User.swift */; };
+		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
+		ECE337C326246AF5009EC353 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337C226246AF5009EC353 /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		ECDD3FFD26242985003C659F /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		ECDD3FFF26242985003C659F /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		ECDD400526242B49003C659F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		ECE337C226246AF5009EC353 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,7 @@
 				ECDD3FC126242836003C659F /* ContentView.swift */,
 				ECDD400526242B49003C659F /* User.swift */,
 				ECDD3FFE26242985003C659F /* Views */,
+				ECE337BE26243A57009EC353 /* Services */,
 				ECDD3FE826242965003C659F /* Helpers */,
 				ECDD3FC826242837003C659F /* LaunchScreen.storyboard */,
 				ECDD3FD3262428B3003C659F /* Assets.xcassets */,
@@ -113,6 +118,7 @@
 			children = (
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
+				ECE337C226246AF5009EC353 /* UserDefaults.swift */,
 				ECDD3FE926242970003C659F /* LocationManager.swift */,
 				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
 				ECDD3FEB26242970003C659F /* ReusableButton.swift */,
@@ -139,6 +145,14 @@
 				ECDD3FFF26242985003C659F /* Onboarding.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		ECE337BE26243A57009EC353 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ECE337BB26243A51009EC353 /* Api.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,8 +243,10 @@
 				ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableButton.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
+				ECE337C326246AF5009EC353 /* UserDefaults.swift in Sources */,
 				ECDD3FED26242970003C659F /* LocationManager.swift in Sources */,
 				ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */,
+				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */,
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
 				ECDD400026242985003C659F /* Map.swift in Sources */,
