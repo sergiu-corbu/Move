@@ -12,7 +12,7 @@ struct User: Identifiable, Codable {
     let email: String
     let username: String
     let password: String
-    var licenseConfirmed: Bool = false
+    //var licenseConfirmed: Bool = false
     //var trips: [Trip] = []
     //let profileImage: Image = ""
     
@@ -22,13 +22,4 @@ struct User: Identifiable, Codable {
         case email = "email"
         case password = "password"
     }
-}
-
-class UserViewModel: ObservableObject {
-    
-    init() {
-        
-    }
-    // dowonlad user data from server
-    //save info in userdefaults
 }

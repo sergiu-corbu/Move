@@ -21,7 +21,7 @@ struct Register: View {
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
     @State private var usernameTyping: Bool = false
-    
+     
     var allfieldsCompleted: Bool {
         return email != "" && username != "" && password != ""
     }
@@ -88,12 +88,22 @@ struct Register: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            
-
-            InputField(activeField: $emailTyping, inputfield: $email, fieldText: "Email Address", image: "close-img", isSecuredField: false)
-            InputField(activeField: $usernameTyping, inputfield: $username, fieldText: "Username", image: "close-img", isSecuredField: false)
-            InputField(activeField: $passwordTyping, inputfield: $password, fieldText: "Password", image: "eye-img", isSecuredField: true)
-            
+            InputField(activeField: $emailTyping, inputfield: $email, fieldText: "Email Address", image: "close-img", isSecuredField: false, action: {
+                emailTyping = true
+                usernameTyping = false
+                passwordTyping = false
+            })
+            InputField(activeField: $usernameTyping, inputfield: $username, fieldText: "Username", image: "close-img", isSecuredField: false, action: {
+                emailTyping = false
+                usernameTyping = true
+                passwordTyping = false
+            })
+            InputField(activeField: $passwordTyping, inputfield: $password, fieldText: "Password", image: "eye-img", isSecuredField: true, action: {
+                emailTyping = false
+                usernameTyping = false
+                passwordTyping = true
+            })
+        
         }
     }
     
@@ -102,11 +112,8 @@ struct Register: View {
             Button(action: {
                 API.register(username: username, email: email, password: password) { (result) in
                     switch result {
-                    case .success(let user):
-                        userDefault.setValue(username, forKey: user.username)
-                        userDefault.setValue(email, forKey: user.email)
-                        userDefault.setValue(password, forKey: user.password)
-                        print(user.email)
+                    case .success(let result):
+                      print("success")
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -162,8 +169,8 @@ struct Register: View {
                 })
                 Spacer()
             }
-          
         }
+        .padding(.top, 20)
     }
     
     var goToLogin: some View {
@@ -172,6 +179,7 @@ struct Register: View {
             Text("You already have an account? You can")
                 .font(Font.custom(FontManager.BaiJamjuree.regular, size: 14))
                 .foregroundColor(.white)
+
             Button(action: {
                 //go to login
             }, label: {
@@ -180,86 +188,19 @@ struct Register: View {
                     .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
                     .bold()
             })
-            .padding(.leading, -3)
             Spacer()
         }
         .padding(.bottom, 25)
     }
 }
 
-struct InputField: View {
-    
-    @Binding var activeField: Bool
-    @Binding var inputfield: String
-    @State private var inputText: String = ""
-    @State private var isSecured: Bool = false
-    
-    let fieldText: String
-    let image: String
-    let isSecuredField: Bool
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            if activeField || !inputText.isEmpty {
-                Text(fieldText)
-                    .foregroundColor(.fadePurple)
-                    .font(Font.custom(FontManager.BaiJamjuree.regular, size: 12))
-            }
-            HStack {
-                if isSecuredField {
-                    SecureField( activeField ? "" : fieldText, text: $inputfield)
-                        .foregroundColor(.white)
-                        .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
-                        .padding(.bottom, 25)
-                        .onTapGesture(perform: {
-                            activeField = true
-                        })
-                } else {
-                    TextField( activeField ? "" : fieldText, text: $inputfield)
-                        .foregroundColor(.white)
-                        .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
-                        .padding(.bottom, 25)
-                        .onTapGesture(perform: {
-                            activeField = true
-                        })
-                }
-                Spacer()
-                if !inputText.isEmpty {
-                    Button(action: {
-                        if isSecuredField {
-                            isSecured.toggle()
-                        } else {
-                            inputText = ""
-                            activeField = false
-                        }
-                    }, label: {
-                        if isSecuredField {
-                            Image(isSecured ? "eye-img" : "close-img")
-                                .padding(.all, 5)
-                                .foregroundColor(.fadePurple)
-                        } else if !isSecuredField {
-                            Image(image)
-                                .padding(.all, 5)
-                                .foregroundColor(.fadePurple)
-                        }
-                        
-                    })
-                }
-            }
-            Divider()
-                .padding(.bottom, activeField ? 2 : 1)
-                .background(activeField ? Color.white : Color.fadePurple)
-        }.padding(.bottom, 12)
-    }
-}
-
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-      //  ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
+        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
             Register()
-          //      .previewDevice(PreviewDevice(rawValue: deviceName))
-        //        .previewDisplayName(deviceName)
-       // }
+                .previewDevice(PreviewDevice(rawValue: deviceName))
+                .previewDisplayName(deviceName)
+        }
             .preferredColorScheme(.dark)
     }
 }
