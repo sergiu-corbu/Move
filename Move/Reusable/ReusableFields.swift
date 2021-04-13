@@ -10,34 +10,36 @@ import SwiftUI
 struct InputField: View {
     
     @Binding var activeField: Bool
-    @Binding var inputfield: String
-    @State private var isSecured: Bool = false
+    @Binding var input: String
+    @State private var showSecured: Bool = true
     
-    let fieldText: String
+    let textField: String
     let image: String
     let isSecuredField: Bool
     let action: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            if  !inputfield.isEmpty || activeField {
-                Text(fieldText)
+            if  !input.isEmpty || activeField {
+                Text(textField)
                     .foregroundColor(.fadePurple)
                     .font(Font.custom(FontManager.BaiJamjuree.regular, size: 14))
             }
             HStack {
-                if isSecuredField {
-                    SecureField( activeField ? "" : fieldText, text: $inputfield)
+                if showSecured {
+                    SecureField( activeField ? "" : textField, text: $input)
                         .foregroundColor(.white)
                         .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
+                        .accentColor(.white)
                         .padding(.bottom, 10)
                         .padding(.top, 5)
                         .disableAutocorrection(true)
                         .onTapGesture { action() }
                 } else {
-                    TextField( activeField ? "" : fieldText, text: $inputfield)
+                    TextField( activeField ? "" : textField, text: $input)
                         .foregroundColor(.white)
                         .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
+                        .accentColor(.white)
                         .padding(.bottom, 10)
                         .padding(.top, 5)
                         .disableAutocorrection(true)
@@ -47,31 +49,33 @@ struct InputField: View {
                         }
                 }
                 Spacer()
-                if !inputfield.isEmpty {
+                if !input.isEmpty && activeField {
                     Button(action: {
-                        if isSecuredField {
-                            isSecured.toggle()
-                        } else {
-                            inputfield = ""
+                        if isSecuredField { showSecured.toggle() } else {
+                            input = ""
                             activeField = false
                         }
                     }, label: {
-                      //  if isSecuredField {
-                       //     Image(isSecured ? "eye-img" : "close-img")
-                      //          .padding(.all, 5)
-                      //          .foregroundColor(.fadePurple)
-                       // } else if !isSecuredField {
+                        if isSecuredField {
+                            Image(showSecured ? "eye-img" : "eye-off-img")
+                                .padding(.all, 5)
+                                .foregroundColor(.fadePurple)
+                        } else if !isSecuredField {
                             Image(image)
                                 .padding(.all, 5)
                                 .foregroundColor(.fadePurple)
-                       // }
-                        
+                        }
                     })
                 }
             }
             Divider()
                 .padding(.bottom, activeField ? 2 : 1)
                 .background(activeField ? Color.white : Color.fadePurple)
+            if isSecuredField && input == ""  && activeField {
+            Text("Use a strong password (min. 8 characters and use symbols")
+                .font(.custom(FontManager.BaiJamjuree.regular, size: 13))
+                .foregroundColor(.white)
+            }
         }.padding([.top, .bottom], 6)
     }
 }
@@ -93,6 +97,7 @@ struct InputPasswordReset: View {
                 TextField(activeField ? "" : text, text: $inputField)
                     .foregroundColor(.white)
                     .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
+                    .accentColor(.white)
                     .padding(.bottom, 10)
                     .padding(.top, 5)
                     .disableAutocorrection(true)

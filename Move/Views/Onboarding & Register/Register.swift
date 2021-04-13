@@ -8,8 +8,6 @@
 import SwiftUI
 import Alamofire
 
-let userDefault = UserDefaults.standard
-
 struct Register: View {
     
     @State private var email: String = ""
@@ -88,17 +86,17 @@ struct Register: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, inputfield: $email, fieldText: "Email Address", image: "close-img", isSecuredField: false, action: {
+            InputField(activeField: $emailTyping, input: $email, textField: "Email Address", image: "close-img", isSecuredField: false, action: {
                 emailTyping = true
                 usernameTyping = false
                 passwordTyping = false
             })
-            InputField(activeField: $usernameTyping, inputfield: $username, fieldText: "Username", image: "close-img", isSecuredField: false, action: {
+            InputField(activeField: $usernameTyping, input: $username, textField: "Username", image: "close-img", isSecuredField: false, action: {
                 emailTyping = false
                 usernameTyping = true
                 passwordTyping = false
             })
-            InputField(activeField: $passwordTyping, inputfield: $password, fieldText: "Password", image: "eye-img", isSecuredField: true, action: {
+            InputField(activeField: $passwordTyping, input: $password, textField: "Password", image: "eye-img", isSecuredField: true, action: {
                 emailTyping = false
                 usernameTyping = false
                 passwordTyping = true
@@ -112,28 +110,29 @@ struct Register: View {
             Button(action: {
                 API.register(username: username, email: email, password: password) { (result) in
                     switch result {
-                    case .success(let result):
+                    case .success(_):
                       print("success")
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
                 }
-              
             }, label: {
-                Spacer()
-                Text("Get started")
-                    .foregroundColor(allfieldsCompleted ? .white : .fadePurple)
-                    .font(allfieldsCompleted ? Font.custom(FontManager.BaiJamjuree.bold, size: 16)  : Font.custom(FontManager.BaiJamjuree.medium, size: 16))
-                Spacer()
+                HStack{
+                    Spacer()
+                    Text("Get started")
+                        .foregroundColor(allfieldsCompleted ? .white : .fadePurple)
+                        .font(allfieldsCompleted ? Font.custom(FontManager.BaiJamjuree.bold, size: 16)  : Font.custom(FontManager.BaiJamjuree.medium, size: 16))
+                    Spacer()
+                }
+                .padding(.all, 20)
+                .background(RoundedRectangle(cornerRadius: 16.0)
+                .strokeBorder(Color.coralRed, lineWidth: 1)
+                .background(RoundedRectangle(cornerRadius: 16.0).fill(allfieldsCompleted ? Color.coralRed : Color.clear))
+                .opacity(allfieldsCompleted ? 1 : 0.3)
+                
+                )
+                .disabled(!allfieldsCompleted)
             })
-            .padding(.all, 20)
-            .background(RoundedRectangle(cornerRadius: 16.0)
-                            .strokeBorder(Color.coralRed, lineWidth: 1)
-                            .background(RoundedRectangle(cornerRadius: 16.0).fill(allfieldsCompleted ? Color.coralRed : Color.clear))
-                            .opacity(allfieldsCompleted ? 1 : 0.3)
-                        
-            )
-            .disabled(!allfieldsCompleted)
         }
         .padding([.top, .bottom], 20)
     }
@@ -154,6 +153,7 @@ struct Register: View {
                         .foregroundColor(.white)
                         .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
                         .bold()
+                        .underline()
                 })
                 Text("and")
                     .foregroundColor(.white)
@@ -166,6 +166,7 @@ struct Register: View {
                         .foregroundColor(.white)
                         .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
                         .bold()
+                        .underline()
                 })
                 Spacer()
             }
@@ -187,6 +188,7 @@ struct Register: View {
                     .foregroundColor(.white)
                     .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
                     .bold()
+                    .underline()
             })
             Spacer()
         }
@@ -196,11 +198,13 @@ struct Register: View {
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-            Register()
-                .previewDevice(PreviewDevice(rawValue: deviceName))
-                .previewDisplayName(deviceName)
-        }
+//        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
+//            Register()
+//                .previewDevice(PreviewDevice(rawValue: deviceName))
+//                .previewDisplayName(deviceName)
+//        }
+//            .preferredColorScheme(.dark)
+        Register()
             .preferredColorScheme(.dark)
     }
 }

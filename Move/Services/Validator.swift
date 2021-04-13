@@ -8,4 +8,6 @@
 import Foundation
 
 
-func validateFields(email: String, password: String) 
+func validateFields(email: String, password: String) {
+    
+}

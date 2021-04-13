@@ -23,7 +23,7 @@ struct AuthResult: Decodable {
     let token: String
         
     enum CodingKeys: String, CodingKey {
-        case user = "user" //??
+        case user = "user"
         case token = "token"
     }
 }
