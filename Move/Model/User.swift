@@ -11,7 +11,7 @@ struct User: Identifiable, Codable {
     let id: String
     let email: String
     let username: String
-    let password: String
+
     //var licenseConfirmed: Bool = false
     //var trips: [Trip] = []
     //let profileImage: Image = ""
@@ -20,6 +20,6 @@ struct User: Identifiable, Codable {
         case id = "_id"
         case username = "username"
         case email = "email"
-        case password = "password"
+      
     }
 }

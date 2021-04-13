@@ -10,8 +10,8 @@ import NavigationStack
 
 struct ContentView: View {
     var body: some View {
-        Register()
-       // FirstOpen()
+       // Register()
+        FirstOpen()
         //MapView()
     }
 }
@@ -22,7 +22,9 @@ struct FirstOpen: View {
     var body: some View {
         NavigationStackView(navigationStack: navigationViewModel) {
             Onboarding {
-                navigationViewModel.push(Register())
+                navigationViewModel.push(Register(onRegisterComplete: {
+                    navigationViewModel.push(MapView())
+                }))
             }
         }
     }

@@ -15,38 +15,33 @@ struct Register: View {
     @State private var password: String = ""
     @State private var termsPresented: Bool = false
     @State private var conditionsPresented: Bool = false
-    
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
     @State private var usernameTyping: Bool = false
+    
+    let onRegisterComplete: () -> Void
      
     var allfieldsCompleted: Bool {
         return email != "" && username != "" && password != ""
     }
     
     var body: some View {
-        ZStack {
-            ScrollView(showsIndicators: false) {
-                logoArea
-                messageArea
-                inputArea
-                agreement
-                getStartedButton
-                goToLogin
-                Spacer()
-            }
-            .padding([.leading, .trailing], 24)
-            .background(Color.lightPurple)
-            .edgesIgnoringSafeArea(.all)
-            
-            Image("Rectangle-img")
-                .offset(x: 80, y: -290)
-                .fixedSize()
-            Image("Rectangle-img")
-                .rotationEffect(.init(degrees: 180.0))
-                .offset(x: -120, y: 290)
-                .fixedSize()
+        ScrollView(showsIndicators: false) {
+            logoArea
+            messageArea
+            inputArea
+            agreement
+            getStartedButton
+            goToLogin
+            Spacer()
         }
+        .padding([.leading, .trailing], 24)
+        .background(
+            Image("rect-background-img")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        )
+        .edgesIgnoringSafeArea(.all)
     }
     
     var logoArea: some View {
@@ -110,8 +105,8 @@ struct Register: View {
             Button(action: {
                 API.register(username: username, email: email, password: password) { (result) in
                     switch result {
-                    case .success(_):
-                      print("success")
+                    case .success:
+                        onRegisterComplete()
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -198,13 +193,13 @@ struct Register: View {
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-//        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-//            Register()
-//                .previewDevice(PreviewDevice(rawValue: deviceName))
-//                .previewDisplayName(deviceName)
-//        }
-//            .preferredColorScheme(.dark)
-        Register()
-            .preferredColorScheme(.dark)
+        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
+            Register(onRegisterComplete: {})
+                .previewDevice(PreviewDevice(rawValue: deviceName))
+                .previewDisplayName(deviceName)
+        }
+        .preferredColorScheme(.dark)
+        //Register(onRegisterComplete: {})
+          //  .preferredColorScheme(.dark)
     }
 }

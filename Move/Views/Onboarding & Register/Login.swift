@@ -19,27 +19,21 @@ struct Login: View {
     }
     
     var body: some View {
-        ZStack {
-            ScrollView(showsIndicators: false) {
-                logoArea
-                messageArea
-                inputArea
-                getStartedButton
-                goToRegister
-                Spacer()
-            }
-            .padding([.leading, .trailing], 24)
-            .background(Color.lightPurple)
-            .edgesIgnoringSafeArea(.all)
-            
-            Image("Rectangle-img")
-                .offset(x: 80, y: -290)
-                .fixedSize()
-            Image("Rectangle-img")
-                .rotationEffect(.init(degrees: 180.0))
-                .offset(x: -120, y: 290)
-                .fixedSize()
+        ScrollView(showsIndicators: false) {
+            logoArea
+            messageArea
+            inputArea
+            getStartedButton
+            goToRegister
+            Spacer()
         }
+        .padding([.leading, .trailing], 24)
+        .background(
+            Image("rect-background-img")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        )
+        .edgesIgnoringSafeArea(.all)
     }
     
     var logoArea: some View {

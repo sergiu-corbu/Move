@@ -26,7 +26,7 @@ struct InputField: View {
                     .font(Font.custom(FontManager.BaiJamjuree.regular, size: 14))
             }
             HStack {
-                if showSecured {
+                if showSecured && isSecuredField {
                     SecureField( activeField ? "" : textField, text: $input)
                         .foregroundColor(.white)
                         .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))

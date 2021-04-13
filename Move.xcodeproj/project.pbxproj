@@ -99,6 +99,14 @@
 			path = "Onboarding & Register";
 			sourceTree = "<group>";
 		};
+		EC0B576C2625C04B005F16CB /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				ECDD3FFD26242985003C659F /* Map.swift */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
 		EC1673CD2625849B007A180D /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,7 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FC126242836003C659F /* ContentView.swift */,
-				ECDD3FFD26242985003C659F /* Map.swift */,
+				EC0B576C2625C04B005F16CB /* MainView */,
 				EC0B576726259E06005F16CB /* Onboarding & Register */,
 			);
 			path = Views;

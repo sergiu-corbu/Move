@@ -49,4 +49,23 @@ class API {
             }
         }
     }
+    
+    static func login(email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void ) {
+        
+        let path = baseUrl + "user/login"
+        AF.request( path, method: .post, parameters: [ "email": email, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
+            if let data = response.data {
+                let debugString = String(data: data, encoding: .utf8)
+                print(debugString ?? "") //delete  after
+                do {
+                    let result = try JSONDecoder().decode(AuthResult.self, from: data)
+                    callback(.success(result))
+                } catch (let error) {
+                    callback(.failure(error))
+                }
+            } else {
+                callback(.failure(APIError(message: "Missing data")))
+            }
+        }
+    }
 }
