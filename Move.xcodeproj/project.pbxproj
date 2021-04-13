@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		EC0B576526259DF8005F16CB /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B576426259DF8005F16CB /* Login.swift */; };
 		EC0B576A2625A1DB005F16CB /* UIModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57692625A1DB005F16CB /* UIModifiers.swift */; };
+		EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */; };
+		EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57732625CC73005F16CB /* ValidationSuccess.swift */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
 		EC1673CB262581D1007A180D /* ReusableFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673CA262581D1007A180D /* ReusableFields.swift */; };
@@ -43,6 +45,8 @@
 /* Begin PBXFileReference section */
 		EC0B576426259DF8005F16CB /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		EC0B57692625A1DB005F16CB /* UIModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIModifiers.swift; sourceTree = "<group>"; };
+		EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInProgress.swift; sourceTree = "<group>"; };
+		EC0B57732625CC73005F16CB /* ValidationSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSuccess.swift; sourceTree = "<group>"; };
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		EC1673CA262581D1007A180D /* ReusableFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableFields.swift; sourceTree = "<group>"; };
@@ -105,6 +109,15 @@
 				ECDD3FFD26242985003C659F /* Map.swift */,
 			);
 			name = MainView;
+			sourceTree = "<group>";
+		};
+		EC0B576F2625C5BA005F16CB /* LicenceValidation */ = {
+			isa = PBXGroup;
+			children = (
+				EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */,
+				EC0B57732625CC73005F16CB /* ValidationSuccess.swift */,
+			);
+			name = LicenceValidation;
 			sourceTree = "<group>";
 		};
 		EC1673CD2625849B007A180D /* Reusable */ = {
@@ -203,8 +216,9 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FC126242836003C659F /* ContentView.swift */,
-				EC0B576C2625C04B005F16CB /* MainView */,
+				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
 				EC0B576726259E06005F16CB /* Onboarding & Register */,
+				EC0B576C2625C04B005F16CB /* MainView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +320,7 @@
 				ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */,
 				ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */,
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
+				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableButtons.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				EC1673CB262581D1007A180D /* ReusableFields.swift in Sources */,
@@ -317,6 +332,7 @@
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
 				EC1673D026258E41007A180D /* Validator.swift in Sources */,
+				EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */,
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
 				ECDD400026242985003C659F /* Map.swift in Sources */,
