@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BetterSafariView
 import Alamofire
 
 struct Register: View {
@@ -13,22 +14,29 @@ struct Register: View {
     @State private var email: String = ""
     @State private var username: String = ""
     @State private var password: String = ""
-    @State private var termsPresented: Bool = false
-    @State private var conditionsPresented: Bool = false
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
     @State private var usernameTyping: Bool = false
     
+    @State private var termsPresented: Bool = false
+    @State private var conditionsPresented: Bool = false
+    @State private var isLoading: Bool = false
+    
+    let switchLogin: () -> Void
     let onRegisterComplete: () -> Void
-     
     var allfieldsCompleted: Bool {
-        return email != "" && username != "" && password != ""
+        return email != "" && username != "" && password != "" && isLoading == false
     }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             logoArea
             messageArea
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                    .scaleEffect(3)
+            }
             inputArea
             agreement
             getStartedButton
@@ -40,8 +48,9 @@ struct Register: View {
             Image("rect-background-img")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
         )
-        .edgesIgnoringSafeArea(.all)
+      //  .edgesIgnoringSafeArea(.all)
     }
     
     var logoArea: some View {
@@ -96,40 +105,28 @@ struct Register: View {
                 usernameTyping = false
                 passwordTyping = true
             })
-        
         }
     }
     
     var getStartedButton: some View {
         HStack {
             Button(action: {
+                isLoading = true
                 API.register(username: username, email: email, password: password) { (result) in
                     switch result {
-                    case .success:
-                        onRegisterComplete()
-                    case .failure(let error):
-                        print(error.localizedDescription)
+                        case .success:
+                            onRegisterComplete()
+                            isLoading = false
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                            isLoading = false
                     }
                 }
             }, label: {
-                HStack{
-                    Spacer()
-                    Text("Get started")
-                        .foregroundColor(allfieldsCompleted ? .white : .fadePurple)
-                        .font(allfieldsCompleted ? Font.custom(FontManager.BaiJamjuree.bold, size: 16)  : Font.custom(FontManager.BaiJamjuree.medium, size: 16))
-                    Spacer()
-                }
-                .padding(.all, 20)
-                .background(RoundedRectangle(cornerRadius: 16.0)
-                .strokeBorder(Color.coralRed, lineWidth: 1)
-                .background(RoundedRectangle(cornerRadius: 16.0).fill(allfieldsCompleted ? Color.coralRed : Color.clear))
-                .opacity(allfieldsCompleted ? 1 : 0.3)
-                
-                )
-                .disabled(!allfieldsCompleted)
+                AuthButton(enabled: allfieldsCompleted, text: "Get started")
             })
+            .padding([.top, .bottom], 20)
         }
-        .padding([.top, .bottom], 20)
     }
     
     var agreement: some View {
@@ -142,7 +139,7 @@ struct Register: View {
             }
             HStack {
                 Button(action: {
-                    termsPresented.toggle()
+                    termsPresented = true
                 }, label: {
                     Text("Terms and Conditions")
                         .foregroundColor(.white)
@@ -150,6 +147,10 @@ struct Register: View {
                         .bold()
                         .underline()
                 })
+                .safariView(isPresented: $termsPresented) {
+                    SafariView(url: URL(string: "https://tapptitude.com")!, configuration: SafariView.Configuration(entersReaderIfAvailable: false, barCollapsingEnabled: true))
+                        .dismissButtonStyle(.close)
+                }
                 Text("and")
                     .foregroundColor(.white)
                     .font(.custom(FontManager.BaiJamjuree.medium, size: 14))
@@ -163,6 +164,10 @@ struct Register: View {
                         .bold()
                         .underline()
                 })
+                .safariView(isPresented: $termsPresented) {
+                    SafariView(url: URL(string: "https://tapptitude.com")!, configuration: SafariView.Configuration(entersReaderIfAvailable: false, barCollapsingEnabled: true))
+                        .dismissButtonStyle(.close)
+                }
                 Spacer()
             }
         }
@@ -177,7 +182,7 @@ struct Register: View {
                 .foregroundColor(.white)
 
             Button(action: {
-                //go to login
+                
             }, label: {
                 Text("log in here")
                     .foregroundColor(.white)
@@ -189,12 +194,19 @@ struct Register: View {
         }
         .padding(.bottom, 25)
     }
+    
+    func startApiCall () {
+        isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() ) {
+            isLoading = false
+        }
+    }
 }
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-            Register(onRegisterComplete: {})
+            Register(switchLogin: {}, onRegisterComplete: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

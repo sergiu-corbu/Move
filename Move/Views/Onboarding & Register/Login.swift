@@ -7,13 +7,17 @@
 
 import SwiftUI
 import Alamofire
+import NavigationStack
 
 struct Login: View {
+    
     @State private var email: String = ""
     @State private var password: String = ""
-
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
+    @State private var isLoading: Bool = false
+    
+    let onLoginCompleted: () -> Void
     var allfieldsCompleted: Bool {
         return email != ""  && password != ""
     }
@@ -22,6 +26,11 @@ struct Login: View {
         ScrollView(showsIndicators: false) {
             logoArea
             messageArea
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                    .scaleEffect(3)
+            }
             inputArea
             getStartedButton
             goToRegister
@@ -88,36 +97,24 @@ struct Login: View {
     var getStartedButton: some View {
         HStack {
             Button(action: {
-               /* API.register(username: username, email: email, password: password) { (result) in
+                isLoading = true
+                API.login(email: email, password: password) { (result) in
                     switch result {
-                    case .success(_):
-                      print("success")
-                    case .failure(let error):
-                        print(error.localizedDescription)
+                        case .success:
+                            onLoginCompleted()
+                            isLoading = false
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                            isLoading = false
                     }
-                }*/
-            }, label: {
-                HStack{
-                    Spacer()
-                    Text("Login")
-                        .foregroundColor(allfieldsCompleted ? .white : .fadePurple)
-                        .font(allfieldsCompleted ? Font.custom(FontManager.BaiJamjuree.bold, size: 16)  : Font.custom(FontManager.BaiJamjuree.medium, size: 16))
-                    Spacer()
                 }
-                .padding(.all, 20)
-                .background(RoundedRectangle(cornerRadius: 16.0)
-                .strokeBorder(Color.coralRed, lineWidth: 1)
-                .background(RoundedRectangle(cornerRadius: 16.0).fill(allfieldsCompleted ? Color.coralRed : Color.clear))
-                .opacity(allfieldsCompleted ? 1 : 0.3)
-                
-                )
-                .disabled(!allfieldsCompleted)
+            }, label: {
+                AuthButton(enabled: allfieldsCompleted, text: "Login")
             })
         }
         .padding([.top, .bottom], 20)
     }
-    
-   
+
     var goToRegister: some View {
         HStack {
             Spacer()
@@ -126,7 +123,7 @@ struct Login: View {
                 .foregroundColor(.white)
 
             Button(action: {
-                //go to register
+                //move to register
             }, label: {
                 Text("start with one here")
                     .foregroundColor(.white)
@@ -142,6 +139,6 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        Login()
+        Login(onLoginCompleted: {})
     }
 }

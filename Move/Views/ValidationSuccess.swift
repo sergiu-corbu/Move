@@ -35,7 +35,7 @@ struct ValidationSuccess: View {
                 .foregroundColor(.white)
                 .font(.custom(FontManager.BaiJamjuree.bold, size: 34.0))
             Spacer()
-        }
+    }
         .padding(.top, 70)
     }
     

@@ -22,7 +22,12 @@ struct FirstOpen: View {
     var body: some View {
         NavigationStackView(navigationStack: navigationViewModel) {
             Onboarding {
-                navigationViewModel.push(Register(onRegisterComplete: {
+                navigationViewModel.push(Register(switchLogin: {
+                    navigationViewModel.push(Login(onLoginCompleted: {
+                        navigationViewModel.push(MapView())
+                    }
+                    ))
+                }, onRegisterComplete: {
                     navigationViewModel.push(MapView())
                 }))
             }

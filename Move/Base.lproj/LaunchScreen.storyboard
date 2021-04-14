@@ -27,7 +27,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8oi-vt-9Iq"/>
-                        <color key="backgroundColor" name="darkPurple"/>
+                        <color key="backgroundColor" name="lightPurple"/>
                         <constraints>
                             <constraint firstItem="TGU-9s-3cY" firstAttribute="top" secondItem="8oi-vt-9Iq" secondAttribute="top" constant="32" id="EPi-YT-2cy"/>
                             <constraint firstItem="8oi-vt-9Iq" firstAttribute="bottom" secondItem="TGU-9s-3cY" secondAttribute="bottom" constant="32" id="HjO-st-VVs"/>
@@ -48,8 +48,8 @@
         <image name="group4-img" width="338" height="338"/>
         <image name="logo-img" width="175" height="40"/>
         <image name="xiaomi-img" width="645" height="684"/>
-        <namedColor name="darkPurple">
-            <color red="0.12941176470588237" green="0.043137254901960784" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="lightPurple">
+            <color red="0.23137254901960785" green="0.066666666666666666" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

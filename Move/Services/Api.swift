@@ -30,7 +30,7 @@ struct AuthResult: Decodable {
 
 class API {
     static let baseUrl: String = "https://escooter-tapp.herokuapp.com/api/"
-    
+
     static func register(username: String, email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void ) {
         
         let path = baseUrl + "user/register"

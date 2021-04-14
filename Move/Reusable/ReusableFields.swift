@@ -76,7 +76,9 @@ struct InputField: View {
                 .font(.custom(FontManager.BaiJamjuree.regular, size: 13))
                 .foregroundColor(.white)
             }
-        }.padding([.top, .bottom], 6)
+        }
+        .padding([.top, .bottom], 6)
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

@@ -15,6 +15,7 @@
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
 		EC1673CB262581D1007A180D /* ReusableFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673CA262581D1007A180D /* ReusableFields.swift */; };
 		EC1673D026258E41007A180D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673CF26258E41007A180D /* Validator.swift */; };
+		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
 		EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionValidator.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBD26242836003C659F /* AppDelegate.swift */; };
@@ -85,6 +86,7 @@
 				ECDD3FDE2624290B003C659F /* Kingfisher in Frameworks */,
 				ECDD3FE626242951003C659F /* NavigationStack in Frameworks */,
 				ECDD3FE226242943003C659F /* Alamofire in Frameworks */,
+				EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +255,7 @@
 				ECDD3FDD2624290B003C659F /* Kingfisher */,
 				ECDD3FE126242943003C659F /* Alamofire */,
 				ECDD3FE526242951003C659F /* NavigationStack */,
+				EC5F17952626D38800A10368 /* BetterSafariView */,
 			);
 			productName = Move;
 			productReference = ECDD3FBA26242836003C659F /* Move.app */;
@@ -285,6 +288,7 @@
 				ECDD3FDC2624290B003C659F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				ECDD3FE026242943003C659F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				ECDD3FE426242951003C659F /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
+				EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
 			);
 			productRefGroup = ECDD3FBB26242836003C659F /* Products */;
 			projectDirPath = "";
@@ -539,6 +543,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
 		ECDD3FDC2624290B003C659F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -566,6 +578,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EC5F17952626D38800A10368 /* BetterSafariView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
+			productName = BetterSafariView;
+		};
 		ECDD3FDD2624290B003C659F /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ECDD3FDC2624290B003C659F /* XCRemoteSwiftPackageReference "Kingfisher" */;
