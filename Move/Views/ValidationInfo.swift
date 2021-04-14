@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct ValidationInfo: View {
+    
+    @State private var showActionSheet: Bool = false
+    
     var body: some View {
         VStack {
-            HStack {
+            HStack { //navigation bar
                 Spacer()
                 Text("Driving License")
                     .font(.custom(FontManager.BaiJamjuree.semiBold, size: 20))
@@ -43,7 +46,21 @@ struct ValidationInfo: View {
                 }
                 Spacer()
                 CallToActionButton(enabled: true, text: "Add driving license", action: {
+                    showActionSheet.toggle()
+                }).actionSheet(isPresented: $showActionSheet, content: {
+                    let camera = ActionSheet.Button.default(Text("Take picture")) {
+                        //open camera
+                    }
                     
+                    let gallery = ActionSheet.Button.default(Text("Select from gallery")) {
+                        //open camera
+                    }
+                    
+                    let cancel = ActionSheet.Button.cancel(Text("Cancel").foregroundColor(.red)) {
+                        showActionSheet = false
+                    }
+                    
+                    return ActionSheet(title: Text("Select options"), buttons: [camera, gallery, cancel])
                 })
             }
             .padding([.leading, .trailing], 24)

@@ -199,8 +199,8 @@ struct Register: View {
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-        //"iPhone SE (2nd generation)",
-        ForEach(["iPhone 12"], id: \.self) { deviceName in
+        //,
+        ForEach(["iPhone 12", "iPhone SE (2nd generation)"], id: \.self) { deviceName in
             Register(onRegisterComplete: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
