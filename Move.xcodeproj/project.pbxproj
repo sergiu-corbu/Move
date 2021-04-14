@@ -13,9 +13,9 @@
 		EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57732625CC73005F16CB /* ValidationSuccess.swift */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
-		EC1673CB262581D1007A180D /* ReusableFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673CA262581D1007A180D /* ReusableFields.swift */; };
 		EC1673D026258E41007A180D /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673CF26258E41007A180D /* Validator.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
+		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
 		EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionValidator.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBD26242836003C659F /* AppDelegate.swift */; };
@@ -30,7 +30,7 @@
 		ECDD3FE626242951003C659F /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = ECDD3FE526242951003C659F /* NavigationStack */; };
 		ECDD3FED26242970003C659F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FE926242970003C659F /* LocationManager.swift */; };
 		ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEA26242970003C659F /* Fonts&Colors.swift */; };
-		ECDD3FEF26242970003C659F /* ReusableButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEB26242970003C659F /* ReusableButtons.swift */; };
+		ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEB26242970003C659F /* ReusableElements.swift */; };
 		ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEC26242970003C659F /* OnboardingData.swift */; };
 		ECDD3FF726242979003C659F /* BaiJamjuree-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF326242979003C659F /* BaiJamjuree-Regular.ttf */; };
 		ECDD3FF826242979003C659F /* BaiJamjuree-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF426242979003C659F /* BaiJamjuree-Bold.ttf */; };
@@ -50,8 +50,8 @@
 		EC0B57732625CC73005F16CB /* ValidationSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSuccess.swift; sourceTree = "<group>"; };
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
-		EC1673CA262581D1007A180D /* ReusableFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableFields.swift; sourceTree = "<group>"; };
 		EC1673CF26258E41007A180D /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionValidator.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECDD3FBA26242836003C659F /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,7 +65,7 @@
 		ECDD3FD6262428C7003C659F /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		ECDD3FE926242970003C659F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		ECDD3FEA26242970003C659F /* Fonts&Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fonts&Colors.swift"; sourceTree = "<group>"; };
-		ECDD3FEB26242970003C659F /* ReusableButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableButtons.swift; sourceTree = "<group>"; };
+		ECDD3FEB26242970003C659F /* ReusableElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableElements.swift; sourceTree = "<group>"; };
 		ECDD3FEC26242970003C659F /* OnboardingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
 		ECDD3FF326242979003C659F /* BaiJamjuree-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Regular.ttf"; sourceTree = "<group>"; };
 		ECDD3FF426242979003C659F /* BaiJamjuree-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Bold.ttf"; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC0B576726259E06005F16CB /* Onboarding & Register */ = {
+		EC0B576726259E06005F16CB /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				ECDD3FD6262428C7003C659F /* Register.swift */,
@@ -102,7 +102,7 @@
 				EC1673C62625802D007A180D /* ResetPassword.swift */,
 				ECDD3FFF26242985003C659F /* Onboarding.swift */,
 			);
-			path = "Onboarding & Register";
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		EC0B576C2625C04B005F16CB /* MainView */ = {
@@ -117,18 +117,10 @@
 			isa = PBXGroup;
 			children = (
 				EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */,
+				EC5F17982626FB7900A10368 /* ValidationInfo.swift */,
 				EC0B57732625CC73005F16CB /* ValidationSuccess.swift */,
 			);
 			name = LicenceValidation;
-			sourceTree = "<group>";
-		};
-		EC1673CD2625849B007A180D /* Reusable */ = {
-			isa = PBXGroup;
-			children = (
-				ECDD3FEB26242970003C659F /* ReusableButtons.swift */,
-				EC1673CA262581D1007A180D /* ReusableFields.swift */,
-			);
-			path = Reusable;
 			sourceTree = "<group>";
 		};
 		EC9C7BB626255DEE00FD5605 /* Model */ = {
@@ -194,11 +186,11 @@
 			children = (
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
+				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
 				ECE337C226246AF5009EC353 /* UserDefaults.swift */,
 				ECDD3FE926242970003C659F /* LocationManager.swift */,
 				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
 				EC0B57692625A1DB005F16CB /* UIModifiers.swift */,
-				EC1673CD2625849B007A180D /* Reusable */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -219,7 +211,7 @@
 			children = (
 				ECDD3FC126242836003C659F /* ContentView.swift */,
 				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
-				EC0B576726259E06005F16CB /* Onboarding & Register */,
+				EC0B576726259E06005F16CB /* Auth */,
 				EC0B576C2625C04B005F16CB /* MainView */,
 			);
 			path = Views;
@@ -325,9 +317,8 @@
 				ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */,
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
-				ECDD3FEF26242970003C659F /* ReusableButtons.swift in Sources */,
+				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
-				EC1673CB262581D1007A180D /* ReusableFields.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
 				ECE337C326246AF5009EC353 /* UserDefaults.swift in Sources */,
@@ -335,6 +326,7 @@
 				ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */,
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
+				EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */,
 				EC1673D026258E41007A180D /* Validator.swift in Sources */,
 				EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */,

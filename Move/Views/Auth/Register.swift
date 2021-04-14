@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BetterSafariView
+import NavigationStack
 import Alamofire
 
 struct Register: View {
@@ -21,9 +22,10 @@ struct Register: View {
     @State private var termsPresented: Bool = false
     @State private var conditionsPresented: Bool = false
     @State private var isLoading: Bool = false
+    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
-    let switchLogin: () -> Void
     let onRegisterComplete: () -> Void
+
     var allfieldsCompleted: Bool {
         return email != "" && username != "" && password != "" && isLoading == false
     }
@@ -32,11 +34,6 @@ struct Register: View {
         ScrollView(showsIndicators: false) {
             logoArea
             messageArea
-            if isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .black))
-                    .scaleEffect(3)
-            }
             inputArea
             agreement
             getStartedButton
@@ -109,24 +106,20 @@ struct Register: View {
     }
     
     var getStartedButton: some View {
-        HStack {
-            Button(action: {
-                isLoading = true
-                API.register(username: username, email: email, password: password) { (result) in
-                    switch result {
-                        case .success:
-                            onRegisterComplete()
-                            isLoading = false
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                            isLoading = false
-                    }
+        
+        CallToActionButton(isLoading: isLoading, enabled: allfieldsCompleted, text: "Get started", action: {
+            isLoading = true
+            API.register(username: username, email: email, password: password) { (result) in
+                switch result {
+                    case .success:
+                        onRegisterComplete()
+                        isLoading = false
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        isLoading = false
                 }
-            }, label: {
-                AuthButton(enabled: allfieldsCompleted, text: "Get started")
-            })
-            .padding([.top, .bottom], 20)
-        }
+            }
+        })
     }
     
     var agreement: some View {
@@ -175,6 +168,7 @@ struct Register: View {
     }
     
     var goToLogin: some View {
+        
         HStack {
             Spacer()
             Text("You already have an account? You can")
@@ -182,7 +176,14 @@ struct Register: View {
                 .foregroundColor(.white)
 
             Button(action: {
-                
+                /*NavigationStackView(navigationStack: navigationViewModel) {
+                    Register(onRegisterComplete: {}) {
+                        navigationViewModel.push(Login(onLoginCompleted: {
+                            navigationViewModel.push(MapView())
+                        }))
+                    }
+                    
+                }*/
             }, label: {
                 Text("log in here")
                     .foregroundColor(.white)
@@ -194,19 +195,13 @@ struct Register: View {
         }
         .padding(.bottom, 25)
     }
-    
-    func startApiCall () {
-        isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() ) {
-            isLoading = false
-        }
-    }
 }
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-            Register(switchLogin: {}, onRegisterComplete: {})
+        //"iPhone SE (2nd generation)",
+        ForEach(["iPhone 12"], id: \.self) { deviceName in
+            Register(onRegisterComplete: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

@@ -49,10 +49,10 @@ struct ValidationSuccess: View {
     }
     
     var exploreButton: some View {
-        ReusableButton(activeField: .constant(true), text: "Find scooters", action: {
-            print("ready for scooters")
+       
+        CallToActionButton(enabled: true, text: "Find scooters", action: {
+            
         })
-        .padding(.bottom, 10)
     }
 }
 

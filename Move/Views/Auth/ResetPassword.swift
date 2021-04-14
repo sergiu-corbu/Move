@@ -14,22 +14,16 @@ struct ResetPassword: View {
     @State private var confirmPasswordField: Bool = false
     @State private var validatePassword: Bool? = false
     //@State private var showAlert: Bool = false
+    private var isEnabled: Bool {
+        return newPassword != ""
+    }
+    
     var body: some View {
         NavigationView {
             ScrollView {
                 messageArea
                 inputField
-                ReusableButton(activeField: newPassword != "" ? $newPasswordField : .constant(false), text: "Reset Password", action: {
-                    if newPassword == confirmPassword {
-                        validatePassword = true
-                        newPassword = ""
-                        newPasswordField = false
-                        confirmPassword = ""
-                        confirmPasswordField = false
-                    }
-                    else { print("passwords don;t match") }
-                    
-                })
+                resetButton
             }
             .padding([.leading, .trailing], 24)
             .background(Color.lightPurple)
@@ -49,7 +43,6 @@ struct ResetPassword: View {
         }
         .padding(.top, 50)
     }
-    
     var inputField: some View {
         VStack {
             InputPasswordReset(activeField: $newPasswordField, inputField: $newPassword, text: "New password", action: {
@@ -61,6 +54,18 @@ struct ResetPassword: View {
                 confirmPasswordField = true
             })
         }
+    }
+    var resetButton: some View {
+        CallToActionButton(enabled: isEnabled, text: "Reset Password", action: {
+            if newPassword == confirmPassword {
+                validatePassword = true
+                newPassword = ""
+                newPasswordField = false
+                confirmPassword = ""
+                confirmPasswordField = false
+            }
+            else { print("passwords don;t match") }
+        })
     }
 }
 

@@ -12,17 +12,15 @@ struct ForgotPassword: View {
     @State private var email: String = ""
     @State private var showAlert: Bool = false
     @State private var activeField: Bool = false
-    
+    private var isEnabled: Bool {
+        return email != ""
+    }
     var body: some View {
         NavigationView {
             ScrollView {
                 messageArea
                 emailField
-                ReusableButton(activeField: email != "" ? $activeField : .constant(false), text: "Send Reset Link", action: {
-                    email = ""
-                    activeField = false
-                    showAlert.toggle()
-                })
+                sendResetButton
             }
             .padding([.leading, .trailing], 24)
             .background(Color.lightPurple)
@@ -56,7 +54,6 @@ struct ForgotPassword: View {
         }
         .padding(.top, 50)
     }
-    
     var emailField: some View {
         
         VStack(alignment: .leading, spacing: 0) {
@@ -79,6 +76,13 @@ struct ForgotPassword: View {
                 .padding(.bottom, activeField ? 2 : 1)
                 .background(activeField ? Color.white : Color.fadePurple)
         }.padding(.bottom, 12)
+    }
+    var sendResetButton: some View {
+        CallToActionButton(enabled: isEnabled, text: "Send Reset Link", action: {
+            email = ""
+            activeField = false
+            showAlert.toggle()
+        })
     }
 }
 

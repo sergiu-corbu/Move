@@ -95,24 +95,20 @@ struct Login: View {
     }
     
     var getStartedButton: some View {
-        HStack {
-            Button(action: {
-                isLoading = true
-                API.login(email: email, password: password) { (result) in
-                    switch result {
-                        case .success:
-                            onLoginCompleted()
-                            isLoading = false
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                            isLoading = false
-                    }
+        
+        CallToActionButton(isLoading: isLoading, enabled: allfieldsCompleted, text: "Login", action: {
+            isLoading = true
+            API.login(email: email, password: password) { (result) in
+                switch result {
+                    case .success:
+                        onLoginCompleted()
+                        isLoading = false
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        isLoading = false
                 }
-            }, label: {
-                AuthButton(enabled: allfieldsCompleted, text: "Login")
-            })
-        }
-        .padding([.top, .bottom], 20)
+            }
+        })
     }
 
     var goToRegister: some View {
@@ -123,7 +119,7 @@ struct Login: View {
                 .foregroundColor(.white)
 
             Button(action: {
-                //move to register
+               
             }, label: {
                 Text("start with one here")
                     .foregroundColor(.white)

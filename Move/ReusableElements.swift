@@ -1,12 +1,68 @@
 //
-//  ReusableFields.swift
+//  Reusable Buttons.swift
 //  Move
 //
-//  Created by Sergiu Corbu on 13.04.2021.
+//  Created by Sergiu Corbu on 4/11/21.
 //
 
 import SwiftUI
 
+//MARK: buttons
+
+struct CallToActionButton: View {
+    
+    var isLoading: Bool? = false
+    var enabled: Bool = false
+    let text: String
+    let action: () -> Void
+    
+    var body: some View {
+        HStack {
+            Button(action: {
+                action()
+            }, label: {
+                ZStack(alignment: .trailing) {
+                    HStack {
+                        Text(text)
+                            .foregroundColor(enabled ? .white : .fadePurple)
+                            .font(enabled ? Font.custom(FontManager.BaiJamjuree.bold, size: 16) : Font.custom(FontManager.BaiJamjuree.medium, size: 16))
+                            .frame(maxWidth: .infinity)
+                            .padding([.trailing, .leading], 46)
+                    }
+                    .padding(.all, 20)
+                    .background(RoundedRectangle(cornerRadius: 16.0)
+                                    .strokeBorder(Color.coralRed, lineWidth: 1)
+                                    .background(RoundedRectangle(cornerRadius: 16.0).fill(enabled ? Color.coralRed : Color.clear))
+                                    .opacity(enabled ? 1 : 0.3)
+                    )
+                    
+                    if let _isLoading = isLoading {
+                        if _isLoading == true {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                .scaleEffect(1.5)
+                                .frame(width: 30, height: 30)
+                                .padding(.trailing, 16)
+                        }
+                    }
+                }
+            })
+            .disabled(!enabled)
+        }
+    }
+}
+
+
+struct Reusable_Previews: PreviewProvider {
+    static var previews: some View {
+        CallToActionButton(isLoading: true, enabled: true, text: "Get starferferf", action: {
+            print("MMM")
+        }).padding([.leading, .trailing], 24)
+    }
+}
+
+
+//MARK: fields
 struct InputField: View {
     
     @Binding var activeField: Bool
@@ -72,9 +128,9 @@ struct InputField: View {
                 .padding(.bottom, activeField ? 2 : 1)
                 .background(activeField ? Color.white : Color.fadePurple)
             if isSecuredField && input == ""  && activeField {
-            Text("Use a strong password (min. 8 characters and use symbols")
-                .font(.custom(FontManager.BaiJamjuree.regular, size: 13))
-                .foregroundColor(.white)
+                Text("Use a strong password (min. 8 characters and use symbols")
+                    .font(.custom(FontManager.BaiJamjuree.regular, size: 13))
+                    .foregroundColor(.white)
             }
         }
         .padding([.top, .bottom], 6)

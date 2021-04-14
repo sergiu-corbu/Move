@@ -51,10 +51,9 @@ struct ValidationInProgress: View {
     }
     
     var exploreButton: some View {
-            ReusableButton(activeField: .constant(true), text: "Explore the app", action: {
-                print("going to app....")
-            })
-            .padding(.bottom, 10)
+        CallToActionButton(enabled: true, text: "Explore the app", action: {
+            
+        })
     }
 }
 
