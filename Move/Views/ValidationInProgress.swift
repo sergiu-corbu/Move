@@ -29,25 +29,19 @@ struct ValidationInProgress: View {
     }
    
     var mainText: some View {
-        HStack{
-            Spacer()
-            Text("We are currently verifying your driving license")
-                .foregroundColor(.white)
-                .font(.custom(FontManager.BaiJamjuree.bold, size: 34.0))
-            Spacer()
-        }
-        .padding(.bottom, 30)
+        Text("We are currently verifying your driving license")
+            .foregroundColor(.white)
+            .font(.custom(FontManager.Primary.bold, size: 34.0))
+            .padding(.bottom, 30)
+            .frame(maxWidth: .infinity)
     }
     
     var secondaryText: some View {
-        HStack {
-            Spacer()
-            Text("Check back shortly and if everything\n looks good you’ll be riding our scooters in no time.")
-                .foregroundColor(.fadePurple)
-                .font(.custom(FontManager.BaiJamjuree.medium, size: 18.0))
-                .lineSpacing(5)
-            Spacer()
-        }
+        Text("Check back shortly and if everything\n looks good you’ll be riding our scooters in no time.")
+            .foregroundColor(.fadePurple)
+            .font(.custom(FontManager.Primary.medium, size: 18.0))
+            .lineSpacing(5)
+            .frame(maxWidth: .infinity)
     }
     
     var exploreButton: some View {

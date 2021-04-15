@@ -207,8 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FC126242836003C659F /* ContentView.swift */,
-				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
 				EC0B576726259E06005F16CB /* Auth */,
+				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
 				EC0B576C2625C04B005F16CB /* MainView */,
 			);
 			path = Views;

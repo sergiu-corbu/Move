@@ -32,16 +32,15 @@ struct Onboarding: View {
             GeometryReader { geometry in
                 Image(image)
                     .resizable()
-                    .frame(width: geometry.size.width)
-                    .aspectRatio(contentMode: .fit)
+                    .frame(width: geometry.size.width, height: geometry.size.height / 0.9)
+                    .aspectRatio(contentMode: .fill)
             }
-            VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
                 titleLine
                 descriptionLine
                 pageControlLine
             }
             .padding([.leading, .trailing], 24)
-            
         }
         .background(Color.white)
         .edgesIgnoringSafeArea(.all)
@@ -50,7 +49,7 @@ struct Onboarding: View {
     var titleLine: some View {
         HStack {
             Text(title)
-                .font(.custom(FontManager.BaiJamjuree.bold, size: 34.0))
+                .font(.custom(FontManager.Primary.bold, size: 34.0))
                 .foregroundColor(.darkPurple)
             Spacer()
             if  !lastPage {
@@ -58,7 +57,7 @@ struct Onboarding: View {
                     onFinished()
                 }, label: {
                     Text("Skip")
-                        .font(.custom(FontManager.BaiJamjuree.semiBold, size: 18))
+                        .font(.custom(FontManager.Primary.semiBold, size: 18))
                         .foregroundColor(.fadePurple)
                 })
             }
@@ -68,17 +67,14 @@ struct Onboarding: View {
     }
     
     var descriptionLine: some View {
-        VStack {
-            HStack {
-                Text(description)
-                    .font(.custom(FontManager.BaiJamjuree.medium, size: 17))
-                    .foregroundColor(.darkPurple)
-                    .opacity(0.7)
-                    .lineSpacing(4)
-                    .fixedSize(horizontal: false, vertical: true)
-                Spacer()
-            }
-           Spacer()
+        VStack(alignment: .leading) {
+            Text(description)
+                .font(.custom(FontManager.Primary.medium, size: 17))
+                .foregroundColor(.darkPurple)
+                .opacity(0.7)
+                .lineSpacing(4)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer()
         }
     }
     
@@ -95,7 +91,7 @@ struct Onboarding: View {
                     HStack {
                         Text(lastPage ? "Get Started" : "Next")
                             .foregroundColor(.white)
-                            .font(.custom(FontManager.BaiJamjuree.bold, size: 18))
+                            .font(.custom(FontManager.Primary.bold, size: 18))
                             .transition(.opacity)
                         Image(systemName: "arrow.right")
                             .foregroundColor(.white)

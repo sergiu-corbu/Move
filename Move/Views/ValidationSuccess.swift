@@ -25,31 +25,24 @@ struct ValidationSuccess: View {
                 .aspectRatio(contentMode: .fill)
         )
         .edgesIgnoringSafeArea(.all)
-        
     }
     
     var mainText: some View {
-        HStack{
-            Spacer()
-            Text("We've succesfully validated your driving license!")
-                .foregroundColor(.white)
-                .font(.custom(FontManager.BaiJamjuree.bold, size: 34.0))
-            Spacer()
-    }
-        .padding(.top, 70)
+        Text("We've succesfully validated your driving license!")
+            .foregroundColor(.white)
+            .font(.custom(FontManager.Primary.bold, size: 34.0))
+            .padding(.top, 70)
+            .frame(maxWidth: .infinity)
     }
     
     var checkMark: some View {
-        VStack {
-            Image("checkmark-img")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 172, height: 172)
-        }
+        Image("checkmark-img")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 172, height: 172)
     }
     
     var exploreButton: some View {
-       
         CallToActionButton(enabled: true, text: "Find scooters", action: {
             
         })

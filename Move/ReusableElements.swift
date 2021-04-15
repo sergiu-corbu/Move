@@ -25,7 +25,7 @@ struct CallToActionButton: View {
                     HStack {
                         Text(text)
                             .foregroundColor(enabled ? .white : .fadePurple)
-                            .font(enabled ? Font.custom(FontManager.BaiJamjuree.bold, size: 16) : Font.custom(FontManager.BaiJamjuree.medium, size: 16))
+                            .font(enabled ? Font.custom(FontManager.Primary.bold, size: 16) : Font.custom(FontManager.Primary.medium, size: 16))
                             .frame(maxWidth: .infinity)
                             .padding([.trailing, .leading], 46)
                     }
@@ -48,14 +48,7 @@ struct CallToActionButton: View {
             })
             .disabled(!enabled)
         }
-    }
-}
-
-struct Reusable_Previews: PreviewProvider {
-    static var previews: some View {
-        CallToActionButton(isLoading: true, enabled: true, text: "Get starferferf", action: {
-            print("MMM")
-        }).padding([.leading, .trailing], 24)
+        .padding(.bottom, 20)
     }
 }
 
@@ -76,23 +69,25 @@ struct InputField: View {
             if  !input.isEmpty || activeField {
                 Text(textField)
                     .foregroundColor(.fadePurple)
-                    .font(Font.custom(FontManager.BaiJamjuree.regular, size: 14))
+                    .font(Font.custom(FontManager.Primary.regular, size: 14))
             }
             HStack {
                 if showSecured && isSecuredField {
-                    SecureField( activeField ? "" : textField, text: $input)
+                    SecureField(activeField ? "" : textField, text: $input)
                         .foregroundColor(.white)
-                        .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
+                        .font(Font.custom(FontManager.Primary.medium, size: 18))
+                        .autocapitalization(.none)
                         .accentColor(.white)
                         .padding(.bottom, 10)
                         .padding(.top, 5)
                         .disableAutocorrection(true)
                         .onTapGesture { action() }
                 } else {
-                    TextField( activeField ? "" : textField, text: $input)
+                    TextField(activeField ? "" : textField, text: $input)
                         .foregroundColor(.white)
-                        .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
+                        .font(Font.custom(FontManager.Primary.medium, size: 18))
                         .accentColor(.white)
+                        .autocapitalization(.none)
                         .padding(.bottom, 10)
                         .padding(.top, 5)
                         .disableAutocorrection(true)
@@ -126,7 +121,7 @@ struct InputField: View {
                 .background(activeField ? Color.white : Color.fadePurple)
             if isSecuredField && input == ""  && activeField {
                 Text("Use a strong password (min. 8 characters and use symbols")
-                    .font(.custom(FontManager.BaiJamjuree.regular, size: 13))
+                    .font(.custom(FontManager.Primary.regular, size: 13))
                     .foregroundColor(.white)
             }
         }
@@ -148,13 +143,14 @@ struct InputPasswordReset: View {
             if activeField || !inputField.isEmpty {
                 Text(text)
                     .foregroundColor(.fadePurple)
-                    .font(Font.custom(FontManager.BaiJamjuree.regular, size: 14))
+                    .font(Font.custom(FontManager.Primary.regular, size: 14))
             }
             HStack {
                 TextField(activeField ? "" : text, text: $inputField)
                     .foregroundColor(.white)
-                    .font(Font.custom(FontManager.BaiJamjuree.medium, size: 18))
+                    .font(Font.custom(FontManager.Primary.medium, size: 18))
                     .accentColor(.white)
+                    .autocapitalization(.none)
                     .padding(.bottom, 10)
                     .padding(.top, 5)
                     .disableAutocorrection(true)
@@ -168,5 +164,39 @@ struct InputPasswordReset: View {
                 .padding(.bottom, activeField ? 2 : 1)
                 .background(activeField ? Color.white : Color.fadePurple)
         }.padding(.bottom, 12)
+    }
+}
+
+// MARK: navigation bar
+
+struct NavigationBar: View {
+    let title: String?
+    let backButton: String
+    let action: () -> Void
+    
+    var body: some View {
+        HStack {
+            Button(action: {
+                action()
+            }, label: {
+                Image(backButton)
+            })
+            if let _title = title {
+                Text(_title)
+                    .font(.custom(FontManager.Primary.semiBold, size: 18))
+                    .foregroundColor(.darkPurple)
+                    .frame(maxWidth: .infinity)
+                    .padding(.trailing, 24)
+            }
+            Spacer()
+        }
+        //.padding([.top, .bottom], 15)
+        .padding([.leading, .trailing], 24)
+    }
+}
+
+struct Reusable_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationBar(title: "Driving License", backButton: "chevron-left-purple", action: {})
     }
 }

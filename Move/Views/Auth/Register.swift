@@ -12,32 +12,33 @@ import Alamofire
 
 struct Register: View {
     
-    @State private var email: String = ""
-    @State private var username: String = ""
-    @State private var password: String = ""
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
     @State private var usernameTyping: Bool = false
+    @StateObject private var userViewModel = UserViewModel()
     
     @State private var termsPresented: Bool = false
     @State private var conditionsPresented: Bool = false
     @State private var isLoading: Bool = false
+    
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
     let onRegisterComplete: () -> Void
 
     var allfieldsCompleted: Bool {
-        return email != "" && username != "" && password != "" && isLoading == false
+        return userViewModel.email != "" && userViewModel.username != "" && userViewModel.password != "" && isLoading == false
     }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            logoArea
-            messageArea
-            inputArea
-            agreement
-            getStartedButton
-            goToLogin
+            VStack(alignment: .leading) {
+                logoArea
+                messageArea
+                inputArea
+                agreement
+                getStartedButton
+                goToLogin
+            }
             Spacer()
         }
         .padding([.leading, .trailing], 24)
@@ -50,53 +51,42 @@ struct Register: View {
     }
     
     var logoArea: some View {
-        HStack {
-            Image("logoOverlay-img")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 100, height: 100)
-            Spacer()
-        }
-        .padding(.leading, -10)
-        .padding(.top, 30)
+        Image("logoOverlay-img")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 100, height: 100)
+            .padding(.leading, -10)
     }
     
     var messageArea: some View {
-        VStack {
-            HStack {
-                Text("Let's get started")
-                    .foregroundColor(.white)
-                    .font(Font.custom(FontManager.BaiJamjuree.bold, size: 32))
-                Spacer()
-            }
-            .padding(.bottom, 15)
-            
-            HStack {
-                Text("Sign up or login and start\nriding right away")
-                    .foregroundColor(.white)
-                    .font(Font.custom(FontManager.BaiJamjuree.medium, size: 20))
-                    .opacity(0.6)
-                    .lineSpacing(3)
-                    .frame(height: 55)
-                Spacer()
-            }
-            .padding(.bottom, 5)
+        VStack(alignment: .leading) {
+            Text("Let's get started")
+                .foregroundColor(.white)
+                .font(Font.custom(FontManager.Primary.bold, size: 32))
+                .padding(.bottom, 15)
+            Text("Sign up or login and start\nriding right away")
+                .foregroundColor(.white)
+                .font(Font.custom(FontManager.Primary.medium, size: 20))
+                .opacity(0.6)
+                .lineSpacing(3)
+                .frame(height: 55)
+                .padding(.bottom, 5)
         }
     }
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $email, textField: "Email Address", image: "close-img", isSecuredField: false, action: {
+            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, action: {
                 emailTyping = true
                 usernameTyping = false
                 passwordTyping = false
             })
-            InputField(activeField: $usernameTyping, input: $username, textField: "Username", image: "close-img", isSecuredField: false, action: {
+            InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", image: "close-img", isSecuredField: false, action: {
                 emailTyping = false
                 usernameTyping = true
                 passwordTyping = false
             })
-            InputField(activeField: $passwordTyping, input: $password, textField: "Password", image: "eye-img", isSecuredField: true, action: {
+            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, action: {
                 emailTyping = false
                 usernameTyping = false
                 passwordTyping = true
@@ -107,7 +97,7 @@ struct Register: View {
     var getStartedButton: some View {
         CallToActionButton(isLoading: isLoading, enabled: allfieldsCompleted, text: "Get started", action: {
             isLoading = true
-            API.register(username: username, email: email, password: password) { (result) in
+            API.register(username: userViewModel.username, email: userViewModel.email, password: userViewModel.password) { (result) in
                 switch result {
                     case .success:
                         onRegisterComplete()
@@ -117,24 +107,21 @@ struct Register: View {
                         isLoading = false
                 }
             }
-        })
+        }).padding(.top, 20)
     }
     
     var agreement: some View {
-        VStack {
-            HStack {
-                Text("By continuing you agree to Move’s")
-                    .foregroundColor(.white)
-                    .font(.custom(FontManager.BaiJamjuree.medium, size: 14))
-                Spacer()
-            }
+        VStack(alignment: .leading) {
+            Text("By continuing you agree to Move’s")
+                .foregroundColor(.white)
+                .font(.custom(FontManager.Primary.medium, size: 14))
             HStack {
                 Button(action: {
                     termsPresented = true
                 }, label: {
                     Text("Terms and Conditions")
                         .foregroundColor(.white)
-                        .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
+                        .font(.custom(FontManager.Primary.semiBold, size: 14))
                         .bold()
                         .underline()
                 })
@@ -144,14 +131,14 @@ struct Register: View {
                 }
                 Text("and")
                     .foregroundColor(.white)
-                    .font(.custom(FontManager.BaiJamjuree.medium, size: 14))
+                    .font(.custom(FontManager.Primary.medium, size: 14))
                     .padding([.trailing, .leading], -3)
                 Button(action: {
                     
                 }, label: {
                     Text("Privacy Policy")
                         .foregroundColor(.white)
-                        .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
+                        .font(.custom(FontManager.Primary.semiBold, size: 14))
                         .bold()
                         .underline()
                 })
@@ -166,13 +153,10 @@ struct Register: View {
     }
     
     var goToLogin: some View {
-        
         HStack {
-            Spacer()
             Text("You already have an account? You can")
-                .font(Font.custom(FontManager.BaiJamjuree.regular, size: 14))
+                .font(Font.custom(FontManager.Primary.regular, size: 14))
                 .foregroundColor(.white)
-
             Button(action: {
                 /*NavigationStackView(navigationStack: navigationViewModel) {
                     Register(onRegisterComplete: {}) {
@@ -185,13 +169,12 @@ struct Register: View {
             }, label: {
                 Text("log in here")
                     .foregroundColor(.white)
-                    .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
+                    .font(.custom(FontManager.Primary.semiBold, size: 14))
                     .bold()
                     .underline()
+                    .padding(.leading, -3)
             })
-            Spacer()
         }
-        .padding(.bottom, 25)
     }
 }
 

@@ -19,7 +19,7 @@ extension Color {
 }
 
 struct FontManager {
-    struct BaiJamjuree {
+    struct Primary {
         static let regular = "BaiJamjuree-Regular"
         static let bold = "BaiJamjuree-Bold"
         static let semiBold = "BaiJamjuree-SemiBold"

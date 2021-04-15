@@ -14,7 +14,7 @@ extension Text: ViewModifier {
     func agreementModifiers() {
         self
             .foregroundColor(.white)
-            .font(.custom(FontManager.BaiJamjuree.semiBold, size: 14))
+            .font(.custom(FontManager.Primary.semiBold, size: 14))
             .bold()
             .underline()
     }

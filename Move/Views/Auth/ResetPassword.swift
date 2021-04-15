@@ -19,29 +19,28 @@ struct ResetPassword: View {
     }
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                messageArea
-                inputField
-                resetButton
-            }
-            .padding([.leading, .trailing], 24)
-            .background(Color.lightPurple)
-            .edgesIgnoringSafeArea(.all)
+        VStack(alignment: .leading) {
+            NavigationBar(title: nil, backButton: "chevron-left-white", action: {})
+                .padding(.leading, -29)
+            messageArea
+            inputField
+            resetButton
+            Spacer()
         }
+        .padding([.leading, .trailing], 24)
+        .background(
+            Color.lightPurple
+                .edgesIgnoringSafeArea(.all)
+        )
     }
     
     var messageArea: some View {
-        VStack {
-            HStack {
-                Text("Reset password")
-                    .foregroundColor(.white)
-                    .font(Font.custom(FontManager.BaiJamjuree.bold, size: 32))
-                Spacer()
-            }
-            .padding(.bottom, 40)
+        VStack(alignment: .leading) {
+            Text("Reset password")
+                .foregroundColor(.white)
+                .font(Font.custom(FontManager.Primary.bold, size: 32))
+                .padding(.bottom, 40)
         }
-        .padding(.top, 50)
     }
     var inputField: some View {
         VStack {
@@ -65,7 +64,7 @@ struct ResetPassword: View {
                 confirmPasswordField = false
             }
             else { print("passwords don;t match") }
-        })
+        }).padding(.top, 20)
     }
 }
 

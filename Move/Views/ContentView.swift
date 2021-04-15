@@ -10,28 +10,36 @@ import NavigationStack
 
 struct ContentView: View {
     var body: some View {
-       // Register()
-        FirstOpen()
+        NewUser()
         //MapView()
     }
 }
 
-struct FirstOpen: View {
+struct OpenLogin: View { //todo
+    
+    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
+    
+    var body: some View {
+        EmptyView()
+    }
+}
+
+struct NewUser: View {
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
     var body: some View {
         NavigationStackView(navigationStack: navigationViewModel) {
             Onboarding {
-                navigationViewModel.push(Register(onRegisterComplete: {
-                    navigationViewModel.push(MapView())
-                }))
+                handleRegister()
             }
         }
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    
+    func handleRegister() {
+        navigationViewModel
+            .push(
+                Register(onRegisterComplete: {
+                    navigationViewModel.push(ValidationInfo(onBack: navigationViewModel.pop()))
+                }))
     }
 }

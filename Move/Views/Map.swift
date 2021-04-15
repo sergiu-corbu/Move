@@ -51,7 +51,7 @@ struct MapView: View {
                     Spacer()
                     Text("Cluj Napoca")
                         .foregroundColor(.darkPurple)
-                        .font(.custom(FontManager.BaiJamjuree.semiBold, size: 18))
+                        .font(.custom(FontManager.Primary.semiBold, size: 18))
                     Spacer()
                     Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
                         ZStack {
