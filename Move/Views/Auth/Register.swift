@@ -47,7 +47,6 @@ struct Register: View {
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
         )
-      //  .edgesIgnoringSafeArea(.all)
     }
     
     var logoArea: some View {
@@ -106,7 +105,6 @@ struct Register: View {
     }
     
     var getStartedButton: some View {
-        
         CallToActionButton(isLoading: isLoading, enabled: allfieldsCompleted, text: "Get started", action: {
             isLoading = true
             API.register(username: username, email: email, password: password) { (result) in
@@ -199,14 +197,11 @@ struct Register: View {
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-        //,
         ForEach(["iPhone 12", "iPhone SE (2nd generation)"], id: \.self) { deviceName in
             Register(onRegisterComplete: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }
         .preferredColorScheme(.dark)
-        //Register(onRegisterComplete: {})
-          //  .preferredColorScheme(.dark)
     }
 }

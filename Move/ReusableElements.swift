@@ -35,7 +35,6 @@ struct CallToActionButton: View {
                                     .background(RoundedRectangle(cornerRadius: 16.0).fill(enabled ? Color.coralRed : Color.clear))
                                     .opacity(enabled ? 1 : 0.3)
                     )
-                    
                     if let _isLoading = isLoading {
                         if _isLoading == true {
                             ProgressView()
@@ -52,7 +51,6 @@ struct CallToActionButton: View {
     }
 }
 
-
 struct Reusable_Previews: PreviewProvider {
     static var previews: some View {
         CallToActionButton(isLoading: true, enabled: true, text: "Get starferferf", action: {
@@ -60,7 +58,6 @@ struct Reusable_Previews: PreviewProvider {
         }).padding([.leading, .trailing], 24)
     }
 }
-
 
 //MARK: fields
 struct InputField: View {
@@ -142,8 +139,10 @@ struct InputPasswordReset: View {
     
     @Binding var activeField: Bool
     @Binding var inputField: String
+    
     let text: String
     let action: () -> Void
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if activeField || !inputField.isEmpty {

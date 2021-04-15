@@ -40,7 +40,6 @@
 		ECDD400126242985003C659F /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFF26242985003C659F /* Onboarding.swift */; };
 		ECDD400626242B49003C659F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* User.swift */; };
 		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
-		ECE337C326246AF5009EC353 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337C226246AF5009EC353 /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +74,6 @@
 		ECDD3FFF26242985003C659F /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		ECDD400526242B49003C659F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		ECE337C226246AF5009EC353 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,7 +185,6 @@
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
-				ECE337C226246AF5009EC353 /* UserDefaults.swift */,
 				ECDD3FE926242970003C659F /* LocationManager.swift */,
 				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
 				EC0B57692625A1DB005F16CB /* UIModifiers.swift */,
@@ -321,7 +318,6 @@
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
-				ECE337C326246AF5009EC353 /* UserDefaults.swift in Sources */,
 				ECDD3FED26242970003C659F /* LocationManager.swift in Sources */,
 				ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */,
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,

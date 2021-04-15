@@ -16,13 +16,10 @@ extension Color {
     static let fadePurple = Color("fadePurple")
     static let lightGray = Color("lightGray")
     static let lightPink = Color("lightPink")
-    
 }
 
 struct FontManager {
-    
     struct BaiJamjuree {
-        
         static let regular = "BaiJamjuree-Regular"
         static let bold = "BaiJamjuree-Bold"
         static let semiBold = "BaiJamjuree-SemiBold"
