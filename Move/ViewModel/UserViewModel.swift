@@ -7,8 +7,16 @@
 
 import Foundation
 
-enum ValidationError: Error {
-    case notDefined
+enum EmailValidator {
+    case empty
+    case invalidFormat
+    case valid
+}
+
+enum PasswordValidator {
+    case empty
+    case notStrongEnough
+    case valid
 }
 
 class UserViewModel: ObservableObject {
@@ -18,13 +26,8 @@ class UserViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var isValid: Bool = false
     
-    let emailValidation = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
-    let passwordValidation = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$")
-    
-    
-    func register(_ callback: @escaping () -> Void ) {
-        
-    }
+   
+
     // dowonlad user data from server
     //save info in userdefaults
 }

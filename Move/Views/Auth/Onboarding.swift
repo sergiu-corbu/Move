@@ -27,8 +27,7 @@ struct Onboarding: View {
     }
     
     var body: some View {
-        
-        VStack(spacing: 0) {
+        VStack(spacing: 20) {
             GeometryReader { geometry in
                 Image(image)
                     .resizable()
@@ -63,7 +62,7 @@ struct Onboarding: View {
             }
         }
         .padding(.bottom, 20)
-        .padding(.top, 20)
+        .padding(.top, 30)
     }
     
     var descriptionLine: some View {
@@ -129,8 +128,10 @@ struct PageControl: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        Onboarding(onFinished: {})
+        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
+            Onboarding(onFinished: {})
+                .previewDevice(PreviewDevice(rawValue: deviceName))
+                .previewDisplayName(deviceName)
+        }
     }
 }
-
-

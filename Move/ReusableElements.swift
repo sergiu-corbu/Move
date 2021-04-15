@@ -54,7 +54,7 @@ struct CallToActionButton: View {
 
 //MARK: fields
 struct InputField: View {
-    
+    @StateObject private var userViewModel = UserViewModel()
     @Binding var activeField: Bool
     @Binding var input: String
     @State private var showSecured: Bool = true
@@ -119,11 +119,26 @@ struct InputField: View {
             Divider()
                 .padding(.bottom, activeField ? 2 : 1)
                 .background(activeField ? Color.white : Color.fadePurple)
+            
+         /*   if !isSecuredField {
+                if !self.userViewModel.emailValidation.evaluate(with: userViewModel.email) {
+                    Text("errorrr")
+                        .foregroundColor(.coralRed)
+                        .font(.footnote)
+                }
+            } else*/
             if isSecuredField && input == ""  && activeField {
                 Text("Use a strong password (min. 8 characters and use symbols")
                     .font(.custom(FontManager.Primary.regular, size: 13))
                     .foregroundColor(.white)
-            }
+            } /*else if isSecuredField && input != "" && activeField  {
+                if !self.userViewModel.passwordValidation.evaluate(with: userViewModel.password) {
+                Text("password errorrr")
+                    .foregroundColor(.coralRed)
+                    .font(.footnote)
+                }
+            }*/
+            
         }
         .padding([.top, .bottom], 6)
         .edgesIgnoringSafeArea(.bottom)
