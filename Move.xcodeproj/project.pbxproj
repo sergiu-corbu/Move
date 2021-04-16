@@ -17,6 +17,7 @@
 		EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionValidator.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB749FE2629B4CD00EA741D /* MenuView.swift */; };
+		ECB74A682629FF3000EA741D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB74A672629FF3000EA741D /* HistoryView.swift */; };
 		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
 		ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBD26242836003C659F /* AppDelegate.swift */; };
 		ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBF26242836003C659F /* SceneDelegate.swift */; };
@@ -52,6 +53,7 @@
 		EC9C7BB326255DA200FD5605 /* SessionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionValidator.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECB749FE2629B4CD00EA741D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		ECB74A672629FF3000EA741D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		ECDD3FBA26242836003C659F /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDD3FBD26242836003C659F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FFD26242985003C659F /* MapView.swift */,
+				ECB74A672629FF3000EA741D /* HistoryView.swift */,
 				ECB749FE2629B4CD00EA741D /* MenuView.swift */,
 			);
 			name = MainView;
@@ -316,6 +319,7 @@
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
 				ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
+				ECB74A682629FF3000EA741D /* HistoryView.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */,

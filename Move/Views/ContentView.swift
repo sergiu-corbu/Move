@@ -10,9 +10,9 @@ import NavigationStack
 
 struct ContentView: View {
     var body: some View {
-        Validation()
+        //Validation()
         //NewUser()
-        //MapView()
+        MapView()
     }
 }
 

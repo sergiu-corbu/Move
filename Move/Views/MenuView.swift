@@ -6,33 +6,39 @@
 //
 
 import SwiftUI
+import NavigationStack
 
 struct MenuView: View {
+    
+    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
                 navBar
                 historyView
                 menuOptions
-                Spacer()
             }
-            // Image("scooter-img")
-            //    .aspectRatio(contentMode: .fill)
+            Spacer()
         }
+        .background(
+            GeometryReader { geometry in
+                Image("menu-background-img")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: geometry.size.width , height: geometry.size.height)
+                    .edgesIgnoringSafeArea(.all)
+            })
         .padding([.leading, .trailing], 24)
-        .background(Color.white)
     }
-    
     var navBar: some View {
         NavigationBar(title: "Hi, Sergiu!", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
-            .padding(.top, 20)
-            .padding(.bottom, 40)
     }
     var historyView: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 28)
                 .foregroundColor(.lightPurple)
-                .frame(width: .infinity, height: 100)
+                .frame(width: .infinity, height: 110)
                 .background(Image("history-background-img").resizable())
             HStack {
                 VStack(alignment: .leading) {
@@ -60,13 +66,16 @@ struct MenuView: View {
                                     .foregroundColor(.coralRed)
                                     .cornerRadius(16))})
             }.padding([.leading, .trailing], 30)
-        }.padding(.bottom, 30)
+        }.padding([.top, .bottom], 20)
     }
-    
     var menuOptions: some View {
         VStack(alignment: .leading) {
-            //MenuItems(icon: "wheel-img", title: "General Settings", components: [MenuSubItems(title: "Account", url: <#T##String?#>)])
-            MenuItems(icon: "flag-img", title: "Legal", components: [SubMenuItems(title: "Terms and Conditions", url: "https://tapptitude.com", index: 0), SubMenuItems(title: "Privacy Policy", url: "https://tapptitude.com", index: 1)])
+            MenuItems(icon: "wheel-img", title: "General Settings", components: [SubMenuItems(title: "Account", isLink: false, isNavButton: true, url: "", index: 0, callback: {
+                //go to account
+            }), SubMenuItems(title: "Change password", isLink: false, isNavButton: true, url: "", index: 1, callback: {
+                //go to change password
+            })])
+            MenuItems(icon: "flag-img", title: "Legal", components: [SubMenuItems(title: "Terms and Conditions",isLink: true, isNavButton: false, url: "https://tapptitude.com", index: 0, callback: {}), SubMenuItems(title: "Privacy Policy", isLink: true, isNavButton: false, url: "https://tapptitude.com", index: 1, callback: {})])
             MenuItems(icon: "star-img", title: "Rate Us", components: [])
         }
     }
@@ -78,22 +87,20 @@ struct MenuItems: View {
     let title: String
     let components: [SubMenuItems]
     
-
-    
     var body: some View {
         VStack (alignment: .leading) {
             HStack(alignment: .top) {
                 Image(icon)
-                    .padding(.trailing, 16)
+                    .padding([.top, .trailing], 20)
                 VStack(alignment: .leading) {
                     Text(title)
                         .foregroundColor(.darkPurple)
                         .font(.custom(FontManager.Primary.bold, size: 18))
+                        .padding([.top, .bottom], 20)
                     if components.count > 0 {
                         ForEach(0..<components.count) { index in
                             components[index]
                                 .padding([.top, .bottom], 15)
-                            
                         }
                     }
                 }
@@ -102,16 +109,31 @@ struct MenuItems: View {
     }
 }
 
-struct SubMenuItems: View, Hashable {
-    let title: String!
-    let url: String!
+struct SubMenuItems: View {
+    
+    let title: String
+    let isLink: Bool
+    let isNavButton: Bool
+    let url: String
     let index: Int
+    let callback: () -> Void
+    
     var body: some View {
-        Link(destination: URL(string: url)!, label: {
-            Text(title)
-                .foregroundColor(.darkPurple)
-                .font(.custom(FontManager.Primary.regular, size: 16))
-        })
+        if isLink {
+            Link(destination: URL(string: url)!, label: {
+                Text(title)
+                    .foregroundColor(.darkPurple)
+                    .font(.custom(FontManager.Primary.regular, size: 16))
+            })
+        } else if isNavButton {
+            Button(action: {
+                callback()
+            }, label: {
+                Text(title)
+                    .foregroundColor(.darkPurple)
+                    .font(.custom(FontManager.Primary.regular, size: 16))
+            })
+        }
     }
 }
 

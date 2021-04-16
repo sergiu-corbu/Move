@@ -10,12 +10,14 @@ import MapKit
 import UIKit
 import SwiftUI
 import Combine
+import NavigationStack
 
 struct MapView: View {
     
+    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
+    
     var body: some View {
-        NavigationView {
-        GeometryReader { geometry in
+
             VStack {
                 Map()
             }
@@ -23,7 +25,8 @@ struct MapView: View {
             .overlay(
                 HStack {
                     Button(action: {
-                        
+                        print("going to menu...")
+                        navigationViewModel.push(MenuView())
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 15.0)
@@ -47,11 +50,7 @@ struct MapView: View {
                 }
                 .padding(.top, 65)
                 .padding([.leading, .trailing], 20)
-                .padding(.bottom, geometry.size.height)
             )
-        }
-        .navigationBarHidden(true)
-        }
     }
 }
 
