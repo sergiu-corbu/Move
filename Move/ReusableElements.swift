@@ -186,6 +186,7 @@ struct InputPasswordReset: View {
 
 struct NavigationBar: View {
     let title: String?
+    let avatar: String?
     let backButton: String
     let action: () -> Void
     
@@ -201,17 +202,22 @@ struct NavigationBar: View {
                     .font(.custom(FontManager.Primary.semiBold, size: 18))
                     .foregroundColor(.darkPurple)
                     .frame(maxWidth: .infinity)
-                    .padding(.trailing, 24)
+                  //  .padding(.trailing, 24)
             }
             Spacer()
+            if let _avatar = avatar {
+                Image(_avatar)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 40, height: 40)
+                
+            }
         }
-        //.padding([.top, .bottom], 15)
-        .padding([.leading, .trailing], 24)
     }
 }
 
 struct Reusable_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar(title: "Driving License", backButton: "chevron-left-purple", action: {})
+        NavigationBar(title: "Driving License", avatar: nil, backButton: "chevron-left-purple", action: {})
     }
 }

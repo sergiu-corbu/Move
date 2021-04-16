@@ -13,6 +13,7 @@ import Alamofire
 struct Register: View {
     let emailValidation = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
     let passwordValidation = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$")
+    
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
     @State private var usernameTyping: Bool = false
@@ -82,11 +83,11 @@ struct Register: View {
                 usernameTyping = false
                 passwordTyping = false
             })
-            if emailValidation.evaluate(with: userViewModel.$email) {
+           /* if emailValidation.evaluate(with: userViewModel.$email) {
                 Text("errorrr")
                     .foregroundColor(.coralRed)
                     .font(.footnote)
-            }
+            }*/
             
             InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", image: "close-img", isSecuredField: false, action: {
                 emailTyping = false

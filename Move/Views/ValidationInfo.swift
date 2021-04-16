@@ -10,14 +10,21 @@ import NavigationStack
 
 struct ValidationInfo: View {
     
+    @State var image: Image?
     @State private var showActionSheet: Bool = false
+    @State private var showImagePicker: Bool = false
+    @State private var showCamera: Bool = false
+    @Binding var isLoading: Bool
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
     let onBack: ()
+    let onNext: (Image) -> Void
     
     var body: some View {
         VStack(spacing: 35) {
-            NavigationBar(title: "Driver License", backButton: "chevron-left-purple", action: {})
+            NavigationBar(title: "Driver License", avatar: nil, backButton: "chevron-left-purple", action: {})
+                .padding(.top, 50)
+                .padding(.bottom, -30)
             GeometryReader { geometry in
                 Image("driver-license-img")
                     .resizable()
@@ -34,21 +41,30 @@ struct ValidationInfo: View {
                         .opacity(0.8)
                         .multilineTextAlignment(.leading)
                 Spacer()
-                CallToActionButton(enabled: true, text: "Add driving license", action: {
+                CallToActionButton(isLoading: isLoading, enabled: true, text: "Add drivig license", action: {
                     showActionSheet.toggle()
-                }).actionSheet(isPresented: $showActionSheet, content: {
+                })
+                .sheet(isPresented: $showImagePicker) {
+                    ImagePickerView(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
+                }
+                .actionSheet(isPresented: $showActionSheet, content: {
                     let camera = ActionSheet.Button.default(Text("Take picture")) {
-                        //open camera
+                        showImagePicker = true
+                        showCamera = true
+                        showActionSheet = false
                     }
                     
                     let gallery = ActionSheet.Button.default(Text("Select from gallery")) {
-                        //open camera
+                        showImagePicker = true
+                        showCamera = false
+                        showActionSheet = false
                     }
                     
                     let cancel = ActionSheet.Button.cancel(Text("Cancel").foregroundColor(.red)) {
                         showActionSheet = false
+                        showImagePicker = false
+                        showCamera = false
                     }
-                    
                     return ActionSheet(title: Text("Select options"), buttons: [camera, gallery, cancel])
                 })
             }
@@ -56,11 +72,21 @@ struct ValidationInfo: View {
         }
         .foregroundColor(.darkPurple)
         .background(Color.white)
+        .edgesIgnoringSafeArea(.top)
+    }
+    var imageBinding: Binding<Image?> {
+        return Binding(get: {
+            return Image("")
+        }, set: { image in
+            if let _image = image {
+                onNext(_image)
+            }
+        })
     }
 }
 
 struct ValidationInfo_Previews: PreviewProvider {
     static var previews: some View {
-        ValidationInfo(onBack: ())
+        ValidationInfo(isLoading: .constant(true), onBack: (), onNext: {_ in})
     }
 }

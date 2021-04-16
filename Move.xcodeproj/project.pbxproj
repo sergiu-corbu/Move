@@ -16,6 +16,8 @@
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
 		EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionValidator.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
+		ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB749FE2629B4CD00EA741D /* MenuView.swift */; };
+		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
 		ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBD26242836003C659F /* AppDelegate.swift */; };
 		ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBF26242836003C659F /* SceneDelegate.swift */; };
 		ECDD3FC226242836003C659F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FC126242836003C659F /* ContentView.swift */; };
@@ -34,7 +36,7 @@
 		ECDD3FF826242979003C659F /* BaiJamjuree-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF426242979003C659F /* BaiJamjuree-Bold.ttf */; };
 		ECDD3FF926242979003C659F /* BaiJamjuree-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF526242979003C659F /* BaiJamjuree-SemiBold.ttf */; };
 		ECDD3FFA26242979003C659F /* BaiJamjuree-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF626242979003C659F /* BaiJamjuree-Medium.ttf */; };
-		ECDD400026242985003C659F /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFD26242985003C659F /* Map.swift */; };
+		ECDD400026242985003C659F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFD26242985003C659F /* MapView.swift */; };
 		ECDD400126242985003C659F /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFF26242985003C659F /* Onboarding.swift */; };
 		ECDD400626242B49003C659F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* User.swift */; };
 		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
@@ -49,6 +51,8 @@
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionValidator.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		ECB749FE2629B4CD00EA741D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		ECDD3FBA26242836003C659F /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDD3FBD26242836003C659F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECDD3FBF26242836003C659F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +70,7 @@
 		ECDD3FF426242979003C659F /* BaiJamjuree-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Bold.ttf"; sourceTree = "<group>"; };
 		ECDD3FF526242979003C659F /* BaiJamjuree-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-SemiBold.ttf"; sourceTree = "<group>"; };
 		ECDD3FF626242979003C659F /* BaiJamjuree-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Medium.ttf"; sourceTree = "<group>"; };
-		ECDD3FFD26242985003C659F /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		ECDD3FFD26242985003C659F /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		ECDD3FFF26242985003C659F /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		ECDD400526242B49003C659F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
@@ -102,7 +106,8 @@
 		EC0B576C2625C04B005F16CB /* MainView */ = {
 			isa = PBXGroup;
 			children = (
-				ECDD3FFD26242985003C659F /* Map.swift */,
+				ECDD3FFD26242985003C659F /* MapView.swift */,
+				ECB749FE2629B4CD00EA741D /* MenuView.swift */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -112,6 +117,7 @@
 			children = (
 				EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */,
 				EC5F17982626FB7900A10368 /* ValidationInfo.swift */,
+				ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */,
 				EC0B57732625CC73005F16CB /* ValidationSuccess.swift */,
 			);
 			name = LicenceValidation;
@@ -308,8 +314,10 @@
 				ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */,
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
+				ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
+				ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
 				ECDD3FED26242970003C659F /* LocationManager.swift in Sources */,
@@ -320,7 +328,7 @@
 				EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */,
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
-				ECDD400026242985003C659F /* Map.swift in Sources */,
+				ECDD400026242985003C659F /* MapView.swift in Sources */,
 				ECDD3FC226242836003C659F /* ContentView.swift in Sources */,
 				EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */,
 				ECDD400626242B49003C659F /* User.swift in Sources */,
