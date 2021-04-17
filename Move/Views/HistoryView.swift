@@ -16,21 +16,18 @@ struct HistoryView: View {
             NavigationBar(title: "History", avatar: nil, backButton: "chevron-left-purple", action: {
                 //go back to menu page
             }).padding(.top, 50) // title as activity indicator, not moving
-    
+            
             TripDetail()
                 .padding(.top, 150)
         }
         .padding([.leading, .trailing], 24)
         //.background(Color.white) // stable color or based on map?
         .edgesIgnoringSafeArea(.all)
-        
     }
 }
 
 struct TripDetail: View {
-    
     var body: some View {
-        
         HStack {
             tripBoundaries
             Spacer()
@@ -38,7 +35,6 @@ struct TripDetail: View {
         }
         .background(Image("trip-history-background")) //to do with zstack
     }
-    
     var tripBoundaries: some View {
         VStack(alignment: .leading) {
             Text("From")
@@ -62,7 +58,6 @@ struct TripDetail: View {
         }
         .padding(.leading, 25)
     }
-    
     var tripTime: some View {
         VStack(alignment: .leading) {
             Text("Travel time")

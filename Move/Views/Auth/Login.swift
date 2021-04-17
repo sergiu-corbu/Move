@@ -66,11 +66,11 @@ struct Login: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, action: {
+            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, action: {
                 emailTyping = true
                 passwordTyping = false
             })
-            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, action: {
+            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, action: {
                 emailTyping = false
                 passwordTyping = true
             })

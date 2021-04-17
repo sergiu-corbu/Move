@@ -48,7 +48,7 @@ struct ForgotPassword: View {
         .padding(.bottom, 30)
     }
     var emailField: some View {
-        InputField(activeField: $activeField, input: $email, textField: "Email Address", image: "", isSecuredField: false, action: {
+        InputField(activeField: $activeField, input: $email, textField: "Email Address", image: "", isSecuredField: false, textColor: .white, action: {
             
         })
     }

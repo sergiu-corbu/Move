@@ -62,6 +62,7 @@ struct InputField: View {
     let textField: String
     let image: String
     let isSecuredField: Bool
+    let textColor: Color
     let action: () -> Void
     
     var body: some View {
@@ -74,19 +75,19 @@ struct InputField: View {
             HStack {
                 if showSecured && isSecuredField {
                     SecureField(activeField ? "" : textField, text: $input)
-                        .foregroundColor(.white)
+                        .foregroundColor(textColor)
                         .font(Font.custom(FontManager.Primary.medium, size: 18))
                         .autocapitalization(.none)
-                        .accentColor(.white)
+                        .accentColor(textColor)
                         .padding(.bottom, 10)
                         .padding(.top, 5)
                         .disableAutocorrection(true)
                         .onTapGesture { action() }
                 } else {
                     TextField(activeField ? "" : textField, text: $input)
-                        .foregroundColor(.white)
+                        .foregroundColor(textColor)
                         .font(Font.custom(FontManager.Primary.medium, size: 18))
-                        .accentColor(.white)
+                        .accentColor(textColor)
                         .autocapitalization(.none)
                         .padding(.bottom, 10)
                         .padding(.top, 5)

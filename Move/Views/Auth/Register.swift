@@ -78,7 +78,7 @@ struct Register: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, action: {
+            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, action: {
                 emailTyping = true
                 usernameTyping = false
                 passwordTyping = false
@@ -89,12 +89,12 @@ struct Register: View {
                     .font(.footnote)
             }*/
             
-            InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", image: "close-img", isSecuredField: false, action: {
+            InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", image: "close-img", isSecuredField: false, textColor: .white, action: {
                 emailTyping = false
                 usernameTyping = true
                 passwordTyping = false
             })
-            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, action: {
+            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, action: {
                 emailTyping = false
                 usernameTyping = false
                 passwordTyping = true
