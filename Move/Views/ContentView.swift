@@ -11,8 +11,8 @@ import NavigationStack
 struct ContentView: View {
     var body: some View {
         //Validation()
-        //NewUser()
-        MapView()
+        NewUser()
+        //MapView()
     }
 }
 
@@ -34,11 +34,8 @@ struct Validation: View {
             navigationViewModel
                 .push(ValidationInProgress())
         })
-        
     }
-
 }
-
 
 struct OpenLogin: View { //todo
     
@@ -48,7 +45,7 @@ struct OpenLogin: View { //todo
         EmptyView()
     }
 }
-/*
+
 struct NewUser: View {
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
@@ -62,10 +59,8 @@ struct NewUser: View {
    
     func handleRegister() {
         navigationViewModel
-            .push(
-                Register(onRegisterComplete: {
-                    navigationViewModel.push(ValidationInfo(onBack: navigationViewModel.pop()))
+            .push(Register(onRegisterComplete: {
                 }))
     }
-}*/
+}
 
