@@ -16,7 +16,7 @@ struct ContentView: View {
     }
 }
 
-struct Validation: View {
+struct ValidationNavigation: View {
     @State private var isLoading = false
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     var body: some View {
@@ -37,12 +37,17 @@ struct Validation: View {
     }
 }
 
-struct OpenLogin: View { //todo
-    
+struct LoginNavigation: View {
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
     var body: some View {
-        EmptyView()
+        NavigationStackView(navigationStack: navigationViewModel) {
+            Login(onLoginCompleted: {
+                navigationViewModel.push(MapView())
+            }, onRegisterSwitch: {
+                navigationViewModel.push(RegisterNavigation())
+            })
+        }
     }
 }
 
@@ -59,8 +64,29 @@ struct NewUser: View {
    
     func handleRegister() {
         navigationViewModel
-            .push(Register(onRegisterComplete: {
-                }))
+            .push(RegisterNavigation())
+    }
+    
+}
+
+struct RegisterNavigation: View {
+    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
+    
+    var body: some View {
+        NavigationStackView(navigationStack: navigationViewModel) {
+            Register(onRegisterComplete: {
+                handleValidation()
+            }, onLoginSwitch: {
+                handleLoginSwitch()
+            })
+        }
+    }
+    
+    func handleLoginSwitch() {
+        navigationViewModel.push(LoginNavigation())
+    }
+    func handleValidation() {
+        navigationViewModel.push(ValidationNavigation())
     }
 }
 

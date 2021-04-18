@@ -16,10 +16,14 @@ struct Login: View {
     @State private var isLoading: Bool = false
     
     let onLoginCompleted: () -> Void
+    let onRegisterSwitch: () -> Void
+    
     var allfieldsCompleted: Bool {
         return userViewModel.email != "" && userViewModel.password != "" && isLoading == false
     }
-    
+    var allfieldsValidated: Bool {
+        return userViewModel.emailError.isEmpty && userViewModel.passwordError.isEmpty
+    }
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack (alignment: .leading) {
@@ -66,14 +70,28 @@ struct Login: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, action: {
-                emailTyping = true
-                passwordTyping = false
-            })
-            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, action: {
-                emailTyping = false
-                passwordTyping = true
-            })
+            VStack(alignment: .leading) {
+                InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, action: {
+                    emailTyping = true
+                    passwordTyping = false
+                })
+                if !userViewModel.emailError.isEmpty {
+                    Text(userViewModel.emailError)
+                        .foregroundColor(.coralRed)
+                        .font(.footnote)
+                }
+            }
+            VStack(alignment: .leading) {
+                InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, action: {
+                    emailTyping = false
+                    passwordTyping = true
+                })
+                if !userViewModel.passwordError.isEmpty  {
+                    Text(userViewModel.passwordError)
+                        .foregroundColor(.coralRed)
+                        .font(.footnote)
+                }
+            }
         }
     }
     
@@ -100,7 +118,7 @@ struct Login: View {
                 .font(Font.custom(FontManager.Primary.regular, size: 14))
                 .foregroundColor(.white)
             Button(action: {
-               
+               onRegisterSwitch()
             }, label: {
                 Text("start with one here")
                     .foregroundColor(.white)
@@ -114,6 +132,6 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        Login(onLoginCompleted: {})
+        Login(onLoginCompleted: {}, onRegisterSwitch: {})
     }
 }

@@ -16,7 +16,7 @@
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
 		EC7DC503262B3A67007D7996 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7DC502262B3A67007D7996 /* AccountView.swift */; };
 		EC7DC507262B3A77007D7996 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */; };
-		EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionValidator.swift */; };
+		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB749FE2629B4CD00EA741D /* MenuView.swift */; };
 		ECB74A682629FF3000EA741D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB74A672629FF3000EA741D /* HistoryView.swift */; };
@@ -54,7 +54,7 @@
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7DC502262B3A67007D7996 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
-		EC9C7BB326255DA200FD5605 /* SessionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionValidator.swift; sourceTree = "<group>"; };
+		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECB749FE2629B4CD00EA741D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		ECB74A672629FF3000EA741D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				ECE337BB26243A51009EC353 /* Api.swift */,
-				EC9C7BB326255DA200FD5605 /* SessionValidator.swift */,
+				EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -336,7 +336,7 @@
 				ECB74A682629FF3000EA741D /* HistoryView.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */,
-				EC9C7BB426255DA200FD5605 /* SessionValidator.swift in Sources */,
+				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
 				ECDD3FED26242970003C659F /* LocationManager.swift in Sources */,
 				EC7DC507262B3A77007D7996 /* ChangePasswordView.swift in Sources */,

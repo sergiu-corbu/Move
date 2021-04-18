@@ -15,18 +15,20 @@ struct Register: View {
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
     @State private var usernameTyping: Bool = false
-    @ObservedObject private var userViewModel = UserViewModel()
+    @StateObject private var userViewModel = UserViewModel()
     
     @State private var termsPresented: Bool = false
-    @State private var conditionsPresented: Bool = false
+    @State private var privacyPresented: Bool = false
     @State private var isLoading: Bool = false
     
-    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
-    
     let onRegisterComplete: () -> Void
-
+    let onLoginSwitch: () -> Void
+    
     var allfieldsCompleted: Bool {
         return userViewModel.email != "" && userViewModel.username != "" && userViewModel.password != "" && isLoading == false
+    }
+    var allfieldsValidated: Bool {
+        return userViewModel.emailError.isEmpty && userViewModel.passwordError.isEmpty
     }
     
     var body: some View {
@@ -76,26 +78,41 @@ struct Register: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, action: {
-                emailTyping = true
-                usernameTyping = false
-                passwordTyping = false
-            })
+            VStack(alignment: .leading) {
+                InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, action: {
+                    emailTyping = true
+                    usernameTyping = false
+                    passwordTyping = false
+                })
+                if !userViewModel.emailError.isEmpty {
+                    Text(userViewModel.emailError)
+                        .foregroundColor(.coralRed)
+                        .font(.footnote)
+                }
+            }
+            
             InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", image: "close-img", isSecuredField: false, textColor: .white, action: {
                 emailTyping = false
                 usernameTyping = true
                 passwordTyping = false
             })
-            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, action: {
-                emailTyping = false
-                usernameTyping = false
-                passwordTyping = true
-            })
+            VStack(alignment: .leading) {
+                InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, action: {
+                    emailTyping = false
+                    usernameTyping = false
+                    passwordTyping = true
+                })
+                if !userViewModel.passwordError.isEmpty  {
+                    Text(userViewModel.passwordError)
+                        .foregroundColor(.coralRed)
+                        .font(.footnote)
+                }
+            }
         }
     }
     
     var getStartedButton: some View {
-        CallToActionButton(isLoading: isLoading, enabled: allfieldsCompleted, text: "Get started", action: {
+        CallToActionButton(isLoading: isLoading, enabled: allfieldsCompleted && allfieldsValidated, text: "Get started", action: {
             isLoading = true
             API.register(username: userViewModel.username, email: userViewModel.email, password: userViewModel.password) { (result) in
                 switch result {
@@ -134,7 +151,7 @@ struct Register: View {
                     .font(.custom(FontManager.Primary.medium, size: 14))
                     .padding([.trailing, .leading], -3)
                 Button(action: {
-                    
+                    privacyPresented = true
                 }, label: {
                     Text("Privacy Policy")
                         .foregroundColor(.white)
@@ -142,7 +159,7 @@ struct Register: View {
                         .bold()
                         .underline()
                 })
-                .safariView(isPresented: $termsPresented) {
+                .safariView(isPresented: $privacyPresented) {
                     SafariView(url: URL(string: "https://tapptitude.com")!, configuration: SafariView.Configuration(entersReaderIfAvailable: false, barCollapsingEnabled: true))
                         .dismissButtonStyle(.close)
                 }
@@ -158,14 +175,8 @@ struct Register: View {
                 .font(Font.custom(FontManager.Primary.regular, size: 14))
                 .foregroundColor(.white)
             Button(action: {
-                /*NavigationStackView(navigationStack: navigationViewModel) {
-                    Register(onRegisterComplete: {}) {
-                        navigationViewModel.push(Login(onLoginCompleted: {
-                            navigationViewModel.push(MapView())
-                        }))
-                    }
-                    
-                }*/
+                onLoginSwitch()
+               
             }, label: {
                 Text("log in here")
                     .foregroundColor(.white)
@@ -181,7 +192,7 @@ struct Register: View {
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone 12", "iPhone SE (2nd generation)"], id: \.self) { deviceName in
-            Register(onRegisterComplete: {})
+            Register(onRegisterComplete: {}, onLoginSwitch: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }
