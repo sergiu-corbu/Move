@@ -5,11 +5,8 @@
 //  Created by Sergiu Corbu on 4/11/21.
 //
 
-import Foundation
 import MapKit
-import UIKit
 import SwiftUI
-import Combine
 import NavigationStack
 
 struct MapViewNavigation: View {
@@ -24,15 +21,21 @@ struct MapViewNavigation: View {
     }
 }
 
-var locationManager = CLLocationManager()
-
-
 struct MapView: View {
+    
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
+    
+    @StateObject var locationManager = LocationManager()
     
     private static let defaultCoordinate = CLLocationCoordinate2D(latitude: 46.770, longitude: 23.591423)
     @State private var coordinateRegion = MKCoordinateRegion(center: defaultCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.0095, longitudeDelta: 0.0054))
    
+    var userLatitude: Double {
+        return locationManager.lastLocation?.coordinate.latitude ?? 0
+    }
+    var userLongitude: Double {
+        return locationManager.lastLocation?.coordinate.latitude ?? 0
+    }
     
     let onMenuButton: () -> Void
     
@@ -77,14 +80,6 @@ struct MapView: View {
         }
         .padding(.top, 65)
         .padding([.leading, .trailing], 24)
-    }
-}
-
-extension Map {
-    func setupManager() {
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestAlwaysAuthorization()
     }
 }
 
