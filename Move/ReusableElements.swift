@@ -54,7 +54,6 @@ struct CallToActionButton: View {
 
 //MARK: fields
 struct InputField: View {
-    @StateObject private var userViewModel = UserViewModel()
     @Binding var activeField: Bool
     @Binding var input: String
     @State private var showSecured: Bool = true
@@ -63,6 +62,7 @@ struct InputField: View {
     let image: String
     let isSecuredField: Bool
     let textColor: Color
+    var error: String?
     let action: () -> Void
     
     var body: some View {
@@ -102,14 +102,13 @@ struct InputField: View {
                     Button(action: {
                         if isSecuredField { showSecured.toggle() } else {
                             input = ""
-                            activeField = false
                         }
                     }, label: {
                         if isSecuredField {
                             Image(showSecured ? "eye-img" : "eye-off-img")
                                 .padding(.all, 5)
                                 .foregroundColor(.fadePurple)
-                        } else if !isSecuredField {
+                        } else {
                             Image(image)
                                 .padding(.all, 5)
                                 .foregroundColor(.fadePurple)
@@ -117,14 +116,31 @@ struct InputField: View {
                     })
                 }
             }
-            Divider()
-                .padding(.bottom, activeField ? 2 : 1)
-                .background(activeField ? Color.white : Color.fadePurple)
-            
-            if isSecuredField && input == ""  && activeField {
-                Text("Use a strong password (min. 8 characters and use symbols")
-                    .font(.custom(FontManager.Primary.regular, size: 13))
-                    .foregroundColor(.white)
+            if let error = self.error {
+                if activeField && !input.isEmpty && !error.isEmpty {
+                Divider()
+                    .padding(.bottom, 2)
+                    .background(Color.errorRed)
+                Text(error)
+                    .foregroundColor(.errorRed)
+                    .font(.custom(FontManager.Primary.regular, size: 14))
+                } else if !activeField && !input.isEmpty && !error.isEmpty  {
+                    Divider()
+                        .padding(.bottom, 1)
+                        .background(Color.errorRed)
+                    Text(error)
+                        .foregroundColor(.errorRed)
+                        .font(.custom(FontManager.Primary.regular, size: 14))
+                }
+                else {
+                    Divider()
+                        .padding(.bottom, activeField ? 2 : 1)
+                        .background(activeField ? Color.white : Color.fadePurple)
+                }
+            } else {
+                Divider()
+                    .padding(.bottom, activeField ? 2 : 1)
+                    .background(activeField ? Color.white : Color.fadePurple)
             }
         }
         .padding([.top, .bottom], 6)

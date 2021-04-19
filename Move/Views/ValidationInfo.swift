@@ -72,7 +72,7 @@ struct ValidationInfo: View {
         }
         .foregroundColor(.darkPurple)
         .background(Color.white)
-        .edgesIgnoringSafeArea(.top)
+        .edgesIgnoringSafeArea(.all)
     }
     var imageBinding: Binding<Image?> {
         return Binding(get: {
@@ -82,6 +82,13 @@ struct ValidationInfo: View {
                 onNext(_image)
             }
         })
+    }
+}
+
+extension ValidationInfo {
+    func goToDeviceSettings() {
+        guard let url = URL.init(string: UIApplication.openSettingsURLString) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 

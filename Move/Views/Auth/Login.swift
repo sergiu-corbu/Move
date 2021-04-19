@@ -70,28 +70,14 @@ struct Login: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            VStack(alignment: .leading) {
-                InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, action: {
-                    emailTyping = true
-                    passwordTyping = false
-                })
-                if !userViewModel.emailError.isEmpty {
-                    Text(userViewModel.emailError)
-                        .foregroundColor(.coralRed)
-                        .font(.footnote)
-                }
-            }
-            VStack(alignment: .leading) {
-                InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, action: {
-                    emailTyping = false
-                    passwordTyping = true
-                })
-                if !userViewModel.passwordError.isEmpty  {
-                    Text(userViewModel.passwordError)
-                        .foregroundColor(.coralRed)
-                        .font(.footnote)
-                }
-            }
+            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white,error: userViewModel.emailError, action: {
+                emailTyping = true
+                passwordTyping = false
+            })
+            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, error: userViewModel.passwordError , action: {
+                emailTyping = false
+                passwordTyping = true
+            })
         }
     }
     

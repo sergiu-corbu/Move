@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import Combine
 
 class LocationManager: NSObject, ObservableObject {
     private let locationManager = CLLocationManager()
@@ -14,11 +15,12 @@ class LocationManager: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        locationManager.desiredAccuracy = 1 //maybe km or kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = 3 //maybe km or kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        locationManager.delegate = self
+        
     }
 }
 

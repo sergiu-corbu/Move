@@ -33,7 +33,7 @@ class UserViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = "" {
         didSet {
-            self.isValidPassword()
+            isValidPassword()
         }
     }
     

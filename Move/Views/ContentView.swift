@@ -10,9 +10,10 @@ import NavigationStack
 
 struct ContentView: View {
     var body: some View {
-        //Validation()
-        NewUser()
-        //MapView()
+        ValidationNavigation()
+        //NewUser()
+        //MapViewNavigation()
+        //MenuView()
     }
 }
 
@@ -43,7 +44,7 @@ struct LoginNavigation: View {
     var body: some View {
         NavigationStackView(navigationStack: navigationViewModel) {
             Login(onLoginCompleted: {
-                navigationViewModel.push(MapView())
+                navigationViewModel.push(MapViewNavigation())
             }, onRegisterSwitch: {
                 navigationViewModel.push(RegisterNavigation())
             })

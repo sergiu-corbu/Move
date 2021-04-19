@@ -21,7 +21,7 @@ struct HistoryView: View {
                 .padding(.top, 150)
         }
         .padding([.leading, .trailing], 24)
-        //.background(Color.white) // stable color or based on map?
+        .background(Color.white) // stable color or based on map?
         .edgesIgnoringSafeArea(.all)
     }
 }

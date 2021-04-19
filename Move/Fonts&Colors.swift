@@ -16,6 +16,7 @@ extension Color {
     static let fadePurple = Color("fadePurple")
     static let lightGray = Color("lightGray")
     static let lightPink = Color("lightPink")
+    static let errorRed = Color("errorRed")
 }
 
 struct FontManager {

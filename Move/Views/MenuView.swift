@@ -18,27 +18,32 @@ struct MenuView: View {
                 navBar
                 historyView
                 menuOptions
+                Spacer()
             }
-            Spacer()
+            
         }
-        .background(
+        .padding([.leading, .trailing], 24)
+        .background(Color.white)
+        .edgesIgnoringSafeArea(.all)
+       /* .background(
             GeometryReader { geometry in
                 Image("menu-background-img")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: geometry.size.width , height: geometry.size.height)
                     .edgesIgnoringSafeArea(.all)
-            })
-        .padding([.leading, .trailing], 24)
+            })*/
+        
     }
     var navBar: some View {
         NavigationBar(title: "Hi, Sergiu!", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
+            .padding(.top, 40)
     }
     var historyView: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 28)
                 .foregroundColor(.lightPurple)
-                .frame(width: .infinity, height: 110)
+                .frame(height: 110)
                 .background(Image("history-background-img").resizable())
             HStack {
                 VStack(alignment: .leading) {
@@ -66,7 +71,7 @@ struct MenuView: View {
                                     .foregroundColor(.coralRed)
                                     .cornerRadius(16))})
             }.padding([.leading, .trailing], 30)
-        }.padding([.top, .bottom], 20)
+        }.padding(.top, 20)
     }
     var menuOptions: some View {
         VStack(alignment: .leading) {
@@ -139,6 +144,11 @@ struct SubMenuItems: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
+            MenuView()
+                .previewDevice(PreviewDevice(rawValue: deviceName))
+                .previewDisplayName(deviceName)
+        }
+        .preferredColorScheme(.dark)
     }
 }

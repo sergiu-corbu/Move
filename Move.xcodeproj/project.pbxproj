@@ -207,7 +207,6 @@
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
-				ECDD3FE926242970003C659F /* LocationManager.swift */,
 				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
 			);
 			name = Helpers;
@@ -240,6 +239,7 @@
 			children = (
 				ECE337BB26243A51009EC353 /* Api.swift */,
 				EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */,
+				ECDD3FE926242970003C659F /* LocationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

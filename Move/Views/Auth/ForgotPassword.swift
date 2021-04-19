@@ -12,6 +12,7 @@ struct ForgotPassword: View {
     @State private var email: String = ""
     @State private var showAlert: Bool = false
     @State private var activeField: Bool = false
+    @StateObject var userViewModel: UserViewModel = UserViewModel()
     private var isEnabled: Bool {
         return email != ""
     }
@@ -48,7 +49,7 @@ struct ForgotPassword: View {
         .padding(.bottom, 30)
     }
     var emailField: some View {
-        InputField(activeField: $activeField, input: $email, textField: "Email Address", image: "", isSecuredField: false, textColor: .white, action: {
+        InputField(activeField: $activeField, input: $email, textField: "Email Address", image: "", isSecuredField: false, textColor: .white,error: userViewModel.emailError , action: {
             
         })
     }

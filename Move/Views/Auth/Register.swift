@@ -78,34 +78,26 @@ struct Register: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            VStack(alignment: .leading) {
-                InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, action: {
+            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, error: userViewModel.emailError, action: {
                     emailTyping = true
                     usernameTyping = false
                     passwordTyping = false
                 })
-                if !userViewModel.emailError.isEmpty {
-                    Text(userViewModel.emailError)
-                        .foregroundColor(.coralRed)
-                        .font(.footnote)
-                }
-            }
-            
             InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", image: "close-img", isSecuredField: false, textColor: .white, action: {
                 emailTyping = false
                 usernameTyping = true
                 passwordTyping = false
             })
             VStack(alignment: .leading) {
-                InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, action: {
+                InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, error: userViewModel.passwordError,action: {
                     emailTyping = false
                     usernameTyping = false
                     passwordTyping = true
                 })
-                if !userViewModel.passwordError.isEmpty  {
-                    Text(userViewModel.passwordError)
-                        .foregroundColor(.coralRed)
-                        .font(.footnote)
+                if userViewModel.password == "" && passwordTyping  {
+                    Text("Use a strong password (min. 8 characters and use symbols")
+                        .font(.custom(FontManager.Primary.regular, size: 13))
+                        .foregroundColor(.white)
                 }
             }
         }
