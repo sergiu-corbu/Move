@@ -29,6 +29,7 @@ struct AuthResult: Decodable {
 }
 
 class API {
+    
     static let baseUrl: String = "https://escooter-tapp.herokuapp.com/api/"
 
     static func register(username: String, email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void ) {
@@ -65,6 +66,25 @@ class API {
                 }
             } else {
                 callback(.failure(APIError(message: "Missing data")))
+            }
+        }
+    }
+    
+    static func getScooters(_ callback: @escaping (Result<[Scooter]>) -> Void ) {
+        let path = baseUrl + "scooter"
+        
+        AF.request(path).response { response in
+            if let data = response.data {
+                let debugString = String(data: data, encoding: .utf8)
+                print(debugString ?? "") //delete  after
+                do {
+                    let result = try JSONDecoder().decode([Scooter].self, from: data)
+                    callback(.success(result))
+                } catch (let error) {
+                    callback(.failure(error))
+                }
+            } else {
+                callback(.failure(APIError(message: "error while getting scooters")))
             }
         }
     }

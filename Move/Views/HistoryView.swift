@@ -50,7 +50,7 @@ struct TripDetail: View {
             Text("To")
                 .foregroundColor(.fadePurple)
                 .font(.custom(FontManager.Primary.medium, size:     14))
-            Text("261 Howell Garden")
+            Text("261 Howell Garddfighrtwjognrtguwrtguirtnrotijhtroiroen")
                 .foregroundColor(.darkPurple)
                 .font(.custom(FontManager.Primary.bold, size: 16))
                 .frame(maxWidth: 180, alignment: .leading)

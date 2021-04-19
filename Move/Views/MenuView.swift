@@ -13,31 +13,29 @@ struct MenuView: View {
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading) {
-                navBar
-                historyView
-                menuOptions
-                Spacer()
+        ZStack(alignment: .bottomTrailing) {
+            Image("scooter-img")
+                .resizable()
+                .frame(width: 250, height: 300)
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading) {
+                    navBar
+                    historyView
+                    menuOptions
+                    Spacer()
+                }
             }
-            
+            .padding([.leading, .trailing], 24)
+            .edgesIgnoringSafeArea(.all)
         }
-        .padding([.leading, .trailing], 24)
         .background(Color.white)
-        .edgesIgnoringSafeArea(.all)
-       /* .background(
-            GeometryReader { geometry in
-                Image("menu-background-img")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: geometry.size.width , height: geometry.size.height)
-                    .edgesIgnoringSafeArea(.all)
-            })*/
-        
     }
     var navBar: some View {
         NavigationBar(title: "Hi, Sergiu!", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
-            .padding(.top, 40)
+            .background(
+                Color.white
+                    .edgesIgnoringSafeArea(.all)
+            )
     }
     var historyView: some View {
         ZStack {

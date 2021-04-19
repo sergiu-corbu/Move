@@ -201,6 +201,7 @@ struct NavigationBar: View {
             }, label: {
                 Image(backButton)
             })
+            
             if let _title = title {
                 Text(_title)
                     .font(.custom(FontManager.Primary.semiBold, size: 18))
@@ -217,6 +218,7 @@ struct NavigationBar: View {
                 
             }
         }
+        .padding([.leading, .trailing], 24)
     }
 }
 
