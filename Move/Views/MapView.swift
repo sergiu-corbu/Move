@@ -28,37 +28,44 @@ struct MapView: View {
     @ObservedObject private var locationManager = LocationManager()
     @State private var region = MKCoordinateRegion.defaultRegion
     @State private var cancellable: AnyCancellable?
-    
     @ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
-    
-   // @State var _result: Result<[Scooter]> =
-    
-    
+    @State private var showScooterInfo: Bool = false
     //MKCoordinateSpan(latitudeDelta: 0.0095, longitudeDelta: 0.0054))
-   
+    
     private func setCurrentLocation() {
         cancellable = locationManager.$location.sink { location in
-            region = MKCoordinateRegion(center: location?.coordinate ?? CLLocationCoordinate2D(), latitudinalMeters: 500, longitudinalMeters: 500)
+            guard let location = location else {
+                region = MKCoordinateRegion.defaultRegion
+                return
+            }
+            scooterViewModel.location = location.coordinate
+            region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         }
     }
+    
     let onMenuButton: () -> Void
     
     var body: some View {
-        ZStack(alignment: .top) {
-            if locationManager.location != nil {
-              /*  Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: Result) { scooter in
-                    //
-                }*/
-                Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true)
-                    .edgesIgnoringSafeArea(.all)
-                    .onAppear {
-                        setCurrentLocation()
+        if locationManager.location != nil {
+            ZStack(alignment: .top) {
+                Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: scooterViewModel.allScooters) { scooter in
+                    MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0])) {
+                        Image("pin-fill-img")
+                            .onTapGesture {
+                                showScooterInfo = true
+                            }
+                            .overlay(
+                                ScooterViewItem(scooter: scooter)
+                            )
                     }
+                }
+                .edgesIgnoringSafeArea(.all)
+                .onAppear { setCurrentLocation() }
+                navigationBarItems
             }
-            navigationBarItems
         }
     }
-
+    
     var navigationBarItems: some View {
         HStack {
             Button(action: {
@@ -72,26 +79,12 @@ struct MapView: View {
                 .shadow(radius: 17)
             })
             Spacer()
-            Button(action: {
-                API.getScooters { result in
-                    switch result {
-                        case .success:
-                            scooterViewModel.allScooters = result
-                      //  _result = result
-                            print(result)
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                    }
-                }
-            }, label: {
-                Text("get scooters")
-            })
             Text("Cluj Napoca")
                 .foregroundColor(.darkPurple)
                 .font(.custom(FontManager.Primary.semiBold, size: 18))
             Spacer()
             Button(action: {
-                
+                //track location
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 15.0)
@@ -100,6 +93,7 @@ struct MapView: View {
                 }.frame(width: 36, height: 36)
             })
         }
+        .padding(.top)
         .padding([.leading, .trailing], 24)
     }
 }
@@ -107,7 +101,7 @@ struct MapView: View {
 extension MKCoordinateRegion {
     
     static var defaultRegion: MKCoordinateRegion {
-        MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770, longitude: 23.591423), latitudinalMeters: 100, longitudinalMeters: 100)
+        MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.770, longitude: 23.591423), latitudinalMeters: 200, longitudinalMeters: 200)
     }
     
 }

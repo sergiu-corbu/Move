@@ -19,14 +19,15 @@ struct Location: Codable {
 
 struct Scooter: Identifiable, Codable {
     let id: String
-    let battery: Double //get set?
+    let battery: Double
     let location: Location
-    let v: Int
+    var batteryPercentage: String {
+        return "\((battery * 100).clean)%"
+    }
     
     enum CodingKeys: String, CodingKey {
         case location = "location"
         case id = "_id"
         case battery = "power"
-        case v = "__v"
     }
 }

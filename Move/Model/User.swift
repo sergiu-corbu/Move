@@ -23,3 +23,14 @@ struct User: Identifiable, Codable {
       
     }
 }
+
+struct AuthResult: Decodable {
+    
+    let user: User
+    let token: String
+    
+    enum CodingKeys: String, CodingKey {
+        case user = "user"
+        case token = "token"
+    }
+}

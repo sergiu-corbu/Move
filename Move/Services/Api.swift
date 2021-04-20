@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import CoreLocation
 
 struct APIError: Error {
     var message: String
@@ -17,16 +18,6 @@ struct APIError: Error {
 
 typealias Result<T> = Swift.Result<T, Error>
 
-struct AuthResult: Decodable {
-    
-    let user: User
-    let token: String
-        
-    enum CodingKeys: String, CodingKey {
-        case user = "user"
-        case token = "token"
-    }
-}
 
 class API {
     
@@ -37,8 +28,6 @@ class API {
         let path = baseUrl + "user/register"
         AF.request( path, method: .post, parameters: [ "email": email, "username": username, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
             if let data = response.data {
-                let debugString = String(data: data, encoding: .utf8)
-                print(debugString ?? "") //delete  after
                 do {
                     let result = try JSONDecoder().decode(AuthResult.self, from: data)
                     callback(.success(result))
@@ -56,8 +45,6 @@ class API {
         let path = baseUrl + "user/login"
         AF.request( path, method: .post, parameters: [ "email": email, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
             if let data = response.data {
-                let debugString = String(data: data, encoding: .utf8)
-                print(debugString ?? "") //delete  after
                 do {
                     let result = try JSONDecoder().decode(AuthResult.self, from: data)
                     callback(.success(result))
@@ -70,13 +57,11 @@ class API {
         }
     }
     
-    static func getScooters(_ callback: @escaping (Result<[Scooter]>) -> Void ) {
+    static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void ) {
         let path = baseUrl + "scooter"
         
         AF.request(path).response { response in
             if let data = response.data {
-                let debugString = String(data: data, encoding: .utf8)
-                print(debugString ?? "") //delete  after
                 do {
                     let result = try JSONDecoder().decode([Scooter].self, from: data)
                     callback(.success(result))

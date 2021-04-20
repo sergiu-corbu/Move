@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC0394F7262EA9CD003668D2 /* ScooterViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */; };
 		EC0B576526259DF8005F16CB /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B576426259DF8005F16CB /* Login.swift */; };
 		EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */; };
 		EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57732625CC73005F16CB /* ValidationSuccess.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterViewItem.swift; sourceTree = "<group>"; };
 		EC0B576426259DF8005F16CB /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInProgress.swift; sourceTree = "<group>"; };
 		EC0B57732625CC73005F16CB /* ValidationSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSuccess.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FFD26242985003C659F /* MapView.swift */,
+				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
 				EC7DC501262B3A56007D7996 /* Menu */,
 			);
 			name = MainView;
@@ -358,6 +361,7 @@
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
 				ECDD400026242985003C659F /* MapView.swift in Sources */,
 				ECDD3FC226242836003C659F /* ContentView.swift in Sources */,
+				EC0394F7262EA9CD003668D2 /* ScooterViewItem.swift in Sources */,
 				EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */,
 				ECDD400626242B49003C659F /* User.swift in Sources */,
 			);
