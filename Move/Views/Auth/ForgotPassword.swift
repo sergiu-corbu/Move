@@ -18,8 +18,7 @@ struct ForgotPassword: View {
     }
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: nil, avatar: nil, backButton: "chevron-left-white", action: {})
-                .padding(.leading, -29)
+            NavigationBar(title: nil, avatar: nil, backButton: "chevron-left-white", action: {}).padding(.leading, -5)
             messageArea
             emailField
             sendResetButton

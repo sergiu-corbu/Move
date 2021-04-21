@@ -8,10 +8,22 @@
 import SwiftUI
 import NavigationStack
 
+struct MenuViewNavigation: View {
+    
+    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
+    var body: some View {
+        NavigationStackView(navigationStack: navigationViewModel) {
+            MenuView(onBack: {
+                navigationViewModel.pop()
+            })
+        }
+    }
+}
+
 struct MenuView: View {
     
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
-    
+    let onBack: () -> Void
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             Image("scooter-img")
@@ -24,18 +36,18 @@ struct MenuView: View {
                     menuOptions
                     Spacer()
                 }
+                
             }
-            .padding([.leading, .trailing], 24)
             .edgesIgnoringSafeArea(.all)
+            .padding([.leading, .trailing], 24)
         }
         .background(Color.white)
     }
     var navBar: some View {
-        NavigationBar(title: "Hi, Sergiu!", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
-            .background(
-                Color.white
-                    .edgesIgnoringSafeArea(.all)
-            )
+        NavigationBar(title: "Hi, Sergiu!", avatar: "avatar-img", backButton: "chevron-left-purple", action: {
+            onBack()
+        })
+        .padding(.top, 40)
     }
     var historyView: some View {
         ZStack {
@@ -143,7 +155,7 @@ struct SubMenuItems: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-            MenuView()
+            MenuView(onBack: { })
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

@@ -108,7 +108,8 @@ struct Register: View {
             isLoading = true
             API.register(username: userViewModel.username, email: userViewModel.email, password: userViewModel.password) { (result) in
                 switch result {
-                    case .success:
+                    case .success(let result):
+                        Session.tokenKey = result.token
                         onRegisterComplete()
                         isLoading = false
                     case .failure(let error):

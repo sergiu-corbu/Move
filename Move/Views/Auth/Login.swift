@@ -87,7 +87,8 @@ struct Login: View {
             isLoading = true
             API.login(email: userViewModel.email, password: userViewModel.password) { (result) in
                 switch result {
-                    case .success:
+                    case .success(let result):
+                        Session.tokenKey = result.token
                         onLoginCompleted()
                         isLoading = false
                     case .failure(let error):

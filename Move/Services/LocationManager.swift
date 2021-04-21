@@ -17,7 +17,7 @@ class LocationManager: NSObject, ObservableObject {
     override init() {
         super.init()
         
-        locationManager.desiredAccuracy = 4 //kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()

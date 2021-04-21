@@ -17,12 +17,14 @@ struct ValidationInfo: View {
     @Binding var isLoading: Bool
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
-    let onBack: ()
+    let onBack: () -> Void
     let onNext: (Image) -> Void
     
     var body: some View {
         VStack(spacing: 35) {
-            NavigationBar(title: "Driver License", avatar: nil, backButton: "chevron-left-purple", action: {})
+            NavigationBar(title: "Driver License", avatar: nil, backButton: "chevron-left-purple", action: {
+                onBack()
+            }) .padding([.leading, .trailing], 24)
                 .padding(.top, 50)
                 .padding(.bottom, -30)
             GeometryReader { geometry in
@@ -43,7 +45,7 @@ struct ValidationInfo: View {
                 Spacer()
                 CallToActionButton(isLoading: isLoading, enabled: true, text: "Add drivig license", action: {
                     showActionSheet.toggle()
-                })
+                }).padding(.bottom)
                 .sheet(isPresented: $showImagePicker) {
                     ImagePickerView(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
                 }
@@ -94,6 +96,6 @@ extension ValidationInfo {
 
 struct ValidationInfo_Previews: PreviewProvider {
     static var previews: some View {
-        ValidationInfo(isLoading: .constant(true), onBack: (), onNext: {_ in})
+        ValidationInfo(isLoading: .constant(true), onBack: {}, onNext: {_ in})
     }
 }

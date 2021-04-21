@@ -52,6 +52,28 @@ struct CallToActionButton: View {
     }
 }
 
+struct miniActionButton: View {
+    let image: String
+    let action: () -> Void
+    
+    var body: some View {
+        VStack {
+        Button(action: {
+            action()
+        }, label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 13)
+                    .foregroundColor(.white)
+                Image(image)
+                    //.resizable()
+            }
+            .shadow(radius: 8)
+            .frame(width: 36, height: 36)
+        })
+        }
+    }
+}
+
 //MARK: fields
 struct InputField: View {
     @Binding var activeField: Bool
@@ -195,35 +217,42 @@ struct NavigationBar: View {
     let action: () -> Void
     
     var body: some View {
-        HStack {
-            Button(action: {
-                action()
-            }, label: {
-                Image(backButton)
-            })
-            
+        ZStack {
             if let _title = title {
-                Text(_title)
-                    .font(.custom(FontManager.Primary.semiBold, size: 18))
-                    .foregroundColor(.darkPurple)
-                    .frame(maxWidth: .infinity)
-                  //  .padding(.trailing, 24)
+                HStack {
+                    Text(_title)
+                        .font(.custom(FontManager.Primary.semiBold, size: 18))
+                        .foregroundColor(.darkPurple)
+                        .frame(maxWidth: .infinity)
+                }
             }
-            Spacer()
             if let _avatar = avatar {
-                Image(_avatar)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 40, height: 40)
-                
+                HStack {
+                    Spacer()
+                    Image(_avatar)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
+                }
+            }
+            HStack {
+                Button(action: {
+                    action()
+                }, label: {
+                    Image(backButton)
+                        .padding(.trailing, 15)
+                })
+                Spacer()
             }
         }
-        .padding([.leading, .trailing], 24)
     }
 }
 
 struct Reusable_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar(title: "Driving License", avatar: nil, backButton: "chevron-left-purple", action: {})
+        NavigationBar(title: "Driving License", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
+        //miniActionButton(image: "pin-img", action: {
+        
+        //   })
     }
 }

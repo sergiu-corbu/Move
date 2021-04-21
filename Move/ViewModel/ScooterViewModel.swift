@@ -20,7 +20,7 @@ class ScooterViewModel: ObservableObject {
     
     private func reloadData() {
         getScooters()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 230, execute: {
             self.reloadData()
         })
     }

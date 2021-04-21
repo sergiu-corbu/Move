@@ -10,9 +10,15 @@ import NavigationStack
 
 struct ContentView: View {
     var body: some View {
+        
+       // if Session.tokenKey != nil {
+            MapViewNavigation()
+      //  } else {
+      //      NewUser()
+      //  }
         //ValidationNavigation()
         //NewUser()
-        MapViewNavigation()
+       // MapViewNavigation()
         //MenuView()
     }
 }
@@ -22,7 +28,9 @@ struct ValidationNavigation: View {
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     var body: some View {
         NavigationStackView(navigationStack: navigationViewModel) {
-            ValidationInfo(isLoading: $isLoading, onBack: (), onNext: { image in
+            ValidationInfo(isLoading: $isLoading, onBack: {
+                navigationViewModel.pop()
+            }, onNext: { image in
                 uploadImage(image: image)
             })
         }
@@ -33,7 +41,7 @@ struct ValidationNavigation: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
             isLoading = false
             navigationViewModel
-                .push(ValidationInProgress())
+                .push(ValidationViewNavigation())
         })
     }
 }
@@ -58,16 +66,10 @@ struct NewUser: View {
     var body: some View {
         NavigationStackView(navigationStack: navigationViewModel) {
             Onboarding {
-                handleRegister()
+                navigationViewModel.push(RegisterNavigation())
             }
         }
     }
-   
-    func handleRegister() {
-        navigationViewModel
-            .push(RegisterNavigation())
-    }
-    
 }
 
 struct RegisterNavigation: View {
@@ -76,18 +78,11 @@ struct RegisterNavigation: View {
     var body: some View {
         NavigationStackView(navigationStack: navigationViewModel) {
             Register(onRegisterComplete: {
-                handleValidation()
+                navigationViewModel.push(ValidationNavigation())
             }, onLoginSwitch: {
-                handleLoginSwitch()
+                navigationViewModel.push(LoginNavigation())
             })
         }
-    }
-    
-    func handleLoginSwitch() {
-        navigationViewModel.push(LoginNavigation())
-    }
-    func handleValidation() {
-        navigationViewModel.push(ValidationNavigation())
     }
 }
 

@@ -12,23 +12,26 @@ struct ScooterViewItem: View {
     let scooter: Scooter
     
     var body: some View {
+        
         ZStack {
             RoundedRectangle(cornerRadius: 29)
                 .foregroundColor(.white)
-                .border(Color.black)
             VStack {
                 Spacer()
                 HStack{
                     Image("scooterdetail-img")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 120)
                     scooterInfo
                 }
                 location
                 unlockButton
             }
             .padding([.leading, .trailing], 24)
-        }.frame(width: 250, height: 315)
+        }
+        .frame(width: 250, height: 315)
+        
     }
     
     var scooterInfo: some View {
@@ -39,11 +42,19 @@ struct ScooterViewItem: View {
             Text("#\(scooter.id)")
                 .font(.custom(FontManager.Primary.bold, size: 22))
                 .lineLimit(1)
-            Text(scooter.batteryPercentage)
-                .font(.custom(FontManager.Primary.medium, size: 16))
             HStack {
-                Image("bell-img")
-                Image("getRoute-img")
+                Image(scooter.batteryImage)
+                Text(scooter.batteryPercentage)
+                    .font(.custom(FontManager.Primary.medium, size: 16))
+            }
+            
+            HStack {
+                miniActionButton(image: "bell-img", action: {
+                    //ring scooter
+                }).padding(.trailing, 20)
+                miniActionButton(image: "getRoute-img", action: {
+                    //open maps & navigate
+                })
             }
         }
         .foregroundColor(.darkPurple)
@@ -62,21 +73,6 @@ struct ScooterViewItem: View {
                 .foregroundColor(.darkPurple)
                 .font(.custom(FontManager.Primary.medium, size: 16))
         }.padding(.top)
-    }
-}
-
-struct scooterActionButton: View {
-    let image: String
-
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 13)
-                .foregroundColor(.white)
-            Image(image)
-                //.resizable()
-        }
-        //.shadow(radius: 14)
-        .frame(width: 36, height: 36)
     }
 }
 

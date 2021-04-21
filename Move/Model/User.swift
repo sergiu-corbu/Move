@@ -20,7 +20,6 @@ struct User: Identifiable, Codable {
         case id = "_id"
         case username = "username"
         case email = "email"
-      
     }
 }
 

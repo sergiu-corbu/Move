@@ -6,8 +6,23 @@
 //
 
 import SwiftUI
+import NavigationStack
+
+struct ValidationViewNavigation: View {
+    
+    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
+    var body: some View {
+        NavigationStackView(navigationStack: navigationViewModel) {
+            ValidationInProgress(onExploreButton: {
+                navigationViewModel.push(MapViewNavigation())
+            })
+        }
+    }
+}
 
 struct ValidationInProgress: View {
+    
+    let onExploreButton: () -> Void
     
     var body: some View {
         VStack {
@@ -46,13 +61,13 @@ struct ValidationInProgress: View {
     
     var exploreButton: some View {
         CallToActionButton(enabled: true, text: "Explore the app", action: {
-            
+            onExploreButton()
         })
     }
 }
 
 struct ValidationInProgress_Previews: PreviewProvider {
     static var previews: some View {
-        ValidationInProgress()
+        ValidationInProgress(onExploreButton: {})
     }
 }

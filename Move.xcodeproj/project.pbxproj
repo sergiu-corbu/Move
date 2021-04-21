@@ -17,6 +17,7 @@
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
 		EC7DC503262B3A67007D7996 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7DC502262B3A67007D7996 /* AccountView.swift */; };
 		EC7DC507262B3A77007D7996 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */; };
+		EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB749FE2629B4CD00EA741D /* MenuView.swift */; };
@@ -58,6 +59,7 @@
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7DC502262B3A67007D7996 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterRowView.swift; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECB749FE2629B4CD00EA741D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			children = (
 				ECDD3FFD26242985003C659F /* MapView.swift */,
 				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
+				EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */,
 				EC7DC501262B3A56007D7996 /* Menu */,
 			);
 			name = MainView;
@@ -338,6 +341,7 @@
 			files = (
 				ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */,
 				ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */,
+				EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */,
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
 				ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */,
@@ -514,7 +518,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sergiucorbu.Move;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -535,7 +539,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sergiucorbu.Move;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
