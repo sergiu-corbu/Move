@@ -49,10 +49,10 @@ struct ScooterViewItem: View {
             }
             
             HStack {
-                miniActionButton(image: "bell-img", action: {
+                MiniActionButton(image: "bell-img", action: {
                     //ring scooter
                 }).padding(.trailing, 20)
-                miniActionButton(image: "getRoute-img", action: {
+                MiniActionButton(image: "getRoute-img", action: {
                     //open maps & navigate
                 })
             }

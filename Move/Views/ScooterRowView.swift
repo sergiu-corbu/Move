@@ -13,10 +13,10 @@ struct ScooterRowView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: true) {
             HStack { //?lazy
-              //  ForEach(scooters) { scooter in
-                    ScooterViewItem(scooter: scooters[0])
+                ForEach(scooters) { scooter in
+                    ScooterViewItem(scooter: scooter)
                         .padding([.leading, .trailing], 15)
-                //}
+                }
             }
         }
     }

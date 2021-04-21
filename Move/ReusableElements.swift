@@ -52,12 +52,12 @@ struct CallToActionButton: View {
     }
 }
 
-struct miniActionButton: View {
+struct MiniActionButton: View {
     let image: String
     let action: () -> Void
     
     var body: some View {
-        VStack {
+        
         Button(action: {
             action()
         }, label: {
@@ -67,10 +67,10 @@ struct miniActionButton: View {
                 Image(image)
                     //.resizable()
             }
-            .shadow(radius: 8)
+            .shadow(color: Color(UIColor.systemGray5), radius: 3, x: 5, y: 4)
             .frame(width: 36, height: 36)
         })
-        }
+        
     }
 }
 
@@ -250,9 +250,9 @@ struct NavigationBar: View {
 
 struct Reusable_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar(title: "Driving License", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
-        //miniActionButton(image: "pin-img", action: {
+        //NavigationBar(title: "Driving License", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
+        MiniActionButton(image: "pin-img", action: {
         
-        //   })
+           })
     }
 }

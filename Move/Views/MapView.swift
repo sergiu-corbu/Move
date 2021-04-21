@@ -68,11 +68,15 @@ struct MapView: View {
                     ScooterRowView(scooters: scooterViewModel.allScooters)
                 }
             }
+            
+            
         } else {
                 Map(coordinateRegion: $region)
                     .edgesIgnoringSafeArea(.all)
-                    .onAppear {
+                  
+                    .onAppear{
                         navigationBarItems
+                       
                     }
         }
     }
@@ -82,33 +86,13 @@ struct MapView: View {
             Image("fademap-img")
                 .frame(height: 130)
             HStack {
-                Button(action: {
-                    onMenuButton()
-                }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15.0)
-                            .foregroundColor(.white)
-                        Image("menu-img")
-                    }
-                    .frame(width: 36, height: 36)
-                    .shadow(radius: 7)
-                })
+                MiniActionButton(image: "menu-img", action: { onMenuButton() })
                 Spacer()
                 Text("Cluj Napoca")
                     .foregroundColor(.darkPurple)
                     .font(.custom(FontManager.Primary.semiBold, size: 18))
                 Spacer()
-                Button(action: {
-                    //track location
-                }, label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15.0)
-                            .foregroundColor(.white)
-                        Image("location-img")
-                    }
-                    .frame(width: 36, height: 36)
-                    .shadow(radius: 7)
-                })
+                MiniActionButton(image: "location-img", action: { })
             }
             .padding(.top)
             .padding([.leading, .trailing], 24)

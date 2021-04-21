@@ -44,6 +44,7 @@ struct Onboarding: View {
         .edgesIgnoringSafeArea(.all)
     }
     
+    
     var titleLine: some View {
         HStack {
             Text(title)

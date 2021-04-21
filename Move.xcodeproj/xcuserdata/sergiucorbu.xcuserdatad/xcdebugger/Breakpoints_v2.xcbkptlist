@@ -32,7 +32,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
                   endingLineNumber = "51"
-                  offsetFromSymbolStart = "1288">
+                  offsetFromSymbolStart = "596">
                </Location>
                <Location
                   uuid = "63B3202D-BF3D-4B72-88C2-85FF864892B1 - 38480bbb7a5892d2"
@@ -47,7 +47,22 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
                   endingLineNumber = "51"
-                  offsetFromSymbolStart = "1512">
+                  offsetFromSymbolStart = "916">
+               </Location>
+               <Location
+                  uuid = "63B3202D-BF3D-4B72-88C2-85FF864892B1 - 38480bbb7a5892d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in static Move.API.login(email: Swift.String, password: Swift.String, _: (Swift.Result&lt;Move.AuthResult, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Move"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sergiucorbu/Desktop/Move/Move/Services/Api.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "1032">
                </Location>
             </Locations>
          </BreakpointContent>

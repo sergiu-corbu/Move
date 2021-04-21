@@ -9,16 +9,22 @@ import SwiftUI
 import NavigationStack
 
 struct ContentView: View {
+    @StateObject var statusBarConfigurator = StatusBarConfigurator()
     var body: some View {
         
        // if Session.tokenKey != nil {
-            MapViewNavigation()
+          //  MapViewNavigation()
       //  } else {
-      //      NewUser()
+          //  NewUser()
+                
       //  }
         //ValidationNavigation()
         //NewUser()
-       // MapViewNavigation()
+        MapViewNavigation()
+            .prepareStatusBarConfigurator(statusBarConfigurator)
+            .onAppear{
+                statusBarConfigurator.statusBarStyle = .darkContent
+            }
         //MenuView()
     }
 }

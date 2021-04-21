@@ -18,6 +18,8 @@
 		EC7DC503262B3A67007D7996 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7DC502262B3A67007D7996 /* AccountView.swift */; };
 		EC7DC507262B3A77007D7996 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */; };
 		EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */; };
+		EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */; };
+		EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = EC7F0EE026301A30004FF766 /* SwiftMessages */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB749FE2629B4CD00EA741D /* MenuView.swift */; };
@@ -60,6 +62,7 @@
 		EC7DC502262B3A67007D7996 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterRowView.swift; sourceTree = "<group>"; };
+		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECB749FE2629B4CD00EA741D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -99,6 +102,7 @@
 				ECDD3FE626242951003C659F /* NavigationStack in Frameworks */,
 				ECDD3FE226242943003C659F /* Alamofire in Frameworks */,
 				EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */,
+				EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +152,15 @@
 				EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */,
 			);
 			name = Menu;
+			sourceTree = "<group>";
+		};
+		EC7F0ED726301463004FF766 /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
+			);
+			name = StatusBar;
+			path = Bai_Jamjuree;
 			sourceTree = "<group>";
 		};
 		EC9C7BB626255DEE00FD5605 /* Model */ = {
@@ -213,6 +226,7 @@
 		ECDD3FE826242965003C659F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				EC7F0ED726301463004FF766 /* StatusBar */,
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
@@ -274,6 +288,7 @@
 				ECDD3FE126242943003C659F /* Alamofire */,
 				ECDD3FE526242951003C659F /* NavigationStack */,
 				EC5F17952626D38800A10368 /* BetterSafariView */,
+				EC7F0EE026301A30004FF766 /* SwiftMessages */,
 			);
 			productName = Move;
 			productReference = ECDD3FBA26242836003C659F /* Move.app */;
@@ -307,6 +322,7 @@
 				ECDD3FE026242943003C659F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				ECDD3FE426242951003C659F /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 				EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
+				EC7F0EDF26301A30004FF766 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = ECDD3FBB26242836003C659F /* Products */;
 			projectDirPath = "";
@@ -345,6 +361,7 @@
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
 				ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */,
+				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
 				ECB74A682629FF3000EA741D /* HistoryView.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
@@ -575,6 +592,14 @@
 				minimumVersion = 2.3.1;
 			};
 		};
+		EC7F0EDF26301A30004FF766 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.2;
+			};
+		};
 		ECDD3FDC2624290B003C659F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -606,6 +631,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */;
 			productName = BetterSafariView;
+		};
+		EC7F0EE026301A30004FF766 /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC7F0EDF26301A30004FF766 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
 		};
 		ECDD3FDD2624290B003C659F /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -14,6 +14,7 @@ struct ValidationInfo: View {
     @State private var showActionSheet: Bool = false
     @State private var showImagePicker: Bool = false
     @State private var showCamera: Bool = false
+    @StateObject var statusBarConfigurator = StatusBarConfigurator()
     @Binding var isLoading: Bool
     @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
@@ -75,6 +76,10 @@ struct ValidationInfo: View {
         .foregroundColor(.darkPurple)
         .background(Color.white)
         .edgesIgnoringSafeArea(.all)
+        .prepareStatusBarConfigurator(statusBarConfigurator)
+        .onAppear{
+            statusBarConfigurator.statusBarStyle = .darkContent
+        }
     }
     var imageBinding: Binding<Image?> {
         return Binding(get: {
