@@ -20,6 +20,7 @@
 		EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */; };
 		EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */; };
 		EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = EC7F0EE026301A30004FF766 /* SwiftMessages */; };
+		EC7F0EE52630385C004FF766 /* UnlockScooterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB749FE2629B4CD00EA741D /* MenuView.swift */; };
@@ -63,6 +64,7 @@
 		EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterRowView.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
+		EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterCard.swift; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECB749FE2629B4CD00EA741D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
@@ -125,8 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FFD26242985003C659F /* MapView.swift */,
-				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
-				EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */,
+				EC7F0EE32630384F004FF766 /* Scooter */,
 				EC7DC501262B3A56007D7996 /* Menu */,
 			);
 			name = MainView;
@@ -161,6 +162,16 @@
 			);
 			name = StatusBar;
 			path = Bai_Jamjuree;
+			sourceTree = "<group>";
+		};
+		EC7F0EE32630384F004FF766 /* Scooter */ = {
+			isa = PBXGroup;
+			children = (
+				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
+				EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */,
+				EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */,
+			);
+			name = Scooter;
 			sourceTree = "<group>";
 		};
 		EC9C7BB626255DEE00FD5605 /* Model */ = {
@@ -367,6 +378,7 @@
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
+				EC7F0EE52630385C004FF766 /* UnlockScooterCard.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
 				ECDD3FED26242970003C659F /* LocationManager.swift in Sources */,
 				EC7DC507262B3A77007D7996 /* ChangePasswordView.swift in Sources */,

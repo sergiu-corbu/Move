@@ -9,6 +9,7 @@ import SwiftUI
 import BetterSafariView
 import NavigationStack
 import Alamofire
+import SwiftMessages
 
 struct Register: View {
 
@@ -113,6 +114,7 @@ struct Register: View {
                         onRegisterComplete()
                         isLoading = false
                     case .failure(let error):
+                      //  SwiftMessages.show()
                         print(error.localizedDescription)
                         isLoading = false
                 }
@@ -192,3 +194,16 @@ struct Register_Previews: PreviewProvider {
         .preferredColorScheme(.dark)
     }
 }
+
+/*
+struct ErrowAlert: UIViewRepresentable {
+    
+    func makeUIView(context: Context) -> some UIView {
+        
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        
+    }
+}
+*/

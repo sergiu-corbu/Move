@@ -38,7 +38,6 @@ struct MenuView: View {
                 }
                 
             }
-            .edgesIgnoringSafeArea(.all)
             .padding([.leading, .trailing], 24)
         }
         .background(Color.white)
@@ -47,7 +46,7 @@ struct MenuView: View {
         NavigationBar(title: "Hi, Sergiu!", avatar: "avatar-img", backButton: "chevron-left-purple", action: {
             onBack()
         })
-        .padding(.top, 40)
+        
     }
     var historyView: some View {
         ZStack {

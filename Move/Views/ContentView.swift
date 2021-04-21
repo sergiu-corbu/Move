@@ -15,12 +15,12 @@ struct ContentView: View {
        // if Session.tokenKey != nil {
           //  MapViewNavigation()
       //  } else {
-          //  NewUser()
+          // NewUser()
                 
       //  }
         //ValidationNavigation()
         //NewUser()
-        MapViewNavigation()
+       MapViewNavigation()
             .prepareStatusBarConfigurator(statusBarConfigurator)
             .onAppear{
                 statusBarConfigurator.statusBarStyle = .darkContent

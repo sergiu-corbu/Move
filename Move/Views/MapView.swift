@@ -73,10 +73,8 @@ struct MapView: View {
         } else {
                 Map(coordinateRegion: $region)
                     .edgesIgnoringSafeArea(.all)
-                  
-                    .onAppear{
+                    .onAppear {
                         navigationBarItems
-                       
                     }
         }
     }
@@ -84,7 +82,10 @@ struct MapView: View {
     var navigationBarItems: some View {
         ZStack {
             Image("fademap-img")
-                .frame(height: 130)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .edgesIgnoringSafeArea(.all)
+                .frame(height: 80)
             HStack {
                 MiniActionButton(image: "menu-img", action: { onMenuButton() })
                 Spacer()
@@ -94,10 +95,9 @@ struct MapView: View {
                 Spacer()
                 MiniActionButton(image: "location-img", action: { })
             }
-            .padding(.top)
+            
             .padding([.leading, .trailing], 24)
         }
-        .edgesIgnoringSafeArea(.all)
     }
 }
 
