@@ -6,24 +6,14 @@
 //
 
 import SwiftUI
-import NavigationStack
-
-struct MenuViewNavigation: View {
-    
-    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
-    var body: some View {
-        NavigationStackView(navigationStack: navigationViewModel) {
-            MenuView(onBack: {
-                navigationViewModel.pop()
-            })
-        }
-    }
-}
 
 struct MenuView: View {
     
-    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     let onBack: () -> Void
+    let onSeeAll: () -> Void
+    let onAccount: () -> Void
+    let onChangePassword: () -> Void
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             Image("scooter-img")
@@ -65,7 +55,7 @@ struct MenuView: View {
                 }
                 Spacer()
                 Button(action: {
-                   
+                   onSeeAll()
                 }, label: {
                     HStack {
                         Text("See all")
@@ -85,9 +75,9 @@ struct MenuView: View {
     var menuOptions: some View {
         VStack(alignment: .leading) {
             MenuItems(icon: "wheel-img", title: "General Settings", components: [SubMenuItems(title: "Account", isLink: false, isNavButton: true, url: "", index: 0, callback: {
-                //go to account
+                onAccount()
             }), SubMenuItems(title: "Change password", isLink: false, isNavButton: true, url: "", index: 1, callback: {
-                //go to change password
+                onChangePassword()
             })])
             MenuItems(icon: "flag-img", title: "Legal", components: [SubMenuItems(title: "Terms and Conditions",isLink: true, isNavButton: false, url: "https://tapptitude.com", index: 0, callback: {}), SubMenuItems(title: "Privacy Policy", isLink: true, isNavButton: false, url: "https://tapptitude.com", index: 1, callback: {})])
             MenuItems(icon: "star-img", title: "Rate Us", components: [])
@@ -154,7 +144,7 @@ struct SubMenuItems: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-            MenuView(onBack: { })
+            MenuView(onBack: {}, onSeeAll: {}, onAccount: {}, onChangePassword: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

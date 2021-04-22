@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct AccountView: View {
+    
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var usernameActive: Bool = false
     @State private var emailActive: Bool = false
     @State private var isLoading: Bool = false
+    
+    let onBack: () -> Void
+    let onLogout: () -> Void
+    let onSave: () -> Void
     
     var allFiledsCompleted: Bool {
         return username != "" && email != ""
@@ -20,7 +25,7 @@ struct AccountView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: "Account", avatar: nil, backButton: "chevron-left-purple", action: {})
+            NavigationBar(title: "Account", avatar: nil, backButton: "chevron-left-purple", action: { onBack() })
                 .padding(.top, 60)
             inputArea
             Spacer()
@@ -48,7 +53,7 @@ struct AccountView: View {
     var footerArea: some View {
         VStack(spacing: 50) {
             Button(action: {
-                //log out
+                onLogout()
             }, label: {
                 HStack {
                     Image("logout-img")
@@ -62,7 +67,7 @@ struct AccountView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     isLoading = false
                 })
-                // update password
+                onSave()
             }).padding(.bottom, 30)
         }
     }
@@ -70,6 +75,6 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView()
+        AccountView(onBack: {}, onLogout: {}, onSave: {})
     }
 }

@@ -11,7 +11,7 @@ struct ScooterRowView: View {
 
     var scooters: [Scooter]
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: true) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack { //?lazy
                 ForEach(scooters) { scooter in
                     ScooterViewItem(scooter: scooter)

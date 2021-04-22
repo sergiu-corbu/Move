@@ -7,11 +7,12 @@
 
 import Foundation
 import CoreLocation
-import Combine
 
 class LocationManager: NSObject, ObservableObject {
     
     private let locationManager = CLLocationManager()
+    private let geocoder = CLGeocoder()
+    
     @Published var location: CLLocation?
     
     override init() {
@@ -24,6 +25,18 @@ class LocationManager: NSObject, ObservableObject {
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
     }
+    /*private func geocode() {
+        guard let location = self.location else { return }
+        geocoder.reverseGeocodeLocation(location, completionHandler: { (result, error) in
+            if error == nil {
+                if let result = result, let loc = result.first {
+                    self.city = loc.locality
+                }
+            } else {
+                self.city = "Unknown location"
+            }
+        })
+    }*/
     
 }
 

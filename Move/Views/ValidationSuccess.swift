@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ValidationSuccess: View {
     
+    let onFindScooters: () -> Void
+    
     var body: some View {
         VStack {
             Spacer()
@@ -43,14 +45,12 @@ struct ValidationSuccess: View {
     }
     
     var exploreButton: some View {
-        CallToActionButton(enabled: true, text: "Find scooters", action: {
-            
-        })
+        CallToActionButton(enabled: true, text: "Find scooters", action: { onFindScooters() })
     }
 }
 
 struct ValidationSuccess_Previews: PreviewProvider {
     static var previews: some View {
-        ValidationSuccess()
+        ValidationSuccess(onFindScooters: {})
     }
 }

@@ -7,17 +7,15 @@
 
 import SwiftUI
 import BetterSafariView
-import NavigationStack
 import Alamofire
 import SwiftMessages
 
 struct Register: View {
 
+    @StateObject private var userViewModel = UserViewModel()
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
     @State private var usernameTyping: Bool = false
-    @StateObject private var userViewModel = UserViewModel()
-    
     @State private var termsPresented: Bool = false
     @State private var privacyPresented: Bool = false
     @State private var isLoading: Bool = false
@@ -123,6 +121,7 @@ struct Register: View {
     }
     
     var agreement: some View {
+        
         VStack(alignment: .leading) {
             Text("By continuing you agree to Move’s")
                 .foregroundColor(.white)
@@ -165,6 +164,7 @@ struct Register: View {
     }
     
     var goToLogin: some View {
+        
         HStack {
             Text("You already have an account? You can")
                 .font(Font.custom(FontManager.Primary.regular, size: 14))

@@ -9,16 +9,17 @@ import SwiftUI
 
 struct ForgotPassword: View {
     
-    @State private var email: String = ""
     @State private var showAlert: Bool = false
     @State private var activeField: Bool = false
     @StateObject var userViewModel: UserViewModel = UserViewModel()
     private var isEnabled: Bool {
-        return email != ""
+        return userViewModel.email != ""
     }
+    let onBack: () -> Void
+    
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: nil, avatar: nil, backButton: "chevron-left-white", action: {}).padding(.leading, -5)
+            NavigationBar(title: nil, avatar: nil, backButton: "chevron-left-white", action: { onBack() }).padding(.leading, -5)
             messageArea
             emailField
             sendResetButton
@@ -48,13 +49,13 @@ struct ForgotPassword: View {
         .padding(.bottom, 30)
     }
     var emailField: some View {
-        InputField(activeField: $activeField, input: $email, textField: "Email Address", image: "", isSecuredField: false, textColor: .white,error: userViewModel.emailError , action: {
+        InputField(activeField: $activeField, input: $userViewModel.email, textField: "Email Address", image: "", isSecuredField: false, textColor: .white,error: userViewModel.emailError , action: {
             
         })
     }
     var sendResetButton: some View {
         CallToActionButton(enabled: isEnabled, text: "Send Reset Link", action: {
-            email = ""
+            userViewModel.email = ""
             activeField = false
             showAlert.toggle()
         }).padding(.top, 20)
@@ -63,6 +64,6 @@ struct ForgotPassword: View {
 
 struct ForgotPassword_Previews: PreviewProvider {
     static var previews: some View {
-        ForgotPassword()
+        ForgotPassword(onBack: {})
     }
 }

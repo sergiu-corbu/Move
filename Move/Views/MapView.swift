@@ -7,29 +7,18 @@
 
 import MapKit
 import SwiftUI
-import NavigationStack
 import Combine
-
-struct MapViewNavigation: View {
-    
-    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
-    var body: some View {
-        NavigationStackView(navigationStack: navigationViewModel) {
-            MapView( onMenuButton: {
-                navigationViewModel.push(MenuView( onBack: {navigationViewModel.pop()}))
-            })
-        }
-    }
-}
 
 struct MapView: View {
     
-    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     @ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
     @ObservedObject private var locationManager = LocationManager()
     @State private var region = MKCoordinateRegion.defaultRegion
     @State private var cancellable: AnyCancellable?
     @State private var scooterTap = false
+    var city: String {
+        return locationManager.city ?? "unknown"
+    }
     private func setCurrentLocation() {
         cancellable = locationManager.$location.sink { location in
             DispatchQueue.main.async {
@@ -37,6 +26,7 @@ struct MapView: View {
                     region = MKCoordinateRegion.defaultRegion
                     return
                 }
+                print(locationManager.city ?? "no location")
                 scooterViewModel.location = location.coordinate
                 region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
 
@@ -49,6 +39,7 @@ struct MapView: View {
     var body: some View {
         if locationManager.location != nil {
             ZStack(alignment: .bottom) {
+                
                 Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: true, annotationItems: scooterViewModel.allScooters) { scooter in
                     MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0])) {
                         Image("pin-fill-img")
@@ -59,17 +50,14 @@ struct MapView: View {
                 }
                 .edgesIgnoringSafeArea(.all)
                 .onAppear { setCurrentLocation() }
-                VStack { //maybe geometry?
+                VStack {
                     navigationBarItems
                     Spacer()
                 }
-                
                 if scooterTap {
                     ScooterRowView(scooters: scooterViewModel.allScooters)
                 }
             }
-            
-            
         } else {
                 Map(coordinateRegion: $region)
                     .edgesIgnoringSafeArea(.all)
@@ -87,9 +75,10 @@ struct MapView: View {
                 .edgesIgnoringSafeArea(.all)
                 .frame(height: 80)
             HStack {
+                
                 MiniActionButton(image: "menu-img", action: { onMenuButton() })
                 Spacer()
-                Text("Cluj Napoca")
+                Text(city)
                     .foregroundColor(.darkPurple)
                     .font(.custom(FontManager.Primary.semiBold, size: 18))
                 Spacer()
@@ -120,3 +109,14 @@ struct MapView_Previews: PreviewProvider {
     }
 }
 
+/*
+extension CLLocation {
+    var latitude: Double {
+        return self.coordinate.latitude
+    }
+    var longitude: Double {
+        return self.coordinate.longitude
+    }
+}
+
+*/

@@ -18,13 +18,16 @@ struct ChangePasswordView: View {
     @State private var newPasswordActive: Bool = false
     @State private var confirmPasswordActive: Bool = false
     
+    let onBack: () -> Void
+    let onSave: () -> Void
+    
     var allFiledsCompleted: Bool {
         return oldPassword != "" && newPassword != "" && confirmPassword != ""
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: "Change password", avatar: nil, backButton: "chevron-left-purple", action: {})
+            NavigationBar(title: "Change password", avatar: nil, backButton: "chevron-left-purple", action: { onBack() })
                 .padding(.top, 60)
             inputArea
             Spacer()
@@ -33,7 +36,7 @@ struct ChangePasswordView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     isLoading = false
                 })
-                // update password
+                onSave()
             }).padding(.bottom, 30)
         }
         .padding([.leading, .trailing], 24)
@@ -66,7 +69,7 @@ struct ChangePasswordView: View {
 
 struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangePasswordView()
+        ChangePasswordView(onBack: {}, onSave: {})
             .preferredColorScheme(.light)
     }
 }

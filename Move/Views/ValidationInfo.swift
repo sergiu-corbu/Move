@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import NavigationStack
 
 struct ValidationInfo: View {
     
@@ -16,15 +15,14 @@ struct ValidationInfo: View {
     @State private var showCamera: Bool = false
     @StateObject var statusBarConfigurator = StatusBarConfigurator()
     @Binding var isLoading: Bool
-    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
     
-    let onBack: () -> Void
+    let onBack: ()
     let onNext: (Image) -> Void
     
     var body: some View {
         VStack(spacing: 35) {
             NavigationBar(title: "Driver License", avatar: nil, backButton: "chevron-left-purple", action: {
-                onBack()
+                onBack
             }) .padding([.leading, .trailing], 24)
                 .padding(.top, 50)
                 .padding(.bottom, -30)
@@ -101,6 +99,6 @@ extension ValidationInfo {
 
 struct ValidationInfo_Previews: PreviewProvider {
     static var previews: some View {
-        ValidationInfo(isLoading: .constant(true), onBack: {}, onNext: {_ in})
+        ValidationInfo(isLoading: .constant(true), onBack: (), onNext: {_ in})
     }
 }

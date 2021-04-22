@@ -14,15 +14,26 @@ struct ScooterViewItem: View {
     var body: some View {
         
         ZStack {
-            RoundedRectangle(cornerRadius: 29)
-                .foregroundColor(.white)
+            ZStack(alignment: .topLeading) {
+                RoundedRectangle(cornerRadius: 29)
+                    .foregroundColor(.white)
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color.fadePurple)
+                    .frame(width: 120, height: 120)
+                    .offset(x: -10, y: 0)
+                    .rotationEffect(.degrees(24.0))
+                    .opacity(0.15)
+                    
+            }
+            .clipped()
+            
             VStack {
                 Spacer()
-                HStack{
+                HStack(alignment: .bottom) {
                     Image("scooterdetail-img")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 100, height: 120)
+                        .frame(width: 100, height: 130)
                     scooterInfo
                 }
                 location
@@ -31,7 +42,6 @@ struct ScooterViewItem: View {
             .padding([.leading, .trailing], 24)
         }
         .frame(width: 250, height: 315)
-        
     }
     
     var scooterInfo: some View {

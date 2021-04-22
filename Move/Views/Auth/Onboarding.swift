@@ -25,6 +25,7 @@ struct Onboarding: View {
         if currentIndex < onboardingData.count - 1 { return false }
         return true
     }
+    
     var body: some View {
         VStack(spacing: 20) {
             GeometryReader { geometry in

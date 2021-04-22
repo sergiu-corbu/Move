@@ -9,18 +9,6 @@ import Foundation
 import SwiftUI
 import Combine
 
-enum EmailValidator {
-    case empty
-    case invalidFormat
-    case valid
-}
-
-enum PasswordValidator {
-    case empty
-    case notStrongEnough
-    case valid
-}
-
 class UserViewModel: ObservableObject {
     
     @Published var email: String = "" {
@@ -36,7 +24,11 @@ class UserViewModel: ObservableObject {
             isValidPassword()
         }
     }
-    
+    @Published var repeatPassword: String = "" {
+        didSet {
+            isValidPassword()
+        }
+    }
     @Published var isValid: Bool = false
     @Published var emailError = ""
     @Published var passwordError = ""
@@ -65,7 +57,8 @@ class UserViewModel: ObservableObject {
             passwordError = ""
         }
     }
-
+    
+    // reset & forgot password
     // dowonlad user data from server
     //save info in userdefaults
 }

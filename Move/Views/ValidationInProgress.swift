@@ -6,19 +6,6 @@
 //
 
 import SwiftUI
-import NavigationStack
-
-struct ValidationViewNavigation: View {
-    
-    @ObservedObject var navigationViewModel: NavigationStack = NavigationStack()
-    var body: some View {
-        NavigationStackView(navigationStack: navigationViewModel) {
-            ValidationInProgress(onExploreButton: {
-                navigationViewModel.push(MapViewNavigation())
-            })
-        }
-    }
-}
 
 struct ValidationInProgress: View {
     

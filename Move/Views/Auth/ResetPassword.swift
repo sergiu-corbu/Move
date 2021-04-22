@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct ResetPassword: View {
-    @State private var newPassword: String = ""
+    
+    @StateObject var userViewModel: UserViewModel = UserViewModel()
     @State private var newPasswordField: Bool = false
-    @State private var confirmPassword: String = ""
     @State private var confirmPasswordField: Bool = false
     @State private var validatePassword: Bool? = false
     //@State private var showAlert: Bool = false
     private var isEnabled: Bool {
-        return newPassword != ""
+        return userViewModel.password != "" && userViewModel.repeatPassword != ""
     }
+    
+    let onBack: () -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: nil, avatar: nil, backButton: "chevron-left-white", action: {})
+            NavigationBar(title: nil, avatar: nil, backButton: "chevron-left-white", action: { onBack() })
                 .padding(.leading, -5)
             messageArea
             inputField
@@ -44,11 +46,11 @@ struct ResetPassword: View {
     }
     var inputField: some View {
         VStack {
-            InputPasswordReset(activeField: $newPasswordField, inputField: $newPassword, text: "New password", action: {
+            InputPasswordReset(activeField: $newPasswordField, inputField: $userViewModel.password, text: "New password", action: {
                 newPasswordField = true
                 confirmPasswordField = false
             })
-            InputPasswordReset(activeField: $confirmPasswordField, inputField: $confirmPassword, text: "Confirm new password", action: {
+            InputPasswordReset(activeField: $confirmPasswordField, inputField: $userViewModel.repeatPassword, text: "Confirm new password", action: {
                 newPasswordField = false
                 confirmPasswordField = true
             })
@@ -56,20 +58,20 @@ struct ResetPassword: View {
     }
     var resetButton: some View {
         CallToActionButton(enabled: isEnabled, text: "Reset Password", action: {
-            if newPassword == confirmPassword {
+            if userViewModel.repeatPassword == userViewModel.password {
                 validatePassword = true
-                newPassword = ""
+                userViewModel.password = ""
                 newPasswordField = false
-                confirmPassword = ""
+                userViewModel.repeatPassword = ""
                 confirmPasswordField = false
             }
-            else { print("passwords don;t match") }
+            else { print( "password doesn't match") }
         }).padding(.top, 20)
     }
 }
 
 struct ResetPassword_Previews: PreviewProvider {
     static var previews: some View {
-        ResetPassword()
+        ResetPassword(onBack: {})
     }
 }
