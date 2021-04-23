@@ -62,9 +62,9 @@ struct FirstOpen: View {
         isLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
             isLoading = false
-            navigationViewModel.push(ValidationInProgress(onExploreButton: {
-                    handleMap()
-                }))
+            navigationViewModel.push(ValidationSuccess(onFindScooters: {
+                handleMap()
+            }))
         })
     }
     

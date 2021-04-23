@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>UIUserInterfaceStyle</key>
-	<string>light</string>
+	<string>Light</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>You  must grant the access for photo selection</string>
 	<key>NSCameraUsageDescription</key>

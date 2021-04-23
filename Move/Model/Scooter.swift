@@ -20,16 +20,14 @@ struct Location: Codable {
 
 struct Scooter: Identifiable, Codable {
     let id: String
-    let battery: Double
+    let battery: Int
     let location: Location
-    var batteryPercentage: String {
-        return "\((battery * 100).clean)%"
-    }
+    
     var batteryImage: String {
-        let _battery = battery * 100
+        let _battery = battery
         var _batteryImage: String = ""
         if _battery <= 5 {
-           _batteryImage = "discharged-battery"
+            _batteryImage = "discharged-battery"
         } else if _battery <= 40 {
             _batteryImage = "almostEmpty-battery"
         } else if _battery <= 60 {
@@ -48,3 +46,4 @@ struct Scooter: Identifiable, Codable {
         case battery = "power"
     }
 }
+

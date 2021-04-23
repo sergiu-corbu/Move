@@ -9,24 +9,22 @@ import SwiftUI
 
 struct ScooterViewItem: View {
     @State private var isUnlocking = false
+    @ObservedObject var mapViewModel: MapViewModel = MapViewModel()
     let scooter: Scooter
-    
+
     var body: some View {
-        
         ZStack {
             ZStack(alignment: .topLeading) {
                 RoundedRectangle(cornerRadius: 29)
                     .foregroundColor(.white)
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 50)
                     .fill(Color.fadePurple)
-                    .frame(width: 120, height: 120)
-                    .offset(x: -10, y: 0)
+                    .frame(width: 140, height: 130)
+                    .offset(x: -20, y: -25)
                     .rotationEffect(.degrees(24.0))
                     .opacity(0.15)
-                    
+                    .clipped()
             }
-            .clipped()
-            
             VStack {
                 Spacer()
                 HStack(alignment: .bottom) {
@@ -42,9 +40,13 @@ struct ScooterViewItem: View {
             .padding([.leading, .trailing], 24)
         }
         .frame(width: 250, height: 315)
+        .onAppear {
+            mapViewModel.scooterGeocode(location: scooter.location.coordinates)
+        }
     }
     
     var scooterInfo: some View {
+        
         VStack(alignment: .trailing) {
             Text("Scooter")
                 .font(.custom(FontManager.Primary.medium, size: 16))
@@ -54,7 +56,7 @@ struct ScooterViewItem: View {
                 .lineLimit(1)
             HStack {
                 Image(scooter.batteryImage)
-                Text(scooter.batteryPercentage)
+                Text("\(scooter.battery)%")
                     .font(.custom(FontManager.Primary.medium, size: 16))
             }
             
@@ -79,7 +81,7 @@ struct ScooterViewItem: View {
     var location: some View {
         HStack(alignment: .top) {
             Image("pin-img")
-            Text("Str.Avram Iancu nr 26 Caldirea 2")
+            Text(mapViewModel.scooterLocation)
                 .foregroundColor(.darkPurple)
                 .font(.custom(FontManager.Primary.medium, size: 16))
         }.padding(.top)
@@ -88,6 +90,6 @@ struct ScooterViewItem: View {
 
 struct ScooterViewItem_Previews: PreviewProvider {
     static var previews: some View {
-        ScooterViewItem(scooter: Scooter(id: "AB23", battery: 0.6, location: Location(coordinates: [32.1, -23.4], type: "Pin")))
+        ScooterViewItem(scooter: Scooter(id: "AB23", battery: 60, location: Location(coordinates: [32.1, -23.4], type: "Pin")))
     }
 }

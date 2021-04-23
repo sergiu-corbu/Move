@@ -23,6 +23,7 @@
 		EC7F0EE52630385C004FF766 /* UnlockScooterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
+		ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49AB72631F58700D9D701 /* MapViewModel.swift */; };
 		ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB749FE2629B4CD00EA741D /* MenuView.swift */; };
 		ECB74A682629FF3000EA741D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB74A672629FF3000EA741D /* HistoryView.swift */; };
 		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
@@ -35,10 +36,8 @@
 		ECDD3FCA26242837003C659F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FC826242837003C659F /* LaunchScreen.storyboard */; };
 		ECDD3FD4262428B3003C659F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FD3262428B3003C659F /* Assets.xcassets */; };
 		ECDD3FD7262428C7003C659F /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FD6262428C7003C659F /* Register.swift */; };
-		ECDD3FDE2624290B003C659F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = ECDD3FDD2624290B003C659F /* Kingfisher */; };
 		ECDD3FE226242943003C659F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ECDD3FE126242943003C659F /* Alamofire */; };
 		ECDD3FE626242951003C659F /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = ECDD3FE526242951003C659F /* NavigationStack */; };
-		ECDD3FED26242970003C659F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FE926242970003C659F /* LocationManager.swift */; };
 		ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEA26242970003C659F /* Fonts&Colors.swift */; };
 		ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEB26242970003C659F /* ReusableElements.swift */; };
 		ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEC26242970003C659F /* OnboardingData.swift */; };
@@ -67,6 +66,7 @@
 		EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterCard.swift; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		ECA49AB72631F58700D9D701 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		ECB749FE2629B4CD00EA741D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		ECB74A672629FF3000EA741D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -81,7 +81,6 @@
 		ECDD3FCB26242837003C659F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECDD3FD3262428B3003C659F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECDD3FD6262428C7003C659F /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
-		ECDD3FE926242970003C659F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		ECDD3FEA26242970003C659F /* Fonts&Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fonts&Colors.swift"; sourceTree = "<group>"; };
 		ECDD3FEB26242970003C659F /* ReusableElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableElements.swift; sourceTree = "<group>"; };
 		ECDD3FEC26242970003C659F /* OnboardingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
@@ -100,7 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECDD3FDE2624290B003C659F /* Kingfisher in Frameworks */,
 				ECDD3FE626242951003C659F /* NavigationStack in Frameworks */,
 				ECDD3FE226242943003C659F /* Alamofire in Frameworks */,
 				EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */,
@@ -187,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				EC9C7BB826255E5700FD5605 /* UserViewModel.swift */,
+				ECA49AB72631F58700D9D701 /* MapViewModel.swift */,
 				ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */,
 			);
 			path = ViewModel;
@@ -273,7 +272,6 @@
 			children = (
 				ECE337BB26243A51009EC353 /* Api.swift */,
 				EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */,
-				ECDD3FE926242970003C659F /* LocationManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -295,7 +293,6 @@
 			);
 			name = Move;
 			packageProductDependencies = (
-				ECDD3FDD2624290B003C659F /* Kingfisher */,
 				ECDD3FE126242943003C659F /* Alamofire */,
 				ECDD3FE526242951003C659F /* NavigationStack */,
 				EC5F17952626D38800A10368 /* BetterSafariView */,
@@ -329,7 +326,6 @@
 			);
 			mainGroup = ECDD3FB126242836003C659F;
 			packageReferences = (
-				ECDD3FDC2624290B003C659F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				ECDD3FE026242943003C659F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				ECDD3FE426242951003C659F /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 				EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
@@ -380,7 +376,6 @@
 				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
 				EC7F0EE52630385C004FF766 /* UnlockScooterCard.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
-				ECDD3FED26242970003C659F /* LocationManager.swift in Sources */,
 				EC7DC507262B3A77007D7996 /* ChangePasswordView.swift in Sources */,
 				EC7DC503262B3A67007D7996 /* AccountView.swift in Sources */,
 				ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */,
@@ -389,6 +384,7 @@
 				ECC10F49262C988B006FAE6C /* Scooter.swift in Sources */,
 				EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */,
 				EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */,
+				ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */,
 				ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */,
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
@@ -612,14 +608,6 @@
 				minimumVersion = 9.0.2;
 			};
 		};
-		ECDD3FDC2624290B003C659F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.2.1;
-			};
-		};
 		ECDD3FE026242943003C659F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -648,11 +636,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC7F0EDF26301A30004FF766 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
 			productName = SwiftMessages;
-		};
-		ECDD3FDD2624290B003C659F /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ECDD3FDC2624290B003C659F /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 		ECDD3FE126242943003C659F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

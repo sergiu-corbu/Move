@@ -9,7 +9,9 @@ import Foundation
 import CoreLocation
 
 class ScooterViewModel: ObservableObject {
+    
     @Published var allScooters: [Scooter] = []
+    
     var location: CLLocationCoordinate2D? {
         didSet {
             if oldValue == nil {
@@ -20,7 +22,7 @@ class ScooterViewModel: ObservableObject {
     
     private func reloadData() {
         getScooters()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 230, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
             self.reloadData()
         })
     }
