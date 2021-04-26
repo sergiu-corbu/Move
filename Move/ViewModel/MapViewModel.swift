@@ -15,7 +15,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject {
     @Published var showLocation: Bool = false
     @Published var scooterLocation: String = ""
     @Published var cityName: String = "Allow location"
-    
+    @Published var selectedScooter: Scooter?
     override init() {
         super.init()
         checkLocationServices()
@@ -33,25 +33,26 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject {
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
     }
     
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
-            case .authorizedWhenInUse: //when app is open
+            
+            case .authorizedWhenInUse, .authorizedAlways: //when app is open
                 startTrackingUserLocation()
             case .notDetermined:
                 locationManager.requestWhenInUseAuthorization()
-            case .denied:
+            case .denied, .restricted:
                 break
-            default:
+            @unknown default:
+                assert(false, "handle new added case")
                 break
         }
     }
     
     func startTrackingUserLocation() {
         showLocation = true
-        locationManager.stopUpdatingLocation()
+        locationManager.startUpdatingLocation()
         geoCode()
         
     }
@@ -70,158 +71,43 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject {
         }
     }
     
-    func scooterGeocode(location coordinates: [Double]) {
+    func scooterGeocode(location coordinates: CLLocationCoordinate2D, _ completion: @escaping (String) -> Void) {
         let geocoder = CLGeocoder()
-        let scooterLocation = CLLocation(latitude: coordinates[1], longitude: coordinates[0])
+        let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
         geocoder.reverseGeocodeLocation(scooterLocation) { [weak self] (placemarks, error) in
             guard let self = self else { return }
             
             if let error = error { print(error); return }
             
             guard let placemark = placemarks?.first else { return }
-            self.scooterLocation = placemark.thoroughfare! + " " + placemark.subThoroughfare!
+            
+            let result = placemark.thoroughfare! + " " + placemark.subThoroughfare!
+            completion(result)
+        }
+    }
+    
+    func selectScooter(scooter: Scooter) {
+        scooterGeocode(location: scooter.coordinates) { address in
+            var scooter = scooter
+            scooter.addressName = address
+            self.selectedScooter = scooter
         }
     }
 }
 
 extension MapViewModel {
     
-    /*func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { // updating location
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { // updating location
      guard let location = locations.last else { return }
      let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-     let region = MKCoordinateRegion.init(center: center, latitudinalMeters: 700, longitudinalMeters: 700)*/
-    
+     let region = MKCoordinateRegion.init(center: center, latitudinalMeters: 700, longitudinalMeters: 700)
+        
+//        DispatchQueue.main.async {
+//            self. = location
+//        }
+    }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()
     }
     
 }
-/*
-class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObject {
-    
-    private let geocoder = CLGeocoder()
-    let locationManager = CLLocationManager()
-    let willChange = PassthroughSubject<Void, Never>()
-    
-    @Published var status: CLAuthorizationStatus? {
-        willSet {
-            willChange.send()
-        }
-    }
-    
-    @Published var location: CLLocation? {
-        willSet {
-            willChange.send()
-        }
-    }
-    @Published var placemark: CLPlacemark? {
-        willSet {
-            willChange.send()
-        }
-    }
-    
-    override init(){
-        super.init()
-        
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        geocode()
-    }
-    
-    func geocode() {
-        
-        guard let location = location else {
-            print("no location")
-            return
-        }
-        geocoder.reverseGeocodeLocation(location, completionHandler: {(response, error) in
-            if error == nil {
-                guard let response = response else { print("no response"); return}
-                self.placemark = response.first
-                if let place = self.placemark {
-                    self.location = place.location
-                }
-                
-            }
-        })
-    }
-    
-    
-     func checkLocationServices() -> Bool {
-     if CLLocationManager.locationServicesEnabled() {
-     
-     return true
-     } else {
-     print("enable location services in settings")
-     return false
-     }
-     }
-    
-    private func geocode() {
-     guard let location = self.location else { return }
-     geocoder.reverseGeocodeLocation(location, completionHandler: { (result, error) in
-     if error == nil {
-     if let result = result, let loc = result.first {
-     self.city = loc.locality
-     }
-     } else {
-     self.city = "Unknown location"
-     }
-     })
-     }
-    
-}
-
-
-
- import Foundation
- import CoreLocation
- 
- class LocationManager: NSObject, ObservableObject {
- 
- private let locationManager = CLLocationManager()
- private let geocoder = CLGeocoder()
- 
- @Published var location: CLLocation?
- 
- override init() {
- super.init()
- 
- locationManager.desiredAccuracy = kCLLocationAccuracyBest
- locationManager.distanceFilter = kCLDistanceFilterNone
- locationManager.requestWhenInUseAuthorization()
- locationManager.requestAlwaysAuthorization()
- locationManager.startUpdatingLocation()
- locationManager.delegate = self
- }
- private func geocode() {
- guard let location = self.location else { return }
- geocoder.reverseGeocodeLocation(location, completionHandler: { (result, error) in
- if error == nil {
- if let result = result, let loc = result.first {
- self.city = loc.locality
- }
- } else {
- self.city = "Unknown location"
- }
- })
- }
- 
- }
- 
- extension LocationManager: CLLocationManagerDelegate {
- 
- func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
- 
- guard let location = locations.last else { return }
- 
- DispatchQueue.main.async {
- self.location = location
- }
- 
- }
- 
- }
- */

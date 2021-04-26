@@ -40,7 +40,7 @@ class API {
         }
     }
     
-    static func login(email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void ) {
+    static func login(email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
         
         let path = baseUrl + "user/login"
         AF.request( path, method: .post, parameters: [ "email": email, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
@@ -57,7 +57,7 @@ class API {
         }
     }
     
-    static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void ) {
+    static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void) {
         let path = baseUrl + "scooter/inradius"
         let parameters = ["longitude": coordinates.longitude, "latitude": coordinates.latitude]
         AF.request(path, parameters: parameters).response { response in
@@ -73,4 +73,11 @@ class API {
             }
         }
     }
+    /*
+    static func logout(token: String, _ callback: @escaping (Result<String>) -> Void) {
+        let path = baseUrl + "user/logout"
+        AF.request(path, parameters: token).response { response in
+            
+        }
+    }*/
 }

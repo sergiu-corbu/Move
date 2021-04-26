@@ -63,7 +63,7 @@ struct Onboarding: View {
             }
         }
         .padding(.bottom, 20)
-        .padding(.top, 30)
+        .padding(.top, 50)
     }
     
     var descriptionLine: some View {

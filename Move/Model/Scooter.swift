@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Location: Codable {
     let coordinates: [Double]
@@ -19,31 +20,41 @@ struct Location: Codable {
 
 
 struct Scooter: Identifiable, Codable {
-    let id: String
-    let battery: Int
     let location: Location
-    
+    let id: String
+    let locked: Bool
+    let available: Bool
+    let battery: Int
+    let tag: String
+    let deviceKey: String
+    var addressName: String?
+    var coordinates: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: location.coordinates[1], longitude: location.coordinates[0])
+    }
     var batteryImage: String {
-        let _battery = battery
-        var _batteryImage: String = ""
-        if _battery <= 5 {
-            _batteryImage = "discharged-battery"
-        } else if _battery <= 40 {
-            _batteryImage = "almostEmpty-battery"
-        } else if _battery <= 60 {
-            _batteryImage = "half-battery"
-        } else if _battery <= 80 {
-            _batteryImage = "almostFull-battery"
-        } else if _battery <= 100 {
-            _batteryImage = "full-battery"
+        var batteryImage: String = ""
+        if battery <= 5 {
+            batteryImage = "discharged-battery"
+        } else if battery <= 40 {
+            batteryImage = "almostEmpty-battery"
+        } else if battery <= 60 {
+            batteryImage = "half-battery"
+        } else if battery <= 80 {
+            batteryImage = "almostFull-battery"
+        } else if battery <= 100 {
+            batteryImage = "full-battery"
         }
-        return _batteryImage
+        return batteryImage
     }
     
     enum CodingKeys: String, CodingKey {
         case location = "location"
         case id = "_id"
+        case locked = "locked"
+        case available = "available"
         case battery = "power"
+        case tag = "tag"
+        case deviceKey = "deviceKey"
     }
 }
 

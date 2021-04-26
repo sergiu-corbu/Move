@@ -45,7 +45,7 @@ struct ValidationSuccess: View {
     }
     
     var exploreButton: some View {
-        CallToActionButton(enabled: true, text: "Find scooters", action: { onFindScooters() })
+        CallToActionButton(enabled: true, text: "Find scooters", action: { onFindScooters() }).padding(.bottom, 20)
     }
 }
 

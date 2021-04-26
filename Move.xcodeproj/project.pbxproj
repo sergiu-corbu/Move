@@ -11,6 +11,7 @@
 		EC0B576526259DF8005F16CB /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B576426259DF8005F16CB /* Login.swift */; };
 		EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */; };
 		EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57732625CC73005F16CB /* ValidationSuccess.swift */; };
+		EC0EDD5226369312006B6D9D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = EC0EDD5126369312006B6D9D /* Introspect */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
@@ -101,6 +102,7 @@
 			files = (
 				ECDD3FE626242951003C659F /* NavigationStack in Frameworks */,
 				ECDD3FE226242943003C659F /* Alamofire in Frameworks */,
+				EC0EDD5226369312006B6D9D /* Introspect in Frameworks */,
 				EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */,
 				EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */,
 			);
@@ -151,15 +153,6 @@
 				EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */,
 			);
 			name = Menu;
-			sourceTree = "<group>";
-		};
-		EC7F0ED726301463004FF766 /* StatusBar */ = {
-			isa = PBXGroup;
-			children = (
-				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
-			);
-			name = StatusBar;
-			path = Bai_Jamjuree;
 			sourceTree = "<group>";
 		};
 		EC7F0EE32630384F004FF766 /* Scooter */ = {
@@ -236,11 +229,11 @@
 		ECDD3FE826242965003C659F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				EC7F0ED726301463004FF766 /* StatusBar */,
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
 				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
+				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -297,6 +290,7 @@
 				ECDD3FE526242951003C659F /* NavigationStack */,
 				EC5F17952626D38800A10368 /* BetterSafariView */,
 				EC7F0EE026301A30004FF766 /* SwiftMessages */,
+				EC0EDD5126369312006B6D9D /* Introspect */,
 			);
 			productName = Move;
 			productReference = ECDD3FBA26242836003C659F /* Move.app */;
@@ -330,6 +324,7 @@
 				ECDD3FE426242951003C659F /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */,
 				EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
 				EC7F0EDF26301A30004FF766 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
+				EC0EDD5026369312006B6D9D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = ECDD3FBB26242836003C659F /* Products */;
 			projectDirPath = "";
@@ -592,6 +587,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EC0EDD5026369312006B6D9D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 		EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
@@ -627,6 +630,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EC0EDD5126369312006B6D9D /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC0EDD5026369312006B6D9D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		EC5F17952626D38800A10368 /* BetterSafariView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */;

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 //MARK: buttons
 
 struct CallToActionButton: View {
@@ -74,6 +73,28 @@ struct MiniActionButton: View {
     }
 }
 
+struct UnlockButton: View {
+    
+    let text: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: {
+            action()
+        }, label: {
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.coralRed, lineWidth: 1.5)
+                .frame(width: 95, height: 56)
+                .background(Color.white)
+                .overlay(
+                    Text(text)
+                        .foregroundColor(.coralRed)
+                        .font(.custom(FontManager.Primary.bold, size: 14))
+                )
+        })
+    }
+}
+
 //MARK: fields
 struct InputField: View {
     @Binding var activeField: Bool
@@ -86,7 +107,7 @@ struct InputField: View {
     let textColor: Color
     var error: String?
     let action: () -> Void
-    
+            
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if  !input.isEmpty || activeField {
@@ -103,6 +124,9 @@ struct InputField: View {
                         .accentColor(textColor)
                         .padding(.bottom, 10)
                         .padding(.top, 5)
+                        .introspectTextField { textField in
+                            textField.returnKeyType = .done
+                        }
                         .disableAutocorrection(true)
                         .onTapGesture { action() }
                 } else {
@@ -113,6 +137,9 @@ struct InputField: View {
                         .autocapitalization(.none)
                         .padding(.bottom, 10)
                         .padding(.top, 5)
+                        .introspectTextField { textField in
+                            textField.returnKeyType = .next
+                        }
                         .disableAutocorrection(true)
                         .onTapGesture {
                             activeField = true
@@ -251,8 +278,27 @@ struct NavigationBar: View {
 struct Reusable_Previews: PreviewProvider {
     static var previews: some View {
         //NavigationBar(title: "Driving License", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
-        MiniActionButton(image: "pin-img", action: {
+        UnlockButton(text: "NFC", action: {
+            
+        })
+    }
+}
+
+struct RoundedCorner: Shape {
+    
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+    
+    func path(in rect: CGRect) -> Path{
+        let path = UIBezierPath(roundedRect: rect,byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         
-           })
+        return Path(path.cgPath)
+    }
+}
+
+
+extension View{
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }

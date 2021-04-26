@@ -13,43 +13,49 @@ struct MapView: View {
     @ObservedObject var mapViewModel: MapViewModel = MapViewModel()
     @ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
     @State private var region = MKCoordinateRegion.defaultRegion
-    @State private var scooterTap = false
+    @State private var isUnlocked = false
     
     func centerViewOnUserLocation() {
-        if let location = mapViewModel.locationManager.location?.coordinate {
+        guard let location = mapViewModel.locationManager.location?.coordinate else { print("errorr"); return }
             region = MKCoordinateRegion(center: location, latitudinalMeters: 900, longitudinalMeters: 900)
             scooterViewModel.location = location
-        }
-        /* guard let location = location else {
-         region = MKCoordinateRegion.defaultRegion
-         return
-         }*/
     }
     
     let onMenuButton: () -> Void
     
     var body: some View {
+        
         ZStack(alignment: .bottom) {
             Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.showLocation, annotationItems: scooterViewModel.allScooters) { scooter in
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0]))
                 {
                     Image("pin-fill-img")
-                        .onTapGesture { scooterTap.toggle() }
+                        .onTapGesture {
+                            self.mapViewModel.selectScooter(scooter: scooter)
+                        }
                 }
+            }
+            .edgesIgnoringSafeArea(.bottom )
+            .onTapGesture {
+                mapViewModel.selectedScooter = nil
             }
             .onAppear {
                 if mapViewModel.showLocation {
+                    centerViewOnUserLocation()
                     DispatchQueue.main.async {
                         centerViewOnUserLocation()
                     }
                 }
             }
             .animation(.easeIn)
-            if scooterTap {
-                ForEach(scooterViewModel.allScooters) { scooter in
-                    VStack {
-                        ScooterViewItem(scooter: scooter)
-                            .padding([.leading, .trailing], 15)
+            if let selectedScooter = self.mapViewModel.selectedScooter {
+                ZStack(alignment: .bottom) {
+                    ScooterViewItem(scooter: selectedScooter, isUnlocked: $isUnlocked)
+                        .padding([.leading, .trailing], 15)
+                    if isUnlocked {
+                        UnlockScooterCard(scooter: selectedScooter)
+                            .cornerRadius(29, corners: [.topLeft, .topRight])
+                            .background(Color.white.edgesIgnoringSafeArea(.bottom))
                     }
                 }
             }
@@ -74,7 +80,7 @@ struct MapView: View {
                     .foregroundColor(.darkPurple)
                     .font(.custom(FontManager.Primary.semiBold, size: 18))
                 Spacer()
-                MiniActionButton(image: "location-img", action: { centerViewOnUserLocation() })
+                MiniActionButton(image: mapViewModel.showLocation ? "location-img" : "locationDenied", action: { centerViewOnUserLocation() })
             }
             .padding([.leading, .trailing], 24)
         }

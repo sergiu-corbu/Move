@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct ScooterViewItem: View {
-    @State private var isUnlocking = false
-    @ObservedObject var mapViewModel: MapViewModel = MapViewModel()
+    //@State private var isUnlocked = false
     let scooter: Scooter
-
+    @Binding var isUnlocked: Bool
     var body: some View {
         ZStack {
             ZStack(alignment: .topLeading) {
@@ -40,9 +39,7 @@ struct ScooterViewItem: View {
             .padding([.leading, .trailing], 24)
         }
         .frame(width: 250, height: 315)
-        .onAppear {
-            mapViewModel.scooterGeocode(location: scooter.location.coordinates)
-        }
+        .clipShape(RoundedRectangle(cornerRadius: 29))
     }
     
     var scooterInfo: some View {
@@ -51,7 +48,7 @@ struct ScooterViewItem: View {
             Text("Scooter")
                 .font(.custom(FontManager.Primary.medium, size: 16))
                 .opacity(0.6)
-            Text("#\(scooter.id)")
+            Text("#\(scooter.tag)")
                 .font(.custom(FontManager.Primary.bold, size: 22))
                 .lineLimit(1)
             HStack {
@@ -73,23 +70,24 @@ struct ScooterViewItem: View {
     }
     
     var unlockButton: some View {
-        CallToActionButton(isLoading: isUnlocking, enabled: true, text: "Unlock", action: {
-            //api call to unlock
-        }).padding(.top)
+        CallToActionButton(isLoading: false, enabled: true, text: "Unlock", action: {
+            isUnlocked.toggle()
+        })
+        .padding(.top)
     }
     
     var location: some View {
         HStack(alignment: .top) {
             Image("pin-img")
-            Text(mapViewModel.scooterLocation)
+            Text(scooter.addressName ?? "n/a")
                 .foregroundColor(.darkPurple)
                 .font(.custom(FontManager.Primary.medium, size: 16))
         }.padding(.top)
     }
 }
 
-struct ScooterViewItem_Previews: PreviewProvider {
-    static var previews: some View {
-        ScooterViewItem(scooter: Scooter(id: "AB23", battery: 60, location: Location(coordinates: [32.1, -23.4], type: "Pin")))
-    }
-}
+//struct ScooterViewItem_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ScooterViewItem(scooter: Scooter(id: "AB23", battery: 60, location: Location(coordinates: [32.1, -23.4], type: "Pin")))
+//    }
+//}

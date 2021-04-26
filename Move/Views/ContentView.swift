@@ -16,17 +16,16 @@ struct ContentView: View {
         if Session.tokenKey != nil {
             LoggedUser()
                 .prepareStatusBarConfigurator(statusBarConfigurator)
-                .onAppear{
+                .onAppear {
                     statusBarConfigurator.statusBarStyle = .darkContent
                 }
         } else {
             FirstOpen()
                 .prepareStatusBarConfigurator(statusBarConfigurator)
-                .onAppear{
+                .onAppear {
                     statusBarConfigurator.statusBarStyle = .lightContent
                 }
         }
-          
     }
 }
 
@@ -45,7 +44,7 @@ struct FirstOpen: View {
     
     func handleRegister() {
         navigationViewModel.push(Register(onRegisterComplete: {
-            navigationViewModel.push(ValidationInfo(isLoading: $isLoading, onBack: navigationViewModel.pop(), onNext: { image in
+            navigationViewModel.push(ValidationInfo(isLoading: $isLoading, onBack: {navigationViewModel.pop()}, onNext: { image in
                 uploadImage(image: image)
             }))
         }, onLoginSwitch: {
@@ -90,8 +89,9 @@ struct FirstOpen: View {
                 }, onSave: {
                     navigationViewModel.pop()
                 }))
-                
-            }))
+
+            }
+            ))
         }))
     }
 }
@@ -123,7 +123,12 @@ struct LoggedUser: View {
                     navigationViewModel.pop()
                 }))
             }, onChangePassword: {
-                navigationViewModel.pop()
+                navigationViewModel.push(ChangePasswordView(onBack: {
+                    navigationViewModel.pop()
+                }, onSave: {
+                    navigationViewModel.pop()
+                }))
+                
             }))
     }
 }

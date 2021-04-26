@@ -9,6 +9,7 @@ import SwiftUI
 import BetterSafariView
 import Alamofire
 import SwiftMessages
+import Introspect
 
 struct Register: View {
 
@@ -82,17 +83,20 @@ struct Register: View {
                     usernameTyping = false
                     passwordTyping = false
                 })
+            
             InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", image: "close-img", isSecuredField: false, textColor: .white, action: {
                 emailTyping = false
                 usernameTyping = true
                 passwordTyping = false
             })
+           
             VStack(alignment: .leading) {
                 InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, error: userViewModel.passwordError,action: {
                     emailTyping = false
                     usernameTyping = false
                     passwordTyping = true
                 })
+               
                 if userViewModel.password == "" && passwordTyping  {
                     Text("Use a strong password (min. 8 characters and use symbols")
                         .font(.custom(FontManager.Primary.regular, size: 13))
@@ -114,6 +118,7 @@ struct Register: View {
                     case .failure(let error):
                       //  SwiftMessages.show()
                         print(error.localizedDescription)
+                        self.userViewModel.emailError = "Email is already taken." //show with swift messages
                         isLoading = false
                 }
             }

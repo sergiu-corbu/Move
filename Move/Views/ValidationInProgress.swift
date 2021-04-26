@@ -50,6 +50,7 @@ struct ValidationInProgress: View {
         CallToActionButton(enabled: true, text: "Explore the app", action: {
             onExploreButton()
         })
+        .padding(.bottom, 20)
     }
 }
 

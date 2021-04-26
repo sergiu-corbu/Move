@@ -16,13 +16,13 @@ struct ValidationInfo: View {
     @StateObject var statusBarConfigurator = StatusBarConfigurator()
     @Binding var isLoading: Bool
     
-    let onBack: ()
+    let onBack: () -> Void
     let onNext: (Image) -> Void
     
     var body: some View {
         VStack(spacing: 35) {
             NavigationBar(title: "Driver License", avatar: nil, backButton: "chevron-left-purple", action: {
-                onBack
+                onBack()
             }) .padding([.leading, .trailing], 24)
                 .padding(.top, 50)
                 .padding(.bottom, -30)
@@ -99,6 +99,6 @@ extension ValidationInfo {
 
 struct ValidationInfo_Previews: PreviewProvider {
     static var previews: some View {
-        ValidationInfo(isLoading: .constant(true), onBack: (), onNext: {_ in})
+        ValidationInfo(isLoading: .constant(true), onBack: {}, onNext: {_ in})
     }
 }

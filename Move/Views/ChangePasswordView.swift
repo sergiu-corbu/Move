@@ -27,7 +27,9 @@ struct ChangePasswordView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: "Change password", avatar: nil, backButton: "chevron-left-purple", action: { onBack() })
+            NavigationBar(title: "Change password", avatar: nil, backButton: "chevron-left-purple", action: {
+                onBack()
+            })
                 .padding(.top, 60)
             inputArea
             Spacer()
