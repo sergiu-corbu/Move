@@ -12,12 +12,14 @@
 		EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */; };
 		EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57732625CC73005F16CB /* ValidationSuccess.swift */; };
 		EC0EDD5226369312006B6D9D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = EC0EDD5126369312006B6D9D /* Introspect */; };
+		EC1614182637117C00931AF0 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1614142637117C00931AF0 /* AccountView.swift */; };
+		EC1614192637117C00931AF0 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1614152637117C00931AF0 /* MenuView.swift */; };
+		EC16141A2637117C00931AF0 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1614162637117C00931AF0 /* HistoryView.swift */; };
+		EC16141B2637117C00931AF0 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1614172637117C00931AF0 /* ChangePasswordView.swift */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
-		EC7DC503262B3A67007D7996 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7DC502262B3A67007D7996 /* AccountView.swift */; };
-		EC7DC507262B3A77007D7996 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */; };
 		EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */; };
 		EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */; };
 		EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = EC7F0EE026301A30004FF766 /* SwiftMessages */; };
@@ -25,8 +27,6 @@
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49AB72631F58700D9D701 /* MapViewModel.swift */; };
-		ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB749FE2629B4CD00EA741D /* MenuView.swift */; };
-		ECB74A682629FF3000EA741D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB74A672629FF3000EA741D /* HistoryView.swift */; };
 		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
 		ECC10F49262C988B006FAE6C /* Scooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10F48262C988B006FAE6C /* Scooter.swift */; };
 		ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */; };
@@ -57,19 +57,19 @@
 		EC0B576426259DF8005F16CB /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInProgress.swift; sourceTree = "<group>"; };
 		EC0B57732625CC73005F16CB /* ValidationSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSuccess.swift; sourceTree = "<group>"; };
+		EC1614142637117C00931AF0 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		EC1614152637117C00931AF0 /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		EC1614162637117C00931AF0 /* HistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		EC1614172637117C00931AF0 /* ChangePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
-		EC7DC502262B3A67007D7996 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
-		EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterRowView.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
 		EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterCard.swift; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECA49AB72631F58700D9D701 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
-		ECB749FE2629B4CD00EA741D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
-		ECB74A672629FF3000EA741D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		ECC10F48262C988B006FAE6C /* Scooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scooter.swift; sourceTree = "<group>"; };
 		ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterViewModel.swift; sourceTree = "<group>"; };
@@ -114,23 +114,15 @@
 		EC0B576726259E06005F16CB /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				ECDD400526242B49003C659F /* User.swift */,
 				ECDD3FD6262428C7003C659F /* Register.swift */,
 				EC0B576426259DF8005F16CB /* Login.swift */,
 				EC1673C32625662C007A180D /* ForgotPassword.swift */,
 				EC1673C62625802D007A180D /* ResetPassword.swift */,
 				ECDD3FFF26242985003C659F /* Onboarding.swift */,
+				EC9C7BB826255E5700FD5605 /* UserViewModel.swift */,
 			);
 			path = Auth;
-			sourceTree = "<group>";
-		};
-		EC0B576C2625C04B005F16CB /* MainView */ = {
-			isa = PBXGroup;
-			children = (
-				ECDD3FFD26242985003C659F /* MapView.swift */,
-				EC7F0EE32630384F004FF766 /* Scooter */,
-				EC7DC501262B3A56007D7996 /* Menu */,
-			);
-			name = MainView;
 			sourceTree = "<group>";
 		};
 		EC0B576F2625C5BA005F16CB /* LicenceValidation */ = {
@@ -142,46 +134,40 @@
 				EC0B57732625CC73005F16CB /* ValidationSuccess.swift */,
 			);
 			name = LicenceValidation;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		EC7DC501262B3A56007D7996 /* Menu */ = {
+		EC16140F26370E2500931AF0 /* MapView */ = {
 			isa = PBXGroup;
 			children = (
-				ECB74A672629FF3000EA741D /* HistoryView.swift */,
-				ECB749FE2629B4CD00EA741D /* MenuView.swift */,
-				EC7DC502262B3A67007D7996 /* AccountView.swift */,
-				EC7DC506262B3A77007D7996 /* ChangePasswordView.swift */,
+				ECDD3FFD26242985003C659F /* MapView.swift */,
+				ECA49AB72631F58700D9D701 /* MapViewModel.swift */,
 			);
-			name = Menu;
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		EC16141D2637118500931AF0 /* MENU */ = {
+			isa = PBXGroup;
+			children = (
+				EC1614142637117C00931AF0 /* AccountView.swift */,
+				EC1614172637117C00931AF0 /* ChangePasswordView.swift */,
+				EC1614162637117C00931AF0 /* HistoryView.swift */,
+				EC1614152637117C00931AF0 /* MenuView.swift */,
+			);
+			path = MENU;
 			sourceTree = "<group>";
 		};
 		EC7F0EE32630384F004FF766 /* Scooter */ = {
 			isa = PBXGroup;
 			children = (
+				ECC10F48262C988B006FAE6C /* Scooter.swift */,
+				ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */,
 				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
 				EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */,
 				EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */,
 			);
 			name = Scooter;
-			sourceTree = "<group>";
-		};
-		EC9C7BB626255DEE00FD5605 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				ECDD400526242B49003C659F /* User.swift */,
-				ECC10F48262C988B006FAE6C /* Scooter.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		EC9C7BBB26255E5B00FD5605 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				EC9C7BB826255E5700FD5605 /* UserViewModel.swift */,
-				ECA49AB72631F58700D9D701 /* MapViewModel.swift */,
-				ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */,
-			);
-			path = ViewModel;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		ECDD3FB126242836003C659F = {
@@ -205,11 +191,14 @@
 			children = (
 				ECDD3FBD26242836003C659F /* AppDelegate.swift */,
 				ECDD3FBF26242836003C659F /* SceneDelegate.swift */,
-				ECDD3FFE26242985003C659F /* Views */,
-				EC9C7BBB26255E5B00FD5605 /* ViewModel */,
-				EC9C7BB626255DEE00FD5605 /* Model */,
+				EC16140F26370E2500931AF0 /* MapView */,
+				ECDD3FC126242836003C659F /* ContentView.swift */,
+				EC16141D2637118500931AF0 /* MENU */,
+				EC7F0EE32630384F004FF766 /* Scooter */,
+				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
+				EC0B576726259E06005F16CB /* Auth */,
+				ECDD3FFE26242985003C659F /* Helpers */,
 				ECE337BE26243A57009EC353 /* Services */,
-				ECDD3FE826242965003C659F /* Helpers */,
 				ECDD3FC826242837003C659F /* LaunchScreen.storyboard */,
 				ECDD3FD3262428B3003C659F /* Assets.xcassets */,
 				ECDD3FCB26242837003C659F /* Info.plist */,
@@ -226,18 +215,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		ECDD3FE826242965003C659F /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
-				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
-				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
-				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
-				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
 		ECDD3FF226242979003C659F /* Bai_Jamjuree */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,15 +226,16 @@
 			path = Bai_Jamjuree;
 			sourceTree = "<group>";
 		};
-		ECDD3FFE26242985003C659F /* Views */ = {
+		ECDD3FFE26242985003C659F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				ECDD3FC126242836003C659F /* ContentView.swift */,
-				EC0B576726259E06005F16CB /* Auth */,
-				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
-				EC0B576C2625C04B005F16CB /* MainView */,
+				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
+				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
+				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
+				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
+				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 			);
-			path = Views;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		ECE337BE26243A57009EC353 /* Services */ = {
@@ -361,25 +339,25 @@
 				ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */,
 				EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */,
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
+				EC1614182637117C00931AF0 /* AccountView.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
 				ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */,
+				EC16141A2637117C00931AF0 /* HistoryView.swift in Sources */,
 				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
-				ECB74A682629FF3000EA741D /* HistoryView.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
-				ECB749FF2629B4CD00EA741D /* MenuView.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
 				EC7F0EE52630385C004FF766 /* UnlockScooterCard.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
-				EC7DC507262B3A77007D7996 /* ChangePasswordView.swift in Sources */,
-				EC7DC503262B3A67007D7996 /* AccountView.swift in Sources */,
 				ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */,
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
 				ECC10F49262C988B006FAE6C /* Scooter.swift in Sources */,
+				EC1614192637117C00931AF0 /* MenuView.swift in Sources */,
 				EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */,
 				EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */,
 				ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */,
+				EC16141B2637117C00931AF0 /* ChangePasswordView.swift in Sources */,
 				ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */,
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
