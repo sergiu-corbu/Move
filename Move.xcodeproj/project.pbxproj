@@ -29,6 +29,7 @@
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49AB72631F58700D9D701 /* MapViewModel.swift */; };
 		ECA7B5882637E6D00063C883 /* ScanQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7B5872637E6D00063C883 /* ScanQRView.swift */; };
+		ECA7B5E8263816CD0063C883 /* SNUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7B5E7263816CD0063C883 /* SNUnlock.swift */; };
 		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
 		ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10F48262C988B006FAE6C /* ScooterModel.swift */; };
 		ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */; };
@@ -49,7 +50,7 @@
 		ECDD3FFA26242979003C659F /* BaiJamjuree-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF626242979003C659F /* BaiJamjuree-Medium.ttf */; };
 		ECDD400026242985003C659F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFD26242985003C659F /* MapView.swift */; };
 		ECDD400126242985003C659F /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFF26242985003C659F /* Onboarding.swift */; };
-		ECDD400626242B49003C659F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* User.swift */; };
+		ECDD400626242B49003C659F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* UserModel.swift */; };
 		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECA49AB72631F58700D9D701 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		ECA7B5872637E6D00063C883 /* ScanQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRView.swift; sourceTree = "<group>"; };
+		ECA7B5E7263816CD0063C883 /* SNUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNUnlock.swift; sourceTree = "<group>"; };
 		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		ECC10F48262C988B006FAE6C /* ScooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterModel.swift; sourceTree = "<group>"; };
 		ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterViewModel.swift; sourceTree = "<group>"; };
@@ -93,7 +95,7 @@
 		ECDD3FF626242979003C659F /* BaiJamjuree-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Medium.ttf"; sourceTree = "<group>"; };
 		ECDD3FFD26242985003C659F /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		ECDD3FFF26242985003C659F /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
-		ECDD400526242B49003C659F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ECDD400526242B49003C659F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,12 +118,12 @@
 		EC0B576726259E06005F16CB /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				ECDD400526242B49003C659F /* User.swift */,
 				ECDD3FD6262428C7003C659F /* Register.swift */,
 				EC0B576426259DF8005F16CB /* Login.swift */,
 				EC1673C32625662C007A180D /* ForgotPassword.swift */,
 				EC1673C62625802D007A180D /* ResetPassword.swift */,
 				ECDD3FFF26242985003C659F /* Onboarding.swift */,
+				ECDD400526242B49003C659F /* UserModel.swift */,
 				EC9C7BB826255E5700FD5605 /* UserViewModel.swift */,
 			);
 			path = Auth;
@@ -172,6 +174,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		ECA7B5EA263816D30063C883 /* UnlockScooter */ = {
+			isa = PBXGroup;
+			children = (
+				ECA7B5872637E6D00063C883 /* ScanQRView.swift */,
+				ECA7B5E7263816CD0063C883 /* SNUnlock.swift */,
+			);
+			path = UnlockScooter;
+			sourceTree = "<group>";
+		};
 		ECDD3FB126242836003C659F = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +205,7 @@
 				ECDD3FBD26242836003C659F /* AppDelegate.swift */,
 				ECDD3FBF26242836003C659F /* SceneDelegate.swift */,
 				ECDD3FC126242836003C659F /* ContentView.swift */,
-				ECA7B5872637E6D00063C883 /* ScanQRView.swift */,
+				ECA7B5EA263816D30063C883 /* UnlockScooter */,
 				EC0B576726259E06005F16CB /* Auth */,
 				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
 				EC16140F26370E2500931AF0 /* MapView */,
@@ -369,7 +380,8 @@
 				ECDD3FC226242836003C659F /* ContentView.swift in Sources */,
 				EC0394F7262EA9CD003668D2 /* ScooterViewItem.swift in Sources */,
 				EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */,
-				ECDD400626242B49003C659F /* User.swift in Sources */,
+				ECDD400626242B49003C659F /* UserModel.swift in Sources */,
+				ECA7B5E8263816CD0063C883 /* SNUnlock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

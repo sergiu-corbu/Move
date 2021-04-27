@@ -13,7 +13,7 @@ struct HistoryView: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            NavigationBar(title: "History", avatar: nil, backButton: "chevron-left-purple", action: {
+            NavigationBar(title: "History", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: {
                 onBack()
             })
             TripDetail() // foreach trip in trips...

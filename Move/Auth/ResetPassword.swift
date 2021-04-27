@@ -22,7 +22,7 @@ struct ResetPassword: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: nil, avatar: nil, backButton: "chevron-left-white", action: { onBack() })
+            NavigationBar(title: nil, color: nil, avatar: nil, flashLight: false, backButton: "chevron-left-white", action: { onBack() })
                 .padding(.leading, -5)
             messageArea
             inputField

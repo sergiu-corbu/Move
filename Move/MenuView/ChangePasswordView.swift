@@ -27,7 +27,7 @@ struct ChangePasswordView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: "Change password", avatar: nil, backButton: "chevron-left-purple", action: {
+            NavigationBar(title: "Change password", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: {
                 onBack()
             })
                 .padding(.top, 60)

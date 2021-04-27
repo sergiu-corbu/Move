@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable {
+struct UserModel: Codable {
     let email: String
     let username: String
 
@@ -23,7 +23,7 @@ struct User: Codable {
 
 struct AuthResult: Decodable {
     
-    let user: User
+    let user: UserModel
     let token: String
     
     enum CodingKeys: String, CodingKey {

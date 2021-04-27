@@ -103,11 +103,40 @@ struct UnlockOptionButton: View {
     var body: some View {
         Button(action: { action() }, label: {
             RoundedRectangle(cornerRadius: 16)
-                .border(Color.white, width: 1.5)
+                .strokeBorder(Color.white)
+                .background(Color.white.opacity(0.2))
                 .overlay(
                     Text(text)
-            )
+                        .foregroundColor(.white)
+                        .font(.custom(FontManager.Primary.bold, size: 16))
+                )
+                .frame(width: 56, height: 56)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+            
         })
+    }
+}
+
+//MARK: views
+
+struct UnlockRow: View {
+    let unlockButton1: UnlockOptionButton
+    let unlockButton2: UnlockOptionButton
+    var body: some View {
+        VStack {
+            Text("Alternately you can unlock using")
+                .font(.custom(FontManager.Primary.medium, size: 16))
+            HStack {
+                Spacer()
+                unlockButton1
+                Text("or")
+                    .font(.custom(FontManager.Primary.bold, size: 16))
+                    .padding(.horizontal, 20)
+                unlockButton1
+                Spacer()
+            }.padding(.vertical, 20)
+
+        }.foregroundColor(.white)
     }
 }
 
@@ -254,28 +283,38 @@ struct InputPasswordReset: View {
 // MARK: navigation bar
 
 struct NavigationBar: View {
+    
     let title: String?
+    let color: Color?
     let avatar: String?
+    let flashLight: Bool
     let backButton: String
     let action: () -> Void
     
     var body: some View {
         ZStack {
-            if let _title = title {
+            if let title = title {
                 HStack {
-                    Text(_title)
+                    Text(title)
                         .font(.custom(FontManager.Primary.semiBold, size: 18))
-                        .foregroundColor(.darkPurple)
+                        .foregroundColor(color!)
                         .frame(maxWidth: .infinity)
                 }
             }
-            if let _avatar = avatar {
+            if let avatar = avatar {
                 HStack {
                     Spacer()
-                    Image(_avatar)
+                    Image(avatar)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 40, height: 40)
+                }
+            }
+            if flashLight == true {
+                HStack {
+                    Spacer()
+                    Image("bulb-img")
+                        .padding(.trailing, 15)
                 }
             }
             HStack {
@@ -294,9 +333,7 @@ struct NavigationBar: View {
 struct Reusable_Previews: PreviewProvider {
     static var previews: some View {
         //NavigationBar(title: "Driving License", avatar: "avatar-img", backButton: "chevron-left-purple", action: {})
-        UnlockButton(text: "NFC", action: {
-            
-        })
+        UnlockOptionButton(text: "123", action: {})
     }
 }
 

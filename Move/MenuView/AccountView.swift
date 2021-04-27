@@ -25,7 +25,7 @@ struct AccountView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: "Account", avatar: nil, backButton: "chevron-left-purple", action: { onBack() })
+            NavigationBar(title: "Account", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: { onBack() })
                 .padding(.top, 60)
             inputArea
             Spacer()

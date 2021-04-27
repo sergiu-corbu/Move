@@ -21,7 +21,7 @@ struct ValidationInfo: View {
     
     var body: some View {
         VStack(spacing: 35) {
-            NavigationBar(title: "Driver License", avatar: nil, backButton: "chevron-left-purple", action: {
+            NavigationBar(title: "Driver License", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: {
                 onBack()
             }) .padding([.leading, .trailing], 24)
                 .padding(.top, 50)
