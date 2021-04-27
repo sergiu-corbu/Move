@@ -74,28 +74,21 @@ class API {
         }
     }
     
-    static func logout(token: String, _ callback: @escaping (Result<LogoutResult>) -> Void) {
+    static func logout(token: String, _ callback: @escaping (Bool) -> Void) {
         let path = baseUrl + "user/logout"
         let header: HTTPHeaders = ["Authorization": token]
         AF.request(path, method: .delete, headers: header).response { response in
-            if let data = response.data {
-                do {
-                    let result = try JSONDecoder().decode(LogoutResult.self, from: data)
-                    callback(.success(result))
-                } catch (let error) {
-                    print(error)
-                    callback(.failure(error))
+            
+            if let response = response.response {
+                let statusCode = response.statusCode
+                if statusCode == 200 {
+                    callback(true)
+                }
+                else {
+                    callback(false)
                 }
             }
+            else { print("error on status code")}
         }
-    }
-}
-
-
-struct LogoutResult: Decodable {
-    let logout: Bool
-    
-    enum CodingKeys: String, CodingKey {
-        case logout = "logout"
     }
 }

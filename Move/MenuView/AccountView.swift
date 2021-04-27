@@ -54,17 +54,11 @@ struct AccountView: View {
         VStack(spacing: 50) {
             Button(action: {
                 API.logout(token: Session.tokenKey!) { (result) in
-                    switch result {
-                        case .success(let result):
-                            if result.logout == true {
-                                Session.tokenKey = nil
-                                onLogout()
-                            } else {
-                                print("failure error")
-                            }
-                        case .failure(let error):
-                            print(error)
-                    }
+                    if result == true {
+                        Session.tokenKey = nil
+                        onLogout()
+                    } else { print("Error on logout") }
+    
                 }
             }, label: {
                 HStack {

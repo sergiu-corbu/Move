@@ -12,21 +12,21 @@ struct ValidationSuccess: View {
     let onFindScooters: () -> Void
     
     var body: some View {
-        VStack {
-            Spacer()
-            checkMark
-            mainText
-            Spacer()
-            exploreButton
-        }
-        .multilineTextAlignment(.center)
-        .padding([.leading, .trailing], 24)
-        .background(
+        ZStack {
             Image("rect-background-img")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-        )
-        .edgesIgnoringSafeArea(.all)
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                Spacer()
+                checkMark
+                mainText
+                Spacer()
+                exploreButton
+            }
+            .multilineTextAlignment(.center)
+            .padding([.leading, .trailing], 24)
+        }
     }
     
     var mainText: some View {

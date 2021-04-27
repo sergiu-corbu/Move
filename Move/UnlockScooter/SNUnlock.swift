@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct SNUnlock: View {
+  
     let action:() -> Void
+    //let onCompleted: (String) -> Void
     var body: some View {
+        
         ScrollView(showsIndicators: false) {
             NavigationBar(title: "Enter serial number", color: .white, avatar: nil, flashLight: false, backButton: "close", action: { action() })
                 .padding(.horizontal, 24)
             title
-            subtitle
-            UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "NFC", action: {}))
+            subtitle.padding(.bottom, 100)
+            digitRow
+            unlockOptions
         }
         .background(
             Image("rect-background-img")
@@ -40,11 +44,35 @@ struct SNUnlock: View {
             .multilineTextAlignment(.center)
             .lineSpacing(5)
     }
-    
+    var digitRow: some View {
+        HStack {
+            ForEach(0..<4) { _ in
+                DigitField(digit: .constant("1"))
+            }
+        }
+    }
+    var unlockOptions: some View {
+        UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
+    }
 }
 
 struct SNUnlock_Previews: PreviewProvider {
     static var previews: some View {
-        SNUnlock(action: {})
+        SNUnlock( action: {})
+    }
+}
+
+struct DigitField: View {
+//    @Binding var index: Int
+    @Binding var digit: String
+    var body: some View {
+        TextField("", text: $digit)
+            .keyboardType(.numberPad)
+            .frame(width: 52, height: 52)
+            .background(Color.fadePurple)
+            .accentColor(.black)
+            .multilineTextAlignment(.center)
+            .clipShape(RoundedRectangle(cornerRadius: 18))
+            .padding(.horizontal, 5)
     }
 }

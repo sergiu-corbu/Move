@@ -13,6 +13,7 @@ struct ContentView: View {
     @StateObject var statusBarConfigurator = StatusBarConfigurator()
     
     var body: some View {
+    
         if Session.tokenKey != nil {
             LoggedUser()
                 .prepareStatusBarConfigurator(statusBarConfigurator)
