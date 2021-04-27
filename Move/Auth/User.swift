@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct User: Identifiable, Codable {
-    let id: String
+struct User: Codable {
     let email: String
     let username: String
 
@@ -17,7 +16,6 @@ struct User: Identifiable, Codable {
     //let profileImage: Image = ""
     
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
         case username = "username"
         case email = "email"
     }

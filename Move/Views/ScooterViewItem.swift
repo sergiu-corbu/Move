@@ -48,7 +48,7 @@ struct ScooterViewItem: View {
             Text("Scooter")
                 .font(.custom(FontManager.Primary.medium, size: 16))
                 .opacity(0.6)
-            Text("#\(scooter.tag)")
+            Text("#\(scooter.id)")
                 .font(.custom(FontManager.Primary.bold, size: 22))
                 .lineLimit(1)
             HStack {

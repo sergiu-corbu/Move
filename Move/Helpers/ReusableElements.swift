@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 //MARK: buttons
 
 struct CallToActionButton: View {
@@ -91,6 +92,21 @@ struct UnlockButton: View {
                         .foregroundColor(.coralRed)
                         .font(.custom(FontManager.Primary.bold, size: 14))
                 )
+        })
+    }
+}
+
+struct UnlockOptionButton: View {
+    let text: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: { action() }, label: {
+            RoundedRectangle(cornerRadius: 16)
+                .border(Color.white, width: 1.5)
+                .overlay(
+                    Text(text)
+            )
         })
     }
 }

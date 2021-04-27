@@ -53,7 +53,19 @@ struct AccountView: View {
     var footerArea: some View {
         VStack(spacing: 50) {
             Button(action: {
-                onLogout()
+                API.logout(token: Session.tokenKey!) { (result) in
+                    switch result {
+                        case .success(let result):
+                            if result.logout == true {
+                                Session.tokenKey = nil
+                                onLogout()
+                            } else {
+                                print("failure error")
+                            }
+                        case .failure(let error):
+                            print(error)
+                    }
+                }
             }, label: {
                 HStack {
                     Image("logout-img")

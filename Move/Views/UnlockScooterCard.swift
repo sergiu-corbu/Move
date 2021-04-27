@@ -54,7 +54,7 @@ struct UnlockScooterCard: View {
                     .font(.custom(FontManager.Primary.medium, size: 16))
                     .opacity(0.6)
                     .padding(.bottom, 2)
-                Text("#\(scooter.tag)")
+                Text("#\(scooter.id)")
                     .font(.custom(FontManager.Primary.bold, size: 32))
                 HStack {
                     Image(scooter.batteryImage)
@@ -104,6 +104,6 @@ struct UnlockScooterCard: View {
 
 struct UnlockScooterCard_Preview: PreviewProvider {
     static var previews: some View {
-        UnlockScooterCard(scooter: Scooter.init(location: Location(coordinates: [10,2], type: "T"), id: "#ABCD", locked: true, available: true, battery: 65, tag: "ABCD", deviceKey: "ewfuhw", addressName: "Strada Plopilor"))
+        UnlockScooterCard(scooter: Scooter.init(location: Location(coordinates: [10,2], type: "T"), locked: true, available: true, battery: 65, id: "ABCD", deviceKey: "ewfuhw", addressName: "Strada Plopilor"))
     }
 }

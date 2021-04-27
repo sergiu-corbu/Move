@@ -43,7 +43,7 @@ class API {
     static func login(email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
         
         let path = baseUrl + "user/login"
-        AF.request( path, method: .post, parameters: [ "email": email, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
+        AF.request(path, method: .post, parameters: [ "email": email, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
             if let data = response.data {
                 do {
                     let result = try JSONDecoder().decode(AuthResult.self, from: data)
@@ -73,11 +73,29 @@ class API {
             }
         }
     }
-    /*
-    static func logout(token: String, _ callback: @escaping (Result<String>) -> Void) {
+    
+    static func logout(token: String, _ callback: @escaping (Result<LogoutResult>) -> Void) {
         let path = baseUrl + "user/logout"
-        AF.request(path, parameters: token).response { response in
-            
+        let header: HTTPHeaders = ["Authorization": token]
+        AF.request(path, method: .delete, headers: header).response { response in
+            if let data = response.data {
+                do {
+                    let result = try JSONDecoder().decode(LogoutResult.self, from: data)
+                    callback(.success(result))
+                } catch (let error) {
+                    print(error)
+                    callback(.failure(error))
+                }
+            }
         }
-    }*/
+    }
+}
+
+
+struct LogoutResult: Decodable {
+    let logout: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case logout = "logout"
+    }
 }

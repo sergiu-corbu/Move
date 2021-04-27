@@ -33,16 +33,17 @@ struct Onboarding: View {
                     .resizable()
                     .frame(width: geometry.size.width, height: geometry.size.height / 0.9)
                     .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.top)
             }
             VStack(alignment: .leading, spacing: 0) {
                 titleLine
                 descriptionLine
                 pageControlLine
             }
-            .padding([.leading, .trailing], 24)
+            .padding(.horizontal, 24)
         }
         .background(Color.white)
-        .edgesIgnoringSafeArea(.all)
+        
     }
     
     
@@ -63,7 +64,7 @@ struct Onboarding: View {
             }
         }
         .padding(.bottom, 20)
-        .padding(.top, 50)
+        .padding(.top)
     }
     
     var descriptionLine: some View {
