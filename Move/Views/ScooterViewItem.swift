@@ -58,10 +58,10 @@ struct ScooterViewItem: View {
             }
             
             HStack {
-                MiniActionButton(image: "bell-img", action: {
+                MapActionButton(image: "bell-img", action: {
                     //ring scooter
                 }).padding(.trailing, 20)
-                MiniActionButton(image: "getRoute-img", action: {
+                MapActionButton(image: "getRoute-img", action: {
                     //open maps & navigate
                 })
             }
@@ -70,7 +70,7 @@ struct ScooterViewItem: View {
     }
     
     var unlockButton: some View {
-        CallToActionButton(isLoading: false, enabled: true, text: "Unlock", action: {
+        ActionButton(isLoading: false, enabled: true, text: "Unlock", action: {
             isUnlocked.toggle()
         })
         .padding(.top)

@@ -13,7 +13,8 @@ struct ContentView: View {
     @StateObject var statusBarConfigurator = StatusBarConfigurator()
     
     var body: some View {
-    
+		//ResetPassword(onBack: {}) errorrrrr
+		
         if Session.tokenKey != nil {
             LoggedUser()
                 .prepareStatusBarConfigurator(statusBarConfigurator)
@@ -27,7 +28,7 @@ struct ContentView: View {
                     statusBarConfigurator.statusBarStyle = .lightContent
                 }
         }
-    }
+	}
 }
 
 struct FirstOpen: View {

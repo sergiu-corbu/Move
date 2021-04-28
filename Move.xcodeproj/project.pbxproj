@@ -20,6 +20,9 @@
 		EC16143F2637148000931AF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC16143E2637148000931AF0 /* LaunchScreen.storyboard */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
+		EC3BA58C2639DB140032A496 /* ButtonsReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ButtonsReusable.swift */; };
+		EC3BA58E2639DBAC0032A496 /* ScooterReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */; };
+		EC58006E263951B200CDF4AC /* StartRideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC58006D263951B200CDF4AC /* StartRideView.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
 		EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */; };
@@ -43,7 +46,7 @@
 		ECDD3FD7262428C7003C659F /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FD6262428C7003C659F /* Register.swift */; };
 		ECDD3FE226242943003C659F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ECDD3FE126242943003C659F /* Alamofire */; };
 		ECDD3FE626242951003C659F /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = ECDD3FE526242951003C659F /* NavigationStack */; };
-		ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEA26242970003C659F /* Fonts&Colors.swift */; };
+		ECDD3FEE26242970003C659F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEA26242970003C659F /* Extensions.swift */; };
 		ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEB26242970003C659F /* ReusableElements.swift */; };
 		ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEC26242970003C659F /* OnboardingData.swift */; };
 		ECDD3FF726242979003C659F /* BaiJamjuree-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF326242979003C659F /* BaiJamjuree-Regular.ttf */; };
@@ -69,6 +72,9 @@
 		EC16143E2637148000931AF0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
+		EC3BA58B2639DB140032A496 /* ButtonsReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsReusable.swift; sourceTree = "<group>"; };
+		EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterReusable.swift; sourceTree = "<group>"; };
+		EC58006D263951B200CDF4AC /* StartRideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRideView.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterRowView.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
@@ -90,7 +96,7 @@
 		ECDD3FCB26242837003C659F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ECDD3FD3262428B3003C659F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECDD3FD6262428C7003C659F /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
-		ECDD3FEA26242970003C659F /* Fonts&Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Fonts&Colors.swift"; sourceTree = "<group>"; };
+		ECDD3FEA26242970003C659F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ECDD3FEB26242970003C659F /* ReusableElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableElements.swift; sourceTree = "<group>"; };
 		ECDD3FEC26242970003C659F /* OnboardingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
 		ECDD3FF326242979003C659F /* BaiJamjuree-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Regular.ttf"; sourceTree = "<group>"; };
@@ -122,13 +128,13 @@
 		EC0B576726259E06005F16CB /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				ECDD3FFF26242985003C659F /* Onboarding.swift */,
 				ECDD3FD6262428C7003C659F /* Register.swift */,
 				EC0B576426259DF8005F16CB /* Login.swift */,
 				EC1673C32625662C007A180D /* ForgotPassword.swift */,
 				EC1673C62625802D007A180D /* ResetPassword.swift */,
-				ECDD3FFF26242985003C659F /* Onboarding.swift */,
-				ECDD400526242B49003C659F /* UserModel.swift */,
 				EC9C7BB826255E5700FD5605 /* UserViewModel.swift */,
+				ECDD400526242B49003C659F /* UserModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -185,6 +191,7 @@
 				ECA7B5E7263816CD0063C883 /* SNUnlock.swift */,
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
 				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
+				EC58006D263951B200CDF4AC /* StartRideView.swift */,
 			);
 			path = UnlockScooter;
 			sourceTree = "<group>";
@@ -211,12 +218,12 @@
 				ECDD3FBD26242836003C659F /* AppDelegate.swift */,
 				ECDD3FBF26242836003C659F /* SceneDelegate.swift */,
 				ECDD3FC126242836003C659F /* ContentView.swift */,
-				ECA7B5EA263816D30063C883 /* UnlockScooter */,
 				EC0B576726259E06005F16CB /* Auth */,
 				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
 				EC16140F26370E2500931AF0 /* MapView */,
 				EC16141D2637118500931AF0 /* MenuView */,
 				EC7F0EE32630384F004FF766 /* Scooter */,
+				ECA7B5EA263816D30063C883 /* UnlockScooter */,
 				ECE337BE26243A57009EC353 /* Services */,
 				ECDD3FFE26242985003C659F /* Helpers */,
 				ECDD3FD3262428B3003C659F /* Assets.xcassets */,
@@ -249,8 +256,10 @@
 		ECDD3FFE26242985003C659F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				ECDD3FEA26242970003C659F /* Fonts&Colors.swift */,
+				ECDD3FEA26242970003C659F /* Extensions.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
+				EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */,
+				EC3BA58B2639DB140032A496 /* ButtonsReusable.swift */,
 				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
 				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
@@ -357,6 +366,7 @@
 			files = (
 				ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */,
 				ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */,
+				EC3BA58C2639DB140032A496 /* ButtonsReusable.swift in Sources */,
 				EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */,
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
 				EC1614182637117C00931AF0 /* AccountView.swift in Sources */,
@@ -366,6 +376,7 @@
 				ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */,
 				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
+				EC58006E263951B200CDF4AC /* StartRideView.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
 				EC7F0EE52630385C004FF766 /* UnlockScooterCard.swift in Sources */,
@@ -382,7 +393,8 @@
 				ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */,
 				EC16141B2637117C00931AF0 /* ChangePasswordView.swift in Sources */,
 				ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */,
-				ECDD3FEE26242970003C659F /* Fonts&Colors.swift in Sources */,
+				ECDD3FEE26242970003C659F /* Extensions.swift in Sources */,
+				EC3BA58E2639DBAC0032A496 /* ScooterReusable.swift in Sources */,
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
 				ECDD400026242985003C659F /* MapView.swift in Sources */,
 				ECDD3FC226242836003C659F /* ContentView.swift in Sources */,
@@ -447,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -502,7 +514,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -522,6 +534,7 @@
 				DEVELOPMENT_TEAM = 2T3LUD4AA9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Move/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -543,6 +556,7 @@
 				DEVELOPMENT_TEAM = 2T3LUD4AA9;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Move/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

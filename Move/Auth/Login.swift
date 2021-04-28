@@ -6,113 +6,54 @@
 //
 
 import SwiftUI
-import Alamofire
 
 struct Login: View {
     @StateObject private var userViewModel = UserViewModel()
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
-    @State private var isLoading: Bool = false
     
     let onLoginCompleted: () -> Void
     let onRegisterSwitch: () -> Void
     
-    var allfieldsCompleted: Bool {
-        return userViewModel.email != "" && userViewModel.password != "" && isLoading == false
-    }
-    var allfieldsValidated: Bool {
-        return userViewModel.emailError.isEmpty && userViewModel.passwordError.isEmpty
-    }
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack (alignment: .leading) {
-                logoArea
-                messageArea
+				RegisterElements.logoArea
+				RegisterElements.MessageArea(text: "Sign up or login and start\nriding right away")
                 inputArea
-                getStartedButton
-                goToRegister
+				ActionButton(isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedLogin && userViewModel.allfieldsValidatedLogin, text: "Login", action: {
+					userViewModel.isLoading = true
+					API.login(email: userViewModel.email, password: userViewModel.password) { (result) in
+						switch result {
+							case .success(let result):
+								Session.tokenKey = result.token
+								onLoginCompleted()
+								userViewModel.isLoading = false
+							case .failure(let error):
+								print(error.localizedDescription)
+								userViewModel.isLoading = false
+						}
+					}
+				}).padding(.top, 20)
+				RegisterElements.SwitchAuthProcess(questionText: "Don't have an account? You can", solutionText: "start with one here", action: { onRegisterSwitch() })
             }
             Spacer()
         }
-        .padding([.leading, .trailing], 24)
-        .background(
-            Image("rect-background-img")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
-        )
-    }
-    
-    var logoArea: some View {
-        Image("logoOverlay-img")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 100, height: 100)
-            .padding(.leading, -10)
-    }
-    
-    var messageArea: some View {
-        VStack(alignment: .leading) {
-            Text("Let's get started")
-                .foregroundColor(.white)
-                .font(Font.custom(FontManager.Primary.bold, size: 32))
-                .padding(.bottom, 15)
-            Text("Sign up or login and start\nriding right away")
-                .foregroundColor(.white)
-                .font(Font.custom(FontManager.Primary.medium, size: 20))
-                .opacity(0.6)
-                .lineSpacing(3)
-                .frame(height: 55)
-                .padding(.bottom, 5)
-        }
+        .padding(.horizontal, 24)
+		.background(RegisterElements.purpleBackground)
     }
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white,error: userViewModel.emailError, action: {
+            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", isSecuredField: false, textColor: .white,error: userViewModel.emailError, action: {
                 emailTyping = true
                 passwordTyping = false
             })
-            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, error: userViewModel.passwordError , action: {
+            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError , action: {
                 emailTyping = false
                 passwordTyping = true
             })
         }
-    }
-    
-    var getStartedButton: some View {
-        
-        CallToActionButton(isLoading: isLoading, enabled: allfieldsCompleted, text: "Login", action: {
-            isLoading = true
-            API.login(email: userViewModel.email, password: userViewModel.password) { (result) in
-                switch result {
-                    case .success(let result):
-                        Session.tokenKey = result.token
-                        onLoginCompleted()
-                        isLoading = false
-                    case .failure(let error):
-                        print(error.localizedDescription)
-                        isLoading = false
-                }
-            }
-        }).padding(.top, 20)
-    }
-
-    var goToRegister: some View {
-        HStack {
-            Text("Don't have an account? You can")
-                .font(Font.custom(FontManager.Primary.regular, size: 14))
-                .foregroundColor(.white)
-            Button(action: {
-               onRegisterSwitch()
-            }, label: {
-                Text("start with one here")
-                    .foregroundColor(.white)
-                    .font(.custom(FontManager.Primary.semiBold, size: 14))
-                    .bold()
-                    .underline()
-            })
-        }.padding(.bottom, 25)
     }
 }
 

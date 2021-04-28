@@ -7,96 +7,53 @@
 
 import SwiftUI
 import BetterSafariView
-import Alamofire
 import SwiftMessages
-import Introspect
 
 struct Register: View {
-
     @StateObject private var userViewModel = UserViewModel()
     @State private var emailTyping: Bool = false
     @State private var passwordTyping: Bool = false
     @State private var usernameTyping: Bool = false
     @State private var termsPresented: Bool = false
     @State private var privacyPresented: Bool = false
-    @State private var isLoading: Bool = false
     
     let onRegisterComplete: () -> Void
     let onLoginSwitch: () -> Void
-    
-    var allfieldsCompleted: Bool {
-        return userViewModel.email != "" && userViewModel.username != "" && userViewModel.password != "" && isLoading == false
-    }
-    var allfieldsValidated: Bool {
-        return userViewModel.emailError.isEmpty && userViewModel.passwordError.isEmpty
-    }
-    
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
-                logoArea
-                messageArea
+				RegisterElements.logoArea
+				RegisterElements.MessageArea(text: "Sign up or login and start\nriding right away")
                 inputArea
                 agreement
                 getStartedButton
-                goToLogin
+				RegisterElements.SwitchAuthProcess(questionText: "You already have an account? You can", solutionText: "log in here", action: { onLoginSwitch() })
             }
             Spacer()
         }
-        .padding([.leading, .trailing], 24)
-        .background(
-            Image("rect-background-img")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
-        )
-    }
-    
-    var logoArea: some View {
-        Image("logoOverlay-img")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 100, height: 100)
-            .padding(.leading, -10)
-    }
-    
-    var messageArea: some View {
-        VStack(alignment: .leading) {
-            Text("Let's get started")
-                .foregroundColor(.white)
-                .font(Font.custom(FontManager.Primary.bold, size: 32))
-                .padding(.bottom, 15)
-            Text("Sign up or login and start\nriding right away")
-                .foregroundColor(.white)
-                .font(Font.custom(FontManager.Primary.medium, size: 20))
-                .opacity(0.6)
-                .lineSpacing(3)
-                .frame(height: 55)
-                .padding(.bottom, 5)
-        }
+        .padding(.horizontal, 24)
+		.background(RegisterElements.purpleBackground)
     }
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", image: "close-img", isSecuredField: false, textColor: .white, error: userViewModel.emailError, action: {
+            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", isSecuredField: false, textColor: .white, error: userViewModel.emailError, action: {
                     emailTyping = true
                     usernameTyping = false
                     passwordTyping = false
                 })
-            
-            InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", image: "close-img", isSecuredField: false, textColor: .white, action: {
+            InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", isSecuredField: false, textColor: .white, action: {
                 emailTyping = false
                 usernameTyping = true
                 passwordTyping = false
             })
-           
             VStack(alignment: .leading) {
-                InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", image: "eye-img", isSecuredField: true, textColor: .white, error: userViewModel.passwordError,action: {
+                InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError,action: {
                     emailTyping = false
                     usernameTyping = false
                     passwordTyping = true
                 })
-               
                 if userViewModel.password == "" && passwordTyping  {
                     Text("Use a strong password (min. 8 characters and use symbols")
                         .font(.custom(FontManager.Primary.regular, size: 13))
@@ -107,85 +64,56 @@ struct Register: View {
     }
     
     var getStartedButton: some View {
-        CallToActionButton(isLoading: isLoading, enabled: allfieldsCompleted && allfieldsValidated, text: "Get started", action: {
-            isLoading = true
+        ActionButton(isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedRegister && userViewModel.allfieldsValidatedRegister, text: "Get started", action: {
+            userViewModel.isLoading = true
             API.register(username: userViewModel.username, email: userViewModel.email, password: userViewModel.password) { (result) in
                 switch result {
                     case .success(let result):
                         Session.tokenKey = result.token
                         onRegisterComplete()
-                        isLoading = false
+                        userViewModel.isLoading = false
                     case .failure(let error):
-                      //  SwiftMessages.show()
+                        //  SwiftMessages.show()
                         print(error.localizedDescription)
-                        self.userViewModel.emailError = "Email is already taken." //show with swift messages
-                        isLoading = false
+                        self.userViewModel.emailError = "Email is already taken." //show with swift
+                        userViewModel.isLoading = false
                 }
             }
         }).padding(.top, 20)
     }
     
     var agreement: some View {
-        
         VStack(alignment: .leading) {
             Text("By continuing you agree to Move’s")
-                .foregroundColor(.white)
                 .font(.custom(FontManager.Primary.medium, size: 14))
             HStack {
-                Button(action: {
-                    termsPresented = true
-                }, label: {
+                Button(action: { termsPresented = true }, label: {
                     Text("Terms and Conditions")
-                        .foregroundColor(.white)
                         .font(.custom(FontManager.Primary.semiBold, size: 14))
                         .bold()
                         .underline()
                 })
-                .safariView(isPresented: $termsPresented) {
-                    SafariView(url: URL(string: "https://tapptitude.com")!, configuration: SafariView.Configuration(entersReaderIfAvailable: false, barCollapsingEnabled: true))
-                        .dismissButtonStyle(.close)
-                }
+                .safariView(isPresented: $termsPresented) { safariView as! SafariView }
                 Text("and")
-                    .foregroundColor(.white)
                     .font(.custom(FontManager.Primary.medium, size: 14))
-                    .padding([.trailing, .leading], -3)
-                Button(action: {
-                    privacyPresented = true
-                }, label: {
+                    .padding(.horizontal, -3)
+                Button(action: { privacyPresented = true }, label: {
                     Text("Privacy Policy")
-                        .foregroundColor(.white)
                         .font(.custom(FontManager.Primary.semiBold, size: 14))
                         .bold()
                         .underline()
                 })
-                .safariView(isPresented: $privacyPresented) {
-                    SafariView(url: URL(string: "https://tapptitude.com")!, configuration: SafariView.Configuration(entersReaderIfAvailable: false, barCollapsingEnabled: true))
-                        .dismissButtonStyle(.close)
-                }
+                .safariView(isPresented: $privacyPresented) { safariView as! SafariView }
                 Spacer()
             }
         }
+        .foregroundColor(.white)
         .padding(.top, 20)
     }
     
-    var goToLogin: some View {
-        
-        HStack {
-            Text("You already have an account? You can")
-                .font(Font.custom(FontManager.Primary.regular, size: 14))
-                .foregroundColor(.white)
-            Button(action: {
-                onLoginSwitch()
-               
-            }, label: {
-                Text("log in here")
-                    .foregroundColor(.white)
-                    .font(.custom(FontManager.Primary.semiBold, size: 14))
-                    .bold()
-                    .underline()
-                    .padding(.leading, -3)
-            })
-        }
+    var safariView: some View {
+        SafariView(url: URL(string: "https://tapptitude.com")!, configuration: SafariView.Configuration(entersReaderIfAvailable: false, barCollapsingEnabled: true))
+            .dismissButtonStyle(.close)
     }
 }
 

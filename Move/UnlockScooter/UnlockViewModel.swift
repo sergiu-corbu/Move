@@ -9,9 +9,18 @@ import Foundation
 
 class UnlockViewModel: ObservableObject {
     
-    @Published var enteredDigit: Bool = false
     @Published var unlockCode: String = ""
-    //@Published var digits: [
-    private let limit: Int = 1
+    @Published var currentIndex: Int = 0
+    var maxDigits: Int = 4
+    @Published var digit: String = "" {
+        didSet {
+            if digit.count > 1 {
+                digit = String(digit.prefix(1))
+                self.unlockCode += digit
+            }
+        }
+    }
+    @Published var allDigitsCompleted: Bool = false
+    
     
 }

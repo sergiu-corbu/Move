@@ -33,7 +33,7 @@ struct ChangePasswordView: View {
                 .padding(.top, 60)
             inputArea
             Spacer()
-            CallToActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
+            ActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
                 isLoading = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     isLoading = false
@@ -50,17 +50,17 @@ struct ChangePasswordView: View {
     var inputArea: some View {
         
         VStack(alignment: .leading, spacing: 20) {
-            InputField(activeField: $oldPasswordActive, input: $oldPassword, textField: "Old password", image: "", isSecuredField: false, textColor: Color.darkPurple, action: {
+            InputField(activeField: $oldPasswordActive, input: $oldPassword, textField: "Old password", isSecuredField: false, textColor: Color.darkPurple, action: {
                 oldPasswordActive = true
                 newPasswordActive = false
                 confirmPasswordActive = false
             })
-            InputField(activeField: $newPasswordActive, input: $newPassword, textField: "New password", image: "", isSecuredField: false, textColor: Color.darkPurple, action: {
+            InputField(activeField: $newPasswordActive, input: $newPassword, textField: "New password", isSecuredField: false, textColor: Color.darkPurple, action: {
                 oldPasswordActive = false
                 newPasswordActive = true
                 confirmPasswordActive = false
             })
-            InputField(activeField: $confirmPasswordActive, input: $confirmPassword, textField: "Confirm new password", image: "eye-off-img", isSecuredField: true, textColor: Color.darkPurple, action: {
+            InputField(activeField: $confirmPasswordActive, input: $confirmPassword, textField: "Confirm new password", isSecuredField: true, textColor: Color.darkPurple, action: {
                 oldPasswordActive = false
                 newPasswordActive = false
                 confirmPasswordActive = true

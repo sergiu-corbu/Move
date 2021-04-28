@@ -14,26 +14,26 @@ struct UnlockScooterCard: View {
     var body: some View {
         ZStack(alignment: .top) {
             mainBody
-            topLine
+            ScooterElements.topLine
         }
         .cornerRadius(29, corners: [.topLeft, .topRight])
         .background(Color.white)
     }
     
-    var mainBody: some View {
+    private var mainBody: some View {
         ZStack {
             VStack(spacing: 20) {
                 header
                 scooterInfo
                 unlockButtons
             }
-            .padding([.leading, .trailing], 24)
-            scooterImage
+            .padding(.horizontal, 24)
+            ScooterElements.ScooterBattery.init(batteryImage: scooter.batteryImage, battery: scooter.battery)
         }
         .padding(.top, 24)
     }
     
-    var header: some View {
+    private var header: some View {
         HStack {
             Text("You can unlock this scooter\nthrough theese methods: ")
                 .font(.custom(FontManager.Primary.bold, size: 16))
@@ -42,45 +42,33 @@ struct UnlockScooterCard: View {
                 .multilineTextAlignment(.center)
         }
     }
-    var topLine: some View {
-        RoundedRectangle(cornerRadius: 25.0)
-            .fill(Color.coralRed)
-            .frame(width: 72, height: 4)
-    }
-    var scooterInfo: some View {
+
+    private var scooterInfo: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Scooter")
-                    .font(.custom(FontManager.Primary.medium, size: 16))
-                    .opacity(0.6)
-                    .padding(.bottom, 2)
-                Text("#\(scooter.id)")
-                    .font(.custom(FontManager.Primary.bold, size: 32))
+                ScooterElements.scooterTitle
+                ScooterElements.ScooterId.init(id: scooter.id)
+                ScooterElements.ScooterBattery.init(batteryImage: scooter.batteryImage, battery: scooter.battery)
                 HStack {
-                    Image(scooter.batteryImage)
-                    Text("\(scooter.battery)%")
-                        .font(.custom(FontManager.Primary.medium, size: 15))
-                }
-                HStack {
-                    MiniActionButton(image: "bell-img", action: {
+                    MapActionButton(image: "bell-img", action: {
                         
                     })
                     Text("Ring")
                         .font(.custom(FontManager.Primary.medium, size: 14))
                 }
                 HStack {
-                    MiniActionButton(image: "missing", action: {
+                    MapActionButton(image: "missing", action: {
                         
                     })
                     Text("Missing")
                         .font(.custom(FontManager.Primary.medium, size: 14))
                 }
             }
-            .foregroundColor(.darkPurple)
+           
             Spacer()
         }
     }
-    var unlockButtons: some View {
+    private var unlockButtons: some View {
         HStack(spacing: 25) {
             UnlockButton(text: "NFC", action: {})
             UnlockButton(text: "QR", action: {})
@@ -89,16 +77,6 @@ struct UnlockScooterCard: View {
         .padding(.vertical, 10)
     }
     
-    var scooterImage: some View {
-        HStack {
-            Spacer()
-            Image("scooterCard")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 216, height: 216)
-        }
-        .padding(.top, -50)
-    }
 }
 
 

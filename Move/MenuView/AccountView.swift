@@ -40,11 +40,11 @@ struct AccountView: View {
     var inputArea: some View {
         
         VStack(alignment: .leading, spacing: 20) {
-            InputField(activeField: $usernameActive, input: $username, textField: "Username", image: "", isSecuredField: false, textColor: Color.darkPurple, action: {
+            InputField(activeField: $usernameActive, input: $username, textField: "Username", isSecuredField: false, textColor: Color.darkPurple, action: {
                 usernameActive = true
                 emailActive = false
             })
-            InputField(activeField: $emailActive, input: $email, textField: "Email Address", image: "", isSecuredField: false, textColor: Color.darkPurple, action: {
+            InputField(activeField: $emailActive, input: $email, textField: "Email Address", isSecuredField: false, textColor: Color.darkPurple, action: {
                 usernameActive = false
                 emailActive = true
             })
@@ -68,7 +68,7 @@ struct AccountView: View {
                         .font(.custom(FontManager.Primary.medium, size: 14))
                 }
             })
-            CallToActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
+            ActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
                 isLoading = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
                     isLoading = false

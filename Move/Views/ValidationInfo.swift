@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ValidationInfo: View {
-    
     @State var image: Image?
     @State private var showActionSheet: Bool = false
     @State private var showImagePicker: Bool = false
@@ -21,11 +20,8 @@ struct ValidationInfo: View {
     
     var body: some View {
         VStack(spacing: 35) {
-            NavigationBar(title: "Driver License", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: {
-                onBack()
-            }) .padding([.leading, .trailing], 24)
-                .padding(.top, 50)
-                .padding(.bottom, -30)
+            NavigationBar(title: "Driver License", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: { onBack() })
+				.padding(.horizontal, 24)
             GeometryReader { geometry in
                 Image("driver-license-img")
                     .resizable()
@@ -36,15 +32,14 @@ struct ValidationInfo: View {
                     Text("Before you can start riding")
                         .font(.custom(FontManager.Primary.bold, size: 32))
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding([.bottom, .top], 10)
+						.padding(.vertical, 10)
                     Text("Please take a photo or upload the front side of your driving license so we can make sure that it is valid.")
                         .font(.custom(FontManager.Primary.regular, size: 17))
                         .opacity(0.8)
                         .multilineTextAlignment(.leading)
                 Spacer()
-                CallToActionButton(isLoading: isLoading, enabled: true, text: "Add drivig license", action: {
-                    showActionSheet.toggle()
-                }).padding(.bottom)
+                ActionButton(isLoading: isLoading, enabled: true, text: "Add drivig license", action: { showActionSheet.toggle() })
+				.padding(.bottom)
                 .sheet(isPresented: $showImagePicker) {
                     ImagePickerView(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
                 }
@@ -68,24 +63,17 @@ struct ValidationInfo: View {
                     }
                     return ActionSheet(title: Text("Select options"), buttons: [camera, gallery, cancel])
                 })
-            }
-            .padding([.leading, .trailing], 24)
+			}.padding(.horizontal, 24)
         }
         .foregroundColor(.darkPurple)
-        .background(Color.white)
-        .edgesIgnoringSafeArea(.all)
+		.background(Color.white.edgesIgnoringSafeArea(.all))
         .prepareStatusBarConfigurator(statusBarConfigurator)
-        .onAppear{
-            statusBarConfigurator.statusBarStyle = .darkContent
-        }
+        .onAppear{ statusBarConfigurator.statusBarStyle = .darkContent }
     }
+	
     var imageBinding: Binding<Image?> {
-        return Binding(get: {
-            return Image("")
-        }, set: { image in
-            if let _image = image {
-                onNext(_image)
-            }
+        return Binding(get: { return Image("") }, set: { image in
+            if let _image = image { onNext(_image) }
         })
     }
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ValidationSuccess: View {
-    
     let onFindScooters: () -> Void
     
     var body: some View {
@@ -22,10 +21,11 @@ struct ValidationSuccess: View {
                 checkMark
                 mainText
                 Spacer()
-                exploreButton
+				ActionButton(enabled: true, text: "Find scooters", action: { onFindScooters() })
+					.padding(.bottom, 20)
             }
             .multilineTextAlignment(.center)
-            .padding([.leading, .trailing], 24)
+			.padding(.horizontal, 24)
         }
     }
     
@@ -42,10 +42,6 @@ struct ValidationSuccess: View {
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 172, height: 172)
-    }
-    
-    var exploreButton: some View {
-        CallToActionButton(enabled: true, text: "Find scooters", action: { onFindScooters() }).padding(.bottom, 20)
     }
 }
 

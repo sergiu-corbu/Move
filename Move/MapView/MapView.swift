@@ -15,7 +15,7 @@ struct MapView: View {
     @State private var region = MKCoordinateRegion.defaultRegion
     @State private var isUnlocked = false
     
-    func centerViewOnUserLocation() {
+    public func centerViewOnUserLocation() {
         guard let location = mapViewModel.locationManager.location?.coordinate else { print("errorr"); return }
             region = MKCoordinateRegion(center: location, latitudinalMeters: 900, longitudinalMeters: 900)
             scooterViewModel.location = location
@@ -35,7 +35,7 @@ struct MapView: View {
                         }
                 }
             }
-            .edgesIgnoringSafeArea(.bottom )
+            .edgesIgnoringSafeArea(.bottom)
             .onTapGesture {
                 mapViewModel.selectedScooter = nil
             }
@@ -72,17 +72,18 @@ struct MapView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .edgesIgnoringSafeArea(.all)
-                .frame(height: 80)
+                .opacity(0.8)
+                .frame(height: 70)
             HStack {
-                MiniActionButton(image: "menu-img", action: { onMenuButton() })
+                MapActionButton(image: "menu-img", action: { onMenuButton() })
                 Spacer()
                 Text(mapViewModel.cityName)
                     .foregroundColor(.darkPurple)
                     .font(.custom(FontManager.Primary.semiBold, size: 18))
                 Spacer()
-                MiniActionButton(image: mapViewModel.showLocation ? "location-img" : "locationDenied", action: { centerViewOnUserLocation() })
+                MapActionButton(image: mapViewModel.showLocation ? "location-img" : "locationDenied", action: { centerViewOnUserLocation() })
             }
-            .padding([.leading, .trailing], 24)
+            .padding(.horizontal, 24)
         }
     }
 }

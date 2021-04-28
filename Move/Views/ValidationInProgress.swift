@@ -8,28 +8,21 @@
 import SwiftUI
 
 struct ValidationInProgress: View {
-    
     let onExploreButton: () -> Void
-    
+	
     var body: some View {
         VStack {
             Spacer()
             mainText
             secondaryText
             Spacer()
-            exploreButton
+			ActionButton(enabled: true, text: "Explore the app", action: { onExploreButton() }) .padding(.bottom, 20)
         }
         .multilineTextAlignment(.center)
-        .padding([.leading, .trailing], 24)
-        .background(
-            Image("rect-background-img")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-        )
-        .edgesIgnoringSafeArea(.all)
-        
+		.padding(.horizontal, 24)
+		.background(RegisterElements.purpleBackground)
     }
-   
+	
     var mainText: some View {
         Text("We are currently verifying your driving license")
             .foregroundColor(.white)
@@ -44,13 +37,6 @@ struct ValidationInProgress: View {
             .font(.custom(FontManager.Primary.medium, size: 18.0))
             .lineSpacing(5)
             .frame(maxWidth: .infinity)
-    }
-    
-    var exploreButton: some View {
-        CallToActionButton(enabled: true, text: "Explore the app", action: {
-            onExploreButton()
-        })
-        .padding(.bottom, 20)
     }
 }
 
