@@ -202,17 +202,26 @@ struct InputField: View {
 	}
 }
 
-//MARK: Circle
-struct NFCCircle: View {
-	let width: CGFloat
-	let height: CGFloat
-	let opacity: Double
-	var body: some View {
-		Circle()
-			.strokeBorder(Color.white, lineWidth: CGFloat(opacity*3))
-			.opacity(opacity)
-			.clipShape(Circle())
-			.frame(width: width, height: height)
+struct Shapes {
+	static var checkmarkImage: some View {
+		Image("checkmark-img")
+			.resizable()
+			.aspectRatio(contentMode: .fill)
+			.frame(width: 172, height: 172)
+			.padding(.top, 100)
+	}
+	
+	struct NFCCircle: View {
+		let width: CGFloat
+		let height: CGFloat
+		let opacity: Double
+		var body: some View {
+			Circle()
+				.strokeBorder(Color.white, lineWidth: CGFloat(opacity*3))
+				.opacity(opacity)
+				.clipShape(Circle())
+				.frame(width: width, height: height)
+		}
 	}
 }
 

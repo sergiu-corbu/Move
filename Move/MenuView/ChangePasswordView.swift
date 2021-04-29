@@ -30,7 +30,6 @@ struct ChangePasswordView: View {
             NavigationBar(title: "Change password", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: {
                 onBack()
             })
-                .padding(.top, 60)
             inputArea
             Spacer()
             ActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
@@ -39,16 +38,13 @@ struct ChangePasswordView: View {
                     isLoading = false
                 })
                 onSave()
-            }).padding(.bottom, 30)
+            }).padding(.bottom)
         }
-        .padding([.leading, .trailing], 24)
-        .edgesIgnoringSafeArea(.all)
+		.padding(.horizontal, 24)
         .background(Color.white)
-                
     }
     
     var inputArea: some View {
-        
         VStack(alignment: .leading, spacing: 20) {
             InputField(activeField: $oldPasswordActive, input: $oldPassword, textField: "Old password", isSecuredField: false, textColor: Color.darkPurple, action: {
                 oldPasswordActive = true
@@ -65,7 +61,7 @@ struct ChangePasswordView: View {
                 newPasswordActive = false
                 confirmPasswordActive = true
             })
-        }.padding(.top, 50)
+        }.padding(.top, 40)
     }
 }
 

@@ -26,19 +26,15 @@ struct AccountView: View {
     var body: some View {
         VStack(alignment: .leading) {
             NavigationBar(title: "Account", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: { onBack() })
-                .padding(.top, 60)
             inputArea
             Spacer()
             footerArea
         }
-        .padding([.leading, .trailing], 24)
-        .edgesIgnoringSafeArea(.all)
+		.padding(.horizontal, 24)
         .background(Color.white)
-        
     }
     
     var inputArea: some View {
-        
         VStack(alignment: .leading, spacing: 20) {
             InputField(activeField: $usernameActive, input: $username, textField: "Username", isSecuredField: false, textColor: Color.darkPurple, action: {
                 usernameActive = true
@@ -48,8 +44,9 @@ struct AccountView: View {
                 usernameActive = false
                 emailActive = true
             })
-        }.padding(.top, 50)
+        }.padding(.top, 40)
     }
+	
     var footerArea: some View {
         VStack(spacing: 50) {
             Button(action: {
@@ -58,15 +55,11 @@ struct AccountView: View {
                         Session.tokenKey = nil
                         onLogout()
                     } else { print("Error on logout") }
-    
                 }
             }, label: {
-                HStack {
-                    Image("logout-img")
-                    Text("Log out")
-                        .foregroundColor(.red)
-                        .font(.custom(FontManager.Primary.medium, size: 14))
-                }
+				Label("Log out", image: "logout-img")
+					.foregroundColor(.red)
+					.font(.custom(FontManager.Primary.medium, size: 14))
             })
             ActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
                 isLoading = true

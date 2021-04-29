@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UnlockScooterCard: View {
-
+	
     let scooter: Scooter
     
     var body: some View {
@@ -23,62 +23,45 @@ struct UnlockScooterCard: View {
     private var mainBody: some View {
         ZStack {
             VStack(spacing: 20) {
-                header
+				ScooterElements.cardTitle
                 scooterInfo
                 unlockButtons
             }
             .padding(.horizontal, 24)
-            ScooterElements.ScooterBattery.init(batteryImage: scooter.batteryImage, battery: scooter.battery)
         }
         .padding(.top, 24)
     }
-    
-    private var header: some View {
-        HStack {
-            Text("You can unlock this scooter\nthrough theese methods: ")
-                .font(.custom(FontManager.Primary.bold, size: 16))
-                .foregroundColor(Color.darkPurple)
-                .frame(maxWidth: .infinity, maxHeight: 50)
-                .multilineTextAlignment(.center)
-        }
-    }
 
     private var scooterInfo: some View {
-        HStack {
+		HStack(alignment: .bottom) {
             VStack(alignment: .leading) {
                 ScooterElements.scooterTitle
                 ScooterElements.ScooterId.init(id: scooter.id)
-                ScooterElements.ScooterBattery.init(batteryImage: scooter.batteryImage, battery: scooter.battery)
+                ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery)
                 HStack {
-                    MapActionButton(image: "bell-img", action: {
-                        
-                    })
+                    MapActionButton(image: "bell-img", action: {})
                     Text("Ring")
                         .font(.custom(FontManager.Primary.medium, size: 14))
                 }
                 HStack {
-                    MapActionButton(image: "missing", action: {
-                        
-                    })
+                    MapActionButton(image: "missing", action: {})
                     Text("Missing")
                         .font(.custom(FontManager.Primary.medium, size: 14))
                 }
             }
-           
+			ScooterElements.scooterImage
             Spacer()
         }
     }
+	
     private var unlockButtons: some View {
         HStack(spacing: 25) {
             UnlockButton(text: "NFC", action: {})
             UnlockButton(text: "QR", action: {})
             UnlockButton(text: "123", action: {})
-        }
-        .padding(.vertical, 10)
+        }.padding(.vertical, 10)
     }
-    
 }
-
 
 struct UnlockScooterCard_Preview: PreviewProvider {
     static var previews: some View {

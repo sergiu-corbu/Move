@@ -11,6 +11,7 @@ class UnlockViewModel: ObservableObject {
     
     @Published var unlockCode: String = ""
     @Published var currentIndex: Int = 0
+	@Published var isLoading: Bool = false
     var maxDigits: Int = 4
     @Published var digit: String = "" {
         didSet {

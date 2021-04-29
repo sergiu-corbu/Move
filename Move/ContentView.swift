@@ -28,7 +28,6 @@ struct ContentView: View {
 			.onAppear {
 				statusBarConfigurator.statusBarStyle = .darkContent
 			}
-			
 		} else {
 			NavigationStackView(navigationStack: navigationViewModel) {
 				Onboarding(onFinished: {
@@ -118,5 +117,4 @@ struct ContentView: View {
 			))
 		}))
 	}
-	
 }

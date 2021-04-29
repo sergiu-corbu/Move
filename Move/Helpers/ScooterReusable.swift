@@ -19,7 +19,7 @@ struct ScooterElements {
 			.font(.custom(FontManager.Primary.medium, size: 16))
 			.foregroundColor(.darkPurple)
 			.opacity(0.6)
-			.padding(.bottom, 2)
+			.padding(.bottom, 1)
 	}
 	static var scooterImage: some View {
 		HStack {
@@ -27,9 +27,8 @@ struct ScooterElements {
 			Image("scooterCard")
 				.resizable()
 				.aspectRatio(contentMode: .fill)
-				.frame(width: 216, height: 216)
+				.frame(width: 200, height: 200)
 		}
-		.padding(.top, -50) // not gooood!!!!!!!!!!!!!!
 	}
 	
 	struct ScooterId: View {
@@ -49,7 +48,7 @@ struct ScooterElements {
 				Image(batteryImage)
 				Text("\(battery)%")
 					.font(.custom(FontManager.Primary.medium, size: 15))
-			}
+			}.padding(.top, -0.5)
 		}
 	}
 	
@@ -71,6 +70,14 @@ struct ScooterElements {
 				}.padding(.vertical, 20)
 			}.foregroundColor(.white)
 		}
+	}
+	
+	static var cardTitle: some View {
+		Text("You can unlock this scooter\nthrough theese methods: ")
+			.font(.custom(FontManager.Primary.bold, size: 16))
+			.foregroundColor(Color.darkPurple)
+			.frame(maxWidth: .infinity, maxHeight: 50)
+			.multilineTextAlignment(.center)
 	}
 }
 

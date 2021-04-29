@@ -9,7 +9,7 @@ import SwiftUI
 
 //MARK: Buttons
 struct ActionButton: View {
-	var isLoading: Bool? = false
+	var isLoading: Bool = false
 	var enabled: Bool = false
 	let text: String
 	let action: () -> Void
@@ -33,14 +33,12 @@ struct ActionButton: View {
 									.background(RoundedRectangle(cornerRadius: 16.0).fill(enabled ? Color.coralRed : Color.clear))
 									.opacity(enabled ? 1 : 0.3)
 					)
-					if let _isLoading = isLoading {
-						if _isLoading == true {
-							ProgressView()
-								.progressViewStyle(CircularProgressViewStyle(tint: .white))
-								.scaleEffect(1.5)
-								.frame(width: 30, height: 30)
-								.padding(.trailing, 16)
-						}
+					if isLoading == true {
+						ProgressView()
+							.progressViewStyle(CircularProgressViewStyle(tint: .white))
+							.scaleEffect(1.5)
+							.frame(width: 30, height: 30)
+							.padding(.trailing, 16)
 					}
 				}
 			})
