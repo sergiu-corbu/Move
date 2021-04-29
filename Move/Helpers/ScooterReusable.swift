@@ -56,7 +56,6 @@ struct ScooterElements {
 	struct UnlockRow: View {
 		let unlockButton1: UnlockOptionButton
 		let unlockButton2: UnlockOptionButton
-		
 		var body: some View {
 			VStack {
 				Text("Alternately you can unlock using")
@@ -67,10 +66,37 @@ struct ScooterElements {
 					Text("or")
 						.font(.custom(FontManager.Primary.bold, size: 16))
 						.padding(.horizontal, 20)
-					unlockButton1
+					unlockButton2
 					Spacer()
 				}.padding(.vertical, 20)
 			}.foregroundColor(.white)
+		}
+	}
+}
+
+struct UnlockScooterElements {
+	
+	struct Title: View {
+		let title: String
+		var body: some View {
+			Text(title)
+				.font(.custom(FontManager.Primary.bold, size: 32))
+				.foregroundColor(.white)
+				.multilineTextAlignment(.center)
+				.padding(.bottom, 20)
+				.padding(.top, 35)
+		}
+	}
+	
+	struct SubTitle: View {
+		let subTitle: String
+		var body: some View {
+			Text(subTitle)
+				.font(.custom(FontManager.Primary.medium, size: 16))
+				.foregroundColor(.white)
+				.opacity(0.6)
+				.multilineTextAlignment(.center)
+				.lineSpacing(5)
 		}
 	}
 }

@@ -11,15 +11,9 @@ struct ScanQRView: View {
     let action: () -> Void
     var body: some View {
        VStack {
-        
-            NavigationBar(title: "Scan QR", color: .white, avatar: nil, flashLight: true, backButton: "close", action: {action()}).background(Color.yellow)
+            NavigationBar(title: "Scan QR", color: .white, avatar: nil, flashLight: true, backButton: "close", action: {action()})
         }
-       .background(
-            Image("rect-background-img")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
-       )
+		.background(RegisterElements.purpleBackground)
     }
 }
 

@@ -110,7 +110,6 @@ struct Register: View {
         .foregroundColor(.white)
         .padding(.top, 20)
     }
-    
     var safariView: some View {
         SafariView(url: URL(string: "https://tapptitude.com")!, configuration: SafariView.Configuration(entersReaderIfAvailable: false, barCollapsingEnabled: true))
             .dismissButtonStyle(.close)

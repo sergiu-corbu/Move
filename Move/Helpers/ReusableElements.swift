@@ -54,7 +54,7 @@ struct RegisterElements {
 		let questionText: String
 		let solutionText: String
 		let action: () -> Void
-		
+
 		var body: some View {
 			HStack {
 				Text(questionText)
@@ -87,7 +87,7 @@ struct NavigationBar: View {
 		ZStack {
 			HStack {
 				Text(title)
-					.font(.custom(FontManager.Primary.semiBold, size: 18))
+					.font(.custom(FontManager.Primary.semiBold, size: 17))
 					.foregroundColor(color)
 					.frame(maxWidth: .infinity)
 			}
@@ -135,7 +135,7 @@ struct InputField: View {
 		VStack(alignment: .leading, spacing: 0) {
 			if !input.isEmpty || activeField {
 				Text(textField)
-					.foregroundColor(.fadePurple)
+					.foregroundColor(.white)
 					.font(Font.custom(FontManager.Primary.regular, size: 14))
 			}
 			HStack {
@@ -199,6 +199,20 @@ struct InputField: View {
 			
 			
 		}.padding(.vertical, 6)
+	}
+}
+
+//MARK: Circle
+struct NFCCircle: View {
+	let width: CGFloat
+	let height: CGFloat
+	let opacity: Double
+	var body: some View {
+		Circle()
+			.strokeBorder(Color.white, lineWidth: CGFloat(opacity*3))
+			.opacity(opacity)
+			.clipShape(Circle())
+			.frame(width: width, height: height)
 	}
 }
 

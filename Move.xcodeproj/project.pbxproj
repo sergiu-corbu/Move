@@ -56,6 +56,7 @@
 		ECDD400026242985003C659F /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFD26242985003C659F /* MapView.swift */; };
 		ECDD400126242985003C659F /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFF26242985003C659F /* Onboarding.swift */; };
 		ECDD400626242B49003C659F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* UserModel.swift */; };
+		ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D233263A8CE7004C448E /* NFCUnlock.swift */; };
 		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		ECDD3FFD26242985003C659F /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		ECDD3FFF26242985003C659F /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		ECDD400526242B49003C659F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		ECE0D233263A8CE7004C448E /* NFCUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCUnlock.swift; sourceTree = "<group>"; };
 		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 			children = (
 				ECA7B5872637E6D00063C883 /* ScanQRView.swift */,
 				ECA7B5E7263816CD0063C883 /* SNUnlock.swift */,
+				ECE0D233263A8CE7004C448E /* NFCUnlock.swift */,
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
 				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
 				EC58006D263951B200CDF4AC /* StartRideView.swift */,
@@ -399,6 +402,7 @@
 				ECDD400026242985003C659F /* MapView.swift in Sources */,
 				ECDD3FC226242836003C659F /* ContentView.swift in Sources */,
 				EC0394F7262EA9CD003668D2 /* ScooterViewItem.swift in Sources */,
+				ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */,
 				EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */,
 				ECDD400626242B49003C659F /* UserModel.swift in Sources */,
 				ECA7B5E8263816CD0063C883 /* SNUnlock.swift in Sources */,
