@@ -30,7 +30,7 @@ struct ForgotPassword: View {
             Spacer()
         }
         .padding(.horizontal, 24)
-		.background(RegisterElements.purpleBackground)
+		.background(SharedElements.purpleBackground)
         .alert(isPresented: $showAlert) {
             Alert.init(title: Text("Password reset link sent"), message: Text("Please check your inbox or spam for the email containing the password reset link"), dismissButton: .default(Text("OK")))
         }

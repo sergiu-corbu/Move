@@ -20,7 +20,7 @@ struct ContentView: View {
 		
 		if Session.tokenKey != nil {
 			NavigationStackView(navigationStack: navigationViewModel) {
-				MapView(onMenuButton: {
+				MapView(onMenu: {
 					handleOnMenu()
 				})
 			}
@@ -92,7 +92,7 @@ struct ContentView: View {
 	}
 	
 	func handleMap() {
-		navigationViewModel.push(MapView(onMenuButton: {
+		navigationViewModel.push(MapView(onMenu: {
 			navigationViewModel.push(MenuView(onBack: {
 				navigationViewModel.pop()
 			}, onSeeAll: {
@@ -115,6 +115,9 @@ struct ContentView: View {
 				}))
 			}
 			))
-		}))
+		}).prepareStatusBarConfigurator(statusBarConfigurator)
+		.onAppear {
+			statusBarConfigurator.statusBarStyle = .darkContent
+		})
 	}
 }

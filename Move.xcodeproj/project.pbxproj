@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		EC0394F7262EA9CD003668D2 /* ScooterViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */; };
 		EC0B576526259DF8005F16CB /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B576426259DF8005F16CB /* Login.swift */; };
-		EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */; };
 		EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57732625CC73005F16CB /* ValidationSuccess.swift */; };
 		EC0EDD5226369312006B6D9D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = EC0EDD5126369312006B6D9D /* Introspect */; };
 		EC0F8FE22638412C009D8CBB /* UnlockSuccesful.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */; };
@@ -64,7 +63,6 @@
 /* Begin PBXFileReference section */
 		EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterViewItem.swift; sourceTree = "<group>"; };
 		EC0B576426259DF8005F16CB /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
-		EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInProgress.swift; sourceTree = "<group>"; };
 		EC0B57732625CC73005F16CB /* ValidationSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSuccess.swift; sourceTree = "<group>"; };
 		EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockSuccesful.swift; sourceTree = "<group>"; };
 		EC1614142637117C00931AF0 /* AccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 		EC0B576F2625C5BA005F16CB /* LicenceValidation */ = {
 			isa = PBXGroup;
 			children = (
-				EC0B57702625C5D8005F16CB /* ValidationInProgress.swift */,
 				EC5F17982626FB7900A10368 /* ValidationInfo.swift */,
 				ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */,
 				EC0B57732625CC73005F16CB /* ValidationSuccess.swift */,
@@ -196,8 +193,8 @@
 				ECA7B5E7263816CD0063C883 /* SNUnlock.swift */,
 				ECE0D233263A8CE7004C448E /* NFCUnlock.swift */,
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
-				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
 				EC58006D263951B200CDF4AC /* StartRideView.swift */,
+				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
 			);
 			path = UnlockScooter;
 			sourceTree = "<group>";
@@ -396,7 +393,6 @@
 				ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */,
 				EC1614192637117C00931AF0 /* MenuView.swift in Sources */,
 				EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */,
-				EC0B57712625C5D8005F16CB /* ValidationInProgress.swift in Sources */,
 				ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */,
 				EC16141B2637117C00931AF0 /* ChangePasswordView.swift in Sources */,
 				ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */,

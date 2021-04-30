@@ -21,8 +21,8 @@ struct MapView: View {
             scooterViewModel.location = location
     }
     
-    let onMenuButton: () -> Void
-    
+    let onMenu: () -> Void
+
     var body: some View {
         
         ZStack(alignment: .bottom) {
@@ -35,7 +35,7 @@ struct MapView: View {
                         }
                 }
             }
-            .edgesIgnoringSafeArea(.bottom)
+			.edgesIgnoringSafeArea(.bottom)
             .onTapGesture {
                 mapViewModel.selectedScooter = nil
             }
@@ -53,39 +53,19 @@ struct MapView: View {
                     ScooterViewItem(scooter: selectedScooter, isUnlocked: $isUnlocked)
                         .padding([.leading, .trailing], 15)
                     if isUnlocked {
-                        UnlockScooterCard(scooter: selectedScooter)
+						UnlockScooterCard(onQR: {}, onPin: {}, onNFC: {}, scooter: selectedScooter)
                             .cornerRadius(29, corners: [.topLeft, .topRight])
                             .background(Color.white.edgesIgnoringSafeArea(.bottom))
                     }
                 }
             }
             VStack {
-                navigationBarItems
+				SharedElements.MapBarItems(menuAction: {onMenu()}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation() })
                 Spacer()
             }
         }
     }
     
-    var navigationBarItems: some View {
-        ZStack {
-            Image("fademap-img")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .edgesIgnoringSafeArea(.all)
-                .opacity(0.8)
-                .frame(height: 70)
-            HStack {
-                MapActionButton(image: "menu-img", action: { onMenuButton() })
-                Spacer()
-                Text(mapViewModel.cityName)
-                    .foregroundColor(.darkPurple)
-                    .font(.custom(FontManager.Primary.semiBold, size: 18))
-                Spacer()
-                MapActionButton(image: mapViewModel.showLocation ? "location-img" : "locationDenied", action: { centerViewOnUserLocation() })
-            }
-            .padding(.horizontal, 24)
-        }
-    }
 }
 
 extension MKCoordinateRegion {

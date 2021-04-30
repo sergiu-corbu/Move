@@ -10,11 +10,11 @@ import SwiftUI
 struct UnlockSuccesful: View {
     var body: some View {
         ZStack {
-			RegisterElements.purpleBackground
+			SharedElements.purpleBackground
             VStack {
 				UnlockScooterElements.Title(title: "Unlock\nsuccessful")
 					.padding(.top, 120)
-				Shapes.checkmarkImage
+				SharedElements.checkmarkImage
 				UnlockScooterElements.SubTitle(subTitle: "Please respect all the driving regulations\nand other participants in traffic while using\nour scooters.")
 					.padding(.top, 50)
                 Spacer()

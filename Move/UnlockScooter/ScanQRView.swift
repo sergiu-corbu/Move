@@ -13,7 +13,7 @@ struct ScanQRView: View {
        VStack {
             NavigationBar(title: "Scan QR", color: .white, avatar: nil, flashLight: true, backButton: "close", action: {action()})
         }
-		.background(RegisterElements.purpleBackground)
+		.background(SharedElements.purpleBackground)
     }
 }
 

@@ -56,7 +56,8 @@ class API {
     }
     
     static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void) {
-        let path = baseUrl + "scooter/inradius"
+        let path = baseUrl + "scooter/"
+		//scooter/inradius/
         let parameters = ["longitude": coordinates.longitude, "latitude": coordinates.latitude]
         AF.request(path, parameters: parameters).response { response in
             if let data = response.data {

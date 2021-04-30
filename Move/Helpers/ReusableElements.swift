@@ -17,12 +17,7 @@ struct RegisterElements {
             .frame(width: 100, height: 100)
             .padding(.leading, -10)
     }
-    static var purpleBackground: some View {
-        Image("rect-background-img")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .edgesIgnoringSafeArea(.all)
-    }
+   
     struct BigTitle: View {
         let text: String
         var body: some View {
@@ -114,7 +109,7 @@ struct NavigationBar: View {
 				})
 				Spacer()
 			}
-		}
+		}.padding(.top, 10)
 	}
 }
 
@@ -202,7 +197,7 @@ struct InputField: View {
 	}
 }
 
-struct Shapes {
+struct SharedElements {
 	static var checkmarkImage: some View {
 		Image("checkmark-img")
 			.resizable()
@@ -221,6 +216,41 @@ struct Shapes {
 				.opacity(opacity)
 				.clipShape(Circle())
 				.frame(width: width, height: height)
+		}
+	}
+	
+	static var purpleBackground: some View {
+		Image("rect-background-img")
+			.resizable()
+			.aspectRatio(contentMode: .fill)
+			.edgesIgnoringSafeArea(.all)
+	}
+	
+	struct MapBarItems: View {
+		let menuAction: () -> Void
+		let text: String
+		let locationEnabled: Bool
+		let centerLocation: () -> Void
+		
+		var body: some View {
+			ZStack {
+				Image("fademap-img")
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.edgesIgnoringSafeArea(.top)
+					.opacity(0.8)
+					.frame(height: 70)
+				HStack {
+					MapActionButton(image: "menu-img", action: { menuAction() })
+					Spacer()
+					Text(text)
+						.foregroundColor(.darkPurple)
+						.font(.custom(FontManager.Primary.semiBold, size: 18))
+					Spacer()
+					MapActionButton(image: locationEnabled ? "location-img" : "locationDenied", action: { locationEnabled ? centerLocation() : nil })
+				}
+				.padding(.horizontal, 24)
+			}
 		}
 	}
 }

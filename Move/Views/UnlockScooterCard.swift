@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct UnlockScooterCard: View {
+	let onQR: () -> Void
+	let onPin: () -> Void
+	let onNFC: () -> Void
 	
     let scooter: Scooter
     
@@ -38,16 +41,8 @@ struct UnlockScooterCard: View {
                 ScooterElements.scooterTitle
                 ScooterElements.ScooterId.init(id: scooter.id)
                 ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery)
-                HStack {
-                    MapActionButton(image: "bell-img", action: {})
-                    Text("Ring")
-                        .font(.custom(FontManager.Primary.medium, size: 14))
-                }
-                HStack {
-                    MapActionButton(image: "missing", action: {})
-                    Text("Missing")
-                        .font(.custom(FontManager.Primary.medium, size: 14))
-                }
+				ScooterElements.UnlockScooterMiniButton(image: "bell-img", text: "Ring")
+				ScooterElements.UnlockScooterMiniButton(image: "missing", text: "Missing")
             }
 			ScooterElements.scooterImage
             Spacer()
@@ -56,15 +51,15 @@ struct UnlockScooterCard: View {
 	
     private var unlockButtons: some View {
         HStack(spacing: 25) {
-            UnlockButton(text: "NFC", action: {})
-            UnlockButton(text: "QR", action: {})
-            UnlockButton(text: "123", action: {})
+            UnlockButton(text: "NFC", action: {onNFC()})
+            UnlockButton(text: "QR", action: {onQR()})
+            UnlockButton(text: "123", action: {onPin()})
         }.padding(.vertical, 10)
     }
 }
 
 struct UnlockScooterCard_Preview: PreviewProvider {
     static var previews: some View {
-        UnlockScooterCard(scooter: Scooter.init(location: Location(coordinates: [10,2], type: "T"), locked: true, available: true, battery: 65, id: "ABCD", deviceKey: "ewfuhw", addressName: "Strada Plopilor"))
+		UnlockScooterCard(onQR: {}, onPin: {}, onNFC: {}, scooter: Scooter.init(location: Location(coordinates: [10,2], type: "T"), locked: true, available: true, battery: 65, id: "ABCD", deviceKey: "ewfuhw", addressName: "Strada Plopilor"))
     }
 }

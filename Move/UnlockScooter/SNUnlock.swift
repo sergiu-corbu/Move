@@ -21,7 +21,7 @@ struct SNUnlock: View {
             digitRow
 			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {print(unlockViewModel.unlockCode)}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
         }
-		.background(RegisterElements.purpleBackground)
+		.background(SharedElements.purpleBackground)
     }
     
     var digitRow: some View {

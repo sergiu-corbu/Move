@@ -40,7 +40,7 @@ struct Login: View {
             Spacer()
         }
         .padding(.horizontal, 24)
-		.background(RegisterElements.purpleBackground)
+		.background(SharedElements.purpleBackground)
     }
     
     var inputArea: some View {

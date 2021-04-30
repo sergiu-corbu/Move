@@ -79,6 +79,18 @@ struct ScooterElements {
 			.frame(maxWidth: .infinity, maxHeight: 50)
 			.multilineTextAlignment(.center)
 	}
+	
+	struct UnlockScooterMiniButton: View {
+		let image: String
+		let text: String
+		var body: some View {
+			HStack {
+				MapActionButton(image: image, action: {})
+				Text(text)
+					.font(.custom(FontManager.Primary.medium, size: 14))
+			}.padding(.leading, -5)
+		}
+	}
 }
 
 struct UnlockScooterElements {

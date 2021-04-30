@@ -30,7 +30,7 @@ class UserViewModel: ObservableObject {
     }
 	@Published var repeatPasswordError = ""
 	@Published var isLoading: Bool = false
-    
+	
     func isValidPassword() {
         guard !password.isEmpty else {
             passwordError = "Password required"

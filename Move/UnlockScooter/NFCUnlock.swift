@@ -20,9 +20,9 @@ struct NFCUnlock: View {
 			ZStack {
 				Image("logoText")
 				ZStack {
-					Shapes.NFCCircle(width: 350, height: 350, opacity: 0.3)
-					Shapes.NFCCircle(width: 258, height: 258, opacity: 0.6)
-					Shapes.NFCCircle(width: 172, height: 172, opacity: 1)
+					SharedElements.NFCCircle(width: 350, height: 350, opacity: 0.3)
+					SharedElements.NFCCircle(width: 258, height: 258, opacity: 0.6)
+					SharedElements.NFCCircle(width: 172, height: 172, opacity: 1)
 				}
 			}
 			.alignmentGuide(VerticalAlignment.center, computeValue: { dimension in
@@ -40,7 +40,7 @@ struct NFCUnlock: View {
 			}
 		}
 		.padding(.horizontal, 24)
-		.background(RegisterElements.purpleBackground)
+		.background(SharedElements.purpleBackground)
 	}
 }
 
