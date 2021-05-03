@@ -20,7 +20,7 @@ struct ValidationInfo: View {
     
     var body: some View {
         VStack(spacing: 35) {
-            NavigationBar(title: "Driver License", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-purple", action: { onBack() })
+            NavigationBar(title: "Driver License", color: .darkPurple, backButton: "chevron-left-purple", action: { onBack() })
 				.padding(.horizontal, 24)
             GeometryReader { geometry in
                 Image("driver-license-img")

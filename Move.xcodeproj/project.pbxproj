@@ -175,6 +175,7 @@
 		EC7F0EE32630384F004FF766 /* Scooter */ = {
 			isa = PBXGroup;
 			children = (
+				ECA7B5EA263816D30063C883 /* UnlockScooter */,
 				ECC10F48262C988B006FAE6C /* ScooterModel.swift */,
 				ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */,
 				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
@@ -226,7 +227,6 @@
 				EC16140F26370E2500931AF0 /* MapView */,
 				EC16141D2637118500931AF0 /* MenuView */,
 				EC7F0EE32630384F004FF766 /* Scooter */,
-				ECA7B5EA263816D30063C883 /* UnlockScooter */,
 				ECE337BE26243A57009EC353 /* Services */,
 				ECDD3FFE26242985003C659F /* Helpers */,
 				ECDD3FD3262428B3003C659F /* Assets.xcassets */,

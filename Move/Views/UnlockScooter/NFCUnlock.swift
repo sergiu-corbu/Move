@@ -32,7 +32,7 @@ struct NFCUnlock: View {
 				dimension[HorizontalAlignment.center]
 			})
 			VStack {
-				NavigationBar(title: "Bring your phone", color: .white, avatar: nil, flashLight: false, backButton: "close", action: { onClose() })
+				NavigationBar(title: "Bring your phone", color: .white, backButton: "close", action: { onClose() })
 				UnlockScooterElements.Title(title: "NFC unlock")
 				UnlockScooterElements.SubTitle(subTitle: "Hold your phone close to the NFC Tag\nlocated on top of the handlebar of\nyour scooter.")
 				Spacer()

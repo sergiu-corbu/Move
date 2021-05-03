@@ -33,7 +33,7 @@ struct MenuView: View {
         .background(Color.white)
     }
     var navBar: some View {
-        NavigationBar(title: "Hi, Sergiu!", color: .darkPurple, avatar: "avatar-img", flashLight: false, backButton: "chevron-left-purple", action: {
+        NavigationBar(title: "Hi, Sergiu!", color: .darkPurple, avatar: "avatar-img", backButton: "chevron-left-purple", action: {
             onBack()
         })
         

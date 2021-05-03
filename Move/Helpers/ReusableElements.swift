@@ -71,17 +71,17 @@ struct RegisterElements {
 
 // MARK: navigation bar
 struct NavigationBar: View {
-	let title: String
-	let color: Color?
-	let avatar: String?
-	let flashLight: Bool
+	var title: String?
+	let color: Color
+	var avatar: String?
+	var flashLight: Bool?
 	let backButton: String
 	let action: () -> Void
 	
 	var body: some View {
 		ZStack {
 			HStack {
-				Text(title)
+				Text(title ?? "")
 					.font(.custom(FontManager.Primary.semiBold, size: 17))
 					.foregroundColor(color)
 					.frame(maxWidth: .infinity)
@@ -191,8 +191,6 @@ struct InputField: View {
 					.padding(.bottom, activeField ? 2 : 1)
 					.background(activeField ? Color.white : Color.fadePurple)
 			}
-			
-			
 		}.padding(.vertical, 6)
 	}
 }

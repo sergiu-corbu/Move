@@ -10,8 +10,6 @@ import Foundation
 struct UserModel: Codable {
     let email: String
     let username: String
-
-    //var licenseConfirmed: Bool = false
     //var trips: [Trip] = []
     //let profileImage: Image = ""
     

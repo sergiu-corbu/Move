@@ -9,7 +9,6 @@ import Foundation
 
 class UserViewModel: ObservableObject {
     //MARK: Register & Login
-	
 	@Published var email: String = "" {
         didSet {
             if email.isEmpty { emailError = "Email required"}
@@ -26,16 +25,16 @@ class UserViewModel: ObservableObject {
     
 	//MARK: Reset password
     @Published var repeatPassword: String = "" {
-        didSet { isValidPassword() }
+		didSet {
+			if password != repeatPassword { repeatPasswordError = "Passwords doesn't match!" }
+			else { repeatPasswordError = "" }
+		}
     }
-	@Published var repeatPasswordError = ""
+	@Published var repeatPasswordError: String = ""
 	@Published var isLoading: Bool = false
 	
     func isValidPassword() {
-        guard !password.isEmpty else {
-            passwordError = "Password required"
-            return
-        }
+        guard !password.isEmpty else { passwordError = "Password required"; return }
         let showPasswordError = password.passwordValidation() == false
         if showPasswordError {
 			if password.count < 6 { passwordError = "Must be at least 6 characters"
@@ -47,11 +46,10 @@ class UserViewModel: ObservableObject {
     }
     
 	//MARK: validation
-    var isEnabled: Bool { return email != "" }
+    var resetPasswordEnabled: Bool { return email != "" }
     var allfieldsCompletedRegister: Bool { return email != "" && username != "" && password != "" && isLoading == false }
     var allfieldsValidatedRegister: Bool { return emailError.isEmpty && passwordError.isEmpty }
     var allfieldsCompletedLogin: Bool { return email != "" && password != "" && isLoading == false }
     var allfieldsValidatedLogin: Bool { return emailError.isEmpty && passwordError.isEmpty }
-	var resetPasswordisEnabled: Bool { return password != "" && repeatPassword != "" && passwordError.isEmpty}
-    var validateResetPassword: Bool { return password == repeatPassword }
+	var validatePasswords: Bool { return password != "" && repeatPassword != "" && passwordError.isEmpty && repeatPasswordError.isEmpty }
 }

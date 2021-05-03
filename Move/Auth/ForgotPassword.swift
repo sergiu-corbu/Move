@@ -17,10 +17,10 @@ struct ForgotPassword: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: "", color: .darkPurple, avatar: nil, flashLight: false, backButton: "chevron-left-white", action: { onBack() }).padding(.leading, -5)
+            NavigationBar(color: .white, backButton: "chevron-left-white", action: { onBack() }).padding(.leading, -5)
             messageArea
             InputField(activeField: $activeField, input: $userViewModel.email, textField: "Email Address", isSecuredField: false, textColor: .white, error: userViewModel.emailError , action: { activeField = true })
-			ActionButton(enabled: userViewModel.isEnabled && userViewModel.emailError.isEmpty, text: "Send Reset Link", action: {
+			ActionButton(enabled: userViewModel.resetPasswordEnabled && userViewModel.emailError.isEmpty, text: "Send Reset Link", action: {
                 userViewModel.email = ""
                 activeField = false
                 onCompleted()

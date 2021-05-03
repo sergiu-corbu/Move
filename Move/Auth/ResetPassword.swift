@@ -18,16 +18,16 @@ struct ResetPassword: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: "", color: nil, avatar: nil, flashLight: false, backButton: "chevron-left-white", action: { onBack() })
+			NavigationBar(color: .white, backButton: "chevron-left-white", action: { onBack() })
                 .padding(.leading, -5)
 			RegisterElements.BigTitle(text: "Reset password")
             inputField
-			ActionButton(enabled: userViewModel.resetPasswordisEnabled, text: "Reset Password", action: {
-				if userViewModel.validateResetPassword {
+			ActionButton(enabled: userViewModel.validatePasswords, text: "Reset Password", action: {
+				if userViewModel.validatePasswords {
 					userViewModel.password = ""
 					userViewModel.repeatPassword = ""
 				}
-				else { print( "password doesn't match") } //swift messages
+				else { print( "errorh") } //swift messages
 			})
 			.padding(.top, 20)
 			.alert(isPresented: $showAlert) {
