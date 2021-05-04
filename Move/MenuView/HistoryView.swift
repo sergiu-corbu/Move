@@ -24,7 +24,6 @@ struct HistoryView: View {
 }
 
 struct TripDetail: View {
-    
     var body: some View {
         ZStack {
             GeometryReader { geometry in
@@ -37,7 +36,7 @@ struct TripDetail: View {
                                 .opacity(0.15)
                                 .frame(width: geometry.size.width / 1.55)
                             Spacer()
-                        }//.padding(.all, 0.5)
+                        }
                     )
             }
             HStack {

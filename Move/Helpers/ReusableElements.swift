@@ -196,6 +196,11 @@ struct InputField: View {
 }
 
 struct SharedElements {
+	
+	static var whiteRoundedRectangle: some View {
+		Color.white.cornerRadius(32, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.bottom)
+	}
+	
 	static var checkmarkImage: some View {
 		Image("checkmark-img")
 			.resizable()

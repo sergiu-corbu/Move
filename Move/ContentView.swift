@@ -14,15 +14,14 @@ struct ContentView: View {
 	@State private var isLoading = false
 	var navigationViewModel: NavigationStack = NavigationStack()
 	
-	
 	var body: some View {
 	//	SNUnlock(action: {})
 		if Session.tokenKey != nil {
 			NavigationStackView(navigationStack: navigationViewModel) {
 				MapView(onMenu: {
 					handleOnMenu()
-				}, pinUnlock: { navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop() }))})
-			}
+				}, onNFC: {navigationViewModel.push(NFCUnlock(onClose: {navigationViewModel.pop()}, onQRUnlock: {}, onPinUnlock: {}, onCompleted: {}))}, pinUnlock: { navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop() }).prepareStatusBarConfigurator(statusBarConfigurator)
+            .onAppear { statusBarConfigurator.statusBarStyle = .lightContent})}) }
 			.prepareStatusBarConfigurator(statusBarConfigurator)
 			.onAppear {
 				statusBarConfigurator.statusBarStyle = .darkContent
@@ -114,7 +113,7 @@ struct ContentView: View {
 				}))
 			}
 			))
-		}, pinUnlock: { navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop() }))})
+		}, onNFC: {navigationViewModel.push(NFCUnlock(onClose: {navigationViewModel.pop()}, onQRUnlock: {}, onPinUnlock: {}, onCompleted: {}))}, pinUnlock: { navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop() }))})
 		.prepareStatusBarConfigurator(statusBarConfigurator)
 		.onAppear {
 			statusBarConfigurator.statusBarStyle = .darkContent

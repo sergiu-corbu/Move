@@ -43,11 +43,14 @@ struct ScooterElements {
 	struct ScooterBattery: View {
 		let batteryImage: String
 		let battery: Int
+		var dimOpacity: Bool = false
 		var body: some View {
 			HStack {
 				Image(batteryImage)
 				Text("\(battery)%")
 					.font(.custom(FontManager.Primary.medium, size: 15))
+					.foregroundColor(.darkPurple)
+					.opacity(dimOpacity ? 0.6 : 1)
 			}.padding(.top, -0.5)
 		}
 	}
@@ -90,6 +93,82 @@ struct ScooterElements {
 					.font(.custom(FontManager.Primary.medium, size: 14))
 			}.padding(.leading, -5)
 		}
+	}
+	
+	struct EndTripButton: View {
+		let endTrip: () -> Void
+		
+		var body: some View {
+			Button(action: { endTrip() }, label: {
+				HStack {
+					Text("End ride") .foregroundColor(.white) .font(.custom(FontManager.Primary.bold, size: 16))
+				}
+				.frame(width: 153, height: 56)
+				.background(RoundedRectangle(cornerRadius: 16).foregroundColor(.coralRed))
+			})
+		}
+	}
+	
+	struct ActionTripButton: View {
+		let text: String
+		let icon: String
+		let tripAction: () -> Void
+		
+		var body: some View {
+			Button(action: { tripAction() }, label: {
+				HStack { Label(text, image: icon) .foregroundColor(.coralRed) .font(.custom(FontManager.Primary.bold, size: 16)) }
+					.frame(width: 153, height: 56)
+					.background(RoundedRectangle(cornerRadius: 16).strokeBorder(Color.coralRed, lineWidth: 1.2).foregroundColor(.white))
+			})
+		}
+	}
+	
+	struct TripInfo: View {
+		let infoText: String
+		let imageName: String
+		var time: String?
+		var distance: String?
+		
+		var body: some View {
+			VStack(alignment: .leading) {
+				TripItemLabel(infoText: infoText, imageName: imageName)
+				if let time = time {
+					HStack(alignment: .bottom) {
+						Text("\(time)")
+							.font(.custom(FontManager.Primary.bold, size: 32))
+						Text("min")
+							.font(.custom(FontManager.Primary.bold, size: 16))
+							.padding(.bottom, 3.5)
+					}
+				} else if let distance = distance {
+					HStack(alignment: .bottom) {
+						Text("\(distance)")
+							.font(.custom(FontManager.Primary.bold, size: 32))
+						Text("km")
+							.font(.custom(FontManager.Primary.bold, size: 16))
+							.padding(.bottom, 3.5)
+					}
+				}
+			}.foregroundColor(.darkPurple)
+		}
+	}
+	
+	struct TripItemLabel: View {
+		let infoText: String
+		let imageName: String
+		
+		var body: some View {
+			Label(infoText, image: imageName)
+				.font(.custom(FontManager.Primary.medium, size: 16))
+				.opacity(0.6)
+		}
+	}
+
+	static var tripButtons: some View {
+		HStack(spacing: 20) {
+			ScooterElements.ActionTripButton(text: "Lock", icon: "lock-img", tripAction: {})
+			ScooterElements.EndTripButton(endTrip: {})
+		}.padding(.vertical, 20)
 	}
 }
 

@@ -21,6 +21,7 @@ struct MapView: View {
     }
     
     let onMenu: () -> Void
+	let onNFC: () -> Void
 	let pinUnlock: () -> Void
     var body: some View {
         
@@ -36,7 +37,7 @@ struct MapView: View {
             }
 			.edgesIgnoringSafeArea(.all)
             .onTapGesture { mapViewModel.selectedScooter = nil }
-            .onAppear {
+			.onAppear{
                 if mapViewModel.showLocation {
                     centerViewOnUserLocation()
                     DispatchQueue.main.async {
@@ -50,9 +51,7 @@ struct MapView: View {
                         .padding([.leading, .trailing], 15)
 						.animation(.easeIn(duration: 15))
                     if isUnlocked {
-						UnlockScooterCard(onQR: {}, onPin: {pinUnlock()}, onNFC: {}, scooter: selectedScooter)
-                            .cornerRadius(29, corners: [.topLeft, .topRight])
-                            .background(Color.white.edgesIgnoringSafeArea(.bottom))
+						UnlockScooterCard(onQR: {}, onPin: {pinUnlock()}, onNFC: {onNFC()}, scooter: selectedScooter)
                     }
                 }
             }

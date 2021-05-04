@@ -18,9 +18,7 @@ struct UnlockScooterCard: View {
         ZStack(alignment: .top) {
             mainBody
             ScooterElements.topLine
-        }
-        .cornerRadius(29, corners: [.topLeft, .topRight])
-        .background(Color.white)
+		}.background(SharedElements.whiteRoundedRectangle)
     }
     
     private var mainBody: some View {
@@ -29,10 +27,8 @@ struct UnlockScooterCard: View {
 				ScooterElements.cardTitle
                 scooterInfo
                 unlockButtons
-            }
-            .padding(.horizontal, 24)
-        }
-        .padding(.top, 24)
+            }.padding(.horizontal, 24)
+        }.padding(.top, 24)
     }
 
     private var scooterInfo: some View {

@@ -8,7 +8,7 @@
 import Foundation
 
 class UnlockViewModel: ObservableObject {
-    
+	
     @Published var unlockCode: String = ""
 	@Published var isLoading: Bool = false
     let maxPins: Int = 4
@@ -17,12 +17,7 @@ class UnlockViewModel: ObservableObject {
 	@Published var digit2: String = ""
 	@Published var digit3: String = ""
 	@Published var digit4: String = ""
-
-	func submitCode() {
-		if unlockCode.count == maxPins {
-			print(unlockCode)
-			//api call to verify
-		}
+	var allDigits: Bool {
+		return !digit1.isEmpty && !digit2.isEmpty && !digit3.isEmpty && !digit4.isEmpty
 	}
-
 }

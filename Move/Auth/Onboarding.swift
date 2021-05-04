@@ -91,9 +91,9 @@ struct Onboarding: View {
 				}
 				.foregroundColor(.white)
 				.padding(.all, 16)
-				.background(Rectangle()
+				.background(RoundedRectangle(cornerRadius: 16))
 								.foregroundColor(.coralRed)
-								.cornerRadius(16))})
+				})
 		}
 		.padding(.bottom, 40)
 	}

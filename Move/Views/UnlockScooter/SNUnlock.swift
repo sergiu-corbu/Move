@@ -7,8 +7,10 @@
 
 import SwiftUI
 import Introspect
+import CoreLocation
 
 struct SNUnlock: View {
+	@ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
     @ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
     let onClose: () -> Void
 //	let onQR: () -> Void
@@ -21,7 +23,18 @@ struct SNUnlock: View {
 			UnlockScooterElements.Title(title: "Enter the scooter's\nserial number")
 			UnlockScooterElements.SubTitle(subTitle: "You can find it on the\nscooter's front panel").padding(.bottom, 100)
             digitRow
-			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {print(unlockViewModel.unlockCode)}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
+			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
+			Button(action: {
+				if unlockViewModel.allDigits {
+					API.unlockScooterPin(token: Session.tokenKey!) { result in
+						if result == true {
+							print("unlock successfull")
+						} else { print("errooooooooor")}
+					}
+				}
+			}, label: {
+				Text("book scooter")
+			})
         }.background(SharedElements.purpleBackground)
     }
     
@@ -34,6 +47,7 @@ struct SNUnlock: View {
 			DigitField(unlockViewModel: unlockViewModel, digit: $unlockViewModel.digit4)
 		}
 	}
+
 	/* Binding(get: {
 	viewModel.unlockPin
 	}, set: { newValue in
@@ -52,7 +66,7 @@ struct DigitField: View {
 			}
 		}
 	}
-	
+
 	var body: some View {
 		TextField("", text: $digit)
 			.keyboardType(.numberPad)
@@ -68,7 +82,6 @@ struct DigitField: View {
 			})
 			.introspectTextField { textfield in
 				if unlockViewModel.unlockCode.count == 4 {
-					unlockViewModel.submitCode()
 					textfield.resignFirstResponder()
 				}
 			}

@@ -21,7 +21,6 @@
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
 		EC3BA58C2639DB140032A496 /* ButtonsReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ButtonsReusable.swift */; };
 		EC3BA58E2639DBAC0032A496 /* ScooterReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */; };
-		EC58006E263951B200CDF4AC /* StartRideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC58006D263951B200CDF4AC /* StartRideView.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
 		EC7F0ED5262FE81C004FF766 /* ScooterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */; };
@@ -57,7 +56,7 @@
 		ECDD400126242985003C659F /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFF26242985003C659F /* Onboarding.swift */; };
 		ECDD400626242B49003C659F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* UserModel.swift */; };
 		ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D233263A8CE7004C448E /* NFCUnlock.swift */; };
-		ECE0D236263AC810004C448E /* TripDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D235263AC810004C448E /* TripDetailsView.swift */; };
+		ECE0D236263AC810004C448E /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D235263AC810004C448E /* TripDetailView.swift */; };
 		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,7 +74,6 @@
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		EC3BA58B2639DB140032A496 /* ButtonsReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsReusable.swift; sourceTree = "<group>"; };
 		EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterReusable.swift; sourceTree = "<group>"; };
-		EC58006D263951B200CDF4AC /* StartRideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRideView.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterRowView.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
@@ -109,7 +107,7 @@
 		ECDD3FFF26242985003C659F /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		ECDD400526242B49003C659F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		ECE0D233263A8CE7004C448E /* NFCUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCUnlock.swift; sourceTree = "<group>"; };
-		ECE0D235263AC810004C448E /* TripDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailsView.swift; sourceTree = "<group>"; };
+		ECE0D235263AC810004C448E /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
 		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,12 +176,12 @@
 			isa = PBXGroup;
 			children = (
 				ECA7B5EA263816D30063C883 /* UnlockScooter */,
-				ECC10F48262C988B006FAE6C /* ScooterModel.swift */,
-				ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */,
 				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
 				EC7F0ED4262FE81C004FF766 /* ScooterRowView.swift */,
 				EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */,
-				ECE0D235263AC810004C448E /* TripDetailsView.swift */,
+				ECC955412641251700A29D50 /* Trip */,
+				ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */,
+				ECC10F48262C988B006FAE6C /* ScooterModel.swift */,
 			);
 			name = Scooter;
 			path = Views;
@@ -196,10 +194,17 @@
 				ECA7B5E7263816CD0063C883 /* SNUnlock.swift */,
 				ECE0D233263A8CE7004C448E /* NFCUnlock.swift */,
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
-				EC58006D263951B200CDF4AC /* StartRideView.swift */,
 				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
 			);
 			path = UnlockScooter;
+			sourceTree = "<group>";
+		};
+		ECC955412641251700A29D50 /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				ECE0D235263AC810004C448E /* TripDetailView.swift */,
+			);
+			path = Trip;
 			sourceTree = "<group>";
 		};
 		ECDD3FB126242836003C659F = {
@@ -378,12 +383,11 @@
 				EC1614182637117C00931AF0 /* AccountView.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
 				ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */,
-				ECE0D236263AC810004C448E /* TripDetailsView.swift in Sources */,
+				ECE0D236263AC810004C448E /* TripDetailView.swift in Sources */,
 				EC16141A2637117C00931AF0 /* HistoryView.swift in Sources */,
 				ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */,
 				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
-				EC58006E263951B200CDF4AC /* StartRideView.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
 				EC7F0EE52630385C004FF766 /* UnlockScooterCard.swift in Sources */,

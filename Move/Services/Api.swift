@@ -83,4 +83,19 @@ class API {
             } else { print("error on status code")}
         }
     }
+	
+	static func unlockScooterPin(token: String, _ callback: @escaping (Bool) -> Void) {
+		let path = baseUrl + "user/book/code/tosu"
+		let header: HTTPHeaders = ["Authorization": token]
+		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.75614, longitude: 23.595)
+		let parameters = ["long": coordinates.longitude, "lat": coordinates.latitude, "code": 1234]
+		AF.request(path, method: .post, parameters: parameters, headers: header).response { response in
+			if let response = response.response {
+				let statusCode = response.statusCode
+				if statusCode == 200 {
+					callback(true)
+				} else { callback(false)}
+			} else {print("error on unlock pin")}
+		}
+	}
 }
