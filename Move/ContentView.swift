@@ -16,29 +16,28 @@ struct ContentView: View {
 	
 	
 	var body: some View {
-		//ResetPassword(onBack: {}) errorrrrr
-		SNUnlock(action: {})
-//		if Session.tokenKey != nil {
-//			NavigationStackView(navigationStack: navigationViewModel) {
-//				MapView(onMenu: {
-//					handleOnMenu()
-//				})
-//			}
-//			.prepareStatusBarConfigurator(statusBarConfigurator)
-//			.onAppear {
-//				statusBarConfigurator.statusBarStyle = .darkContent
-//			}
-//		} else {
-//			NavigationStackView(navigationStack: navigationViewModel) {
-//				Onboarding(onFinished: {
-//					handleRegister()
-//				})
-//			}
-//			.prepareStatusBarConfigurator(statusBarConfigurator)
-//			.onAppear {
-//				statusBarConfigurator.statusBarStyle = .lightContent
-//			}
-//		}
+	//	SNUnlock(action: {})
+		if Session.tokenKey != nil {
+			NavigationStackView(navigationStack: navigationViewModel) {
+				MapView(onMenu: {
+					handleOnMenu()
+				}, pinUnlock: { navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop() }))})
+			}
+			.prepareStatusBarConfigurator(statusBarConfigurator)
+			.onAppear {
+				statusBarConfigurator.statusBarStyle = .darkContent
+			}
+		} else {
+			NavigationStackView(navigationStack: navigationViewModel) {
+				Onboarding(onFinished: {
+					handleRegister()
+				})
+			}
+			.prepareStatusBarConfigurator(statusBarConfigurator)
+			.onAppear {
+				statusBarConfigurator.statusBarStyle = .lightContent
+			}
+		}
 	}
 	
 	func handleOnMenu() {
@@ -115,7 +114,8 @@ struct ContentView: View {
 				}))
 			}
 			))
-		}).prepareStatusBarConfigurator(statusBarConfigurator)
+		}, pinUnlock: { navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop() }))})
+		.prepareStatusBarConfigurator(statusBarConfigurator)
 		.onAppear {
 			statusBarConfigurator.statusBarStyle = .darkContent
 		})

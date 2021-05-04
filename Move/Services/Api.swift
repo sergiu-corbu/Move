@@ -20,9 +20,8 @@ typealias Result<T> = Swift.Result<T, Error>
 
 class API {
     static let baseUrl: String = "https://escooter-tapp.herokuapp.com/api/"
-
+	
 	static func register(username: String, email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void ) {
-        
         let path = baseUrl + "user/register"
         AF.request( path, method: .post, parameters: [ "email": email, "username": username, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
             if let data = response.data {
@@ -39,7 +38,6 @@ class API {
     }
     
     static func login(email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
-        
         let path = baseUrl + "user/login"
         AF.request(path, method: .post, parameters: [ "email": email, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
             if let data = response.data {
@@ -81,12 +79,8 @@ class API {
                 let statusCode = response.statusCode
                 if statusCode == 200 {
                     callback(true)
-                }
-                else {
-                    callback(false)
-                }
-            }
-            else { print("error on status code")}
+                } else { callback(false) }
+            } else { print("error on status code")}
         }
     }
 }

@@ -14,13 +14,13 @@ struct ValidationInfo: View {
     @State private var showCamera: Bool = false
     @StateObject var statusBarConfigurator = StatusBarConfigurator()
     @Binding var isLoading: Bool
-    
+
     let onBack: () -> Void
     let onNext: (Image) -> Void
     
     var body: some View {
         VStack(spacing: 35) {
-            NavigationBar(title: "Driver License", color: .darkPurple, backButton: "chevron-left-purple", action: { onBack() })
+			NavigationBar(title: "Driver License", color: .darkPurple, backButton: "chevron-left-purple", action: { onBack() })
 				.padding(.horizontal, 24)
             GeometryReader { geometry in
                 Image("driver-license-img")

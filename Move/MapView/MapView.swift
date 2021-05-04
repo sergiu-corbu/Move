@@ -14,7 +14,6 @@ struct MapView: View {
     @ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
     @State private var region = MKCoordinateRegion.defaultRegion
     @State private var isUnlocked = false
-    
     public func centerViewOnUserLocation() {
         guard let location = mapViewModel.locationManager.location?.coordinate else { print("errorr"); return }
             region = MKCoordinateRegion(center: location, latitudinalMeters: 900, longitudinalMeters: 900)
@@ -22,7 +21,7 @@ struct MapView: View {
     }
     
     let onMenu: () -> Void
-
+	let pinUnlock: () -> Void
     var body: some View {
         
         ZStack(alignment: .bottom) {
@@ -35,10 +34,8 @@ struct MapView: View {
                         }
                 }
             }
-			.edgesIgnoringSafeArea(.bottom)
-            .onTapGesture {
-                mapViewModel.selectedScooter = nil
-            }
+			.edgesIgnoringSafeArea(.all)
+            .onTapGesture { mapViewModel.selectedScooter = nil }
             .onAppear {
                 if mapViewModel.showLocation {
                     centerViewOnUserLocation()
@@ -47,20 +44,20 @@ struct MapView: View {
                     }
                 }
             }
-            .animation(.easeIn)
             if let selectedScooter = self.mapViewModel.selectedScooter {
                 ZStack(alignment: .bottom) {
                     ScooterViewItem(scooter: selectedScooter, isUnlocked: $isUnlocked)
                         .padding([.leading, .trailing], 15)
+						.animation(.easeIn(duration: 15))
                     if isUnlocked {
-						UnlockScooterCard(onQR: {}, onPin: {}, onNFC: {}, scooter: selectedScooter)
+						UnlockScooterCard(onQR: {}, onPin: {pinUnlock()}, onNFC: {}, scooter: selectedScooter)
                             .cornerRadius(29, corners: [.topLeft, .topRight])
                             .background(Color.white.edgesIgnoringSafeArea(.bottom))
                     }
                 }
             }
             VStack {
-				SharedElements.MapBarItems(menuAction: {onMenu()}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation() })
+				SharedElements.MapBarItems(menuAction: {onMenu()}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil })
                 Spacer()
             }
         }

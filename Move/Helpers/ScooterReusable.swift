@@ -116,6 +116,7 @@ struct UnlockScooterElements {
 				.opacity(0.6)
 				.multilineTextAlignment(.center)
 				.lineSpacing(5)
+				.fixedSize(horizontal: true, vertical: true)
 		}
 	}
 }

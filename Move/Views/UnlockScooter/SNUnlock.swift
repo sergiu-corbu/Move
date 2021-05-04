@@ -10,18 +10,19 @@ import Introspect
 
 struct SNUnlock: View {
     @ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
-    let action:() -> Void
+    let onClose: () -> Void
+//	let onQR: () -> Void
+//	let onNFC: () -> Void
     //let onCompleted: (String) -> Void
     var body: some View {
         ScrollView(showsIndicators: false) {
-            NavigationBar(title: "Enter serial number", color: .white, backButton: "close", action: { action() })
+            NavigationBar(title: "Enter serial number", color: .white, backButton: "close", action: { onClose() })
                 .padding(.horizontal, 24)
 			UnlockScooterElements.Title(title: "Enter the scooter's\nserial number")
 			UnlockScooterElements.SubTitle(subTitle: "You can find it on the\nscooter's front panel").padding(.bottom, 100)
             digitRow
 			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {print(unlockViewModel.unlockCode)}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
-        }
-		.background(SharedElements.purpleBackground)
+        }.background(SharedElements.purpleBackground)
     }
     
 	var digitRow: some View {
@@ -77,6 +78,6 @@ struct DigitField: View {
 
 struct SNUnlock_Previews: PreviewProvider {
 	static var previews: some View {
-		SNUnlock( action: {})
+		SNUnlock(onClose: {})
 	}
 }

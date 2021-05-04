@@ -36,6 +36,7 @@
 		ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */; };
 		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
 		ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10F48262C988B006FAE6C /* ScooterModel.swift */; };
+		ECD684B026402AA600AD36E0 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD684AF26402AA600AD36E0 /* ErrorAlert.swift */; };
 		ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */; };
 		ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBD26242836003C659F /* AppDelegate.swift */; };
 		ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBF26242836003C659F /* SceneDelegate.swift */; };
@@ -87,6 +88,7 @@
 		ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockViewModel.swift; sourceTree = "<group>"; };
 		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		ECC10F48262C988B006FAE6C /* ScooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterModel.swift; sourceTree = "<group>"; };
+		ECD684AF26402AA600AD36E0 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterViewModel.swift; sourceTree = "<group>"; };
 		ECDD3FBA26242836003C659F /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDD3FBD26242836003C659F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				ECDD3FBD26242836003C659F /* AppDelegate.swift */,
 				ECDD3FBF26242836003C659F /* SceneDelegate.swift */,
 				ECDD3FC126242836003C659F /* ContentView.swift */,
+				ECD684AF26402AA600AD36E0 /* ErrorAlert.swift */,
 				EC0B576726259E06005F16CB /* Auth */,
 				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
 				EC16140F26370E2500931AF0 /* MapView */,
@@ -388,6 +391,7 @@
 				ECA7B5882637E6D00063C883 /* ScanQRView.swift in Sources */,
 				ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */,
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
+				ECD684B026402AA600AD36E0 /* ErrorAlert.swift in Sources */,
 				EC0F8FE22638412C009D8CBB /* UnlockSuccesful.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
 				ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */,

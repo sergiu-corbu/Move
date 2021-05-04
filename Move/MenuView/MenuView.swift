@@ -26,7 +26,6 @@ struct MenuView: View {
                     menuOptions
                     Spacer()
                 }
-                
             }
             .padding([.leading, .trailing], 24)
         }

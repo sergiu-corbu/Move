@@ -86,8 +86,8 @@ struct ScooterViewItem: View {
     }
 }
 
-//struct ScooterViewItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ScooterViewItem(scooter: Scooter(id: "AB23", battery: 60, location: Location(coordinates: [32.1, -23.4], type: "Pin")))
-//    }
-//}
+struct ScooterViewItem_Previews: PreviewProvider {
+    static var previews: some View {
+		ScooterViewItem(scooter: Scooter(location: Location(coordinates: [10,2], type: "t"), locked: true, available: true, battery: 90, id: "asdd", deviceKey: "fsodjn", addressName: nil), isUnlocked: .constant(true))
+    }
+}
