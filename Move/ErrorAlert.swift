@@ -13,9 +13,9 @@ struct ErrorAlert: View {
 	@State var text = NSMutableAttributedString(string: "show the error")
 	
 	var body: some View {
-		
+		EmptyView()
 		//SwiftMessages.show(view: ErrorView(text: $text))
-		ErrorView(text: $text)
+		//ErrorView(text: $text)
 	}
 }
 

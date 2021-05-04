@@ -29,41 +29,28 @@ struct SNUnlock: View {
     
 	var digitRow: some View {
 		HStack {
-		//ForEach(0..<unlockViewModel.maxPins) { index in
-			DigitField(unlockViewModel: unlockViewModel, digit: $unlockViewModel.digit1)
-			DigitField(unlockViewModel: unlockViewModel, digit: $unlockViewModel.digit2)
-			DigitField(unlockViewModel: unlockViewModel, digit: $unlockViewModel.digit3)
-			DigitField(unlockViewModel: unlockViewModel, digit: $unlockViewModel.digit4)
-//				API.unlockScooterPin(token: Session.tokenKey!) { result in
-//					if result == true {
-//						print("unlock successfull")
-//					} else { print("errooooooooor")}
-//				}
+		ForEach(0..<unlockViewModel.maxPins) { index in
+			DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
 		}
 	}
-
-	/* Binding(get: {
-	viewModel.unlockPin
-	}, set: { newValue in
-	viewModel.unlockPin.append(contentsOf: newValue.prefix(1))
-	self.submitCode()
-	}*/
+	}
+	func digitBinding(index: Int) -> Binding<String> {
+		return Binding<String>.init(get: {
+			return String(unlockViewModel.unlockCode[index])
+		}) { newValue in
+			unlockViewModel.unlockCode[index] = newValue
+		}
+	}
 }
 
 struct DigitField: View {
 	
 	@ObservedObject var unlockViewModel: UnlockViewModel
-	@Binding var digit: String {
-		didSet {
-			if digit.count > 1 {
-				digit = String(digit.prefix(1))
-			}
-		}
-	}
-	
-	var unlockApiCall: (() -> Void)?
+	@Binding var digit: String
+	var isSelected: Bool
 
 	var body: some View {
+
 		TextField("", text: $digit)
 			.keyboardType(.numberPad)
 			.frame(width: 52, height: 52)
@@ -73,13 +60,10 @@ struct DigitField: View {
 			.multilineTextAlignment(.center)
 			.clipShape(RoundedRectangle(cornerRadius: 18))
 			.padding(.horizontal, 5)
-			.onChange(of: digit, perform: { _ in
-				unlockViewModel.unlockCode.append(digit)
-			})
 			.introspectTextField { textfield in
-				if unlockViewModel.unlockCode.count == 4 {
-					textfield.resignFirstResponder()
-					print(unlockViewModel.unlockCode)
+				textfield.delegate = self.unlockViewModel
+				if isSelected {
+					textfield.becomeFirstResponder()
 				}
 			}
 	}

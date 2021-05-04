@@ -7,6 +7,11 @@
 
 import MapKit
 import SwiftUI
+enum UnlockType {
+	case code
+	case qr
+	case nfc
+}
 
 struct MapView: View {
     
@@ -14,6 +19,7 @@ struct MapView: View {
     @ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
     @State private var region = MKCoordinateRegion.defaultRegion
     @State private var isUnlocked = false
+	
     public func centerViewOnUserLocation() {
         guard let location = mapViewModel.locationManager.location?.coordinate else { print("errorr"); return }
             region = MKCoordinateRegion(center: location, latitudinalMeters: 900, longitudinalMeters: 900)
@@ -21,6 +27,7 @@ struct MapView: View {
     }
     
     let onMenu: () -> Void
+	let onUnlockType: (UnlockType) -> Void
 	let onNFC: () -> Void
 	let pinUnlock: () -> Void
     var body: some View {
@@ -49,7 +56,7 @@ struct MapView: View {
                         .padding([.leading, .trailing], 15)
 						.animation(.easeIn(duration: 15))
                     if isUnlocked {
-						UnlockScooterCard(onQR: {}, onPin: {pinUnlock()}, onNFC: {onNFC()}, scooter: selectedScooter)
+						UnlockScooterCard(onQR: {}, onPin: {onUnlockType(UnlockType.code)}, onNFC: {onNFC()}, scooter: selectedScooter)
                     }
                 }
             }

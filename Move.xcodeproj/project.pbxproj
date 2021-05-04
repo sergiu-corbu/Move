@@ -152,13 +152,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		EC16140F26370E2500931AF0 /* MapView */ = {
+		EC16140F26370E2500931AF0 /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				ECDD3FFD26242985003C659F /* MapView.swift */,
 				ECA49AB72631F58700D9D701 /* MapViewModel.swift */,
 			);
-			path = MapView;
+			path = Map;
 			sourceTree = "<group>";
 		};
 		EC16141D2637118500931AF0 /* MenuView */ = {
@@ -232,7 +232,7 @@
 				ECD684AF26402AA600AD36E0 /* ErrorAlert.swift */,
 				EC0B576726259E06005F16CB /* Auth */,
 				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
-				EC16140F26370E2500931AF0 /* MapView */,
+				EC16140F26370E2500931AF0 /* Map */,
 				EC16141D2637118500931AF0 /* MenuView */,
 				EC7F0EE32630384F004FF766 /* Scooter */,
 				ECE337BE26243A57009EC353 /* Services */,

@@ -53,6 +53,6 @@ struct ExpandedTripDetailView: View {
 
 struct TripDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-		ExpandedTripDetailView(scooter: Scooter(location: Location(coordinates: [20,0], type: "a"), locked: true, available: true, battery: 90, id: "AVSA", deviceKey: "DQFW", addressName: nil))
+		TripDetailView(scooter: Scooter(location: Location(coordinates: [20,0], type: "a"), locked: true, available: true, battery: 90, id: "AVSA", deviceKey: "DQFW", addressName: nil))
 	}
 }
