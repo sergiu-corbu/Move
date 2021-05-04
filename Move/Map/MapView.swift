@@ -7,6 +7,7 @@
 
 import MapKit
 import SwiftUI
+
 enum UnlockType {
 	case code
 	case qr
@@ -28,8 +29,7 @@ struct MapView: View {
     
     let onMenu: () -> Void
 	let onUnlockType: (UnlockType) -> Void
-	let onNFC: () -> Void
-	let pinUnlock: () -> Void
+	
     var body: some View {
         
         ZStack(alignment: .bottom) {
@@ -56,7 +56,7 @@ struct MapView: View {
                         .padding([.leading, .trailing], 15)
 						.animation(.easeIn(duration: 15))
                     if isUnlocked {
-						UnlockScooterCard(onQR: {}, onPin: {onUnlockType(UnlockType.code)}, onNFC: {onNFC()}, scooter: selectedScooter)
+						UnlockScooterCard(onQR: {}, onPin: {onUnlockType(UnlockType.code)}, onNFC: {}, scooter: selectedScooter)
                     }
                 }
             }

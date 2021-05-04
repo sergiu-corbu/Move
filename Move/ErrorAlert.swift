@@ -8,12 +8,21 @@
 import SwiftUI
 import UIKit
 import SwiftMessages
-
+/*
 struct ErrorAlert: View {
-	@State var text = NSMutableAttributedString(string: "show the error")
+	@State var text = "show the error"
+	@State var showError = false
 	
 	var body: some View {
-		EmptyView()
+		Button(action: {
+			showError.toggle()
+			let banner = UIHostingController(rootView: ErrorAlert())
+		
+		}, label: {
+			VStack {
+				
+			}
+		})
 		//SwiftMessages.show(view: ErrorView(text: $text))
 		//ErrorView(text: $text)
 	}
@@ -25,17 +34,14 @@ struct ErrorAlert_Previews: PreviewProvider {
     }
 }
 
-struct ErrorView: UIViewRepresentable {
-	
-	@Binding var text: NSMutableAttributedString
-	
-	func makeUIView(context: Context) -> UITextView {
-		let view = UITextView()
-		
-		return view
-	}
-	
-	func updateUIView(_ uiView: UITextView, context: Context) {
-		uiView.attributedText = text
-	}
-}
+//class ErrorView: UIViewController {
+//	let errorView: UIView = UIView()
+//
+//	override func viewDidLoad() {
+//		super.viewDidLoad()
+//		let banner = UIHostingController(rootView: ErrorAlert())
+//		addChild(banner)
+//		errorView.addSubview(banner.view)
+//	}
+//}
+*/

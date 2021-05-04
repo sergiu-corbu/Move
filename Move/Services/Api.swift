@@ -65,9 +65,7 @@ class API {
                 } catch (let error) {
                     callback(.failure(error))
                 }
-            } else {
-                callback(.failure(APIError(message: "error while getting scooters")))
-            }
+            } else { callback(.failure(APIError(message: "error while getting scooters"))) }
         }
     }
     
@@ -87,8 +85,9 @@ class API {
 	static func unlockScooterPin(token: String, _ callback: @escaping (Bool) -> Void) {
 		let path = baseUrl + "user/book/code/tosu"
 		let header: HTTPHeaders = ["Authorization": token]
-		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.75614, longitude: 23.595)
-		let parameters = ["long": coordinates.longitude, "lat": coordinates.latitude, "code": 1234]
+		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
+		let parameters = ["long": coordinates.longitude, "lat": coordinates.latitude, "code": "1234"] as [String : Any]
+		
 		AF.request(path, method: .post, parameters: parameters, headers: header).response { response in
 			if let response = response.response {
 				let statusCode = response.statusCode

@@ -9,13 +9,14 @@ import Foundation
 import CoreLocation
 import MapKit
 
-class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject {
+class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITextFieldDelegate {
     
     let locationManager = CLLocationManager()
     @Published var showLocation: Bool = false
     @Published var scooterLocation: String = ""
     @Published var cityName: String = "Allow location"
     @Published var selectedScooter: Scooter?
+	
     override init() {
         super.init()
         checkLocationServices()

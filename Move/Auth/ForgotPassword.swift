@@ -29,6 +29,7 @@ struct ForgotPassword: View {
 			.padding(.top, 20)
             Spacer()
         }
+		.onTapGesture { hideKeyboard() }
         .padding(.horizontal, 24)
 		.background(SharedElements.purpleBackground)
         .alert(isPresented: $showAlert) {

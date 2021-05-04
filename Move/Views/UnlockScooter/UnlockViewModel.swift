@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
@@ -23,7 +24,11 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 		if selectedIndex  < 3 { selectedIndex += 1 }
 		else {
 			textField.resignFirstResponder()
-			//call
+			API.unlockScooterPin(token: Session.tokenKey!) { result in
+				if result {
+					print("going to unlock")
+				} else { print("errorrr")}
+			}
 		}
 		textField.sendActions(for: .editingChanged)
 		return false
