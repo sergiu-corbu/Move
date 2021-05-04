@@ -43,10 +43,9 @@ struct ExpandedTripDetailView: View {
 	var body: some View {
 		VStack(spacing: 24) {
 			NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {})
-			//Spacer()
-			BigCard(infoText: "Battery", imageName: scooter.batteryImage, data: "\(scooter.battery)%")
-			BigCard(infoText: "Travel time", imageName: "time-img", data: "00:12:56")
-			BigCard(infoText: "Distance", imageName: "map-img", data: "2.7 km")
+			ScooterElements.BigCard(infoText: "Battery", imageName: scooter.batteryImage, data: "\(scooter.battery)%")
+			ScooterElements.BigCard(infoText: "Travel time", imageName: "time-img", data: "00:12:56")
+			ScooterElements.BigCard(infoText: "Distance", imageName: "map-img", data: "2.7 km")
 			ScooterElements.tripButtons
 		}.padding(.horizontal, 24)
 	}
@@ -55,29 +54,5 @@ struct ExpandedTripDetailView: View {
 struct TripDetailView_Previews: PreviewProvider {
 	static var previews: some View {
 		ExpandedTripDetailView(scooter: Scooter(location: Location(coordinates: [20,0], type: "a"), locked: true, available: true, battery: 90, id: "AVSA", deviceKey: "DQFW", addressName: nil))
-	}
-}
-
-
-struct BigCard: View {
-	
-	let infoText: String
-	let imageName: String
-	let data: String
-	
-	var body: some View {
-		ZStack {
-			GeometryReader { geometry in
-				RoundedRectangle(cornerRadius: 29)
-					.stroke(Color.lightGray)
-			}
-			VStack(spacing: 20) {
-				ScooterElements.TripItemLabel(infoText: infoText, imageName: imageName)
-				Text(data)
-					.font(.custom(FontManager.Primary.bold, size: 44))
-					.foregroundColor(.darkPurple)
-			}
-			.padding(.vertical, 40)
-		}
 	}
 }

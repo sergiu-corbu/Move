@@ -30,9 +30,7 @@ struct MapView: View {
                 MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0]))
                 {
                     Image("pin-fill-img")
-                        .onTapGesture {
-                            self.mapViewModel.selectScooter(scooter: scooter)
-                        }
+                        .onTapGesture { self.mapViewModel.selectScooter(scooter: scooter) }
                 }
             }
 			.edgesIgnoringSafeArea(.all)
@@ -56,12 +54,11 @@ struct MapView: View {
                 }
             }
             VStack {
-				SharedElements.MapBarItems(menuAction: {onMenu()}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil })
+				SharedElements.MapBarItems(menuAction: {onMenu()}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil } )
                 Spacer()
             }
         }
     }
-    
 }
 
 extension MKCoordinateRegion {

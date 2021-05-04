@@ -24,17 +24,6 @@ struct SNUnlock: View {
 			UnlockScooterElements.SubTitle(subTitle: "You can find it on the\nscooter's front panel").padding(.bottom, 100)
             digitRow
 			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
-			Button(action: {
-				if unlockViewModel.allDigits {
-					API.unlockScooterPin(token: Session.tokenKey!) { result in
-						if result == true {
-							print("unlock successfull")
-						} else { print("errooooooooor")}
-					}
-				}
-			}, label: {
-				Text("book scooter")
-			})
         }.background(SharedElements.purpleBackground)
     }
     
@@ -45,6 +34,11 @@ struct SNUnlock: View {
 			DigitField(unlockViewModel: unlockViewModel, digit: $unlockViewModel.digit2)
 			DigitField(unlockViewModel: unlockViewModel, digit: $unlockViewModel.digit3)
 			DigitField(unlockViewModel: unlockViewModel, digit: $unlockViewModel.digit4)
+//				API.unlockScooterPin(token: Session.tokenKey!) { result in
+//					if result == true {
+//						print("unlock successfull")
+//					} else { print("errooooooooor")}
+//				}
 		}
 	}
 
@@ -66,6 +60,8 @@ struct DigitField: View {
 			}
 		}
 	}
+	
+	var unlockApiCall: (() -> Void)?
 
 	var body: some View {
 		TextField("", text: $digit)
@@ -83,6 +79,7 @@ struct DigitField: View {
 			.introspectTextField { textfield in
 				if unlockViewModel.unlockCode.count == 4 {
 					textfield.resignFirstResponder()
+					print(unlockViewModel.unlockCode)
 				}
 			}
 	}

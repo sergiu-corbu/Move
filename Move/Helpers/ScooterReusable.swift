@@ -170,6 +170,28 @@ struct ScooterElements {
 			ScooterElements.EndTripButton(endTrip: {})
 		}.padding(.vertical, 20)
 	}
+	
+	struct BigCard: View {
+		let infoText: String
+		let imageName: String
+		let data: String
+		
+		var body: some View {
+			ZStack {
+				GeometryReader { geometry in
+					RoundedRectangle(cornerRadius: 29)
+						.stroke(Color.lightGray)
+				}
+				VStack(spacing: 15) {
+					ScooterElements.TripItemLabel(infoText: infoText, imageName: imageName)
+					Text(data)
+						.font(.custom(FontManager.Primary.bold, size: 44))
+						.foregroundColor(.darkPurple)
+				}
+				.padding(.vertical, 40)
+			}
+		}
+	}
 }
 
 struct UnlockScooterElements {
@@ -183,6 +205,7 @@ struct UnlockScooterElements {
 				.multilineTextAlignment(.center)
 				.padding(.bottom, 20)
 				.padding(.top, 35)
+				.fixedSize(horizontal: true, vertical: true)
 		}
 	}
 	
