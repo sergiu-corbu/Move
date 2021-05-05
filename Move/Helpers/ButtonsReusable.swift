@@ -50,13 +50,20 @@ struct ActionButton: View {
 
 struct MapActionButton: View {
 	let image: String
+	var border: Bool = false
 	let action: () -> Void
 	
 	var body: some View {
 		Button(action: { action() }, label: {
 			ZStack {
-				RoundedRectangle(cornerRadius: 13)
-					.foregroundColor(.white)
+				if border {
+					RoundedRectangle(cornerRadius: 13)
+						.strokeBorder(Color.lightGray)
+						.foregroundColor(.white)
+				} else {
+					RoundedRectangle(cornerRadius: 13)
+						.foregroundColor(.white)
+				}
 				Image(image)
 			}
 			.shadow(color: Color(UIColor.systemGray5), radius: 3, x: 5, y: 4)

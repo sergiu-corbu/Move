@@ -76,7 +76,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
         let geocoder = CLGeocoder()
         let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
         geocoder.reverseGeocodeLocation(scooterLocation) { [weak self] (placemarks, error) in
-            guard let self = self else { return }
+           // guard let self = self else { return }
             
             if let error = error { print(error); return }
             

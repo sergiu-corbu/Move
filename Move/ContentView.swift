@@ -39,6 +39,7 @@ struct ContentView: View {
 	}
 	
 	func handleCodeUnlock() {
+		//navigationViewModel.push(TripDetailView(scooter: Scooter(location: Location(coordinates: [20,0], type: "a"), locked: true, available: true, battery: 90, id: "AVSA", deviceKey: "DQFW", addressName: nil)))
 		navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop()}))
 	}
 	

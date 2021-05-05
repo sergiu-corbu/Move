@@ -86,12 +86,14 @@ struct ScooterElements {
 	struct UnlockScooterMiniButton: View {
 		let image: String
 		let text: String
+		var showBorder: Bool = false
 		var body: some View {
 			HStack {
-				MapActionButton(image: image, action: {})
+				MapActionButton(image: image, border: showBorder, action:{})
 				Text(text)
 					.font(.custom(FontManager.Primary.medium, size: 14))
-			}.padding(.leading, -5)
+			}
+			.padding(.leading, -5)
 		}
 	}
 	
@@ -139,7 +141,7 @@ struct ScooterElements {
 						Text("min")
 							.font(.custom(FontManager.Primary.bold, size: 16))
 							.padding(.bottom, 3.5)
-					}
+					}.padding(.top, -5)
 				} else if let distance = distance {
 					HStack(alignment: .bottom) {
 						Text("\(distance)")
@@ -147,7 +149,7 @@ struct ScooterElements {
 						Text("km")
 							.font(.custom(FontManager.Primary.bold, size: 16))
 							.padding(.bottom, 3.5)
-					}
+					}.padding(.top, -5)
 				}
 			}.foregroundColor(.darkPurple)
 		}

@@ -38,8 +38,9 @@ struct UnlockScooterCard: View {
                 ScooterElements.scooterTitle
                 ScooterElements.ScooterId.init(id: scooter.id)
                 ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery)
-				ScooterElements.UnlockScooterMiniButton(image: "bell-img", text: "Ring")
-				ScooterElements.UnlockScooterMiniButton(image: "missing", text: "Missing")
+					.padding(.bottom, 10)
+				ScooterElements.UnlockScooterMiniButton(image: "bell-img", text: "Ring", showBorder: true)
+				ScooterElements.UnlockScooterMiniButton(image: "missing", text: "Missing", showBorder: true)
             }
 			ScooterElements.scooterImage
             Spacer()

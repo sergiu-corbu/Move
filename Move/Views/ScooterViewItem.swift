@@ -48,7 +48,7 @@ struct ScooterViewItem: View {
                 Image(scooter.batteryImage)
                 Text("\(scooter.battery)%")
                     .font(.custom(FontManager.Primary.medium, size: 14))
-			}.padding(.bottom, 25)
+			}.padding(.bottom, 15)
             HStack {
                 MapActionButton(image: "bell-img", action: {
                     //ring scooter

@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct TripDetailView: View {
+	@State var tapped: Bool = false
 	let scooter: Scooter
 	
-    var body: some View {
-		ScrollView{
-			Spacer()
-		ZStack(alignment: .top) {
-			ScooterElements.topLine
-			mainBody
-		}.background(SharedElements.whiteRoundedRectangle)
-		}.background(Color.red)
-    }
+	var body: some View {
+		if tapped {
+			expandedBody
+		} else {
+			ZStack(alignment: .top) {
+				ScooterElements.topLine
+				mainBody
+			}.background(SharedElements.whiteRoundedRectangle)
+		}
+	}
 	
 	var mainBody: some View {
 		VStack(alignment: .leading, spacing: 10) {
@@ -32,6 +34,18 @@ struct TripDetailView: View {
 				ScooterElements.TripInfo(infoText: "Travel time", imageName: "time-img", time: "00:12")
 				ScooterElements.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7")
 			}
+			ScooterElements.tripButtons
+		}
+		.onTapGesture { tapped.toggle() }
+		.padding(.horizontal, 24)
+	}
+	
+	var expandedBody: some View {
+		VStack(spacing: 24) {
+			NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {})
+			ScooterElements.BigCard(infoText: "Battery", imageName: scooter.batteryImage, data: "\(scooter.battery)%")
+			ScooterElements.BigCard(infoText: "Travel time", imageName: "time-img", data: "00:12:56")
+			ScooterElements.BigCard(infoText: "Distance", imageName: "map-img", data: "2.7 km")
 			ScooterElements.tripButtons
 		}.padding(.horizontal, 24)
 	}
