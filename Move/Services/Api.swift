@@ -69,7 +69,8 @@ class API {
         }
     }
     
-    static func logout(token: String, _ callback: @escaping (Bool) -> Void) {
+    static func logout(_ callback: @escaping (Bool) -> Void) {
+		guard let token = Session.tokenKey else { print("invalid token"); return}
         let path = baseUrl + "user/logout"
         let header: HTTPHeaders = ["Authorization": token]
         AF.request(path, method: .delete, headers: header).response { response in
@@ -82,19 +83,35 @@ class API {
         }
     }
 	
-	static func unlockScooterPin(token: String, _ callback: @escaping (Bool) -> Void) {
+	static func unlockScooterPin(code: String, _ callback: @escaping (Result<UnlockResult>) -> Void) {
+		guard let token = Session.tokenKey else { print("invalid token"); return}
+		
 		let path = baseUrl + "user/book/code/tosu"
 		let header: HTTPHeaders = ["Authorization": token]
 		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
-		let parameters = ["long": coordinates.longitude, "lat": coordinates.latitude, "code": "1234"] as [String : Any]
+		let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "code": code]
 		
 		AF.request(path, method: .post, parameters: parameters, headers: header).response { response in
-			if let response = response.response {
-				let statusCode = response.statusCode
-				if statusCode == 200 {
-					callback(true)
-				} else { callback(false)}
+			//print(response)
+			print(response.response!.statusCode)
+			if let response = response.data {
+				do {
+					let result = try JSONDecoder().decode(UnlockResult.self, from: response)
+					callback(.success(result))
+				} catch (let error) { callback(.failure(error)) }
 			} else {print("error on unlock pin")}
 		}
+	}
+	
+//	static func downloadUser(_ callback: @escaping (Result<UserDataModel>)) {
+//
+//	}
+}
+
+
+struct UnlockResult: Codable {
+	let message: String
+	enum CodingKeys: String, CodingKey {
+		case message = "message"
 	}
 }

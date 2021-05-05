@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UnlockScooterCard: View {
+	
 	let onQR: () -> Void
 	let onPin: () -> Void
 	let onNFC: () -> Void

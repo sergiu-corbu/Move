@@ -10,11 +10,13 @@ import Introspect
 import CoreLocation
 
 struct SNUnlock: View {
+	
 	@ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
-    @ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
-	
+	@ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
+
     let onClose: () -> Void
-	
+	//let onFinished: () -> Void
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             NavigationBar(title: "Enter serial number", color: .white, backButton: "close", action: { onClose() })

@@ -50,7 +50,7 @@ struct AccountView: View {
     var footerArea: some View {
         VStack(spacing: 50) {
             Button(action: {
-                API.logout(token: Session.tokenKey!) { (result) in
+                API.logout() { (result) in
                     if result == true {
                         Session.tokenKey = nil
                         onLogout()
