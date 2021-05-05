@@ -14,9 +14,7 @@ class ScooterViewModel: ObservableObject {
     
     var location: CLLocationCoordinate2D? {
         didSet {
-            if oldValue == nil {
-                reloadData()
-            }
+            if oldValue == nil { reloadData() }
         }
     }
     
@@ -28,9 +26,7 @@ class ScooterViewModel: ObservableObject {
     }
     
     func getScooters() {
-        guard let location = self.location else {
-            return
-        }
+        guard let location = self.location else { return }
         API.getScooters(coordinates: location) { result in
             switch result {
                 case .success(let scooters):

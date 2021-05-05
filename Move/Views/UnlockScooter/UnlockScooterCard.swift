@@ -1,5 +1,5 @@
 //
-//  ScooterCard.swift
+//  UnlockScooterCard.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 21.04.2021.

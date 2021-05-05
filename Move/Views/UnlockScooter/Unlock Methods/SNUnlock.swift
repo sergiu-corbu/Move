@@ -15,7 +15,7 @@ struct SNUnlock: View {
 	@ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
 
     let onClose: () -> Void
-	//let onFinished: () -> Void
+	let onFinished: () -> Void
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -26,6 +26,7 @@ struct SNUnlock: View {
             digitRow
 			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
         }
+		.onAppear { unlockViewModel.onFinishedUnlock = onFinished }
 		.onTapGesture { hideKeyboard() }
 		.background(SharedElements.purpleBackground)
     }
@@ -66,11 +67,5 @@ struct DigitField: View {
 				if isSelected { textfield.becomeFirstResponder() }
 				if unlockViewModel.selectedIndex == 3 && unlockViewModel.unlockCode[3] != "" { hideKeyboard() }
 			}
-	}
-}
-
-struct SNUnlock_Previews: PreviewProvider {
-	static var previews: some View {
-		SNUnlock(onClose: {})
 	}
 }

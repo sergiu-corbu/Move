@@ -17,12 +17,8 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 
 	let maxPins: Int = 4
 	var codeString: String = ""
-	//let onFinishedUnlock: () -> Void
-	
-//	init(onFinishedUnlock: @escaping ()-> Void){
-//		self.onFinishedUnlock = onFinishedUnlock
-//	}
-	
+	var onFinishedUnlock: (() -> Void)?
+
 	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		textField.text = string
 		codeString += string
@@ -33,7 +29,7 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 				switch result {
 					case .success(let result):
 						print("\(result)")
-						//self.onFinishedUnlock()
+						self.onFinishedUnlock?()
 					case .failure(let error):
 						print("\(error)")
 				}

@@ -8,18 +8,15 @@
 import SwiftUI
 
 struct HistoryView: View {
-   
     let onBack: () -> Void
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            NavigationBar(title: "History", color: .darkPurple, backButton: "chevron-left-purple", action: {
-                onBack()
-            })
+            NavigationBar(title: "History", color: .darkPurple, backButton: "chevron-left-purple", action: { onBack() })
             TripDetail() // foreach trip in trips...
         }
-        .padding([.leading, .trailing], 24)
-        .background(Color.white)
+		.padding(.horizontal, 24)
+		.background(Color.white.edgesIgnoringSafeArea(.all))
     }
 }
 
@@ -39,70 +36,25 @@ struct TripDetail: View {
                         }
                     )
             }
-            HStack {
+			HStack(alignment: .top) {
                 tripBoundaries
                 Spacer()
                 tripTime
-            }
+            }.padding(.vertical, 10)
         }
     }
     var tripBoundaries: some View {
         VStack(alignment: .leading) {
-            VStack(alignment: .leading) {
-                Text("From")
-                    .foregroundColor(.fadePurple)
-                    .font(.custom(FontManager.Primary.medium, size: 12))
-                Text("9776 Gutkowski Shores Suite 420 ")
-                    .foregroundColor(.darkPurple)
-                    .font(.custom(FontManager.Primary.bold, size: 14))
-                    .multilineTextAlignment(.leading)
-                    .padding(.bottom, 1)
-                    .frame(maxWidth: 180, alignment: .leading)
-                    .lineLimit(2)
-            }
-            VStack(alignment: .leading) {
-                Text("To")
-                    .foregroundColor(.fadePurple)
-                    .font(.custom(FontManager.Primary.medium, size: 12))
-                Text("261 Howell Gardhnkjnjj jjjjjjjjjgh")
-                    .foregroundColor(.darkPurple)
-                    .font(.custom(FontManager.Primary.bold, size: 14))
-                    .frame(maxWidth: 180, alignment: .leading)
-                    .lineLimit(3)
-            }.padding(.bottom, 5)
-        }
-        .padding(.leading, 25)
-        .padding([.top, .bottom], 15)
+			TripReusable.TripLocation(infoText: "From", address: "9776 Gutkowski Shores Suite 420")
+			TripReusable.TripLocation(infoText: "To", address: "261 Howell Gardhnkjnjj jjjjjjjjjgh")
+		}
     }
     
     var tripTime: some View {
         VStack(alignment: .leading) {
-            VStack(alignment: .leading) {
-                Text("Travel time")
-                    .foregroundColor(.fadePurple)
-                    .font(.custom(FontManager.Primary.medium, size: 12))
-                Text("00:42 min")
-                    .foregroundColor(.darkPurple)
-                    .font(.custom(FontManager.Primary.bold, size: 14))
-                    .padding(.bottom, 10)
-                    .frame(maxWidth: 90, alignment: .leading)
-                    .lineLimit(1)
-                Spacer()
-            }
-            VStack(alignment: .leading) {
-                Text("Distance")
-                    .foregroundColor(.fadePurple)
-                    .font(.custom(FontManager.Primary.medium, size: 12))
-                Text("7.8 km")
-                    .foregroundColor(.darkPurple)
-                    .font(.custom(FontManager.Primary.bold, size: 14))
-                    .frame(maxWidth: 80, alignment: .leading)
-                    .lineLimit(1)
-                Spacer()
-            }
-        }
-        .padding(.trailing, 10)
-        .padding([.top, .bottom], 15)
+			TripReusable.TripData(infoText: "Travel time", data: "00:42", showTime: true)
+			TripReusable.TripData(infoText: "Distance", data: "7.8").padding(.top, 16)
+		}
     }
 }
 

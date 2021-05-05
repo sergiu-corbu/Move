@@ -12,13 +12,10 @@ struct StartRide: View {
 	let onStartRide: () -> Void
 	
     var body: some View {
-		ScrollView{
-			Spacer()
-			ZStack(alignment: .top) {
-				ScooterElements.topLine
-				mainBody
-			}.background(SharedElements.whiteRoundedRectangle)
-		}.background(Color.red)
+		ZStack(alignment: .top) {
+			ScooterElements.topLine
+			mainBody
+		}.background(SharedElements.whiteRoundedRectangle)
     }
 	
 	var mainBody: some View {

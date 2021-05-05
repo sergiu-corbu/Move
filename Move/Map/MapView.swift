@@ -28,7 +28,7 @@ struct MapView: View {
     }
     
     let onMenu: () -> Void
-	let onUnlockType: (UnlockType) -> Void
+	let onUnlockScooter: (UnlockType, Scooter) -> Void
 	
     var body: some View {
         
@@ -56,7 +56,7 @@ struct MapView: View {
                         .padding([.leading, .trailing], 15)
 						.animation(.easeIn(duration: 15))
                     if isUnlocked {
-						UnlockScooterCard(onQR: {}, onPin: {onUnlockType(UnlockType.code)}, onNFC: {}, scooter: selectedScooter)
+						UnlockScooterCard(onQR: {}, onPin: {onUnlockScooter(UnlockType.code, selectedScooter)}, onNFC: {}, scooter: selectedScooter)
                     }
                 }
             }

@@ -15,8 +15,8 @@ struct ContentView: View {
 	var body: some View {
 		if Session.tokenKey != nil {
 			NavigationStackView(navigationStack: navigationViewModel) {
-				MapView(onMenu: { handleOnMenu() }) { unlockType in
-					handleUnlockType(type: unlockType)}
+				MapView(onMenu: { handleOnMenu() }) { unlockType, scooter in
+					handleUnlockType(type: unlockType, scooter: scooter)}
 				}}
 		else {
 			NavigationStackView(navigationStack: navigationViewModel) {
@@ -27,10 +27,10 @@ struct ContentView: View {
 		}
 	}
 	
-	func handleUnlockType(type: UnlockType) {
+	func handleUnlockType(type: UnlockType, scooter: Scooter) {
 		switch type {
 			case .code:
-				handleCodeUnlock()
+				handleCodeUnlock(scooter: scooter)
 			case .qr:
 				break
 			case .nfc:
@@ -38,10 +38,20 @@ struct ContentView: View {
 		}
 	}
 	
-	func handleCodeUnlock() {
+	func handleCodeUnlock(scooter: Scooter) {
 		//navigationViewModel.push(TripDetailView(scooter: Scooter(location: Location(coordinates: [20,0], type: "a"), locked: true, available: true, battery: 90, id: "AVSA", deviceKey: "DQFW", addressName: nil)))
-		navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop()}))
+		navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop()}, onFinished: {
+			navigationViewModel.push(UnlockSuccesful())
+			DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
+				navigationViewModel.push(StartRide(scooter: scooter, onStartRide: {
+					//
+				}))
+			})
+			
+		}))
 	}
+	
+	
 	
 	func handleOnMenu() {
 		navigationViewModel.push(MenuView(onBack: { navigationViewModel.pop()},
@@ -70,8 +80,8 @@ struct ContentView: View {
 	}
 	
 	func handleMap() {
-		navigationViewModel.push(MapView(onMenu: { handleOnMenu() }, onUnlockType: { unlockType in
-			handleUnlockType(type: unlockType)
+		navigationViewModel.push(MapView(onMenu: { handleOnMenu() }, onUnlockScooter: { unlockType, scooter in
+			handleUnlockType(type: unlockType, scooter: scooter)
 		}))
 	}
 

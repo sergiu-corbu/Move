@@ -75,8 +75,8 @@ struct NavigationBar: View {
 	let color: Color
 	var avatar: String?
 	var flashLight: Bool?
-	let backButton: String
-	let action: () -> Void
+	var backButton: String?
+	var action: (() -> Void)?
 	
 	var body: some View {
 		ZStack {
@@ -102,13 +102,16 @@ struct NavigationBar: View {
 						.padding(.trailing, 15)
 				}
 			}
-			HStack {
-				Button(action: { action() }, label: {
-					Image(backButton)
-						.padding(.trailing, 15)
-				})
-				Spacer()
+			if let action = action, let backButton = backButton {
+				HStack {
+					Button(action: { action() }, label: {
+						Image(backButton)
+							.padding(.trailing, 15)
+					})
+					Spacer()
+				}
 			}
+			
 		}.padding(.top, 10)
 	}
 }
@@ -257,6 +260,53 @@ struct SharedElements {
 		}
 	}
 }
+
+struct TripReusable {
+	struct TripLocation: View {
+		let infoText: String
+		let address: String
+		var extraPadding: Bool = true
+		var spaceBetween: CGFloat = 0
+		var expandInline: Bool = false
+		var body: some View {
+			VStack(alignment: .leading) {
+				Text(infoText)
+					.foregroundColor(.fadePurple)
+					.font(.custom(FontManager.Primary.medium, size: 12))
+					.padding(.bottom, spaceBetween)
+				Text(address)
+					.foregroundColor(.darkPurple)
+					.font(.custom(FontManager.Primary.bold, size: 14))
+					.frame(maxWidth: expandInline ? .infinity : 180, alignment: .leading)
+					.lineLimit(3)
+			}
+			.padding(.vertical, 7)
+			.padding(.leading, extraPadding ? 25 : 20)
+		}
+	}
+	
+	struct TripData: View {
+		let infoText: String
+		let data: String
+		var showTime: Bool = false
+		
+		var body: some View {
+			VStack(alignment: .leading) {
+				Text(infoText)
+					.foregroundColor(.fadePurple)
+					.font(.custom(FontManager.Primary.medium, size: 12))
+				Text(showTime ? "\(data) km" : "\(data) min")
+					.foregroundColor(.darkPurple)
+					.font(.custom(FontManager.Primary.bold, size: 14))
+					.frame(maxWidth: 80, alignment: .leading)
+					.lineLimit(1)
+			}
+			.padding(.vertical, 7)
+			.padding(.trailing, 10)
+		}
+	}
+}
+
 
 struct Reusable_Previews: PreviewProvider {
 	static var previews: some View {

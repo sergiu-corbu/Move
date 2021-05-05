@@ -107,11 +107,3 @@ class API {
 //
 //	}
 }
-
-
-struct UnlockResult: Codable {
-	let message: String
-	enum CodingKeys: String, CodingKey {
-		case message = "message"
-	}
-}

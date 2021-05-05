@@ -130,6 +130,7 @@ struct ScooterElements {
 		let imageName: String
 		var time: String?
 		var distance: String?
+		var fontSize: CGFloat = 32
 		
 		var body: some View {
 			VStack(alignment: .leading) {
@@ -137,19 +138,23 @@ struct ScooterElements {
 				if let time = time {
 					HStack(alignment: .bottom) {
 						Text("\(time)")
-							.font(.custom(FontManager.Primary.bold, size: 32))
+							.font(.custom(FontManager.Primary.bold, size: fontSize))
 						Text("min")
 							.font(.custom(FontManager.Primary.bold, size: 16))
-							.padding(.bottom, 3.5)
-					}.padding(.top, -5)
+							.padding(.bottom, fontSize == 32 ? 3.5 : 0)
+					}
+					.padding(.leading, fontSize == 32 ? 0 : 35)
+					.padding(.top, -5)
 				} else if let distance = distance {
 					HStack(alignment: .bottom) {
 						Text("\(distance)")
-							.font(.custom(FontManager.Primary.bold, size: 32))
+							.font(.custom(FontManager.Primary.bold, size: fontSize))
 						Text("km")
 							.font(.custom(FontManager.Primary.bold, size: 16))
-							.padding(.bottom, 3.5)
-					}.padding(.top, -5)
+							.padding(.bottom, fontSize == 32 ? 3.5 : 0)
+					}
+					.padding(.leading, fontSize == 32 ? 0 : 35)
+					.padding(.top, -5)
 				}
 			}.foregroundColor(.darkPurple)
 		}

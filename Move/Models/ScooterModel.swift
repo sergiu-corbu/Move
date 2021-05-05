@@ -18,7 +18,6 @@ struct Location: Codable {
     }
 }
 
-
 struct Scooter: Identifiable, Codable {
     let location: Location
     let locked: Bool
@@ -56,3 +55,9 @@ struct Scooter: Identifiable, Codable {
     }
 }
 
+struct UnlockResult: Codable {
+	let message: String
+	enum CodingKeys: String, CodingKey {
+		case message = "message"
+	}
+}

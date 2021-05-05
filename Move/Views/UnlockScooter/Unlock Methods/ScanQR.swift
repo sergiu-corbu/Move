@@ -1,5 +1,5 @@
 //
-//  ScanQRView.swift
+//  ScanQR.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 27.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScanQRView: View {
+struct ScanQR: View {
     let action: () -> Void
     var body: some View {
        VStack {
@@ -17,8 +17,8 @@ struct ScanQRView: View {
     }
 }
 
-struct ScanQRView_Previews: PreviewProvider {
+struct ScanQR_Previews: PreviewProvider {
     static var previews: some View {
-        ScanQRView(action: {})
+        ScanQR(action: {})
     }
 }
