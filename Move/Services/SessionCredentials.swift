@@ -9,11 +9,13 @@ import Foundation
 
 struct Session {
     static var tokenKey: String? {
-        get {
-            return UserDefaults.standard.string(forKey: "tokenKey")
-        } set {
-            UserDefaults.standard.setValue(newValue, forKey: "tokenKey")
-        }
+        get { return UserDefaults.standard.string(forKey: "tokenKey") }
+		set { UserDefaults.standard.setValue(newValue, forKey: "tokenKey") }
     }
+	
+	static var username: String? {
+		get { return UserDefaults.standard.string(forKey: "username")}
+		set {UserDefaults.standard.setValue(newValue, forKey: "username")}
+	}
 }
 

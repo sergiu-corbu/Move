@@ -58,6 +58,7 @@
 		ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D233263A8CE7004C448E /* NFCUnlock.swift */; };
 		ECE0D236263AC810004C448E /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D235263AC810004C448E /* TripDetailView.swift */; };
 		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
+		ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFCA8492642AB5100674750 /* StartRide.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		ECE0D233263A8CE7004C448E /* NFCUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCUnlock.swift; sourceTree = "<group>"; };
 		ECE0D235263AC810004C448E /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
 		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		ECFCA8492642AB5100674750 /* StartRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRide.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 			children = (
 				ECA7B5872637E6D00063C883 /* ScanQRView.swift */,
 				ECA7B5E7263816CD0063C883 /* SNUnlock.swift */,
+				ECFCA8492642AB5100674750 /* StartRide.swift */,
 				ECE0D233263A8CE7004C448E /* NFCUnlock.swift */,
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
 				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
@@ -395,6 +398,7 @@
 				ECA7B5882637E6D00063C883 /* ScanQRView.swift in Sources */,
 				ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */,
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
+				ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */,
 				ECD684B026402AA600AD36E0 /* ErrorAlert.swift in Sources */,
 				EC0F8FE22638412C009D8CBB /* UnlockSuccesful.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,

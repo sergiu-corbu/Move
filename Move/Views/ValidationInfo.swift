@@ -12,7 +12,6 @@ struct ValidationInfo: View {
     @State private var showActionSheet: Bool = false
     @State private var showImagePicker: Bool = false
     @State private var showCamera: Bool = false
-    @StateObject var statusBarConfigurator = StatusBarConfigurator()
     @Binding var isLoading: Bool
 
     let onBack: () -> Void
@@ -29,17 +28,10 @@ struct ValidationInfo: View {
                     .aspectRatio(contentMode: .fill)
             }
             VStack(alignment: .leading) {
-                    Text("Before you can start riding")
-                        .font(.custom(FontManager.Primary.bold, size: 32))
-                        .fixedSize(horizontal: false, vertical: true)
-						.padding(.vertical, 10)
-                    Text("Please take a photo or upload the front side of your driving license so we can make sure that it is valid.")
-                        .font(.custom(FontManager.Primary.regular, size: 17))
-                        .opacity(0.8)
-                        .multilineTextAlignment(.leading)
-                Spacer()
+				UnlockScooterElements.Title(title: "Before you can start\nriding", purpleColor: true, customPadding: true, customAlignment: true)
+				UnlockScooterElements.SubTitle(subTitle: "Please take a photo or upload the front side of your driving license so we can make sure that it is valid.", purpleColor: true, customAlignment: true, customOpacity: true)
+				Spacer()
                 ActionButton(isLoading: isLoading, enabled: true, text: "Add drivig license", action: { showActionSheet.toggle() })
-				.padding(.bottom)
                 .sheet(isPresented: $showImagePicker) {
                     ImagePickerView(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
                 }
@@ -49,13 +41,11 @@ struct ValidationInfo: View {
                         showCamera = true
                         showActionSheet = false
                     }
-                    
                     let gallery = ActionSheet.Button.default(Text("Select from gallery")) {
                         showImagePicker = true
                         showCamera = false
                         showActionSheet = false
                     }
-                    
                     let cancel = ActionSheet.Button.cancel(Text("Cancel").foregroundColor(.red)) {
                         showActionSheet = false
                         showImagePicker = false
@@ -64,16 +54,12 @@ struct ValidationInfo: View {
                     return ActionSheet(title: Text("Select options"), buttons: [camera, gallery, cancel])
                 })
 			}.padding(.horizontal, 24)
-        }
-        .foregroundColor(.darkPurple)
-		.background(Color.white.edgesIgnoringSafeArea(.all))
-        .prepareStatusBarConfigurator(statusBarConfigurator)
-        .onAppear{ statusBarConfigurator.statusBarStyle = .darkContent }
+		}.background(Color.white.edgesIgnoringSafeArea(.all))
     }
 	
     var imageBinding: Binding<Image?> {
         return Binding(get: { return Image("") }, set: { image in
-            if let _image = image { onNext(_image) }
+            if let image = image { onNext(image) }
         })
     }
 }

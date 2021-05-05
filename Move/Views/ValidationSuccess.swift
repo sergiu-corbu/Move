@@ -11,18 +11,16 @@ struct ValidationSuccess: View {
     let onFindScooters: () -> Void
     
     var body: some View {
-        ZStack {
-			SharedElements.purpleBackground
-            VStack {
-				SharedElements.checkmarkImage.padding(.top, 70)
-				UnlockScooterElements.Title(title: "We've succesfully validated your driving license!")
-                Spacer()
-				ActionButton(enabled: true, text: "Find scooters", action: { onFindScooters() })
-					.padding(.bottom, 20)
-            }
-            .multilineTextAlignment(.center)
-			.padding(.horizontal, 24)
+        VStack {
+			SharedElements.checkmarkImage.padding(.top, 70)
+			UnlockScooterElements.Title(title: "We've succesfully validated your driving license!")
+			Spacer()
+			ActionButton(enabled: true, text: "Find scooters", action: { onFindScooters() })
+				.padding(.bottom, 20)
         }
+		.multilineTextAlignment(.center)
+		.padding(.horizontal, 24)
+		.background(SharedElements.purpleBackground)
     }
 }
 

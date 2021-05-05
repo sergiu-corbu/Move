@@ -8,55 +8,47 @@
 import SwiftUI
 
 struct ScooterViewItem: View {
-    //@State private var isUnlocked = false
     let scooter: Scooter
     @Binding var isUnlocked: Bool
+	
     var body: some View {
         ZStack {
-            ZStack(alignment: .topLeading) {
-                RoundedRectangle(cornerRadius: 29)
-                    .foregroundColor(.white)
-                RoundedRectangle(cornerRadius: 50)
-                    .fill(Color.fadePurple)
-                    .frame(width: 140, height: 130)
-                    .offset(x: -20, y: -25)
-                    .rotationEffect(.degrees(24.0))
-                    .opacity(0.15)
-                    .clipped()
-            }
-            VStack {
-                Spacer()
-                HStack(alignment: .bottom) {
-                    Image("scooterdetail-img")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 100, height: 130)
-                    scooterInfo
-                }
-                location
-                unlockButton
-            }
-            .padding([.leading, .trailing], 24)
+            customBackground
+            mainBody
         }
         .frame(width: 250, height: 315)
         .clipShape(RoundedRectangle(cornerRadius: 29))
     }
-    
+	
+	var mainBody: some View {
+		VStack {
+			Spacer()
+			HStack(alignment: .bottom) {
+				Image("scooterdetail-img")
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(width: 100, height: 130)
+				scooterInfo
+			}
+			location
+			ActionButton(isLoading: false, enabled: true, text: "Unlock", action: { isUnlocked.toggle()})
+				.padding(.top)
+		}.padding(.horizontal, 24)
+	}
+	
     var scooterInfo: some View {
-        
-        VStack(alignment: .trailing) {
+		VStack(alignment: .trailing, spacing: 7) {
             Text("Scooter")
-                .font(.custom(FontManager.Primary.medium, size: 16))
+                .font(.custom(FontManager.Primary.medium, size: 14))
                 .opacity(0.6)
             Text("#\(scooter.id)")
-                .font(.custom(FontManager.Primary.bold, size: 22))
+                .font(.custom(FontManager.Primary.bold, size: 20))
                 .lineLimit(1)
             HStack {
                 Image(scooter.batteryImage)
                 Text("\(scooter.battery)%")
-                    .font(.custom(FontManager.Primary.medium, size: 16))
-            }
-            
+                    .font(.custom(FontManager.Primary.medium, size: 14))
+			}.padding(.bottom, 25)
             HStack {
                 MapActionButton(image: "bell-img", action: {
                     //ring scooter
@@ -65,15 +57,7 @@ struct ScooterViewItem: View {
                     //open maps & navigate
                 })
             }
-        }
-        .foregroundColor(.darkPurple)
-    }
-    
-    var unlockButton: some View {
-        ActionButton(isLoading: false, enabled: true, text: "Unlock", action: {
-            isUnlocked.toggle()
-        })
-        .padding(.top)
+        }.foregroundColor(.darkPurple)
     }
     
     var location: some View {
@@ -84,6 +68,20 @@ struct ScooterViewItem: View {
                 .font(.custom(FontManager.Primary.medium, size: 16))
         }.padding(.top)
     }
+	
+	var customBackground: some View {
+		ZStack(alignment: .topLeading) {
+			RoundedRectangle(cornerRadius: 29)
+				.foregroundColor(.white)
+			RoundedRectangle(cornerRadius: 50)
+				.fill(Color.fadePurple)
+				.frame(width: 140, height: 130)
+				.offset(x: -20, y: -25)
+				.rotationEffect(.degrees(24.0))
+				.opacity(0.15)
+				.clipped()
+		}
+	}
 }
 
 struct ScooterViewItem_Previews: PreviewProvider {

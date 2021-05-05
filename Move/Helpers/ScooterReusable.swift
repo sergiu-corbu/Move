@@ -198,27 +198,33 @@ struct UnlockScooterElements {
 	
 	struct Title: View {
 		let title: String
+		var purpleColor: Bool = false
+		var customPadding: Bool = false
+		var customAlignment: Bool = false
 		var body: some View {
 			Text(title)
 				.font(.custom(FontManager.Primary.bold, size: 32))
-				.foregroundColor(.white)
-				.multilineTextAlignment(.center)
-				.padding(.bottom, 20)
-				.padding(.top, 35)
-				.fixedSize(horizontal: true, vertical: true)
+				.foregroundColor(purpleColor ? .darkPurple : .white)
+				.multilineTextAlignment(customAlignment ? .leading : .center)
+				.padding(.bottom, customPadding ? 10 : 20)
+				.padding(.top, customPadding ? 10 : 35)
+				.fixedSize(horizontal: false, vertical: true)
 		}
 	}
 	
 	struct SubTitle: View {
 		let subTitle: String
+		var purpleColor: Bool = false
+		var customAlignment: Bool = false
+		var customOpacity: Bool = false
 		var body: some View {
 			Text(subTitle)
 				.font(.custom(FontManager.Primary.medium, size: 16))
-				.foregroundColor(.white)
-				.opacity(0.6)
-				.multilineTextAlignment(.center)
+				.foregroundColor(purpleColor ? .darkPurple : .white)
+				.multilineTextAlignment(customAlignment ? .leading : .center)
+				.opacity(customOpacity ? 0.7 : 0.6)
 				.lineSpacing(5)
-				.fixedSize(horizontal: true, vertical: true)
+				.fixedSize(horizontal: false, vertical: true)
 		}
 	}
 }

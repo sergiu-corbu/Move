@@ -44,7 +44,7 @@ struct ActionButton: View {
 			})
 			.disabled(!enabled)
 		}
-		.padding(.bottom, 20)
+		.padding(.vertical)
 	}
 }
 

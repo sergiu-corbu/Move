@@ -71,6 +71,7 @@ struct Register: View {
                 switch result {
                     case .success(let result):
                         Session.tokenKey = result.token
+						Session.username = result.user.username
                         onRegisterComplete()
                         userViewModel.isLoading = false
                     case .failure(let error):
