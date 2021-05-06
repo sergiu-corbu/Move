@@ -112,7 +112,7 @@ struct NavigationBar: View {
 				}
 			}
 			
-		}.padding(.top, 10)
+		}//.padding(.top, 10)
 	}
 }
 

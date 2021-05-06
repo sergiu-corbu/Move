@@ -10,6 +10,7 @@ import NavigationStack
 
 struct ContentView: View {
 	@State private var isLoading = false
+	@StateObject var tripViewModel: TripViewModel = TripViewModel()
 	var navigationViewModel: NavigationStack = NavigationStack()
 	
 	var body: some View {
@@ -54,8 +55,9 @@ struct ContentView: View {
 	
 	
 	func handleOnMenu() {
-		navigationViewModel.push(MenuView(onBack: { navigationViewModel.pop()},
-										  onSeeAll: { navigationViewModel.push(HistoryView(onBack: { navigationViewModel.pop() }))
+		
+		navigationViewModel.push(MenuView(tripViewModel: tripViewModel, onBack: { navigationViewModel.pop()},
+										  onSeeAll: { navigationViewModel.push(HistoryView( tripViewModel: tripViewModel, onBack: { navigationViewModel.pop() }))
 										  }, onAccount: { navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() },
 										onLogout: { navigationViewModel.push(Onboarding(onFinished: {handleRegister()})) },
 										onSave: { navigationViewModel.pop() })) },

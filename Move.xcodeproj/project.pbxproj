@@ -19,7 +19,7 @@
 		EC16143F2637148000931AF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC16143E2637148000931AF0 /* LaunchScreen.storyboard */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
-		EC3BA58C2639DB140032A496 /* ButtonsReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ButtonsReusable.swift */; };
+		EC3BA58C2639DB140032A496 /* ReusableButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ReusableButtons.swift */; };
 		EC3BA58E2639DBAC0032A496 /* ScooterReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
@@ -36,6 +36,7 @@
 		ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10F48262C988B006FAE6C /* ScooterModel.swift */; };
 		ECD684B026402AA600AD36E0 /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD684AF26402AA600AD36E0 /* ErrorAlert.swift */; };
 		ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */; };
+		ECDAF11E2643F1C4004FF94F /* TripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */; };
 		ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBD26242836003C659F /* AppDelegate.swift */; };
 		ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FBF26242836003C659F /* SceneDelegate.swift */; };
 		ECDD3FC226242836003C659F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FC126242836003C659F /* ContentView.swift */; };
@@ -74,7 +75,7 @@
 		EC16143E2637148000931AF0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
-		EC3BA58B2639DB140032A496 /* ButtonsReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsReusable.swift; sourceTree = "<group>"; };
+		EC3BA58B2639DB140032A496 /* ReusableButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableButtons.swift; sourceTree = "<group>"; };
 		EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterReusable.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		ECC10F48262C988B006FAE6C /* ScooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterModel.swift; sourceTree = "<group>"; };
 		ECD684AF26402AA600AD36E0 /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterViewModel.swift; sourceTree = "<group>"; };
+		ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewModel.swift; sourceTree = "<group>"; };
 		ECDD3FBA26242836003C659F /* Move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Move.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDD3FBD26242836003C659F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECDD3FBF26242836003C659F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,10 +169,11 @@
 		EC16141D2637118500931AF0 /* MenuView */ = {
 			isa = PBXGroup;
 			children = (
-				EC1614142637117C00931AF0 /* AccountView.swift */,
-				EC1614172637117C00931AF0 /* ChangePasswordView.swift */,
-				EC1614162637117C00931AF0 /* HistoryView.swift */,
 				EC1614152637117C00931AF0 /* MenuView.swift */,
+				EC1614142637117C00931AF0 /* AccountView.swift */,
+				EC1614162637117C00931AF0 /* HistoryView.swift */,
+				EC1614172637117C00931AF0 /* ChangePasswordView.swift */,
+				ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */,
 			);
 			path = MenuView;
 			sourceTree = "<group>";
@@ -264,7 +267,7 @@
 				ECDD3FEA26242970003C659F /* Extensions.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
 				EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */,
-				EC3BA58B2639DB140032A496 /* ButtonsReusable.swift */,
+				EC3BA58B2639DB140032A496 /* ReusableButtons.swift */,
 				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
 				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
@@ -391,7 +394,7 @@
 			files = (
 				ECDD3FBE26242836003C659F /* AppDelegate.swift in Sources */,
 				ECDD3FC026242836003C659F /* SceneDelegate.swift in Sources */,
-				EC3BA58C2639DB140032A496 /* ButtonsReusable.swift in Sources */,
+				EC3BA58C2639DB140032A496 /* ReusableButtons.swift in Sources */,
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
 				EC1614182637117C00931AF0 /* AccountView.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
@@ -426,6 +429,7 @@
 				ECDD400026242985003C659F /* MapView.swift in Sources */,
 				ECDD3FC226242836003C659F /* ContentView.swift in Sources */,
 				EC0394F7262EA9CD003668D2 /* ScooterViewItem.swift in Sources */,
+				ECDAF11E2643F1C4004FF94F /* TripViewModel.swift in Sources */,
 				ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */,
 				EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */,
 				ECDD400626242B49003C659F /* UserModel.swift in Sources */,

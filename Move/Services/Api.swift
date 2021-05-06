@@ -86,7 +86,7 @@ class API {
 	static func unlockScooterPin(code: String, _ callback: @escaping (Result<UnlockResult>) -> Void) {
 		guard let token = Session.tokenKey else { print("invalid token"); return}
 		
-		let path = baseUrl + "user/book/code/tosu"
+		let path = baseUrl + "user/book/code/g6i6"
 		let header: HTTPHeaders = ["Authorization": token]
 		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
 		let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "code": code]
@@ -97,13 +97,27 @@ class API {
 			if let response = response.data {
 				do {
 					let result = try JSONDecoder().decode(UnlockResult.self, from: response)
-					callback(.success(result))
+					if result.message == "started ride booking" {
+						callback(.success(result))
+					} else { print("scooter is already booked") }
 				} catch (let error) { callback(.failure(error)) }
 			} else {print("error on unlock pin")}
 		}
 	}
 	
-//	static func downloadUser(_ callback: @escaping (Result<UserDataModel>)) {
-//
-//	}
+	static func downloadTrips(_ callback: @escaping (Result<[Trip]>) -> Void) {
+		guard let token = Session.tokenKey else { print("invalid token"); return }
+		
+		let path = baseUrl + "user/book/0/10"
+		let header: HTTPHeaders = ["Authorization": token]
+		AF.request(path, method: .get, headers: header).response { response in
+			if let response = response.data {
+				do {
+					let result = try JSONDecoder().decode([Trip].self, from: response)
+					callback(.success(result))
+				} catch (let error) { callback(.failure(error)) }
+			} else { print("error on api call")}
+		}
+
+	}
 }

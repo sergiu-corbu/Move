@@ -1,5 +1,5 @@
 //
-//  ButtonsReusable.swift
+//  ReusableButtons.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 28.04.2021.
@@ -11,6 +11,7 @@ import SwiftUI
 struct ActionButton: View {
 	var isLoading: Bool = false
 	var enabled: Bool = false
+	var isBlackBackground: Bool = false
 	let text: String
 	let action: () -> Void
 	
@@ -23,14 +24,18 @@ struct ActionButton: View {
 					HStack {
 						Text(text)
 							.foregroundColor(enabled ? .white : .fadePurple)
-							.font(enabled ? Font.custom(FontManager.Primary.bold, size: 16) : Font.custom(FontManager.Primary.medium, size: 16))
+							.font(enabled ? Font.custom(FontManager.Primary.bold, size: isBlackBackground ? 18 : 16) : Font.custom(FontManager.Primary.medium, size: 16))
 							.frame(maxWidth: .infinity)
 							.padding(.horizontal, 46)
+//						if isBlackBackground {
+//						Label("Pay", systemImage: "appleLogo")
+//							.foregroundColor(.white)
+//						}
 					}
 					.padding(.all, 20)
 					.background(RoundedRectangle(cornerRadius: 16.0)
-									.strokeBorder(Color.coralRed, lineWidth: 1)
-									.background(RoundedRectangle(cornerRadius: 16.0).fill(enabled ? Color.coralRed : Color.clear))
+									.strokeBorder(Color.coralRed, lineWidth: !isBlackBackground ? 1 : 0)
+									.background(RoundedRectangle(cornerRadius: 16.0).fill(enabled ? (!isBlackBackground ? Color.coralRed : .black) : Color.clear))
 									.opacity(enabled ? 1 : 0.3)
 					)
 					if isLoading == true {

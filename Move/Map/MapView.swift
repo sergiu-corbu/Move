@@ -15,7 +15,6 @@ enum UnlockType {
 }
 
 struct MapView: View {
-    
     @ObservedObject var mapViewModel: MapViewModel = MapViewModel()
     @ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
     @State private var region = MKCoordinateRegion.defaultRegion
@@ -42,7 +41,8 @@ struct MapView: View {
             }
 			.edgesIgnoringSafeArea(.all)
             .onTapGesture { mapViewModel.selectedScooter = nil }
-			.onAppear{
+			.onAppear {
+				
                 if mapViewModel.showLocation {
                     centerViewOnUserLocation()
                     DispatchQueue.main.async {

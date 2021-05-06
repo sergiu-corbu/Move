@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountView: View {
-    
+	
     @State private var username: String = ""
     @State private var email: String = ""
     @State private var usernameActive: Bool = false

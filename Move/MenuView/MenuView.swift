@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct MenuView: View {
-    
+	
+	@ObservedObject var tripViewModel: TripViewModel
     let onBack: () -> Void
     let onSeeAll: () -> Void
     let onAccount: () -> Void
     let onChangePassword: () -> Void
-    
+	@State var totalTrips: Int = 0
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             Image("scooter-img")
@@ -21,22 +22,28 @@ struct MenuView: View {
                 .frame(width: 250, height: 300)
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    navBar
+					NavigationBar(title: "Hi, \(Session.username ?? "no user logged")!", color: .darkPurple, avatar: "avatar-img", backButton: "chevron-left-purple", action: { onBack() })
                     historyView
                     menuOptions
                     Spacer()
                 }
             }
-            .padding([.leading, .trailing], 24)
+			.padding(.horizontal, 24)
         }
-        .background(Color.white)
+		.onAppear{
+			API.downloadTrips({ result in
+				switch result {
+					case .success(let trips):
+						tripViewModel.allTrips = trips
+						self.totalTrips = tripViewModel.allTrips.count
+					case .failure(let error):
+						print(error)
+				}
+			})
+		}
+		.background(Color.white.ignoresSafeArea())
     }
-    var navBar: some View {
-		NavigationBar(title: "Hi, \(Session.username ?? "no user logged")!", color: .darkPurple, avatar: "avatar-img", backButton: "chevron-left-purple", action: {
-            onBack()
-        })
-        
-    }
+	
     var historyView: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 28)
@@ -48,7 +55,7 @@ struct MenuView: View {
                     Text("History")
                         .foregroundColor(.white)
                         .font(.custom(FontManager.Primary.bold, size: 18))
-                    Text("Total rides: 20")
+					Text("Total rides: \(totalTrips)")
                         .foregroundColor(.fadePurple)
                         .font(.custom(FontManager.Primary.medium, size: 16))
                 }
@@ -143,7 +150,7 @@ struct SubMenuItems: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-            MenuView(onBack: {}, onSeeAll: {}, onAccount: {}, onChangePassword: {})
+			MenuView(tripViewModel: TripViewModel(), onBack: {}, onSeeAll: {}, onAccount: {}, onChangePassword: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

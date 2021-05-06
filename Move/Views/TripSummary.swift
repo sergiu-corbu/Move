@@ -16,8 +16,7 @@ struct TripSummary: View {
 			tripBoundaries
 			travelData
 			Spacer()
-			ActionButton(isLoading: isLoading, enabled: true, text: "Pay with  Pay", action: {})
-			//systemname: applelogo
+			ActionButton(isLoading: isLoading, enabled: true, isBlackBackground: true, text: "Pay with A Pay", action: {})
 		}
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))
@@ -46,6 +45,11 @@ struct TripSummary: View {
 			ScooterElements.TripInfo(infoText: "Travel time", imageName: "time-img", time: "00:12", fontSize: 16)
 			ScooterElements.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7", fontSize: 16)
 		}
+	}
+	
+	var appleLogo: some View {
+		Image(systemName: "applelogo")
+			.foregroundColor(.white)
 	}
 }
 
