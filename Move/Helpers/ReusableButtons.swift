@@ -17,21 +17,22 @@ struct ActionButton: View {
 	
 	var body: some View {
 		HStack {
-			Button(action: {
-				action()
-			}, label: {
+			Button(action: { action() }, label: {
 				ZStack(alignment: .trailing) {
 					HStack {
 						Text(text)
-							.foregroundColor(enabled ? .white : .fadePurple)
-							.font(enabled ? Font.custom(FontManager.Primary.bold, size: isBlackBackground ? 18 : 16) : Font.custom(FontManager.Primary.medium, size: 16))
-							.frame(maxWidth: .infinity)
-							.padding(.horizontal, 46)
-//						if isBlackBackground {
-//						Label("Pay", systemImage: "appleLogo")
-//							.foregroundColor(.white)
-//						}
+						if isBlackBackground {
+							Image("Alogo")
+								.padding(.top, -2)
+							Text("Pay")
+								.padding(.leading, -3)
+								.padding(.top, -1)
+						}
 					}
+					.foregroundColor(enabled ? .white : .fadePurple)
+					.font(enabled ? Font.custom(FontManager.Primary.bold, size: isBlackBackground ? 18 : 16) : Font.custom(FontManager.Primary.medium, size: 16))
+					.frame(maxWidth: .infinity)
+					.padding(.horizontal, 46)
 					.padding(.all, 20)
 					.background(RoundedRectangle(cornerRadius: 16.0)
 									.strokeBorder(Color.coralRed, lineWidth: !isBlackBackground ? 1 : 0)
@@ -46,10 +47,8 @@ struct ActionButton: View {
 							.padding(.trailing, 16)
 					}
 				}
-			})
-			.disabled(!enabled)
-		}
-		.padding(.vertical)
+			}).disabled(!enabled)
+		}.padding(.vertical)
 	}
 }
 

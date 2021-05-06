@@ -44,8 +44,8 @@ struct ContentView: View {
 		navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop()}, onFinished: {
 			navigationViewModel.push(UnlockSuccesful())
 			DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
-				navigationViewModel.push(StartRide(scooter: scooter, onStartRide: {
-					//
+				navigationViewModel.push(StartRide(scooter: scooter, onStartRide: {scooter in
+					navigationViewModel.push(TripDetailView(tapped: false, scooter: scooter))
 				}))
 			})
 			

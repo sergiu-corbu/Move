@@ -16,7 +16,7 @@ struct TripSummary: View {
 			tripBoundaries
 			travelData
 			Spacer()
-			ActionButton(isLoading: isLoading, enabled: true, isBlackBackground: true, text: "Pay with A Pay", action: {})
+			ActionButton(isLoading: isLoading, enabled: true, isBlackBackground: true, text: "Pay with", action: {})
 		}
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))

@@ -118,6 +118,63 @@ class API {
 				} catch (let error) { callback(.failure(error)) }
 			} else { print("error on api call")}
 		}
-
 	}
+	
+	static func endTrip(_ callback: @escaping (Result<EndTripResult>) -> Void) {
+		guard let token = Session.tokenKey else { print("invalid token"); return }
+		let path = baseUrl + "user/book/end"
+		let header: HTTPHeaders = ["Authorization": token]
+		AF.request(path, method: .put, headers: header).response { response in
+			if let response = response.data {
+				do {
+					let result = try JSONDecoder().decode(EndTripResult.self, from: response)
+					if result.message == "trip ended successfully" {
+						callback(.success(result))
+					} else {print("errooraaaaaa")}
+					
+				} catch (let error) { callback(.failure(error))}
+			} else {
+				print("error on api call")
+			}
+		}
+	}
+	
+	static func lockScooter(_ callback: @escaping (Result<LockScooter>) -> Void) {
+		guard let token = Session.tokenKey else { print("invalid token"); return }
+		let path = baseUrl + "user/book/lock"
+		let header: HTTPHeaders = ["Authorization": token]
+		AF.request(path, method: .put, headers: header).response { response in
+			if let response = response.data {
+				do {
+					let result = try JSONDecoder().decode(LockScooter.self, from: response)
+					if result.message == "success" {
+						callback(.success(result))
+					} else {print("errooraaaaaa")}
+					
+				} catch (let error) { callback(.failure(error))}
+			} else {
+				print("error on api call")
+			}
+		}
+	}
+	
+	static func unlockScooter(_ callback: @escaping (Result<UnlockScooter>) -> Void) {
+		guard let token = Session.tokenKey else { print("invalid token"); return }
+		let path = baseUrl + "user/book/unlock"
+		let header: HTTPHeaders = ["Authorization": token]
+		AF.request(path, method: .put, headers: header).response { response in
+			if let response = response.data {
+				do {
+					let result = try JSONDecoder().decode(UnlockScooter.self, from: response)
+					if result.message == "success" {
+						callback(.success(result))
+					} else {print("errooraaaaaa")}
+					
+				} catch (let error) { callback(.failure(error))}
+			} else {
+				print("error on api call")
+			}
+		}
+	}
+	
 }

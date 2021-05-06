@@ -61,3 +61,25 @@ struct UnlockResult: Codable {
 		case message = "message"
 	}
 }
+
+struct EndTripResult: Codable {
+	let message: String
+	enum CodingKeys: String, CodingKey {
+		case message = "message"
+	}
+}
+
+struct LockScooter: Codable {
+	let message: String
+	enum CodingKeys: String, CodingKey {
+		case message = "message"
+	}
+}
+
+struct UnlockScooter: Codable {
+	let message: String
+	
+	enum CodingKeys: String, CodingKey {
+		case message = "message"
+	}
+}

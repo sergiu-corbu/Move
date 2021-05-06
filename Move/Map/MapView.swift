@@ -54,9 +54,8 @@ struct MapView: View {
                 ZStack(alignment: .bottom) {
                     ScooterViewItem(scooter: selectedScooter, isUnlocked: $isUnlocked)
                         .padding([.leading, .trailing], 15)
-						.animation(.easeIn(duration: 15))
                     if isUnlocked {
-						UnlockScooterCard(onQR: {}, onPin: {onUnlockScooter(UnlockType.code, selectedScooter)}, onNFC: {}, scooter: selectedScooter)
+						UnlockScooterCard(onQR: {}, onPin: {onUnlockScooter(UnlockType.code, selectedScooter); isUnlocked = false}, onNFC: {}, scooter: selectedScooter)
                     }
                 }
             }

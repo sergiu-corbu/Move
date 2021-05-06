@@ -170,12 +170,19 @@ struct ScooterElements {
 				.opacity(0.6)
 		}
 	}
-
-	static var tripButtons: some View {
-		HStack(spacing: 20) {
-			ScooterElements.ActionTripButton(text: "Lock", icon: "lock-img", tripAction: {})
-			ScooterElements.EndTripButton(endTrip: {})
-		}.padding(.vertical, 20)
+	
+	struct TripButtons: View {
+		@Binding var isLockedPressed: Bool
+		var onLockButton: () -> Void
+		var onUnlockButton: () -> Void
+		let onEndTripButton: () -> Void
+		
+		var body: some View {
+			HStack(spacing: 20) {
+				ScooterElements.ActionTripButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onLockButton() : onUnlockButton() })
+				ScooterElements.EndTripButton(endTrip: {onEndTripButton()})
+			}.padding(.vertical, 20)
+		}
 	}
 	
 	struct BigCard: View {

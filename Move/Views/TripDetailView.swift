@@ -9,6 +9,11 @@ import SwiftUI
 
 struct TripDetailView: View {
 	@State var tapped: Bool = false
+	@State var lockButtonPressed: Bool = false
+	@State private var endRidePressed: Bool = false
+	@ObservedObject var stopWatch = StopWatch()
+	@ObservedObject var tripViewModel = TripViewModel()
+	
 	let scooter: Scooter
 	
 	var body: some View {
@@ -31,12 +36,13 @@ struct TripDetailView: View {
 				.frame(maxWidth: .infinity)
 			ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: true).padding(.vertical, 16)
 			HStack(spacing: 55) {
-				ScooterElements.TripInfo(infoText: "Travel time", imageName: "time-img", time: "00:12")
+				ScooterElements.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.stopWatchTime)
 				ScooterElements.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7")
 			}
-			ScooterElements.tripButtons
+			tripButtons
 		}
-		.onTapGesture { tapped.toggle() }
+		.onAppear(perform: { self.stopWatch.start() })
+		.onTapGesture { tapped = true }
 		.padding(.horizontal, 24)
 	}
 	
@@ -44,24 +50,17 @@ struct TripDetailView: View {
 		VStack(spacing: 24) {
 			NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {})
 			ScooterElements.BigCard(infoText: "Battery", imageName: scooter.batteryImage, data: "\(scooter.battery)%")
-			ScooterElements.BigCard(infoText: "Travel time", imageName: "time-img", data: "00:12:56")
+			ScooterElements.BigCard(infoText: "Travel time", imageName: "time-img", data: "")
 			ScooterElements.BigCard(infoText: "Distance", imageName: "map-img", data: "2.7 km")
-			ScooterElements.tripButtons
-		}.padding(.horizontal, 24)
+			tripButtons
+		}
+		.onTapGesture { tapped = false }
+		.padding(.horizontal, 24)
 	}
-}
-
-struct ExpandedTripDetailView: View {
-	let scooter: Scooter
 	
-	var body: some View {
-		VStack(spacing: 24) {
-			NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {})
-			ScooterElements.BigCard(infoText: "Battery", imageName: scooter.batteryImage, data: "\(scooter.battery)%")
-			ScooterElements.BigCard(infoText: "Travel time", imageName: "time-img", data: "00:12:56")
-			ScooterElements.BigCard(infoText: "Distance", imageName: "map-img", data: "2.7 km")
-			ScooterElements.tripButtons
-		}.padding(.horizontal, 24)
+	private var tripButtons: some View {
+		ScooterElements.TripButtons(isLockedPressed: $lockButtonPressed, onLockButton: { tripViewModel.lockScooter(); lockButtonPressed.toggle() }, onUnlockButton: { tripViewModel.unlockScooter(); lockButtonPressed.toggle() }, onEndTripButton: {
+										tripViewModel.endTrip(); endRidePressed = true;self.stopWatch.stop() })
 	}
 }
 
