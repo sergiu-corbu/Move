@@ -119,15 +119,14 @@ struct NavigationBar: View {
 //MARK: fields
 struct InputField: View {
 	
-	@Binding var activeField: Bool
 	@Binding var input: String
+	@State var activeField: Bool
 	@State private var showSecured: Bool = true
 	
 	let textField: String
 	let isSecuredField: Bool
 	let textColor: Color
 	var error: String?
-	let action: () -> Void
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
@@ -139,25 +138,23 @@ struct InputField: View {
 			HStack {
 				HStack {
 					if showSecured && isSecuredField {
-						SecureField(activeField ? "" : textField, text: $input)
+						SecureField(activeField ? "" : textField, text: $input, onCommit: { activeField = false })
+							.foregroundColor(textColor)
 							.introspectTextField { textField in
 								textField.returnKeyType = .done }
 					} else {
-						TextField(activeField ? "" : textField, text: $input)
+						TextField(activeField ? "" : textField, text: $input, onCommit: { activeField = false })
+							.foregroundColor(textColor)
 							.introspectTextField { textField in
 								textField.returnKeyType = .next }
 					}
 				}
-				.foregroundColor(textColor)
 				.font(Font.custom(FontManager.Primary.medium, size: 18))
 				.accentColor(textColor)
 				.autocapitalization(.none)
 				.disableAutocorrection(true)
 				.padding(.vertical, 7)
-				.onTapGesture {
-					activeField = true
-					action()
-				}
+				.onTapGesture { activeField = true }
 				Spacer()
 				if !input.isEmpty && activeField {
 					Button(action: {
@@ -295,7 +292,7 @@ struct TripReusable {
 				Text(infoText)
 					.foregroundColor(.fadePurple)
 					.font(.custom(FontManager.Primary.medium, size: 12))
-				Text(showTime ? "\(data) km" : "\(data) min")
+				Text(!showTime ? "\(data) km" : "\(data) min")
 					.foregroundColor(.darkPurple)
 					.font(.custom(FontManager.Primary.bold, size: 14))
 					.frame(maxWidth: 80, alignment: .leading)
@@ -304,52 +301,5 @@ struct TripReusable {
 			.padding(.vertical, 7)
 			.padding(.trailing, 10)
 		}
-	}
-}
-
-
-struct TripDetail: View {
-	let trip: Trip
-	
-	var body: some View {
-		ZStack {
-			GeometryReader { geometry in
-				RoundedRectangle(cornerRadius: 29)
-					.stroke(Color.darkPurple, lineWidth: 1)
-					.overlay(
-						HStack {
-							RoundedRectangle(cornerRadius: 29)
-								.fill(Color.fadePurple)
-								.opacity(0.15)
-								.frame(width: geometry.size.width / 1.55)
-							Spacer()
-						}
-					)
-			}
-			HStack(alignment: .top) {
-				tripBoundaries
-				Spacer()
-				tripTime
-			}.padding(.vertical, 10)
-		}.padding(.vertical, 6)
-	}
-	var tripBoundaries: some View {
-		VStack(alignment: .leading) {
-			TripReusable.TripLocation(infoText: "From", address: trip.startTime)
-			TripReusable.TripLocation(infoText: "To", address: trip.endTime)
-		}
-	}
-	
-	var tripTime: some View {
-		VStack(alignment: .leading) {
-			TripReusable.TripData(infoText: "Travel time", data: String(trip.path[0][0]), showTime: true)
-			TripReusable.TripData(infoText: "Distance", data: String(trip.path[0][1])).padding(.top, 16)
-		}
-	}
-}
-
-struct Reusable_Previews: PreviewProvider {
-	static var previews: some View {
-		InputField(activeField: .constant(true), input: .constant("sergiucorbu@icloud.com"), textField: "Enter email", isSecuredField: false, textColor: .white, error: "error", action: {})
 	}
 }

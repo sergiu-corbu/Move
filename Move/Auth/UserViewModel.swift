@@ -8,6 +8,7 @@
 import Foundation
 
 class UserViewModel: ObservableObject {
+	static var shared: UserViewModel = UserViewModel()
     //MARK: Register & Login
 	@Published var email: String = "" {
         didSet {
@@ -20,6 +21,7 @@ class UserViewModel: ObservableObject {
     @Published var password: String = "" {
         didSet { isValidPassword() }
     }
+	
 	@Published var emailError = ""
 	@Published var passwordError = ""
     
@@ -31,6 +33,7 @@ class UserViewModel: ObservableObject {
 		}
     }
 	@Published var repeatPasswordError: String = ""
+	@Published var isActive: Bool = false
 	@Published var isLoading: Bool = false
 	
     func isValidPassword() {

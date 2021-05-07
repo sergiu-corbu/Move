@@ -11,7 +11,7 @@ import CoreLocation
 
 struct SNUnlock: View {
 	
-	@ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
+	@ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel.shared
 	@ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
 
     let onClose: () -> Void

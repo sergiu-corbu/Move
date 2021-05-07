@@ -17,8 +17,8 @@ enum UnlockType {
 
 struct MapCoordinator: View {
 	var navigationViewModel = NavigationStack()
-	@StateObject var mapViewModel: MapViewModel = MapViewModel()
-	@StateObject var scooterViewModel: ScooterViewModel = ScooterViewModel()
+	@StateObject var mapViewModel: MapViewModel = MapViewModel.shared
+	@StateObject var scooterViewModel: ScooterViewModel = ScooterViewModel.shared
 	@State private var unlockPressed: Bool = false
 	
 	let onMenu: () -> Void
@@ -27,7 +27,7 @@ struct MapCoordinator: View {
 	var body: some View {
 		NavigationStackView(navigationStack: navigationViewModel) {
 			ZStack(alignment: .top) {
-				MapView(mapViewModel: mapViewModel, scooterViewModel: scooterViewModel, onMenu: {onMenu()})
+				MapView(onMenu: {onMenu()})
 				if let selectedScooter = self.mapViewModel.selectedScooter {
 					VStack {
 						Spacer()
@@ -47,8 +47,8 @@ struct MapCoordinator: View {
 	}
 	
 	struct MapView: View {
-		@ObservedObject var mapViewModel: MapViewModel
-		@ObservedObject var scooterViewModel: ScooterViewModel
+		@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+		@ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel.shared
 		@State private var region = MKCoordinateRegion.defaultRegion
 		
 		public func centerViewOnUserLocation() {

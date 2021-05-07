@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 class ScooterViewModel: ObservableObject {
-    
+	static var shared: ScooterViewModel = ScooterViewModel()
     @Published var allScooters: [Scooter] = []
     
     var location: CLLocationCoordinate2D? {

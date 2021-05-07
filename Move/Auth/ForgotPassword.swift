@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct ForgotPassword: View {
+	@ObservedObject var userViewModel: UserViewModel = UserViewModel.shared
     @State private var showAlert: Bool = false
-    @State private var activeField: Bool = false
-    @StateObject var userViewModel: UserViewModel = UserViewModel()
-
+	
     let onBack: () -> Void
     let onCompleted: () -> Void
     
@@ -19,10 +18,9 @@ struct ForgotPassword: View {
         VStack(alignment: .leading) {
             NavigationBar(color: .white, backButton: "chevron-left-white", action: { onBack() }).padding(.leading, -5)
             messageArea
-            InputField(activeField: $activeField, input: $userViewModel.email, textField: "Email Address", isSecuredField: false, textColor: .white, error: userViewModel.emailError , action: { activeField = true })
+			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: "Email Address", isSecuredField: false, textColor: .white, error: userViewModel.emailError)
 			ActionButton(enabled: userViewModel.resetPasswordEnabled && userViewModel.emailError.isEmpty, text: "Send Reset Link", action: {
                 userViewModel.email = ""
-                activeField = false
                 onCompleted()
                 showAlert.toggle()
             })

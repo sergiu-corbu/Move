@@ -7,13 +7,9 @@
 
 import SwiftUI
 import BetterSafariView
-import SwiftMessages
 
 struct Register: View {
-    @StateObject private var userViewModel = UserViewModel()
-    @State private var emailTyping: Bool = false
-    @State private var passwordTyping: Bool = false
-    @State private var usernameTyping: Bool = false
+	@ObservedObject private var userViewModel = UserViewModel.shared
     @State private var termsPresented: Bool = false
     @State private var privacyPresented: Bool = false
     
@@ -39,23 +35,11 @@ struct Register: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", isSecuredField: false, textColor: .white, error: userViewModel.emailError, action: {
-                    emailTyping = true
-                    usernameTyping = false
-                    passwordTyping = false
-                })
-            InputField(activeField: $usernameTyping, input: $userViewModel.username, textField: "Username", isSecuredField: false, textColor: .white, action: {
-                emailTyping = false
-                usernameTyping = true
-                passwordTyping = false
-            })
+			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: "Email Address", isSecuredField: false, textColor: .white, error: userViewModel.emailError)
+			InputField(input: $userViewModel.username, activeField: userViewModel.isActive, textField: "Username", isSecuredField: false, textColor: .white)
             VStack(alignment: .leading) {
-                InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError,action: {
-                    emailTyping = false
-                    usernameTyping = false
-                    passwordTyping = true
-                })
-                if userViewModel.password == "" && passwordTyping  {
+				InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: "Password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError)
+                if userViewModel.password == "" && userViewModel.isActive  {
                     Text("Use a strong password (min. 8 characters and use symbols")
                         .font(.custom(FontManager.Primary.regular, size: 13))
                         .foregroundColor(.white)

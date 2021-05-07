@@ -108,13 +108,27 @@ class API {
 	static func downloadTrips(_ callback: @escaping (Result<[Trip]>) -> Void) {
 		guard let token = Session.tokenKey else { print("invalid token"); return }
 		
-		let path = baseUrl + "user/book/0/10"
+		let path = baseUrl + "user/book/info/0/0"
 		let header: HTTPHeaders = ["Authorization": token]
 		AF.request(path, method: .get, headers: header).response { response in
 			if let response = response.data {
 				do {
-					let result = try JSONDecoder().decode([Trip].self, from: response)
-					callback(.success(result))
+					let trips = try JSONDecoder().decode([Trip].self, from: response)
+					DispatchQueue.global(qos: .userInteractive).async {
+						let dispatchGroup = DispatchGroup()
+						var result: [Trip] = []
+						for trip in trips {
+							dispatchGroup.enter()
+							trip.computeAddress { trip in
+								result.append(trip)
+								dispatchGroup.leave()
+							}
+							dispatchGroup.wait()
+						}
+						DispatchQueue.main.async {
+							callback(.success(result))
+						}
+					}
 				} catch (let error) { callback(.failure(error)) }
 			} else { print("error on api call")}
 		}

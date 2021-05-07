@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct ResetPassword: View {
-    
-    @StateObject var userViewModel: UserViewModel = UserViewModel()
-    @State private var newPasswordField: Bool = false
-    @State private var confirmPasswordField: Bool = false
+	@ObservedObject private var userViewModel = UserViewModel.shared
     @State private var showAlert: Bool = false
     
     let onBack: () -> Void
@@ -27,7 +24,7 @@ struct ResetPassword: View {
 					userViewModel.password = ""
 					userViewModel.repeatPassword = ""
 				}
-				else { print( "errorh") } //swift messages
+				else { showError(error: "Couldn't reset") }
 			})
 			.padding(.top, 20)
 			.alert(isPresented: $showAlert) {
@@ -42,14 +39,8 @@ struct ResetPassword: View {
 
     var inputField: some View {
         VStack {
-            InputField(activeField: $newPasswordField, input: $userViewModel.password, textField: "New password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError, action: {
-                newPasswordField = true
-                confirmPasswordField = false
-            })
-            InputField(activeField: $confirmPasswordField, input: $userViewModel.repeatPassword, textField: "New password", isSecuredField: true, textColor: .white, error: userViewModel.repeatPasswordError, action: {
-                newPasswordField = false
-                confirmPasswordField = true
-            })
+			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: "New password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError)
+			InputField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: "New password", isSecuredField: true, textColor: .white, error: userViewModel.repeatPasswordError)
         }
     }
 }

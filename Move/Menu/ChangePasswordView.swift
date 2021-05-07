@@ -8,22 +8,10 @@
 import SwiftUI
 
 struct ChangePasswordView: View {
-    
-    @State private var oldPassword: String = ""
-    @State private var newPassword: String = ""
-    @State private var confirmPassword: String = ""
-    @State private var isLoading: Bool = false
-    
-    @State private var oldPasswordActive: Bool = false
-    @State private var newPasswordActive: Bool = false
-    @State private var confirmPasswordActive: Bool = false
-    
+	@ObservedObject private var userViewModel = UserViewModel.shared
+	
     let onBack: () -> Void
     let onSave: () -> Void
-    
-    var allFiledsCompleted: Bool {
-        return oldPassword != "" && newPassword != "" && confirmPassword != ""
-    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -32,10 +20,10 @@ struct ChangePasswordView: View {
             })
             inputArea
             Spacer()
-            ActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
-                isLoading = true
+			ActionButton(isLoading: userViewModel.isLoading, enabled: userViewModel.validatePasswords, text: "Save edits", action: {
+				userViewModel.isLoading = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                    isLoading = false
+					userViewModel.isLoading = false
                 })
                 onSave()
             }).padding(.bottom)
@@ -46,21 +34,9 @@ struct ChangePasswordView: View {
     
     var inputArea: some View {
         VStack(alignment: .leading, spacing: 20) {
-            InputField(activeField: $oldPasswordActive, input: $oldPassword, textField: "Old password", isSecuredField: false, textColor: Color.darkPurple, action: {
-                oldPasswordActive = true
-                newPasswordActive = false
-                confirmPasswordActive = false
-            })
-            InputField(activeField: $newPasswordActive, input: $newPassword, textField: "New password", isSecuredField: false, textColor: Color.darkPurple, action: {
-                oldPasswordActive = false
-                newPasswordActive = true
-                confirmPasswordActive = false
-            })
-            InputField(activeField: $confirmPasswordActive, input: $confirmPassword, textField: "Confirm new password", isSecuredField: true, textColor: Color.darkPurple, action: {
-                oldPasswordActive = false
-                newPasswordActive = false
-                confirmPasswordActive = true
-            })
+			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: "Old password", isSecuredField: false, textColor: Color.darkPurple)
+			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: "New password", isSecuredField: false, textColor: Color.darkPurple)
+			InputField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: "Confirm new password", isSecuredField: true, textColor: Color.darkPurple)
         }.padding(.top, 40)
     }
 }

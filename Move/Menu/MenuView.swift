@@ -14,7 +14,7 @@ struct MenuView: View {
     let onSeeAll: () -> Void
     let onAccount: () -> Void
     let onChangePassword: () -> Void
-	@State var totalTrips: Int = 0
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             Image("scooter-img")
@@ -35,7 +35,6 @@ struct MenuView: View {
 				switch result {
 					case .success(let trips):
 						tripViewModel.allTrips = trips
-						self.totalTrips = tripViewModel.allTrips.count
 					case .failure(let error):
 						print(error)
 				}
@@ -55,7 +54,7 @@ struct MenuView: View {
                     Text("History")
                         .foregroundColor(.white)
                         .font(.custom(FontManager.Primary.bold, size: 18))
-					Text("Total rides: \(totalTrips)")
+					Text("Total rides: \(tripViewModel.allTrips.count)")
                         .foregroundColor(.fadePurple)
                         .font(.custom(FontManager.Primary.medium, size: 16))
                 }

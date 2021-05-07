@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct Login: View {
-    @StateObject private var userViewModel = UserViewModel()
-    @State private var emailTyping: Bool = false
-    @State private var passwordTyping: Bool = false
-    
+	@ObservedObject private var userViewModel = UserViewModel.shared
+
     let onLoginCompleted: () -> Void
     let onRegisterSwitch: () -> Void
     
@@ -46,14 +44,8 @@ struct Login: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", isSecuredField: false, textColor: .white, action: {
-                emailTyping = true
-                passwordTyping = false
-            })
-            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", isSecuredField: true, textColor: .white, action: {
-                emailTyping = false
-                passwordTyping = true
-            })
+			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: "Email Address", isSecuredField: false, textColor: .white)
+			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: "Password", isSecuredField: true, textColor: .white)
         }
     }
 }

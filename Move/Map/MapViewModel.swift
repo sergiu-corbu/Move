@@ -10,7 +10,8 @@ import CoreLocation
 import MapKit
 
 class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITextFieldDelegate {
-    
+	static var shared: MapViewModel = MapViewModel()
+	
     let locationManager = CLLocationManager()
     @Published var showLocation: Bool = false
     @Published var scooterLocation: String = ""
@@ -72,7 +73,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
         }
     }
     
-    func scooterGeocode(location coordinates: CLLocationCoordinate2D, _ completion: @escaping (String) -> Void) {
+    func locationGeocode(location coordinates: CLLocationCoordinate2D, _ completion: @escaping (String) -> Void) {
         let geocoder = CLGeocoder()
         let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
         geocoder.reverseGeocodeLocation(scooterLocation) { [weak self] (placemarks, error) in
@@ -88,7 +89,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
     }
     
     func selectScooter(scooter: Scooter) {
-        scooterGeocode(location: scooter.coordinates) { address in
+        locationGeocode(location: scooter.coordinates) { address in
             var scooter = scooter
             scooter.addressName = address
             self.selectedScooter = scooter
