@@ -139,6 +139,7 @@ struct ScooterElements {
 					HStack(alignment: .bottom) {
 						Text("\(time)")
 							.font(.custom(FontManager.Primary.bold, size: fontSize))
+							.frame(width: 95)
 						Text("min")
 							.font(.custom(FontManager.Primary.bold, size: 16))
 							.padding(.bottom, fontSize == 32 ? 3.5 : 0)
@@ -156,7 +157,8 @@ struct ScooterElements {
 					.padding(.leading, fontSize == 32 ? 0 : 35)
 					.padding(.top, -5)
 				}
-			}.foregroundColor(.darkPurple)
+			}
+			.foregroundColor(.darkPurple)
 		}
 	}
 	

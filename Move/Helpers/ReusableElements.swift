@@ -112,7 +112,7 @@ struct NavigationBar: View {
 				}
 			}
 			
-		}//.padding(.top, 10)
+		}.padding(.top, 10)
 	}
 }
 
@@ -307,6 +307,46 @@ struct TripReusable {
 	}
 }
 
+
+struct TripDetail: View {
+	let trip: Trip
+	
+	var body: some View {
+		ZStack {
+			GeometryReader { geometry in
+				RoundedRectangle(cornerRadius: 29)
+					.stroke(Color.darkPurple, lineWidth: 1)
+					.overlay(
+						HStack {
+							RoundedRectangle(cornerRadius: 29)
+								.fill(Color.fadePurple)
+								.opacity(0.15)
+								.frame(width: geometry.size.width / 1.55)
+							Spacer()
+						}
+					)
+			}
+			HStack(alignment: .top) {
+				tripBoundaries
+				Spacer()
+				tripTime
+			}.padding(.vertical, 10)
+		}.padding(.vertical, 6)
+	}
+	var tripBoundaries: some View {
+		VStack(alignment: .leading) {
+			TripReusable.TripLocation(infoText: "From", address: trip.startTime)
+			TripReusable.TripLocation(infoText: "To", address: trip.endTime)
+		}
+	}
+	
+	var tripTime: some View {
+		VStack(alignment: .leading) {
+			TripReusable.TripData(infoText: "Travel time", data: String(trip.path[0][0]), showTime: true)
+			TripReusable.TripData(infoText: "Distance", data: String(trip.path[0][1])).padding(.top, 16)
+		}
+	}
+}
 
 struct Reusable_Previews: PreviewProvider {
 	static var previews: some View {

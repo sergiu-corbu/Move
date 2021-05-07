@@ -26,7 +26,7 @@ struct TripDetailView: View {
 			}.background(SharedElements.whiteRoundedRectangle)
 		}
 	}
-	
+
 	var mainBody: some View {
 		VStack(alignment: .leading, spacing: 10) {
 			Text("Trip Details")

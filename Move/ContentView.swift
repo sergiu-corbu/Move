@@ -10,21 +10,19 @@ import NavigationStack
 
 struct ContentView: View {
 	@State private var isLoading = false
-	@StateObject var tripViewModel: TripViewModel = TripViewModel()
 	var navigationViewModel: NavigationStack = NavigationStack()
 	
 	var body: some View {
 		if Session.tokenKey != nil {
 			NavigationStackView(navigationStack: navigationViewModel) {
-				MapView(onMenu: { handleOnMenu() }) { unlockType, scooter in
-					handleUnlockType(type: unlockType, scooter: scooter)}
-				}}
-		else {
-			NavigationStackView(navigationStack: navigationViewModel) {
-				Onboarding(onFinished: {
-					handleRegister()
-				})
+				MapCoordinator(onMenu: {handleOnMenu()}) { unlockType, scooter in
+					handleUnlockType(type: unlockType, scooter: scooter)
+				}
 			}
+//			}} else {
+//			NavigationStackView(navigationStack: navigationViewModel) {
+//				Onboarding(onFinished: { handleRegister() })
+//			}
 		}
 	}
 	
@@ -40,10 +38,9 @@ struct ContentView: View {
 	}
 	
 	func handleCodeUnlock(scooter: Scooter) {
-		//navigationViewModel.push(TripDetailView(scooter: Scooter(location: Location(coordinates: [20,0], type: "a"), locked: true, available: true, battery: 90, id: "AVSA", deviceKey: "DQFW", addressName: nil)))
 		navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop()}, onFinished: {
 			navigationViewModel.push(UnlockSuccesful())
-			DispatchQueue.main.asyncAfter(deadline: .now()+1, execute: {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
 				navigationViewModel.push(StartRide(scooter: scooter, onStartRide: {scooter in
 					navigationViewModel.push(TripDetailView(tapped: false, scooter: scooter))
 				}))
@@ -52,18 +49,16 @@ struct ContentView: View {
 		}))
 	}
 	
-	
-	
 	func handleOnMenu() {
-		
-		navigationViewModel.push(MenuView(tripViewModel: tripViewModel, onBack: { navigationViewModel.pop()},
-										  onSeeAll: { navigationViewModel.push(HistoryView( tripViewModel: tripViewModel, onBack: { navigationViewModel.pop() }))
+		//navigationViewModel.push(Men)
+		navigationViewModel.push(MenuView(onBack: { navigationViewModel.pop()},
+										  onSeeAll: { navigationViewModel.push(HistoryView( onBack: { navigationViewModel.pop() }))
 										  }, onAccount: { navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() },
-										onLogout: { navigationViewModel.push(Onboarding(onFinished: {handleRegister()})) },
+										onLogout: { /*navigationViewModel.push(Onboarding(onFinished: {handleRegister()})) */},
 										onSave: { navigationViewModel.pop() })) },
 										  onChangePassword: { navigationViewModel.push(ChangePasswordView(onBack: { navigationViewModel.pop() }, onSave: { navigationViewModel.pop() }))}))
 	}
-	
+	/*
 	func handleRegister() {
 		navigationViewModel.push(Register(onRegisterComplete: {
 			navigationViewModel.push(ValidationInfo(isLoading: $isLoading, onBack: { navigationViewModel.pop() }, onNext: { image in
@@ -85,6 +80,6 @@ struct ContentView: View {
 		navigationViewModel.push(MapView(onMenu: { handleOnMenu() }, onUnlockScooter: { unlockType, scooter in
 			handleUnlockType(type: unlockType, scooter: scooter)
 		}))
-	}
+	}*/
 
 }

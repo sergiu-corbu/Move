@@ -30,7 +30,7 @@ struct Login: View {
 								onLoginCompleted()
 								userViewModel.isLoading = false
 							case .failure(let error):
-								print(error.localizedDescription)
+								showError(error: error.localizedDescription)
 								userViewModel.isLoading = false
 						}
 					}
@@ -46,11 +46,11 @@ struct Login: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", isSecuredField: false, textColor: .white,error: userViewModel.emailError, action: {
+            InputField(activeField: $emailTyping, input: $userViewModel.email, textField: "Email Address", isSecuredField: false, textColor: .white, action: {
                 emailTyping = true
                 passwordTyping = false
             })
-            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError , action: {
+            InputField(activeField: $passwordTyping, input: $userViewModel.password, textField: "Password", isSecuredField: true, textColor: .white, action: {
                 emailTyping = false
                 passwordTyping = true
             })

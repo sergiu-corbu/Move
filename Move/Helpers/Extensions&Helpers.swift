@@ -1,5 +1,5 @@
 //
-//  Fonts&Colors.swift
+//  Extensions&Helpers.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 4/11/21.
@@ -7,6 +7,19 @@
 
 import Foundation
 import SwiftUI
+import UIKit
+import SwiftMessages
+
+//MARK: SwiftMessages
+public func showError(error: String) {
+	let view = MessageView.viewFromNib(layout: .cardView)
+	view.configureTheme(.error)
+	view.configureDropShadow()
+	view.configureContent(title: "Error", body: error)
+	view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+	(view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+	SwiftMessages.show(view: view)
+}
 
 //MARK: Data validation
 extension String {

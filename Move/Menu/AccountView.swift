@@ -50,11 +50,13 @@ struct AccountView: View {
     var footerArea: some View {
         VStack(spacing: 50) {
             Button(action: {
-                API.logout() { (result) in
-                    if result == true {
-                        Session.tokenKey = nil
-                        onLogout()
-                    } else { print("Error on logout") }
+                API.logout() { result in
+					switch result {
+						case true:
+							Session.tokenKey = nil
+							onLogout()
+						case false: showError(error: "Error from server")
+					}
                 }
             }, label: {
 				Label("Log out", image: "logout-img")
@@ -63,9 +65,7 @@ struct AccountView: View {
             })
             ActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
                 isLoading = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-                    isLoading = false
-                })
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { isLoading = false })
                 onSave()
             }).padding(.bottom, 30)
         }

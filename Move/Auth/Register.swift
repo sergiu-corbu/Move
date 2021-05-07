@@ -75,9 +75,7 @@ struct Register: View {
                         onRegisterComplete()
                         userViewModel.isLoading = false
                     case .failure(let error):
-                        //  SwiftMessages.show()
-                        print(error.localizedDescription)
-                        self.userViewModel.emailError = "Email is already taken." //show with swift
+						showError(error: error.localizedDescription)
                         userViewModel.isLoading = false
                 }
             }
