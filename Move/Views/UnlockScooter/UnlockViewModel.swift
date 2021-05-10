@@ -31,7 +31,7 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 						print("\(result)")
 						self.onFinishedUnlock?()
 					case .failure(let error):
-						print("\(error)")
+						showError(error: error.localizedDescription)
 				}
 			}
 		}

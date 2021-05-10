@@ -39,8 +39,8 @@ struct ResetPassword: View {
 
     var inputField: some View {
         VStack {
-			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: "New password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError)
-			InputField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: "New password", isSecuredField: true, textColor: .white, error: userViewModel.repeatPasswordError)
+			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: InputFieldType.newPassword.rawValue, isSecuredField: true, error: userViewModel.passwordError)
+			InputField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: InputFieldType.confirmNewPassword.rawValue, isSecuredField: true, error: userViewModel.repeatPasswordError)
         }
     }
 }

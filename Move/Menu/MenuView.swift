@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct MenuView: View {
-	
 	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
+	
     let onBack: () -> Void
     let onSeeAll: () -> Void
     let onAccount: () -> Void
@@ -34,6 +34,7 @@ struct MenuView: View {
 			API.downloadTrips({ result in
 				switch result {
 					case .success(let trips):
+						print(trips)
 						tripViewModel.allTrips = trips
 					case .failure(let error):
 						print(error)

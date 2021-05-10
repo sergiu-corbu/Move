@@ -36,8 +36,8 @@ struct AccountView: View {
     
     var inputArea: some View {
         VStack(alignment: .leading, spacing: 20) {
-			InputField(input: $username, activeField: usernameActive, textField: "Username", isSecuredField: false, textColor: Color.darkPurple)
-			InputField(input: $email, activeField: emailActive, textField: "Email Address", isSecuredField: false, textColor: Color.darkPurple)
+			InputField(input: $username, activeField: usernameActive, textField: InputFieldType.username.rawValue, textColor: Color.darkPurple)
+			InputField(input: $email, activeField: emailActive, textField: InputFieldType.email.rawValue, textColor: Color.darkPurple)
         }.padding(.top, 40)
     }
 	

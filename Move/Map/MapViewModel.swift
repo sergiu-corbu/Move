@@ -39,7 +39,6 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
     
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
-            
             case .authorizedWhenInUse, .authorizedAlways: //when app is open
                 startTrackingUserLocation()
             case .notDetermined:
@@ -64,11 +63,8 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
         guard let location = locationManager.location else { print("error while unwrapping"); return }
         geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
             guard let self = self else { return }
-            
             if let error = error { print(error); return }
-            
             guard let placemark = placemarks?.first else { return }
-            
             self.cityName = placemark.locality ?? "Not defined"
         }
     }
@@ -98,15 +94,13 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
 }
 
 extension MapViewModel {
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { // updating location
-     guard let location = locations.last else { return }
-     let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-     let region = MKCoordinateRegion.init(center: center, latitudinalMeters: 700, longitudinalMeters: 700)
-        
-//        DispatchQueue.main.async {
-//            self. = location
-//        }
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		guard let location = locations.last else { return }
+		let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+		DispatchQueue.main.async {
+			self.locationManager.startUpdatingLocation()
+			
+		}
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorization()

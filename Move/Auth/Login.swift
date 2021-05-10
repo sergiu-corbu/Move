@@ -44,8 +44,8 @@ struct Login: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: "Email Address", isSecuredField: false, textColor: .white)
-			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: "Password", isSecuredField: true, textColor: .white)
+			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: InputFieldType.email.rawValue)
+			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: InputFieldType.password.rawValue, isSecuredField: true)
         }
     }
 }

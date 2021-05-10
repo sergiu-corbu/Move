@@ -16,30 +16,29 @@ enum UnlockType {
 }
 
 struct MapCoordinator: View {
-	var navigationViewModel = NavigationStack()
+	var navigationViewModel: NavigationStack
 	@StateObject var mapViewModel: MapViewModel = MapViewModel.shared
 	@StateObject var scooterViewModel: ScooterViewModel = ScooterViewModel.shared
 	@State private var unlockPressed: Bool = false
-	
+
 	let onMenu: () -> Void
 	let onUnlockScooter: (UnlockType, Scooter) -> Void
 	
 	var body: some View {
 		NavigationStackView(navigationStack: navigationViewModel) {
 			ZStack(alignment: .top) {
-				MapView(onMenu: {onMenu()})
+				MapView(onMenu: {  onMenu()})
 				if let selectedScooter = self.mapViewModel.selectedScooter {
 					VStack {
 						Spacer()
-						ZStack(alignment: .bottom) {
-							ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed)
-								.padding([.leading, .trailing], 15)
-							if unlockPressed {
-								UnlockScooterCard(onQR: {}, onPin: {onUnlockScooter(UnlockType.code, selectedScooter); unlockPressed = false}, onNFC: {}, scooter: selectedScooter)
-							}
+							ZStack(alignment: .bottom) {
+								ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed)
+									.padding(.horizontal, 15)
+								if unlockPressed {
+									UnlockScooterCard(onQR: {}, onPin: {onUnlockScooter(UnlockType.code, selectedScooter); unlockPressed = false}, onNFC: {}, scooter: selectedScooter)
+								}
 						}
 					}
-					
 				}
 				
 			}
@@ -76,7 +75,7 @@ struct MapCoordinator: View {
 					}
 				}
 			}
-			SharedElements.MapBarItems(menuAction: {onMenu()}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil } )
+			SharedElements.MapBarItems(menuAction: { onMenu(); mapViewModel.selectedScooter = nil}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil } )
 		}
 	}
 }

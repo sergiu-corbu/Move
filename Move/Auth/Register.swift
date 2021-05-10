@@ -35,10 +35,10 @@ struct Register: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: "Email Address", isSecuredField: false, textColor: .white, error: userViewModel.emailError)
-			InputField(input: $userViewModel.username, activeField: userViewModel.isActive, textField: "Username", isSecuredField: false, textColor: .white)
+			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: InputFieldType.email.rawValue, error: userViewModel.emailError)
+			InputField(input: $userViewModel.username, activeField: userViewModel.isActive, textField: InputFieldType.username.rawValue)
             VStack(alignment: .leading) {
-				InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: "Password", isSecuredField: true, textColor: .white, error: userViewModel.passwordError)
+				InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: InputFieldType.password.rawValue, isSecuredField: true, error: userViewModel.passwordError)
                 if userViewModel.password == "" && userViewModel.isActive  {
                     Text("Use a strong password (min. 8 characters and use symbols")
                         .font(.custom(FontManager.Primary.regular, size: 13))

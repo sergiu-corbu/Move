@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TripSummary: View {
 	@State private var isLoading: Bool = false
+	
     var body: some View {
 		VStack(alignment: .leading, spacing: 48) {
 			NavigationBar(title: "Trip Summary", color: .darkPurple)

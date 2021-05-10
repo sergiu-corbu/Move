@@ -131,15 +131,22 @@ struct ScooterElements {
 		var time: String?
 		var distance: String?
 		var fontSize: CGFloat = 32
+		var largeFrame: Bool = false
 		
 		var body: some View {
 			VStack(alignment: .leading) {
 				TripItemLabel(infoText: infoText, imageName: imageName)
 				if let time = time {
 					HStack(alignment: .bottom) {
-						Text("\(time)")
-							.font(.custom(FontManager.Primary.bold, size: fontSize))
-							.frame(width: 95)
+						if largeFrame {
+							Text("\(time)")
+								.font(.custom(FontManager.Primary.bold, size: fontSize))
+								.frame(width: 95)
+						} else {
+							Text("\(time)")
+								.font(.custom(FontManager.Primary.bold, size: fontSize))
+						}
+						
 						Text("min")
 							.font(.custom(FontManager.Primary.bold, size: 16))
 							.padding(.bottom, fontSize == 32 ? 3.5 : 0)

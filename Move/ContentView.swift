@@ -15,14 +15,13 @@ struct ContentView: View {
 	var body: some View {
 		if Session.tokenKey != nil {
 			NavigationStackView(navigationStack: navigationViewModel) {
-				MapCoordinator(onMenu: {handleOnMenu()}) { unlockType, scooter in
+				MapCoordinator(navigationViewModel: navigationViewModel, onMenu: { handleOnMenu() }) { unlockType, scooter in
 					handleUnlockType(type: unlockType, scooter: scooter)
 				}
+			} } else {
+			NavigationStackView(navigationStack: navigationViewModel) {
+				Onboarding(onFinished: { handleRegister() })
 			}
-//			}} else {
-//			NavigationStackView(navigationStack: navigationViewModel) {
-//				Onboarding(onFinished: { handleRegister() })
-//			}
 		}
 	}
 	
@@ -42,30 +41,33 @@ struct ContentView: View {
 			navigationViewModel.push(UnlockSuccesful())
 			DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
 				navigationViewModel.push(StartRide(scooter: scooter, onStartRide: {scooter in
-					navigationViewModel.push(TripDetailView(tapped: false, scooter: scooter))
+					navigationViewModel.push(TripDetailView(tapped: false, scooter: scooter, onEndRide: {
+						navigationViewModel.push(TripSummary())
+					}))
 				}))
 			})
-			
 		}))
 	}
 	
 	func handleOnMenu() {
-		//navigationViewModel.push(Men)
-		navigationViewModel.push(MenuView(onBack: { navigationViewModel.pop()},
-										  onSeeAll: { navigationViewModel.push(HistoryView( onBack: { navigationViewModel.pop() }))
-										  }, onAccount: { navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() },
-										onLogout: { /*navigationViewModel.push(Onboarding(onFinished: {handleRegister()})) */},
-										onSave: { navigationViewModel.pop() })) },
-										  onChangePassword: { navigationViewModel.push(ChangePasswordView(onBack: { navigationViewModel.pop() }, onSave: { navigationViewModel.pop() }))}))
+		navigationViewModel.push(MenuView(onBack: { navigationViewModel.pop() },
+										  onSeeAll: {
+											navigationViewModel.push(HistoryView(onBack: { navigationViewModel.pop() }))
+										  }, onAccount: {
+											navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() }, onLogout: { navigationViewModel.push(Onboarding(onFinished: { handleRegister() }))}, onSave: { navigationViewModel.pop() }))
+										}, onChangePassword: {
+											navigationViewModel.push(ChangePasswordView(action: {navigationViewModel.pop()}))
+										}))
 	}
-	/*
+	
 	func handleRegister() {
 		navigationViewModel.push(Register(onRegisterComplete: {
 			navigationViewModel.push(ValidationInfo(isLoading: $isLoading, onBack: { navigationViewModel.pop() }, onNext: { image in
 				uploadImage(image: image) }))
 		}, onLoginSwitch: {
 			navigationViewModel.push(
-				Login(onLoginCompleted: { handleMap() }, onRegisterSwitch: { handleRegister() }) )}))
+				Login(onLoginCompleted: {  }, onRegisterSwitch: { handleRegister() })
+			)}))
 	}
 	
 	func uploadImage(image: Image) {
@@ -77,9 +79,10 @@ struct ContentView: View {
 	}
 	
 	func handleMap() {
-		navigationViewModel.push(MapView(onMenu: { handleOnMenu() }, onUnlockScooter: { unlockType, scooter in
+		navigationViewModel.push(
+		MapCoordinator(navigationViewModel: navigationViewModel, onMenu: {handleOnMenu()}) { unlockType, scooter in
 			handleUnlockType(type: unlockType, scooter: scooter)
-		}))
-	}*/
+		})
+	}
 
 }

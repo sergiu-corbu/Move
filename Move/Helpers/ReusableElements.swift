@@ -116,6 +116,16 @@ struct NavigationBar: View {
 	}
 }
 
+
+enum InputFieldType: String {
+	case email = "Email Address"
+	case username = "Username"
+	case password = "Password"
+	case oldPassword = "Old password"
+	case newPassword = "New Password"
+	case confirmNewPassword = "Confirm new password"
+}
+
 //MARK: fields
 struct InputField: View {
 	
@@ -124,13 +134,13 @@ struct InputField: View {
 	@State private var showSecured: Bool = true
 	
 	let textField: String
-	let isSecuredField: Bool
-	let textColor: Color
+	var textColor: Color = Color.white
+	var isSecuredField: Bool = false
 	var error: String?
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
-			if !input.isEmpty || activeField {
+			if input != "" || activeField {
 				Text(textField)
 					.foregroundColor(.white)
 					.font(Font.custom(FontManager.Primary.regular, size: 14))
@@ -159,7 +169,7 @@ struct InputField: View {
 				if !input.isEmpty && activeField {
 					Button(action: {
 						if isSecuredField { showSecured.toggle() } else { input = "" } }, label: {
-							Image( isSecuredField ? ( showSecured ? "eye-img": "eye-off-img") : "close-img")
+							Image(isSecuredField ? ( showSecured ? "eye-img": "eye-off-img") : "close-img")
 								.padding(.all, 5)
 								.foregroundColor(.fadePurple) })
 				}

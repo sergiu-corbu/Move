@@ -80,9 +80,7 @@ struct TripDetail: View {
 				Spacer()
 				tripTime
 			}.padding(.vertical, 10)
-		}
-		
-		.padding(.vertical, 6)
+		}.padding(.vertical, 6)
 	}
 	
 	var tripBoundaries: some View {
