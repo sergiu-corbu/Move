@@ -111,7 +111,6 @@ struct NavigationBar: View {
 					Spacer()
 				}
 			}
-			
 		}.padding(.top, 10)
 	}
 }
@@ -156,6 +155,7 @@ struct InputField: View {
 						TextField(activeField ? "" : textField, text: $input, onCommit: { activeField = false })
 							.foregroundColor(textColor)
 							.introspectTextField { textField in
+							
 								textField.returnKeyType = .next }
 					}
 				}

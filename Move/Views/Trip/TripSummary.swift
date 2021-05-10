@@ -11,14 +11,13 @@ struct TripSummary: View {
 	@State private var isLoading: Bool = false
 	
     var body: some View {
-		VStack(alignment: .leading, spacing: 48) {
+		VStack(alignment: .leading, spacing: 40) {
 			NavigationBar(title: "Trip Summary", color: .darkPurple)
 			Image("mapDraw")
 			tripBoundaries
 			travelData
-			Spacer()
 			ActionButton(isLoading: isLoading, enabled: true, isBlackBackground: true, text: "Pay with", action: {})
-		}
+		} 
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))
     }
@@ -49,8 +48,7 @@ struct TripSummary: View {
 	}
 	
 	var appleLogo: some View {
-		Image(systemName: "applelogo")
-			.foregroundColor(.white)
+		Image(systemName: "applelogo").foregroundColor(.white)
 	}
 }
 

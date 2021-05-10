@@ -27,11 +27,8 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 			textField.resignFirstResponder()
 			API.unlockScooterPin(code: codeString) { result in
 				switch result {
-					case .success(let result):
-						print("\(result)")
-						self.onFinishedUnlock?()
-					case .failure(let error):
-						showError(error: error.localizedDescription)
+					case .success: self.onFinishedUnlock?()
+					case .failure(let error): showError(error: error.localizedDescription)
 				}
 			}
 		}

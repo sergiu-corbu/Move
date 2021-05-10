@@ -1,10 +1,3 @@
-//
-//  StatusBarConfigurator.swift
-//  StatusBarTest
-//
-//  Created by hiroki on 2021/02/11.
-//
-
 import UIKit
 import SwiftUI
 

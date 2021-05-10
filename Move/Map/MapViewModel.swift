@@ -39,12 +39,9 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
     
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
-            case .authorizedWhenInUse, .authorizedAlways: //when app is open
-                startTrackingUserLocation()
-            case .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
-            case .denied, .restricted:
-                break
+            case .authorizedWhenInUse, .authorizedAlways: startTrackingUserLocation()
+            case .notDetermined: locationManager.requestWhenInUseAuthorization()
+            case .denied, .restricted: break
             @unknown default:
                 assert(false, "handle new added case")
                 break
@@ -55,7 +52,6 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
         showLocation = true
         locationManager.startUpdatingLocation()
         geoCode()
-        
     }
     
     func geoCode() {
@@ -76,9 +72,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
            // guard let self = self else { return }
             
             if let error = error { print(error); return }
-            
             guard let placemark = placemarks?.first else { return }
-            
             let result = placemark.thoroughfare! + " " + placemark.subThoroughfare!
             completion(result)
         }

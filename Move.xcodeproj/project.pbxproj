@@ -47,7 +47,6 @@
 		ECDD3FE626242951003C659F /* NavigationStack in Frameworks */ = {isa = PBXBuildFile; productRef = ECDD3FE526242951003C659F /* NavigationStack */; };
 		ECDD3FEE26242970003C659F /* Extensions&Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEA26242970003C659F /* Extensions&Helpers.swift */; };
 		ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEB26242970003C659F /* ReusableElements.swift */; };
-		ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FEC26242970003C659F /* OnboardingData.swift */; };
 		ECDD3FF726242979003C659F /* BaiJamjuree-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF326242979003C659F /* BaiJamjuree-Regular.ttf */; };
 		ECDD3FF826242979003C659F /* BaiJamjuree-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF426242979003C659F /* BaiJamjuree-Bold.ttf */; };
 		ECDD3FF926242979003C659F /* BaiJamjuree-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDD3FF526242979003C659F /* BaiJamjuree-SemiBold.ttf */; };
@@ -101,7 +100,6 @@
 		ECDD3FD6262428C7003C659F /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		ECDD3FEA26242970003C659F /* Extensions&Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions&Helpers.swift"; sourceTree = "<group>"; };
 		ECDD3FEB26242970003C659F /* ReusableElements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableElements.swift; sourceTree = "<group>"; };
-		ECDD3FEC26242970003C659F /* OnboardingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
 		ECDD3FF326242979003C659F /* BaiJamjuree-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Regular.ttf"; sourceTree = "<group>"; };
 		ECDD3FF426242979003C659F /* BaiJamjuree-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-Bold.ttf"; sourceTree = "<group>"; };
 		ECDD3FF526242979003C659F /* BaiJamjuree-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BaiJamjuree-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -276,7 +274,6 @@
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
 				EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */,
 				EC3BA58B2639DB140032A496 /* ReusableButtons.swift */,
-				ECDD3FEC26242970003C659F /* OnboardingData.swift */,
 				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 			);
@@ -418,7 +415,6 @@
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
 				ECA7B5882637E6D00063C883 /* ScanQR.swift in Sources */,
 				ECDAF120264438C0004FF94F /* StopWatch.swift in Sources */,
-				ECDD3FF026242970003C659F /* OnboardingData.swift in Sources */,
 				ECFCA84E2642C10500674750 /* TripModel.swift in Sources */,
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
 				ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */,

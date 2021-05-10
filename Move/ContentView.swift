@@ -15,7 +15,7 @@ struct ContentView: View {
 	var body: some View {
 		if Session.tokenKey != nil {
 			NavigationStackView(navigationStack: navigationViewModel) {
-				MapCoordinator(navigationViewModel: navigationViewModel, onMenu: { handleOnMenu() }) { unlockType, scooter in
+				MapCoordinator(navigationViewModel: navigationViewModel) { unlockType, scooter in
 					handleUnlockType(type: unlockType, scooter: scooter)
 				}
 			} } else {
@@ -27,12 +27,9 @@ struct ContentView: View {
 	
 	func handleUnlockType(type: UnlockType, scooter: Scooter) {
 		switch type {
-			case .code:
-				handleCodeUnlock(scooter: scooter)
-			case .qr:
-				break
-			case .nfc:
-				break
+			case .code: handleCodeUnlock(scooter: scooter)
+			case .qr: break
+			case .nfc: break
 		}
 	}
 	
@@ -47,17 +44,6 @@ struct ContentView: View {
 				}))
 			})
 		}))
-	}
-	
-	func handleOnMenu() {
-		navigationViewModel.push(MenuView(onBack: { navigationViewModel.pop() },
-										  onSeeAll: {
-											navigationViewModel.push(HistoryView(onBack: { navigationViewModel.pop() }))
-										  }, onAccount: {
-											navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() }, onLogout: { navigationViewModel.push(Onboarding(onFinished: { handleRegister() }))}, onSave: { navigationViewModel.pop() }))
-										}, onChangePassword: {
-											navigationViewModel.push(ChangePasswordView(action: {navigationViewModel.pop()}))
-										}))
 	}
 	
 	func handleRegister() {
@@ -80,7 +66,7 @@ struct ContentView: View {
 	
 	func handleMap() {
 		navigationViewModel.push(
-		MapCoordinator(navigationViewModel: navigationViewModel, onMenu: {handleOnMenu()}) { unlockType, scooter in
+		MapCoordinator(navigationViewModel: navigationViewModel) { unlockType, scooter in
 			handleUnlockType(type: unlockType, scooter: scooter)
 		})
 	}

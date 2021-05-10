@@ -23,8 +23,13 @@ class API {
 	
 	static func register(username: String, email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void ) {
         let path = baseUrl + "user/register"
-        AF.request( path, method: .post, parameters: [ "email": email, "username": username, "password": password ], encoder: JSONParameterEncoder.default).response {  response in
+		
+		AF.request( path, method: .post, parameters: [ "email": email, "username": username, "password": password ], encoder: JSONParameterEncoder.default).validate()
+			.response {  response in
+				
             if let data = response.data {
+				let debugString = String.init(data: data, encoding: .utf8)
+				print(debugString)
                 do {
                     let result = try JSONDecoder().decode(AuthResult.self, from: data)
                     callback(.success(result))
@@ -112,6 +117,9 @@ class API {
 		let header: HTTPHeaders = ["Authorization": token]
 		AF.request(path, method: .get, headers: header).response { response in
 			if let response = response.data {
+//				let debugString = String.init(data: response, encoding: .utf8)
+//				print(debugString)
+				
 				do {
 					let trips = try JSONDecoder().decode([Trip].self, from: response)
 					DispatchQueue.global(qos: .userInteractive).async {
@@ -129,7 +137,10 @@ class API {
 							callback(.success(result))
 						}
 					}
-				} catch (let error) { callback(.failure(error)) }
+				} catch (let error)
+				{
+					//print(error)
+					callback(.failure(error)) }
 			} else { print("error on api call")}
 		}
 	}

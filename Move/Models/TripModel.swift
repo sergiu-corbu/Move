@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct Trip: Codable, Hashable {
+struct Trip: Codable {//, Hashable {
 //	static func == (lhs: Trip, rhs: Trip) -> Bool {
 //		return lhs.duration == rhs.duration && lhs.distance == rhs.distance
 //	}
@@ -16,7 +16,6 @@ struct Trip: Codable, Hashable {
 //		hasher.combine(duration)
 //		hasher.combine(distance)
 //	}
-	
 	let startStreet: [Double]
 	let endStreet: [Double]
 	let duration: Int
