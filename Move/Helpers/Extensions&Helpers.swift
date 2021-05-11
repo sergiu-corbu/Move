@@ -21,6 +21,16 @@ public func showError(error: String) {
 	SwiftMessages.show(view: view)
 }
 
+public func showMessage(message: String) {
+	let view = MessageView.viewFromNib(layout: .cardView)
+	view.configureTheme(.success)
+	view.configureDropShadow()
+	view.configureContent(body: message)
+	view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+	(view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
+	SwiftMessages.show(view: view)
+}
+
 //MARK: Data validation
 extension String {
 	func emailValidation() -> Bool {

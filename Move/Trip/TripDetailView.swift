@@ -59,17 +59,18 @@ struct TripDetailView: View {
 	}
 	
 	private var tripButtons: some View {
-		ScooterElements.TripButtons(isLockedPressed: $lockButtonPressed, onLockButton: { tripViewModel.lockScooter(); lockButtonPressed.toggle() }, onUnlockButton: { tripViewModel.unlockScooter(); lockButtonPressed.toggle() },
-			onEndTripButton: {
+		ScooterElements.TripButtons(isLockedPressed: $lockButtonPressed, onLockButton: {
+			tripViewModel.lockScooter()
+			lockButtonPressed.toggle()
+		}, onUnlockButton: {
+			tripViewModel.unlockScooter()
+			lockButtonPressed.toggle()
+		}, onEndTripButton: {
 			endRidePressed = true
 			self.stopWatch.stop()
-			API.endTrip { result in
-					switch result {
-						case .success: onEndRide()
-						case .failure(let error): showError(error: error.localizedDescription)
-					}
-				}
-			})
+			tripViewModel.endTrip()
+			onEndRide()
+		})
 	}
 }
 
