@@ -31,7 +31,7 @@ struct ScooterViewItem: View {
 				scooterInfo
 			}
 			location
-			ActionButton(isLoading: false, enabled: true, text: "Unlock", action: { isUnlocked.toggle()})
+			ActionButton(text: "Unlock", isLoading: false, enabled: true, action: { isUnlocked.toggle()})
 				.padding(.top)
 		}.padding(.horizontal, 24)
 	}

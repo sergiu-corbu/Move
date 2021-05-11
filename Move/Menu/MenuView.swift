@@ -34,7 +34,7 @@ struct MenuView: View {
                 }
             }.padding(.horizontal, 24)
         }
-		.onAppear{ downloadTrips() }
+		.onAppear{ tripViewModel.downloadTrips() }
 		.background(Color.white.edgesIgnoringSafeArea(.all))
     }
 	
@@ -49,7 +49,7 @@ struct MenuView: View {
                     Text("History")
                         .foregroundColor(.white)
                         .font(.custom(FontManager.Primary.bold, size: 18))
-					Text("Total rides: \(tripViewModel.allTrips.count)")
+					Text("Total rides: \(tripViewModel.tripCount)")
                         .foregroundColor(.fadePurple)
                         .font(.custom(FontManager.Primary.medium, size: 16))
                 }
@@ -70,21 +70,15 @@ struct MenuView: View {
     }
     var menuOptions: some View {
         VStack(alignment: .leading) {
-            MenuItems(icon: "wheel-img", title: "General Settings", components: [SubMenuItems(title: "Account", index: 0, callback: { onAccount()}, isNavButton: true, url: "a"),
-				SubMenuItems(title: "Change password",index: 1, callback: { onChangePassword() }, isNavButton: true, url: "a")])
-            MenuItems(icon: "flag-img", title: "Legal", components: [SubMenuItems(title: "Terms and Conditions", index: 0, url: "https://tapptitude.com"), SubMenuItems(title: "Privacy Policy", index: 1, url: "https://tapptitude.com")])
+            MenuItems(icon: "wheel-img", title: "General Settings", components: [
+						SubMenuItems(title: "Account", index: 0, callback: { onAccount()}),
+						SubMenuItems(title: "Change password",index: 1, callback: { onChangePassword() })])
+			MenuItems(icon: "flag-img", title: "Legal", components: [
+						SubMenuItems(title: "Terms and Conditions", index: 0),
+						SubMenuItems(title: "Privacy Policy", index: 1)])
             MenuItems(icon: "star-img", title: "Rate Us", components: [])
         }
     }
-	
-	func downloadTrips() {
-		API.downloadTrips({ result in
-			switch result {
-				case .success(let trips): tripViewModel.allTrips = trips
-				case .failure(let error): showError(error: error.localizedDescription)
-			}
-		})
-	}
 }
 
 struct MenuItems: View {
@@ -119,16 +113,16 @@ struct SubMenuItems: View {
     
     let title: String
 	let index: Int
-	var callback: (() -> Void)?
+	//let url: String
     var isNavButton: Bool = false
-    var url: String
-    
+	var callback: (() -> Void)?
+   
     var body: some View {
-        if isNavButton {
-            Link(destination: URL(string: url)!, label: { text })
-        } else {
-            Button(action: { callback!() }, label: { text })
-        }
+       // if isNavButton {
+         //   Link(destination: URL(string: url)!, label: { text })
+      //  } else {
+            Button(action: { callback?() }, label: { text })
+      //  }
     }
 	
 	var text: some View {

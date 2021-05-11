@@ -23,21 +23,17 @@ struct SNUnlock: View {
                 .padding(.horizontal, 24)
 			UnlockScooterElements.Title(title: "Enter the scooter's\nserial number")
 			UnlockScooterElements.SubTitle(subTitle: "You can find it on the\nscooter's front panel").padding(.bottom, 100)
-            digitRow
+			HStack {
+				ForEach(0..<unlockViewModel.maxPins) { index in
+					DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
+				}
+			}
 			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
         }
 		.onAppear { unlockViewModel.onFinishedUnlock = onFinished }
 		.onTapGesture { hideKeyboard() }
 		.background(SharedElements.purpleBackground)
     }
-    
-	var digitRow: some View {
-		HStack {
-			ForEach(0..<unlockViewModel.maxPins) { index in
-				DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
-			}
-		}
-	}
 	
 	func digitBinding(index: Int) -> Binding<String> {
 		return Binding<String>.init(get: {
@@ -64,6 +60,7 @@ struct DigitField: View {
 			.clipShape(RoundedRectangle(cornerRadius: 18))
 			.introspectTextField { textfield in
 				textfield.delegate = self.unlockViewModel
+				if unlockViewModel.selectedIndex == 0 { textfield.becomeFirstResponder() }
 				if isSelected { textfield.becomeFirstResponder() }
 				if unlockViewModel.selectedIndex == 3 && unlockViewModel.unlockCode[3] != "" { hideKeyboard() }
 			}

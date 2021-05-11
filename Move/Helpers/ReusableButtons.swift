@@ -9,10 +9,10 @@ import SwiftUI
 
 //MARK: Buttons
 struct ActionButton: View {
+	let text: String
 	var isLoading: Bool = false
 	var enabled: Bool = false
 	var isBlackBackground: Bool = false
-	let text: String
 	let action: () -> Void
 	
 	var body: some View {
@@ -22,11 +22,10 @@ struct ActionButton: View {
 					HStack {
 						Text(text)
 						if isBlackBackground {
-							Image("Alogo")
-								.padding(.top, -2)
+							Image("Alogo").padding(.top, -2)
 							Text("Pay")
 								.padding(.leading, -3)
-								.padding(.top, -1)
+								.padding(.top, -1) //maybe not ok
 						}
 					}
 					.foregroundColor(enabled ? .white : .fadePurple)
@@ -54,8 +53,8 @@ struct ActionButton: View {
 
 struct MapActionButton: View {
 	let image: String
-	var border: Bool = false
 	let action: () -> Void
+	var border: Bool = false
 	
 	var body: some View {
 		Button(action: { action() }, label: {
@@ -64,10 +63,7 @@ struct MapActionButton: View {
 					RoundedRectangle(cornerRadius: 13)
 						.strokeBorder(Color.lightGray)
 						.foregroundColor(.white)
-				} else {
-					RoundedRectangle(cornerRadius: 13)
-						.foregroundColor(.white)
-				}
+				} else { RoundedRectangle(cornerRadius: 13).foregroundColor(.white) }
 				Image(image)
 			}
 			.shadow(color: Color(UIColor.systemGray5), radius: 3, x: 5, y: 4)
@@ -111,12 +107,4 @@ struct UnlockOptionButton: View {
 				.clipShape(RoundedRectangle(cornerRadius: 16))
 		})
 	}
-}
-
-
-struct ReusableButtons_Previews: PreviewProvider {
-    static var previews: some View {
-       // ReusableButtons()
-		EmptyView()
-    }
 }

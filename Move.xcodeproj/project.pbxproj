@@ -20,7 +20,7 @@
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
 		EC3BA58C2639DB140032A496 /* ReusableButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ReusableButtons.swift */; };
-		EC3BA58E2639DBAC0032A496 /* ScooterReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */; };
+		EC3BA58E2639DBAC0032A496 /* ReusableScooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
 		EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */; };
@@ -32,6 +32,7 @@
 		ECA7B5882637E6D00063C883 /* ScanQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7B5872637E6D00063C883 /* ScanQR.swift */; };
 		ECA7B5E8263816CD0063C883 /* SNUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7B5E7263816CD0063C883 /* SNUnlock.swift */; };
 		ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */; };
+		ECB5991A264AB6A500708241 /* ScootersRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB59919264AB6A500708241 /* ScootersRowView.swift */; };
 		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
 		ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10F48262C988B006FAE6C /* ScooterModel.swift */; };
 		ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */; };
@@ -75,7 +76,7 @@
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		EC3BA58B2639DB140032A496 /* ReusableButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableButtons.swift; sourceTree = "<group>"; };
-		EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterReusable.swift; sourceTree = "<group>"; };
+		EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableScooter.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
 		EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterCard.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		ECA7B5872637E6D00063C883 /* ScanQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQR.swift; sourceTree = "<group>"; };
 		ECA7B5E7263816CD0063C883 /* SNUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNUnlock.swift; sourceTree = "<group>"; };
 		ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockViewModel.swift; sourceTree = "<group>"; };
+		ECB59919264AB6A500708241 /* ScootersRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScootersRowView.swift; sourceTree = "<group>"; };
 		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		ECC10F48262C988B006FAE6C /* ScooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterModel.swift; sourceTree = "<group>"; };
 		ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterViewModel.swift; sourceTree = "<group>"; };
@@ -189,9 +191,8 @@
 		EC7F0EE32630384F004FF766 /* Scooter */ = {
 			isa = PBXGroup;
 			children = (
-				ECA7B5EA263816D30063C883 /* UnlockScooter */,
-				EC3233092645454300BC9FD0 /* Trip */,
 				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
+				ECB59919264AB6A500708241 /* ScootersRowView.swift */,
 				ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */,
 			);
 			name = Scooter;
@@ -237,6 +238,8 @@
 				EC16140F26370E2500931AF0 /* Map */,
 				EC16141D2637118500931AF0 /* Menu */,
 				EC7F0EE32630384F004FF766 /* Scooter */,
+				ECA7B5EA263816D30063C883 /* UnlockScooter */,
+				EC3233092645454300BC9FD0 /* Trip */,
 				ECFCA84B2642BCB100674750 /* Models */,
 				ECE337BE26243A57009EC353 /* Services */,
 				ECDD3FFE26242985003C659F /* Helpers */,
@@ -272,7 +275,7 @@
 			children = (
 				ECDD3FEA26242970003C659F /* Extensions&Helpers.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
-				EC3BA58D2639DBAC0032A496 /* ScooterReusable.swift */,
+				EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */,
 				EC3BA58B2639DB140032A496 /* ReusableButtons.swift */,
 				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
@@ -428,7 +431,8 @@
 				EC16141B2637117C00931AF0 /* ChangePasswordView.swift in Sources */,
 				ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Extensions&Helpers.swift in Sources */,
-				EC3BA58E2639DBAC0032A496 /* ScooterReusable.swift in Sources */,
+				ECB5991A264AB6A500708241 /* ScootersRowView.swift in Sources */,
+				EC3BA58E2639DBAC0032A496 /* ReusableScooter.swift in Sources */,
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
 				ECDD400026242985003C659F /* MapView.swift in Sources */,
 				ECDD3FC226242836003C659F /* ContentView.swift in Sources */,

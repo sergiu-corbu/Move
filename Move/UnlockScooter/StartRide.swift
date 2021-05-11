@@ -28,7 +28,7 @@ struct StartRide: View {
 				}.padding(.top, 30)
 				ScooterElements.scooterImage.padding(.trailing, -24)
 			}
-			ActionButton(isLoading: false, enabled: true, text: "Start ride", action: { onStartRide(scooter) })
+			ActionButton(text: "Start ride", isLoading: false, enabled: true, action: { onStartRide(scooter) })
 		}
 		.padding(.top, 30)
 		.padding(.horizontal, 24)

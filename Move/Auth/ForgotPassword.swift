@@ -18,8 +18,8 @@ struct ForgotPassword: View {
         VStack(alignment: .leading) {
             NavigationBar(color: .white, backButton: "chevron-left-white", action: { onBack() }).padding(.leading, -5)
             messageArea
-			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: InputFieldType.email.rawValue)
-			ActionButton(enabled: userViewModel.resetPasswordEnabled && userViewModel.emailError.isEmpty, text: "Send Reset Link", action: {
+			CustomField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: FieldType.email.rawValue)
+			ActionButton(text: "Send Reset Link", enabled: userViewModel.resetPasswordEnabled && userViewModel.emailError.isEmpty, action: {
                 userViewModel.email = ""
                 onCompleted()
                 showAlert.toggle()

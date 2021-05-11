@@ -49,6 +49,7 @@ class UserViewModel: ObservableObject {
     }
     
 	//MARK: validation
+	var editCredentialsEnabled: Bool { return email != "" && username != ""}
     var resetPasswordEnabled: Bool { return email != "" }
     var allfieldsCompletedRegister: Bool { return email != "" && username != "" && password != "" && isLoading == false }
     var allfieldsValidatedRegister: Bool { return emailError.isEmpty && passwordError.isEmpty }

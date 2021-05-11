@@ -1,5 +1,5 @@
 //
-//  ScooterReusable.swift
+//  ReusableScooter.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 28.04.2021.
@@ -87,13 +87,12 @@ struct ScooterElements {
 		let image: String
 		let text: String
 		var showBorder: Bool = false
+		
 		var body: some View {
 			HStack {
-				MapActionButton(image: image, border: showBorder, action:{})
-				Text(text)
-					.font(.custom(FontManager.Primary.medium, size: 14))
-			}
-			.padding(.leading, -5)
+				MapActionButton(image: image, action:{}, border: showBorder)
+				Text(text).font(.custom(FontManager.Primary.medium, size: 14))
+			}.padding(.leading, -5)
 		}
 	}
 	
@@ -103,7 +102,7 @@ struct ScooterElements {
 		var body: some View {
 			Button(action: { endTrip() }, label: {
 				HStack {
-					Text("End ride") .foregroundColor(.white) .font(.custom(FontManager.Primary.bold, size: 16))
+					Text("End ride").foregroundColor(.white).font(.custom(FontManager.Primary.bold, size: 16))
 				}
 				.frame(width: 153, height: 56)
 				.background(RoundedRectangle(cornerRadius: 16).foregroundColor(.coralRed))
@@ -118,7 +117,7 @@ struct ScooterElements {
 		
 		var body: some View {
 			Button(action: { tripAction() }, label: {
-				HStack { Label(text, image: icon) .foregroundColor(.coralRed) .font(.custom(FontManager.Primary.bold, size: 16)) }
+				HStack { Label(text, image: icon).foregroundColor(.coralRed).font(.custom(FontManager.Primary.bold, size: 16)) }
 					.frame(width: 153, height: 56)
 					.background(RoundedRectangle(cornerRadius: 16).strokeBorder(Color.coralRed, lineWidth: 1.2).foregroundColor(.white))
 			})

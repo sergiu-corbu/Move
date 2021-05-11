@@ -13,6 +13,7 @@ struct ContentView: View {
 	var navigationViewModel: NavigationStack = NavigationStack()
 	
 	var body: some View {
+
 		if Session.tokenKey != nil {
 			NavigationStackView(navigationStack: navigationViewModel) {
 				MapCoordinator(navigationViewModel: navigationViewModel) { unlockType, scooter in
@@ -70,5 +71,4 @@ struct ContentView: View {
 			handleUnlockType(type: unlockType, scooter: scooter)
 		})
 	}
-
 }

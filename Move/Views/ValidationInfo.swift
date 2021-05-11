@@ -31,7 +31,7 @@ struct ValidationInfo: View {
 				UnlockScooterElements.Title(title: "Before you can start\nriding", purpleColor: true, customPadding: true, customAlignment: true)
 				UnlockScooterElements.SubTitle(subTitle: "Please take a photo or upload the front side of your driving license so we can make sure that it is valid.", purpleColor: true, customAlignment: true, customOpacity: true)
 				Spacer()
-                ActionButton(isLoading: isLoading, enabled: true, text: "Add drivig license", action: { showActionSheet.toggle() })
+				ActionButton(text: "Add drivig license", isLoading: isLoading, enabled: true, action: { showActionSheet.toggle() })
                 .sheet(isPresented: $showImagePicker) {
                     ImagePickerView(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
                 }

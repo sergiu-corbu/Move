@@ -19,7 +19,7 @@ struct Login: View {
 				RegisterElements.logoArea
 				RegisterElements.MessageArea(text: "Sign up or login and start\nriding right away")
                 inputArea
-				ActionButton(isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedLogin && userViewModel.allfieldsValidatedLogin, text: "Login", action: {
+				ActionButton(text: "Login", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedLogin && userViewModel.allfieldsValidatedLogin, action: {
 					userViewModel.isLoading = true
 					API.login(email: userViewModel.email, password: userViewModel.password) { (result) in
 						switch result {
@@ -44,8 +44,8 @@ struct Login: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: InputFieldType.email.rawValue)
-			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: InputFieldType.password.rawValue, isSecuredField: true)
+			CustomField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: FieldType.email.rawValue)
+			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.password.rawValue, isSecuredField: true)
         }
     }
 }

@@ -35,10 +35,10 @@ struct Register: View {
     
     var inputArea: some View {
         VStack(alignment: .leading) {
-			InputField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: InputFieldType.email.rawValue, error: userViewModel.emailError)
-			InputField(input: $userViewModel.username, activeField: userViewModel.isActive, textField: InputFieldType.username.rawValue)
+			CustomField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: FieldType.email.rawValue, error: userViewModel.emailError)
+			CustomField(input: $userViewModel.username, activeField: userViewModel.isActive, textField: FieldType.username.rawValue)
             VStack(alignment: .leading) {
-				InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: InputFieldType.password.rawValue, isSecuredField: true, error: userViewModel.passwordError)
+				CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.password.rawValue, isSecuredField: true, error: userViewModel.passwordError)
                 if userViewModel.password == "" && userViewModel.isActive  {
                     Text("Use a strong password (min. 8 characters and use symbols")
                         .font(.custom(FontManager.Primary.regular, size: 13))
@@ -49,7 +49,7 @@ struct Register: View {
     }
     
     var getStartedButton: some View {
-        ActionButton(isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedRegister && userViewModel.allfieldsValidatedRegister, text: "Get started", action: {
+		ActionButton(text: "Get started", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedRegister && userViewModel.allfieldsValidatedRegister, action: {
             userViewModel.isLoading = true
             API.register(username: userViewModel.username, email: userViewModel.email, password: userViewModel.password) { (result) in
                 switch result {
@@ -61,6 +61,10 @@ struct Register: View {
                     case .failure(let error):
 						showError(error: error.localizedDescription)
                         userViewModel.isLoading = false
+						userViewModel.email = ""
+						userViewModel.username = ""
+						userViewModel.password = ""
+						
                 }
             }
         }).padding(.top, 20)

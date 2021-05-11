@@ -16,7 +16,7 @@ struct ChangePasswordView: View {
             NavigationBar(title: "Change password", color: .darkPurple, backButton: "chevron-left-purple", action: { action() })
             inputArea
             Spacer()
-			ActionButton(isLoading: userViewModel.isLoading, enabled: userViewModel.validatePasswords, text: "Save edits", action: {
+			ActionButton(text: "Save edits", isLoading: userViewModel.isLoading, enabled: userViewModel.validatePasswords, action: {
 				userViewModel.isLoading = true
 				// api call
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
@@ -31,9 +31,9 @@ struct ChangePasswordView: View {
     
     var inputArea: some View {
         VStack(alignment: .leading, spacing: 20) {
-			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: InputFieldType.oldPassword.rawValue, textColor: Color.darkPurple)
-			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: InputFieldType.newPassword.rawValue, textColor: Color.darkPurple)
-			InputField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: InputFieldType.confirmNewPassword.rawValue, textColor: Color.darkPurple, isSecuredField: true)
+			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.oldPassword.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
+			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.newPassword.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
+			CustomField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: FieldType.confirmNewPassword.rawValue, textColor: Color.darkPurple, isSecuredField: true, upperTextOpacity: true)
         }.padding(.top, 40)
     }
 }

@@ -19,7 +19,7 @@ struct ResetPassword: View {
                 .padding(.leading, -5)
 			RegisterElements.BigTitle(text: "Reset password")
             inputField
-			ActionButton(enabled: userViewModel.validatePasswords, text: "Reset Password", action: {
+			ActionButton(text: "Reset Password", enabled: userViewModel.validatePasswords, action: {
 				if userViewModel.validatePasswords {
 					userViewModel.password = ""
 					userViewModel.repeatPassword = ""
@@ -39,8 +39,8 @@ struct ResetPassword: View {
 
     var inputField: some View {
         VStack {
-			InputField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: InputFieldType.newPassword.rawValue, isSecuredField: true, error: userViewModel.passwordError)
-			InputField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: InputFieldType.confirmNewPassword.rawValue, isSecuredField: true, error: userViewModel.repeatPasswordError)
+			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.newPassword.rawValue, isSecuredField: true, error: userViewModel.passwordError)
+			CustomField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: FieldType.confirmNewPassword.rawValue, isSecuredField: true, error: userViewModel.repeatPasswordError)
         }
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TripSummary: View {
 	@State private var isLoading: Bool = false
+	//let onFinish: () -> Void
 	
     var body: some View {
 		VStack(alignment: .leading, spacing: 40) {
@@ -16,7 +17,7 @@ struct TripSummary: View {
 			Image("mapDraw")
 			tripBoundaries
 			travelData
-			ActionButton(isLoading: isLoading, enabled: true, isBlackBackground: true, text: "Pay with", action: {})
+			ActionButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: {})
 		} 
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))

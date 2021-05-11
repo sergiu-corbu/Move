@@ -15,14 +15,7 @@ struct HistoryView: View {
 		VStack(spacing: 30) {
 			NavigationBar(title: "History", color: .darkPurple, backButton: "chevron-left-purple", action: { onBack() })
 			ScrollView(showsIndicators: false) {
-				PullToRefresh(coordinateSpace: "pullToRefresh") {
-					API.downloadTrips({ result in
-						switch result {
-							case .success(let trips): tripViewModel.allTrips = trips
-							case .failure(let error): print(error)
-						}
-					})
-				}
+				PullToRefresh(coordinateSpace: "pullToRefresh") { tripViewModel.downloadTrips() }
 				ForEach(0..<tripViewModel.allTrips.count, id: \.self) { index in
 					TripDetail(trip: tripViewModel.allTrips[index])
 				}

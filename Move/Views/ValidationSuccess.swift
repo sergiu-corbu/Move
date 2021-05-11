@@ -15,7 +15,7 @@ struct ValidationSuccess: View {
 			SharedElements.checkmarkImage.padding(.top, 70)
 			UnlockScooterElements.Title(title: "We've succesfully validated your driving license!")
 			Spacer()
-			ActionButton(enabled: true, text: "Find scooters", action: { onFindScooters() })
+			ActionButton(text: "Find scooters", enabled: true, action: { onFindScooters() })
 				.padding(.bottom, 20)
         }
 		.multilineTextAlignment(.center)

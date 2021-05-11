@@ -28,7 +28,12 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 			API.unlockScooterPin(code: codeString) { result in
 				switch result {
 					case .success: self.onFinishedUnlock?()
-					case .failure(let error): showError(error: error.localizedDescription)
+					case .failure(let error):
+						showError(error: error.localizedDescription)
+						self.codeString = ""
+						self.selectedIndex = 0
+						self.unlockCode = ["", "", "", ""]
+						textField.becomeFirstResponder()
 				}
 			}
 		}

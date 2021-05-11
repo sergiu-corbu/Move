@@ -26,15 +26,14 @@ struct MapCoordinator: View {
 	var body: some View {
 		NavigationStackView(navigationStack: navigationViewModel) {
 			ZStack(alignment: .top) {
-				MapView(onMenu: {  handleOnMenu() })
+				MapView(mapViewModel: mapViewModel, scooterViewModel: scooterViewModel, onMenu: {  handleOnMenu() })
 				if let selectedScooter = self.mapViewModel.selectedScooter {
 					VStack {
 						Spacer()
 						ZStack(alignment: .bottom) {
-							ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed)
-								.padding(.horizontal, 15)
+							ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed).padding(.horizontal, 15)
 							if unlockPressed {
-								UnlockScooterCard(onQR: {}, onPin: {onUnlockScooter(UnlockType.code, selectedScooter); unlockPressed = false}, onNFC: {}, scooter: selectedScooter)
+								UnlockScooterCard(onQR: {}, onPin: { onUnlockScooter(UnlockType.code, selectedScooter); unlockPressed = false }, onNFC: {}, scooter: selectedScooter)
 							}
 						}
 					}
@@ -49,7 +48,7 @@ struct MapCoordinator: View {
 										  onSeeAll: {
 											navigationViewModel.push(HistoryView(onBack: { navigationViewModel.pop() }))
 										  }, onAccount: {
-											navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() }, onLogout: { navigationViewModel.push(Onboarding(onFinished: { /*handleRegister() */}))}, onSave: { navigationViewModel.pop() }))
+											navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() }, onLogout: { navigationViewModel.push(Onboarding(onFinished: { print("a")}))}, onSave: { navigationViewModel.pop() }))
 										}, onChangePassword: {
 											navigationViewModel.push(ChangePasswordView(action: {navigationViewModel.pop()}))
 										}))
@@ -57,8 +56,8 @@ struct MapCoordinator: View {
 }
 
 struct MapView: View {
-	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
-	@ObservedObject var scooterViewModel: ScooterViewModel = ScooterViewModel.shared
+	@ObservedObject var mapViewModel: MapViewModel
+	@ObservedObject var scooterViewModel: ScooterViewModel
 	@State private var region = MKCoordinateRegion.defaultRegion
 	
 	public func centerViewOnUserLocation() {

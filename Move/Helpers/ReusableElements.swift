@@ -116,7 +116,7 @@ struct NavigationBar: View {
 }
 
 
-enum InputFieldType: String {
+enum FieldType: String {
 	case email = "Email Address"
 	case username = "Username"
 	case password = "Password"
@@ -126,8 +126,7 @@ enum InputFieldType: String {
 }
 
 //MARK: fields
-struct InputField: View {
-	
+struct CustomField: View {
 	@Binding var input: String
 	@State var activeField: Bool
 	@State private var showSecured: Bool = true
@@ -136,27 +135,30 @@ struct InputField: View {
 	var textColor: Color = Color.white
 	var isSecuredField: Bool = false
 	var error: String?
+	var upperTextOpacity: Bool = false
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 0) {
 			if input != "" || activeField {
 				Text(textField)
-					.foregroundColor(.white)
+					.foregroundColor(textColor)
 					.font(Font.custom(FontManager.Primary.regular, size: 14))
+					.opacity(upperTextOpacity ? 0.6 : 1)
 			}
 			HStack {
 				HStack {
 					if showSecured && isSecuredField {
 						SecureField(activeField ? "" : textField, text: $input, onCommit: { activeField = false })
-							.foregroundColor(textColor)
+							.foregroundColor(textColor) // must be textColor
 							.introspectTextField { textField in
 								textField.returnKeyType = .done }
+							.onTapGesture { activeField = true }
 					} else {
 						TextField(activeField ? "" : textField, text: $input, onCommit: { activeField = false })
 							.foregroundColor(textColor)
 							.introspectTextField { textField in
-							
 								textField.returnKeyType = .next }
+							.onTapGesture { activeField = true }
 					}
 				}
 				.font(Font.custom(FontManager.Primary.medium, size: 18))
@@ -164,7 +166,6 @@ struct InputField: View {
 				.autocapitalization(.none)
 				.disableAutocorrection(true)
 				.padding(.vertical, 7)
-				.onTapGesture { activeField = true }
 				Spacer()
 				if !input.isEmpty && activeField {
 					Button(action: {

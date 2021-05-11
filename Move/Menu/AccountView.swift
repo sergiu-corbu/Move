@@ -8,20 +8,12 @@
 import SwiftUI
 
 struct AccountView: View {
-	
-    @State private var username: String = ""
-    @State private var email: String = ""
-    @State private var usernameActive: Bool = false
-    @State private var emailActive: Bool = false
-    @State private var isLoading: Bool = false
+	@StateObject var userViewModel = UserViewModel()
+	@State private var isActive: Bool = false
     
     let onBack: () -> Void
     let onLogout: () -> Void
     let onSave: () -> Void
-    
-    var allFiledsCompleted: Bool {
-        return username != "" && email != ""
-    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -36,8 +28,8 @@ struct AccountView: View {
     
     var inputArea: some View {
         VStack(alignment: .leading, spacing: 20) {
-			InputField(input: $username, activeField: usernameActive, textField: InputFieldType.username.rawValue, textColor: Color.darkPurple)
-			InputField(input: $email, activeField: emailActive, textField: InputFieldType.email.rawValue, textColor: Color.darkPurple)
+			CustomField(input: $userViewModel.username, activeField: isActive, textField: FieldType.username.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
+			CustomField(input: $userViewModel.email, activeField: isActive, textField: FieldType.email.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
         }.padding(.top, 40)
     }
 	
@@ -46,10 +38,10 @@ struct AccountView: View {
             Button(action: {
                 API.logout() { result in
 					switch result {
-						case true:
+						case .success:
 							Session.tokenKey = nil
 							onLogout()
-						case false: showError(error: "Error from server")
+						case .failure(let error): showError(error: error.localizedDescription)
 					}
                 }
             }, label: {
@@ -57,9 +49,9 @@ struct AccountView: View {
 					.foregroundColor(.red)
 					.font(.custom(FontManager.Primary.medium, size: 14))
             })
-            ActionButton(isLoading: isLoading, enabled: allFiledsCompleted, text: "Save edits", action: {
-                isLoading = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { isLoading = false })
+			ActionButton(text: "Save edits", isLoading: userViewModel.isLoading, enabled:userViewModel.editCredentialsEnabled, action: {
+				userViewModel.isLoading = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { userViewModel.isLoading = false })
                 onSave()
             }).padding(.bottom, 30)
         }
