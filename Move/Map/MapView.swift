@@ -16,42 +16,74 @@ enum UnlockType {
 }
 
 struct MapCoordinator: View {
-	var navigationViewModel: NavigationStack
+	@ObservedObject var navigationViewModel: NavigationStack
 	@StateObject var mapViewModel: MapViewModel = MapViewModel.shared
 	@StateObject var scooterViewModel: ScooterViewModel = ScooterViewModel.shared
 	@State private var unlockPressed: Bool = false
-	
-	let onUnlockScooter: (UnlockType, Scooter) -> Void
+	@State private var pinPressed = false
+	@State var showUnlock = false
+	@State var showTrip = false
+	@State var showTripDetails = false
+	@State var showSummary = false
 	
 	var body: some View {
-		NavigationStackView(navigationStack: navigationViewModel) {
 			ZStack(alignment: .top) {
 				MapView(mapViewModel: mapViewModel, scooterViewModel: scooterViewModel, onMenu: {  handleOnMenu() })
 				if let selectedScooter = self.mapViewModel.selectedScooter {
 					VStack {
 						Spacer()
-						ZStack(alignment: .bottom) {
+						ZStack(alignment: .bottom)
+						{
 							ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed).padding(.horizontal, 15)
 							if unlockPressed {
-								UnlockScooterCard(onQR: {}, onPin: { onUnlockScooter(UnlockType.code, selectedScooter); unlockPressed = false }, onNFC: {}, scooter: selectedScooter)
+								UnlockScooterCard(onQR: {}, onPin: { pinPressed = true }, onNFC: {}, scooter: selectedScooter)
+							}
+							if showTrip {
+								StartRide(scooter: selectedScooter, onStartRide: { scooter in
+									showTripDetails = true
+									unlockPressed = false
+									showTrip = false
+								})
+							}
+							if showTripDetails {
+								TripDetailView(tapped: false, scooter: selectedScooter, onEndRide: {
+									mapViewModel.selectedScooter = nil
+									showTripDetails = false
+									showSummary = true
+								})
+							}
 							}
 						}
 					}
+						
+					if pinPressed {
+						SNUnlock(onClose: {pinPressed = false}, onFinished: {
+							showUnlock = true
+							pinPressed = false
+						})
+					}
+					if showUnlock {
+						UnlockSuccesful(onFinished: {
+							showUnlock = false
+							showTrip = true
+							//pinPressed = false
+							unlockPressed = false
+						})
+					}
+				if showSummary {
+					TripSummary(onFinish: {
+						showSummary = false
+					})
 				}
-				
-			}
-		}
+
+				}
 	}
-	
 	func handleOnMenu() {
 		navigationViewModel.push(MenuView(onBack: { navigationViewModel.pop() },
-										  onSeeAll: {
-											navigationViewModel.push(HistoryView(onBack: { navigationViewModel.pop() }))
+										  onSeeAll: { navigationViewModel.push(HistoryView(onBack: { navigationViewModel.pop() }))
 										  }, onAccount: {
 											navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() }, onLogout: { navigationViewModel.push(Onboarding(onFinished: { print("a")}))}, onSave: { navigationViewModel.pop() }))
-										}, onChangePassword: {
-											navigationViewModel.push(ChangePasswordView(action: {navigationViewModel.pop()}))
-										}))
+										}, onChangePassword: { navigationViewModel.push(ChangePasswordView(action: {navigationViewModel.pop()})) }))
 	}
 }
 

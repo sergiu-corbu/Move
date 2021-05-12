@@ -34,7 +34,7 @@ struct MenuView: View {
                 }
             }.padding(.horizontal, 24)
         }
-		.onAppear{ tripViewModel.downloadTrips() }
+		.onAppear{ print("i m on menu"); tripViewModel.downloadTrips() }
 		.background(Color.white.edgesIgnoringSafeArea(.all))
     }
 	

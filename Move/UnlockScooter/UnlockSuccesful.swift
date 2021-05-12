@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct UnlockSuccesful: View {
+	let onFinished: () -> Void
+	
     var body: some View {
         ZStack {
 			SharedElements.purpleBackground
@@ -20,11 +22,14 @@ struct UnlockSuccesful: View {
                 Spacer()
             }
         }
+		.onAppear {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { onFinished() })
+		}
     }
 }
 
 struct UnlockSuccesful_Previews: PreviewProvider {
     static var previews: some View {
-        UnlockSuccesful()
+		UnlockSuccesful(onFinished: {})
     }
 }

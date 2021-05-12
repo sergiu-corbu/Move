@@ -9,15 +9,16 @@ import SwiftUI
 
 struct TripSummary: View {
 	@State private var isLoading: Bool = false
-	//let onFinish: () -> Void
+	let onFinish: () -> Void
 	
     var body: some View {
 		VStack(alignment: .leading, spacing: 40) {
 			NavigationBar(title: "Trip Summary", color: .darkPurple)
-			Image("mapDraw")
+			Image("mapDraw").frame(maxWidth: .infinity)
 			tripBoundaries
 			travelData
-			ActionButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: {})
+			Spacer()
+			ActionButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: { onFinish() })
 		} 
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))
@@ -55,6 +56,6 @@ struct TripSummary: View {
 
 struct TripSummary_Previews: PreviewProvider {
     static var previews: some View {
-        TripSummary()
+		TripSummary(onFinish: {})
     }
 }
