@@ -10,7 +10,11 @@ import Foundation
 class TripViewModel: ObservableObject {
 	static var shared: TripViewModel = TripViewModel()
 	var allTrips: [Trip] = []
-	var tripCount: Int = 0
+	@Published var tripCount: Int = 0
+	
+	init() {
+		downloadTrips()
+	}
 	
 	func downloadTrips() {
 		API.downloadTrips({ result in
@@ -26,7 +30,7 @@ class TripViewModel: ObservableObject {
 	func endTrip() {
 		API.endTrip { result in
 			switch result {
-				case .success(let result): print(result.message)
+				case .success(let result): showMessage(message: result.message)
 				case .failure(let error): showError(error: error.localizedDescription)
 			}
 		}
@@ -35,7 +39,7 @@ class TripViewModel: ObservableObject {
 	func lockScooter() {
 		API.lockScooter{ result in
 			switch result {
-				case .success(let result): showMessage(message: result.message)
+				case .success: showMessage(message: "Scooter locked")
 				case .failure(let error): showError(error: error.localizedDescription)
 			}
 		}
@@ -44,7 +48,7 @@ class TripViewModel: ObservableObject {
 	func unlockScooter() {
 		API.unlockScooter{ result in
 			switch result {
-				case .success(let result): showMessage(message: result.message)
+				case .success: showMessage(message: "Scooter unlocked")
 				case .failure(let error): showError(error: error.localizedDescription)
 			}
 		}

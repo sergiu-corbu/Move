@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TripDetailView: View {
+	
 	@State var tapped: Bool = false
 	@State var lockButtonPressed: Bool = false
 	@State private var endRidePressed: Bool = false
@@ -19,18 +20,14 @@ struct TripDetailView: View {
 	
 	var body: some View {
 		if tapped { expandedBody }
-		else {
-			ZStack(alignment: .top) {
-				ScooterElements.topLine
-				mainBody
-			}.background(SharedElements.whiteRoundedRectangle)
-		}
+		else { mainBody }
 	}
 
 	var mainBody: some View {
 		VStack(alignment: .leading, spacing: 10) {
+			ScooterElements.topLine.frame(maxWidth: .infinity)
 			Text("Trip Details")
-				.padding(.top, 20)
+				.padding(.top)
 				.foregroundColor(.darkPurple)
 				.font(.custom(FontManager.Primary.semiBold, size: 16))
 				.frame(maxWidth: .infinity)
@@ -41,9 +38,10 @@ struct TripDetailView: View {
 			}
 			tripButtons
 		}
+		.padding(.horizontal, 24)
+		.background(SharedElements.whiteRoundedRectangle)
 		.onAppear(perform: { self.stopWatch.start() })
 		.onTapGesture { tapped = true }
-		.padding(.horizontal, 24)
 	}
 	
 	var expandedBody: some View {

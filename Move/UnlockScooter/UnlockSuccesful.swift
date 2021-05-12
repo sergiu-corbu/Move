@@ -15,8 +15,10 @@ struct UnlockSuccesful: View {
 			SharedElements.purpleBackground
             VStack {
 				UnlockScooterElements.Title(title: "Unlock\nsuccessful")
-					.padding(.top, 120)
+					.padding(.top, 50)
+				Spacer()
 				SharedElements.checkmarkImage
+					.padding(.bottom, 50)
 				UnlockScooterElements.SubTitle(subTitle: "Please respect all the driving regulations\nand other participants in traffic while using\nour scooters.")
 					.padding(.top, 50)
                 Spacer()

@@ -24,7 +24,29 @@ class API {
 	
     static let baseUrl: String = "https://escooter-tapp.herokuapp.com/api/"
 	
-	//static func authCalls
+	static func authCall(path: String, email: String, password: String, username: String?, _ callback: @escaping (Result<AuthResult>) -> Void) {
+		let path = baseUrl + "user/" + path
+		let registerParameters = ["email": email, "username": username, "password": password]
+		let loginParameters = ["email": email, "password": password]
+		var isRegister: Bool {
+			if username != nil { return true }
+			return false
+		}
+		
+		AF.request(path, method: .post, parameters: isRegister ? registerParameters : loginParameters, encoder: JSONParameterEncoder.default).validate().responseData { response in
+			if response.response?.statusCode == 200 {
+				do {
+					let result = try JSONDecoder().decode(AuthResult.self, from: response.data!)
+						callback(.success(result))
+				} catch (let error) { print(error) }
+			} else {
+				do {
+					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
+						callback(.failure(APIError(message: result.localizedDescription)))
+				} catch (let error) { print(error) }
+			}
+		}
+	}
 	
 	static func register(username: String, email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
 		let path = baseUrl + "user/register"
@@ -84,10 +106,10 @@ class API {
     }
     
     static func logout(_ callback: @escaping (Result<Bool>) -> Void) {
-		guard let token = Session.tokenKey else { print("invalid token"); return}
+		guard let token = Session.tokenKey else { showError(error: "Invalid token"); return}
         let path = baseUrl + "user/logout"
         let header: HTTPHeaders = ["Authorization": token]
-        AF.request(path, method: .delete, headers: header).response { response in
+		AF.request(path, method: .delete, headers: header).validate().responseData { response in
 			if response.response?.statusCode == 200 {
 				callback(.success(true))
 			} else {
@@ -226,22 +248,3 @@ class API {
 	}
 	
 }
-
-
-/*
-AF.request( path, method: .post, parameters: ["email": email, "username": username, "password": password], encoder: JSONParameterEncoder.default).validate()
-.responseData {  response in
-
-if let data = response.data {
-let debugString = String.init(data: data, encoding: .utf8)
-print(debugString)
-do {
-let result = try JSONDecoder().decode(AuthResult.self, from: data)
-callback(.success(result))
-} catch (let error) {
-callback(.failure(error))
-}
-} else {
-callback(.failure(APIError(message: "Missing data")))
-}
-}*/

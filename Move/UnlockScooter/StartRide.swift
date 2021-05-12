@@ -12,14 +12,8 @@ struct StartRide: View {
 	let onStartRide: (Scooter) -> Void
 	
     var body: some View {
-		ZStack(alignment: .top) {
-			ScooterElements.topLine
-			mainBody
-		}.background(SharedElements.whiteRoundedRectangle)
-    }
-	
-	var mainBody: some View {
 		VStack {
+			ScooterElements.topLine.frame(maxWidth: .infinity)
 			HStack {
 				VStack(alignment: .leading, spacing: 5) {
 					ScooterElements.scooterTitle
@@ -32,7 +26,8 @@ struct StartRide: View {
 		}
 		.padding(.top, 30)
 		.padding(.horizontal, 24)
-	}
+		.background(SharedElements.whiteRoundedRectangle)
+    }
 }
 
 struct StartRide_Previews: PreviewProvider {

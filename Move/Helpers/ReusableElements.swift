@@ -217,7 +217,6 @@ struct SharedElements {
 			.resizable()
 			.aspectRatio(contentMode: .fill)
 			.frame(width: 172, height: 172)
-			.padding(.top, 100)
 	}
 	
 	struct NFCCircle: View {

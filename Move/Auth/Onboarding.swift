@@ -11,6 +11,7 @@ struct Onboarding: View {
     
     @State private var currentIndex: Int = 0
     let onFinished: () -> Void
+	
     var title: String {
         return onboardingData[currentIndex].title
     }
@@ -38,10 +39,8 @@ struct Onboarding: View {
                 titleLine
                 descriptionLine
                 pageControlLine
-			}
-            .padding(.horizontal, 24)
-        }
-        .background(Color.white)
+			}.padding(.horizontal, 24)
+        }.background(Color.white)
     }
     
     var titleLine: some View {
@@ -51,16 +50,13 @@ struct Onboarding: View {
                 .foregroundColor(.darkPurple)
             Spacer()
             if  !lastPage {
-                Button(action: {
-                    onFinished()
-                }, label: {
+                Button(action: { onFinished() }, label: {
                     Text("Skip")
                         .font(.custom(FontManager.Primary.semiBold, size: 18))
                         .foregroundColor(.fadePurple)
                 })
             }
-        }
-        .padding(.bottom, 20)
+        }.padding(.bottom, 20)
     }
     
 	var descriptionLine: some View {
@@ -80,9 +76,7 @@ struct Onboarding: View {
 			PageControl(currentIndex: $currentIndex)
 			Spacer()
 			Button(action: {
-				if currentIndex == onboardingData.count - 1 {
-					onFinished()
-				} else { currentIndex += 1 }
+				if currentIndex == onboardingData.count - 1 { onFinished() } else { currentIndex += 1 }
 			}, label: {
 				HStack {
 					Text(lastPage ? "Get Started" : "Next")
@@ -94,13 +88,13 @@ struct Onboarding: View {
 				.background(RoundedRectangle(cornerRadius: 16))
 								.foregroundColor(.coralRed)
 				})
-		}
-		.padding(.bottom, 40)
+		}.padding(.bottom, 40)
 	}
 }
 
 struct PageControl: View {
     @Binding var currentIndex: Int
+	
     var body: some View {
         ForEach(0..<onboardingData.count) { page in
             RoundedRectangle(cornerRadius: 1.5)

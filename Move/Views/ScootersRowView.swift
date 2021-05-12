@@ -13,7 +13,7 @@ struct ScootersRowView: View {
     var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
 			ForEach(0..<allScooters.count) { index in
-				ScooterViewItem(scooter: allScooters[index], isUnlocked: .constant(false))
+				ScooterViewItem(scooter: allScooters[index], isUnlocked: .constant(false), onTapp: {})
 			}
 		}
     }
