@@ -26,6 +26,7 @@
 		EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */; };
 		EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = EC7F0EE026301A30004FF766 /* SwiftMessages */; };
 		EC7F0EE52630385C004FF766 /* UnlockScooterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */; };
+		EC8EDD55264C1A3C00033E9D /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC8EDD54264C1A3C00033E9D /* MessageView.xib */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49AB72631F58700D9D701 /* MapViewModel.swift */; };
@@ -80,6 +81,7 @@
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
 		EC7F0EE42630385C004FF766 /* UnlockScooterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterCard.swift; sourceTree = "<group>"; };
+		EC8EDD54264C1A3C00033E9D /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECA49AB72631F58700D9D701 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		ECDD3FFE26242985003C659F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				EC8EDD54264C1A3C00033E9D /* MessageView.xib */,
 				ECDD3FEA26242970003C659F /* Extensions&Helpers.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
 				EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */,
@@ -383,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC8EDD55264C1A3C00033E9D /* MessageView.xib in Resources */,
 				ECDD3FF726242979003C659F /* BaiJamjuree-Regular.ttf in Resources */,
 				ECDD3FF926242979003C659F /* BaiJamjuree-SemiBold.ttf in Resources */,
 				ECDD3FD4262428B3003C659F /* Assets.xcassets in Resources */,

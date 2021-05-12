@@ -138,7 +138,6 @@ class API {
 				do {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-					
 				} catch (let error) { print(error) }
 			}
 		}
@@ -175,7 +174,6 @@ class API {
 				{
 					print("i am on error")
 					callback(.failure(APIError(message: error.localizedDescription))) }
-			
 			} else {
 				do {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
@@ -183,7 +181,6 @@ class API {
 					
 				} catch (let error) { print(error) }
 			}
-		
 		}
 	}
 	
@@ -201,7 +198,6 @@ class API {
 				do {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-					
 				} catch (let error) { print(error) }
 			}
 		}
@@ -221,7 +217,6 @@ class API {
 				do {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-					
 				} catch (let error) { print(error) }
 			}
 		}
@@ -241,7 +236,6 @@ class API {
 				do {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-					
 				} catch (let error) { print(error) }
 			}
 		}

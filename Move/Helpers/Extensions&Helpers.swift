@@ -12,20 +12,20 @@ import SwiftMessages
 
 //MARK: SwiftMessages
 public func showError(error: String) {
-	let view = MessageView.viewFromNib(layout: .cardView)
+	let view = MessageView.viewFromNib(layout: .messageView, bundle: Bundle.main)
 	view.configureTheme(.error)
 	view.configureDropShadow()
-	view.configureContent(title: "Error", body: error)
+	view.configureContent(title: "Error", body: error, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: nil) { _ in }
 	view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 	(view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
 	SwiftMessages.show(view: view)
 }
 
 public func showMessage(message: String) {
-	let view = MessageView.viewFromNib(layout: .cardView)
+	let view = MessageView.viewFromNib(layout: .messageView, bundle: Bundle.main)
 	view.configureTheme(.success)
 	view.configureDropShadow()
-	view.configureContent(body: message)
+	view.configureContent(title: "Success", body: message, iconImage: .checkmark, iconText: nil, buttonImage: nil, buttonTitle: nil) { _ in }
 	view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 	(view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
 	SwiftMessages.show(view: view)
