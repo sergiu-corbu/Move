@@ -28,33 +28,28 @@ struct MapCoordinator: View {
 	@State var showScooterCard = true
 	
 	var body: some View {
-		ZStack(alignment: .top) {
+		ZStack(alignment: .bottom) {
 			MapView(mapViewModel: mapViewModel, scooterViewModel: scooterViewModel, onMenu: {  handleOnMenu() })
 			if let selectedScooter = self.mapViewModel.selectedScooter {
-				//Spacer()
-				//ZStack(alignment: .bottom) {
-				VStack {
-					Spacer()
-					if showScooterCard {
-						ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed, onTapp: {showScooterCard = false})
-					}
-					if unlockPressed {
-						UnlockScooterCard(onQR: {}, onPin: { pinPressed = true }, onNFC: {}, scooter: selectedScooter)
-					}
-					if showTrip {
-						StartRide(scooter: selectedScooter, onStartRide: { scooter in
-							showTripDetails = true
-							unlockPressed = false
-							showTrip = false
-						})
-					}
-					if showTripDetails {
-						TripDetailView(tapped: false, scooter: selectedScooter, onEndRide: {
-							mapViewModel.selectedScooter = nil
-							showTripDetails = false
-							showSummary = true
-						})
-					}
+				if showScooterCard {
+					ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed, onTapp: {showScooterCard = false})
+				}
+				if unlockPressed {
+					UnlockScooterCard(onQR: {}, onPin: { pinPressed = true }, onNFC: {}, scooter: selectedScooter)
+				}
+				if showTrip {
+					StartRide(scooter: selectedScooter, onStartRide: { scooter in
+						showTripDetails = true
+						unlockPressed = false
+						showTrip = false
+					})
+				}
+				if showTripDetails {
+					TripDetailView(tapped: false, scooter: selectedScooter, onEndRide: {
+						mapViewModel.selectedScooter = nil
+						showTripDetails = false
+						showSummary = true
+					})
 				}
 			}
 			
@@ -74,9 +69,11 @@ struct MapCoordinator: View {
 			if showSummary {
 				TripSummary(onFinish: {
 					showSummary = false
+					showScooterCard = true
 				})
 			}
 		}
+
 	}
 	
 	func handleOnMenu() {
@@ -117,8 +114,8 @@ struct MapView: View {
 					DispatchQueue.main.async { centerViewOnUserLocation() }
 				}
 			}
+			SharedElements.MapBarItems(menuAction: { onMenu(); mapViewModel.selectedScooter = nil}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil } )
 		}
-		SharedElements.MapBarItems(menuAction: { onMenu(); mapViewModel.selectedScooter = nil}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil } )
 	}
 }
 
