@@ -66,23 +66,23 @@ class API {
         }
     }
     
-    static func logout(_ callback: @escaping (Result<Bool>) -> Void) {
-		guard let token = Session.tokenKey else { showError(error: "Invalid token"); return}
-        let path = baseUrl + "user/logout"
-        let header: HTTPHeaders = ["Authorization": token]
-		AF.request(path, method: .delete, headers: header).validate().responseData { response in
-			if response.response?.statusCode == 200 {
-				callback(.success(true))
-			} else {
-				do {
-					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
-					callback(.failure(APIError(message: result.localizedDescription)))
-				} catch (let error) { print(error) }
-			}
-		}
-	}
+//    static func logout(_ callback: @escaping (Result<Bool>) -> Void) {
+//		guard let token = Session.tokenKey else { showError(error: "Invalid token"); return}
+//        let path = baseUrl + "user/logout"
+//        let header: HTTPHeaders = ["Authorization": token]
+//		AF.request(path, method: .delete, headers: header).validate().responseData { response in
+//			if response.response?.statusCode == 200 {
+//				callback(.success(true))
+//			} else {
+//				do {
+//					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
+//					callback(.failure(APIError(message: result.localizedDescription)))
+//				} catch (let error) { print(error) }
+//			}
+//		}
+//	}
 	
-	static func unlockScooterPin(code: String, _ callback: @escaping (Result<UnlockResult>) -> Void) {
+	static func unlockScooterPin(code: String, _ callback: @escaping (Result<BasicCallResult>) -> Void) {
 		guard let token = Session.tokenKey else { print("invalid token"); return}
 		
 		let path = baseUrl + "user/book/code/g6i6"
@@ -92,7 +92,7 @@ class API {
 		AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
 			if response.response?.statusCode == 200 {
 				do {
-					let result = try JSONDecoder().decode(UnlockResult.self, from: response.data!)
+					let result = try JSONDecoder().decode(BasicCallResult.self, from: response.data!)
 					callback(.success(result))
 				} catch (let error) { print(error) }
 			} else {
@@ -145,14 +145,15 @@ class API {
 		}
 	}
 	
-	static func endTrip(_ callback: @escaping (Result<EndTripResult>) -> Void) {
+	static func basicCall(path: String, _ callback: @escaping (Result<BasicCallResult>) -> Void) {
 		guard let token = Session.tokenKey else { print("invalid token"); return }
-		let path = baseUrl + "user/book/end"
+		let path = baseUrl + "user/book/" + path
 		let header: HTTPHeaders = ["Authorization": token]
+		
 		AF.request(path, method: .put, headers: header).validate().responseData { response in
 			if response.response?.statusCode == 200 {
 				do {
-					let result = try JSONDecoder().decode(EndTripResult.self, from: response.data!)
+					let result = try JSONDecoder().decode(BasicCallResult.self, from: response.data!)
 					callback(.success(result))
 				} catch (let error) { print(error) }
 			} else {
@@ -164,42 +165,11 @@ class API {
 		}
 	}
 	
-	static func lockScooter(_ callback: @escaping (Result<LockScooter>) -> Void) {
-		guard let token = Session.tokenKey else { print("invalid token"); return }
-		let path = baseUrl + "user/book/lock"
-		let header: HTTPHeaders = ["Authorization": token]
-		AF.request(path, method: .put, headers: header).validate().responseData { response in
-			if response.response?.statusCode == 200 {
-				do {
-					let result = try JSONDecoder().decode(LockScooter.self, from: response.data!)
-					callback(.success(result))
-				} catch (let error) { print(error) }
-			} else {
-				do {
-					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
-					callback(.failure(APIError(message: result.localizedDescription)))
-				} catch (let error) { print(error) }
-			}
-		}
+}
+
+struct BasicCallResult: Codable {
+	let message: String
+	enum CodingKeys: String, CodingKey {
+		case message = "message"
 	}
-	
-	static func unlockScooter(_ callback: @escaping (Result<LockScooter>) -> Void) {
-		guard let token = Session.tokenKey else { print("invalid token"); return }
-		let path = baseUrl + "user/book/unlock"
-		let header: HTTPHeaders = ["Authorization": token]
-		AF.request(path, method: .put, headers: header).validate().responseData { response in
-			if response.response?.statusCode == 200 {
-				do {
-					let result = try JSONDecoder().decode(LockScooter.self, from: response.data!)
-					callback(.success(result))
-				} catch (let error) { print(error) }
-			} else {
-				do {
-					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
-					callback(.failure(APIError(message: result.localizedDescription)))
-				} catch (let error) { print(error) }
-			}
-		}
-	}
-	
 }

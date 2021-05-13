@@ -36,7 +36,7 @@ struct AccountView: View {
     var footerArea: some View {
         VStack(spacing: 50) {
             Button(action: {
-                API.logout() { result in
+                API.basicCall(path: "logout") { result in
 					switch result {
 						case .success:
 							Session.tokenKey = nil
