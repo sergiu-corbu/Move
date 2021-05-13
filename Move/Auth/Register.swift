@@ -51,22 +51,7 @@ struct Register: View {
     var getStartedButton: some View {
 		ActionButton(text: "Get started", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedRegister && userViewModel.allfieldsValidatedRegister, action: {
             userViewModel.isLoading = true
-            API.register(username: userViewModel.username, email: userViewModel.email, password: userViewModel.password) { (result) in
-                switch result {
-                    case .success(let result):
-                        Session.tokenKey = result.token
-						Session.username = result.user.username
-                        onRegisterComplete()
-                        userViewModel.isLoading = false
-                    case .failure(let error):
-						showError(error: error.localizedDescription)
-                        userViewModel.isLoading = false
-						userViewModel.email = ""
-						userViewModel.username = ""
-						userViewModel.password = ""
-						
-                }
-            }
+			userViewModel.registerCall { onRegisterComplete() }
         }).padding(.top, 20)
     }
     

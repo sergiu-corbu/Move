@@ -21,7 +21,6 @@ struct APIError: Error, Decodable {
 typealias Result<T> = Swift.Result<T, APIError>
 
 class API {
-	
     static let baseUrl: String = "https://escooter-tapp.herokuapp.com/api/"
 	
 	static func authCall(path: String, email: String, password: String, username: String?, _ callback: @escaping (Result<AuthResult>) -> Void) {
@@ -32,44 +31,7 @@ class API {
 			if username != nil { return true }
 			return false
 		}
-		
 		AF.request(path, method: .post, parameters: isRegister ? registerParameters : loginParameters, encoder: JSONParameterEncoder.default).validate().responseData { response in
-			if response.response?.statusCode == 200 {
-				do {
-					let result = try JSONDecoder().decode(AuthResult.self, from: response.data!)
-						callback(.success(result))
-				} catch (let error) { print(error) }
-			} else {
-				do {
-					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
-						callback(.failure(APIError(message: result.localizedDescription)))
-				} catch (let error) { print(error) }
-			}
-		}
-	}
-	
-	static func register(username: String, email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
-		let path = baseUrl + "user/register"
-		AF.request(path, method: .post, parameters: ["email": email, "username": username, "password": password], encoder: JSONParameterEncoder.default).validate()
-			.responseData {  response in
-				if response.response?.statusCode == 200 {
-					do {
-						let result = try JSONDecoder().decode(AuthResult.self, from: response.data!)
-						callback(.success(result))
-					} catch (let error) { print(error) }
-				} else {
-					do {
-						let result = try JSONDecoder().decode(APIError.self, from: response.data!)
-						callback(.failure(APIError(message: result.localizedDescription)))
-
-					} catch (let error) { print(error) }
-				}
-			}
-	}
-    
-    static func login(email: String, password: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
-        let path = baseUrl + "user/login"
-		AF.request(path, method: .post, parameters: [ "email": email, "password": password ], encoder: JSONParameterEncoder.default).validate().responseData {  response in
 			if response.response?.statusCode == 200 {
 				do {
 					let result = try JSONDecoder().decode(AuthResult.self, from: response.data!)
@@ -79,12 +41,11 @@ class API {
 				do {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-					
 				} catch (let error) { print(error) }
 			}
-        }
-    }
-    
+		}
+	}
+	
     static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void) {
         let path = baseUrl + "scooter/"
 		//scooter/inradius/
@@ -222,14 +183,14 @@ class API {
 		}
 	}
 	
-	static func unlockScooter(_ callback: @escaping (Result<UnlockScooter>) -> Void) {
+	static func unlockScooter(_ callback: @escaping (Result<LockScooter>) -> Void) {
 		guard let token = Session.tokenKey else { print("invalid token"); return }
 		let path = baseUrl + "user/book/unlock"
 		let header: HTTPHeaders = ["Authorization": token]
 		AF.request(path, method: .put, headers: header).validate().responseData { response in
 			if response.response?.statusCode == 200 {
 				do {
-					let result = try JSONDecoder().decode(UnlockScooter.self, from: response.data!)
+					let result = try JSONDecoder().decode(LockScooter.self, from: response.data!)
 					callback(.success(result))
 				} catch (let error) { print(error) }
 			} else {

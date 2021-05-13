@@ -21,18 +21,9 @@ struct Login: View {
                 inputArea
 				ActionButton(text: "Login", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedLogin && userViewModel.allfieldsValidatedLogin, action: {
 					userViewModel.isLoading = true
-					API.login(email: userViewModel.email, password: userViewModel.password) { (result) in
-						switch result {
-							case .success(let result):
-								Session.tokenKey = result.token
-								onLoginCompleted()
-								userViewModel.isLoading = false
-							case .failure(let error):
-								showError(error: error.localizedDescription)
-								userViewModel.isLoading = false
-						}
-					}
-				}).padding(.top, 20)
+					userViewModel.loginCall{ onLoginCompleted() }
+					})
+				.padding(.top, 20)
 				RegisterElements.SwitchAuthProcess(questionText: "Don't have an account? You can", solutionText: "start with one here", action: { onRegisterSwitch() })
             }
             Spacer()

@@ -11,21 +11,16 @@ import CoreLocation
 class ScooterViewModel: ObservableObject {
 	static var shared: ScooterViewModel = ScooterViewModel()
     @Published var allScooters: [Scooter] = []
-    
     var location: CLLocationCoordinate2D? {
-        didSet {
-            if oldValue == nil { reloadData() }
-        }
+        didSet { if oldValue == nil { reloadData() } }
     }
     
     private func reloadData() {
-        getScooters()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
-            self.reloadData()
-        })
+        getAvailableScooters()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: { self.reloadData() })
     }
     
-    func getScooters() {
+    func getAvailableScooters() {
         guard let location = self.location else { return }
         API.getScooters(coordinates: location) { result in
             switch result {

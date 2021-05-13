@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TripSummary: View {
 	@State private var isLoading: Bool = false
+	let paymentHander = Payment()
 	let onFinish: () -> Void
 	
     var body: some View {
@@ -18,7 +19,13 @@ struct TripSummary: View {
 			tripBoundaries
 			travelData
 			Spacer()
-			ActionButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: { onFinish() })
+			ActionButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: {
+				self.paymentHander.startPayment { (success) in
+					if success { showMessage(message: "Payment done")}
+					else { showError(error: "Paymant Failed")}
+					DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: { onFinish() })
+				}
+			})
 		} 
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))

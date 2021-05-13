@@ -50,7 +50,7 @@ struct ContentView: View {
 				uploadImage(image: image) }))
 		}, onLoginSwitch: {
 			navigationViewModel.push(
-				Login(onLoginCompleted: {  }, onRegisterSwitch: { handleRegister() })
+				Login(onLoginCompleted: { handleMap() }, onRegisterSwitch: { handleRegister() })
 			)}))
 	}
 	

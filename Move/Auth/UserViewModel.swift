@@ -14,7 +14,7 @@ class UserViewModel: ObservableObject {
         didSet {
             if email.isEmpty { emailError = "Email required"}
             else if !email.emailValidation() { emailError = "Invalid email"}
-            else { emailError = ""}
+            else { emailError = "" }
         }
     }
     @Published var username: String = ""
@@ -47,6 +47,42 @@ class UserViewModel: ObservableObject {
             } else if !password.containsDigit() { passwordError = "Must contain at least one digit" }
         } else { passwordError = "" }
     }
+	
+	func registerCall(_ callback: @escaping () -> Void) {
+		 API.authCall(path: "register", email: email, password: password, username: username) { result in
+			switch result {
+				case .success(let result):
+					Session.tokenKey = result.token
+					Session.username = result.user.username
+					callback()
+				case .failure(let error):
+					showError(error: error.localizedDescription)
+					self.clearFields()
+			}
+			self.isLoading = false
+		}
+	}
+	
+	func loginCall(_ callback: @escaping () -> Void) {
+		API.authCall(path: "login", email: email, password: password, username: nil) { result in
+			switch result {
+				case .success(let result):
+					Session.tokenKey = result.token
+					Session.username = result.user.username
+					callback()
+				case .failure(let error):
+					showError(error: error.localizedDescription)
+					self.clearFields()
+			}
+			self.isLoading = false
+		}
+	}
+	
+	private func clearFields() {
+		username = ""
+		password = ""
+		email = ""
+	}
     
 	//MARK: validation
 	var editCredentialsEnabled: Bool { return email != "" && username != ""}

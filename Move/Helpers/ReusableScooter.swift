@@ -187,8 +187,8 @@ struct ScooterElements {
 		
 		var body: some View {
 			HStack(spacing: 20) {
-				ScooterElements.ActionTripButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onLockButton() : onUnlockButton() })
-				ScooterElements.EndTripButton(endTrip: {onEndTripButton()})
+				ScooterElements.ActionTripButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onUnlockButton() : onLockButton() })
+				ScooterElements.EndTripButton(endTrip: { onEndTripButton() })
 			}.padding(.vertical, 20)
 		}
 	}

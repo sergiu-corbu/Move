@@ -17,5 +17,7 @@ struct Session {
 		get { return UserDefaults.standard.string(forKey: "username")}
 		set {UserDefaults.standard.setValue(newValue, forKey: "username")}
 	}
+	
+	static var ongoingTrip: Bool = false
 }
 

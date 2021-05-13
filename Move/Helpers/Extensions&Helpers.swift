@@ -25,7 +25,7 @@ public func showMessage(message: String) {
 	let view = MessageView.viewFromNib(layout: .messageView, bundle: Bundle.main)
 	view.configureTheme(.success)
 	view.configureDropShadow()
-	view.configureContent(title: "Success", body: message, iconImage: .checkmark, iconText: nil, buttonImage: nil, buttonTitle: nil) { _ in }
+	view.configureContent(title: message, body: nil, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: nil) { _ in }
 	view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 	(view.backgroundView as? CornerRoundingView)?.cornerRadius = 10
 	SwiftMessages.show(view: view)

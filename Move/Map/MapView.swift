@@ -42,17 +42,18 @@ struct MapCoordinator: View {
 						showTripDetails = true
 						unlockPressed = false
 						showTrip = false
+						Session.ongoingTrip = true
+						self.scooterViewModel.getAvailableScooters()
 					})
 				}
 				if showTripDetails {
-					TripDetailView(tapped: false, scooter: selectedScooter, onEndRide: {
+					TripDetailView(scooter: selectedScooter, onEndRide: {
 						mapViewModel.selectedScooter = nil
 						showTripDetails = false
 						showSummary = true
 					})
 				}
 			}
-			
 			if pinPressed {
 				SNUnlock(onClose: {pinPressed = false}, onFinished: {
 					showUnlock = true
@@ -68,8 +69,10 @@ struct MapCoordinator: View {
 			}
 			if showSummary {
 				TripSummary(onFinish: {
+					Session.ongoingTrip = false
 					showSummary = false
 					showScooterCard = true
+					scooterViewModel.getAvailableScooters()
 				})
 			}
 		}
@@ -80,7 +83,7 @@ struct MapCoordinator: View {
 		navigationViewModel.push(MenuView(onBack: { navigationViewModel.pop() },
 										  onSeeAll: { navigationViewModel.push(HistoryView(onBack: { navigationViewModel.pop() }))
 										  }, onAccount: {
-											navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() }, onLogout: { navigationViewModel.push(Onboarding(onFinished: { }))}, onSave: { navigationViewModel.pop() }))
+											navigationViewModel.push(AccountView(onBack: { navigationViewModel.pop() }, onLogout: { navigationViewModel.push(ContentView())}, onSave: { navigationViewModel.pop() }))
 										}, onChangePassword: { navigationViewModel.push(ChangePasswordView(action: {navigationViewModel.pop()})) }))
 	}
 }
@@ -90,7 +93,7 @@ struct MapView: View {
 	@ObservedObject var scooterViewModel: ScooterViewModel
 	@State private var region = MKCoordinateRegion.defaultRegion
 	
-	public func centerViewOnUserLocation() {
+	func centerViewOnUserLocation() {
 		guard let location = mapViewModel.locationManager.location?.coordinate else { print("errorr"); return }
 		region = MKCoordinateRegion(center: location, latitudinalMeters: 900, longitudinalMeters: 900)
 		scooterViewModel.location = location
@@ -99,18 +102,16 @@ struct MapView: View {
 	
 	var body: some View {
 		ZStack(alignment: .top) {
-			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.showLocation, annotationItems: scooterViewModel.allScooters) { scooter in
-				MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0]))
-				{
-					Image("pin-fill-img")
-						.onTapGesture { self.mapViewModel.selectScooter(scooter: scooter) }
-				}
+			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.showLocation, annotationItems: !Session.ongoingTrip ?  scooterViewModel.allScooters.filter({$0.available == true }) : []) { scooter in
+					MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0]))
+						{ Image("pin-fill-img").onTapGesture { self.mapViewModel.selectScooter(scooter: scooter) } }
 			}
 			.edgesIgnoringSafeArea(.all)
 			.onTapGesture { mapViewModel.selectedScooter = nil }
 			.onAppear {
+				//print(Session.tokenKey)
+				centerViewOnUserLocation()
 				if mapViewModel.showLocation {
-					centerViewOnUserLocation()
 					DispatchQueue.main.async { centerViewOnUserLocation() }
 				}
 			}
