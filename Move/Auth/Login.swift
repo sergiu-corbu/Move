@@ -16,15 +16,14 @@ struct Login: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack (alignment: .leading) {
-				RegisterElements.logoArea
-				RegisterElements.MessageArea(text: "Sign up or login and start\nriding right away")
+				AuthElements.logoArea
+				AuthElements.MessageArea(text: "Sign up or login and start\nriding right away")
                 inputArea
 				ActionButton(text: "Login", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedLogin && userViewModel.allfieldsValidatedLogin, action: {
 					userViewModel.isLoading = true
 					userViewModel.loginCall{ onLoginCompleted() }
 					})
-				.padding(.top, 20)
-				RegisterElements.SwitchAuthProcess(questionText: "Don't have an account? You can", solutionText: "start with one here", action: { onRegisterSwitch() })
+				AuthElements.SwitchAuthProcess(questionText: "Don't have an account? You can", solutionText: "start with one here", action: { onRegisterSwitch() })
             }
             Spacer()
         }

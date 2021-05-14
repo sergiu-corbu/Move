@@ -9,7 +9,7 @@ import SwiftUI
 import Introspect
 
 //MARK: Register & login elements
-struct RegisterElements {
+struct AuthElements {
     static var logoArea: some View {
         Image("logoOverlay-img")
             .resizable()
@@ -54,14 +54,7 @@ struct RegisterElements {
 			HStack {
 				Text(questionText)
 					.font(Font.custom(FontManager.Primary.regular, size: 14))
-				Button(action: {
-					action()
-				}, label: {
-					Text(solutionText)
-						.font(.custom(FontManager.Primary.semiBold, size: 14))
-						.bold()
-						.underline()
-				})
+				SharedElements.CustomSmallButton(text: solutionText, action: { action() })
 			}
 			.foregroundColor(.white)
 			.padding(.bottom, 25)
@@ -149,7 +142,7 @@ struct CustomField: View {
 				HStack {
 					if showSecured && isSecuredField {
 						SecureField(activeField ? "" : textField, text: $input, onCommit: { activeField = false })
-							.foregroundColor(textColor) // must be textColor
+							.foregroundColor(textColor)
 							.introspectTextField { textField in
 								textField.returnKeyType = .done }
 							.onTapGesture { activeField = true }
@@ -266,6 +259,20 @@ struct SharedElements {
 			}
 		}
 	}
+	
+	struct CustomSmallButton: View {
+		let text: String
+		let action: () -> Void
+		var body: some View {
+			Button(action: { action() }, label: {
+				Text(text)
+					.font(.custom(FontManager.Primary.semiBold, size: 14))
+					.bold()
+					.underline()
+			})
+		}
+	}
+
 }
 
 struct TripReusable {

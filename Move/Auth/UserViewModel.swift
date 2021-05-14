@@ -10,18 +10,9 @@ import Foundation
 class UserViewModel: ObservableObject {
 	static var shared: UserViewModel = UserViewModel()
     //MARK: Register & Login
-	@Published var email: String = "" {
-        didSet {
-            if email.isEmpty { emailError = "Email required"}
-            else if !email.emailValidation() { emailError = "Invalid email"}
-            else { emailError = "" }
-        }
-    }
+	@Published var email: String = ""
     @Published var username: String = ""
-    @Published var password: String = "" {
-        didSet { isValidPassword() }
-    }
-	
+    @Published var password: String = ""
 	@Published var emailError = ""
 	@Published var passwordError = ""
     
@@ -47,6 +38,13 @@ class UserViewModel: ObservableObject {
             } else if !password.containsDigit() { passwordError = "Must contain at least one digit" }
         } else { passwordError = "" }
     }
+	
+	func validateFields() {
+		if email.isEmpty { emailError = "Email required"}
+		else if !email.emailValidation() { emailError = "Invalid email"}
+		else { emailError = "" }
+		isValidPassword()
+	}
 	
 	func registerCall(_ callback: @escaping () -> Void) {
 		 API.authCall(path: "register", email: email, password: password, username: username) { result in

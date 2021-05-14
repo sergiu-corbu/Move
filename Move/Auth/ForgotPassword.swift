@@ -36,7 +36,7 @@ struct ForgotPassword: View {
     }
 	var messageArea: some View {
 		VStack(alignment: .leading) {
-			RegisterElements.BigTitle(text: "Forgot password")
+			AuthElements.BigTitle(text: "Forgot password")
 			Text("Enter the email address you’re\nusing for your account bellow and we’ll send you a password reset link.")
 				.foregroundColor(.white)
 				.font(Font.custom(FontManager.Primary.medium, size: 17))
