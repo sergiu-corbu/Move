@@ -18,7 +18,7 @@ enum UnlockType {
 struct MapCoordinator: View {
 	@ObservedObject var navigationViewModel: NavigationStack
 	@StateObject var mapViewModel: MapViewModel = MapViewModel.shared
-	@StateObject var scooterViewModel: ScooterViewModel = ScooterViewModel.shared
+	//@StateObject var scooterViewModel: ScooterViewModel = ScooterViewModel.shared
 	@State private var unlockPressed: Bool = false
 	@State private var pinPressed = false
 	@State var showUnlock = false
@@ -29,7 +29,7 @@ struct MapCoordinator: View {
 	
 	var body: some View {
 		ZStack(alignment: .bottom) {
-			MapView(mapViewModel: mapViewModel, scooterViewModel: scooterViewModel, onMenu: {  handleOnMenu() })
+			MapView(mapViewModel: mapViewModel, onMenu: {  handleOnMenu() })
 			if let selectedScooter = self.mapViewModel.selectedScooter {
 				if showScooterCard {
 					ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed, onTapp: {showScooterCard = false})
@@ -43,7 +43,7 @@ struct MapCoordinator: View {
 						unlockPressed = false
 						showTrip = false
 						Session.ongoingTrip = true
-						self.scooterViewModel.getAvailableScooters()
+						self.mapViewModel.getAvailableScooters()
 					})
 				}
 				if showTripDetails {
@@ -72,7 +72,7 @@ struct MapCoordinator: View {
 					Session.ongoingTrip = false
 					showSummary = false
 					showScooterCard = true
-					scooterViewModel.getAvailableScooters()
+					mapViewModel.getAvailableScooters()
 				})
 			}
 		}
@@ -90,21 +90,25 @@ struct MapCoordinator: View {
 
 struct MapView: View {
 	@ObservedObject var mapViewModel: MapViewModel
-	@ObservedObject var scooterViewModel: ScooterViewModel
+	//@ObservedObject var scooterViewModel: ScooterViewModel
 	@State private var region = MKCoordinateRegion.defaultRegion
 	
 	func centerViewOnUserLocation() {
 		guard let location = mapViewModel.locationManager.location?.coordinate else { print("errorr"); return }
 		region = MKCoordinateRegion(center: location, latitudinalMeters: 900, longitudinalMeters: 900)
-		scooterViewModel.location = location
+		mapViewModel.location = location
 	}
 	let onMenu: () -> Void
 	
 	var body: some View {
 		ZStack(alignment: .top) {
-			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.showLocation, annotationItems: !Session.ongoingTrip ?  scooterViewModel.allScooters.filter({$0.available == true }) : []) { scooter in
+			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.showLocation, annotationItems: !Session.ongoingTrip ?  mapViewModel.allScooters.filter({$0.available == true }) : []) { scooter in
 					MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0]))
-						{ Image("pin-fill-img").onTapGesture { self.mapViewModel.selectScooter(scooter: scooter) } }
+					{
+						Image(scooter.isSelected ? "pin-fill-active-img" : "pin-fill-img").onTapGesture {
+							print(scooter.isSelected)
+							self.mapViewModel.selectScooter(scooter: scooter) }
+					}
 			}
 			.edgesIgnoringSafeArea(.all)
 			.onTapGesture { mapViewModel.selectedScooter = nil }

@@ -16,7 +16,6 @@ struct ValidationSuccess: View {
 			UnlockScooterElements.Title(title: "We've succesfully validated your driving license!")
 			Spacer()
 			ActionButton(text: "Find scooters", enabled: true, action: { onFindScooters() })
-				.padding(.bottom, 20)
         }
 		.multilineTextAlignment(.center)
 		.padding(.horizontal, 24)

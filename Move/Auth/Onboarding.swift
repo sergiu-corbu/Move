@@ -42,9 +42,6 @@ struct Onboarding: View {
 			}
 			.padding(.horizontal, 24)
         }
-		.onAppear {
-			print(Session.tokenKey)
-		}
 		.background(Color.white)
     }
     

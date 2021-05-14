@@ -37,7 +37,7 @@ class Payment: NSObject {
 		paymentController = PKPaymentAuthorizationController(paymentRequest: paymentRequest)
 		paymentController?.delegate = self
 		paymentController?.present(completion: { (isPresented: Bool) in
-			if isPresented { print("Presented paymen")}
+			if isPresented { print("")}
 			else { print("Failed"); self.callback!(false)}
 		})
 		

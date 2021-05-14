@@ -23,11 +23,11 @@ struct TripDetailView: View {
 			VStack(alignment: .leading, spacing: 10) {
 				ScooterElements.topLine.frame(maxWidth: .infinity)
 				Text("Trip Details")
-					.padding(.top)
+					.padding(.top, 5)
 					.foregroundColor(.darkPurple)
 					.font(.custom(FontManager.Primary.semiBold, size: 16))
 					.frame(maxWidth: .infinity)
-				ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: true).padding(.vertical, 16)
+				ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: true).padding(.vertical, 12)
 				HStack(spacing: 55) {
 					ScooterElements.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.tripTime, largeFrame: true)
 					ScooterElements.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7")
