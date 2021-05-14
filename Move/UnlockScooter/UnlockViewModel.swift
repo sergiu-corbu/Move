@@ -25,7 +25,7 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 		if selectedIndex  < 3 { selectedIndex += 1 }
 		else {
 			textField.resignFirstResponder()
-			API.unlockScooterPin(code: codeString) { result in
+			API.unlockScooterPin(scooterID: <#String#>, code: codeString) { result in
 				switch result {
 					case .success: self.onFinishedUnlock?()
 					case .failure(let error):

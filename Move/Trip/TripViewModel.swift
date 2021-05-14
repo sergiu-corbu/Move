@@ -28,16 +28,16 @@ class TripViewModel: ObservableObject {
 	}
 
 	func endTrip() {
-		API.basicCall(path: "end") { result in
+		API.basicCall(path: "book/end") { result in
 			switch result {
-				case .success(let result): showMessage(message: result.message)
+				case .success: print("a")
 				case .failure(let error): showError(error: error.localizedDescription)
 			}
 		}
 	}
 	
 	func lockScooter() {
-		API.basicCall(path: "lock") { result in
+		API.basicCall(path: "book/lock") { result in
 			switch result {
 				case .success: showMessage(message: "Scooter locked")
 				case .failure(let error): showError(error: error.localizedDescription)
@@ -46,7 +46,7 @@ class TripViewModel: ObservableObject {
 	}
 	
 	func unlockScooter() {
-		API.basicCall(path: "unlock") { result in
+		API.basicCall(path: "book/unlock") { result in
 			switch result {
 				case .success: showMessage(message: "Scooter unlocked")
 				case .failure(let error): showError(error: error.localizedDescription)

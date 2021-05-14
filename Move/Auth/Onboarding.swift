@@ -39,8 +39,13 @@ struct Onboarding: View {
                 titleLine
                 descriptionLine
                 pageControlLine
-			}.padding(.horizontal, 24)
-        }.background(Color.white)
+			}
+			.padding(.horizontal, 24)
+        }
+		.onAppear {
+			print(Session.tokenKey)
+		}
+		.background(Color.white)
     }
     
     var titleLine: some View {

@@ -9,15 +9,6 @@ import Foundation
 import Alamofire
 import CoreLocation
 
-struct APIError: Error, Decodable {
-    var message: String
-    var localizedDescription: String { return message }
-	
-	enum CodingKeys: String, CodingKey {
-		case message = "message"
-	}
-}
-
 typealias Result<T> = Swift.Result<T, APIError>
 
 class API {
@@ -31,18 +22,17 @@ class API {
 			if username != nil { return true }
 			return false
 		}
+		
 		AF.request(path, method: .post, parameters: isRegister ? registerParameters : loginParameters, encoder: JSONParameterEncoder.default).validate().responseData { response in
-			if response.response?.statusCode == 200 {
-				do {
+			do {
+				if response.response?.statusCode == 200 {
 					let result = try JSONDecoder().decode(AuthResult.self, from: response.data!)
 					callback(.success(result))
-				} catch (let error) { print(error) }
-			} else {
-				do {
+				} else {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-				} catch (let error) { print(error) }
-			}
+				}
+			} catch (let error) { print(error) }
 		}
 	}
 	
@@ -51,56 +41,36 @@ class API {
 		//scooter/inradius/
         let parameters = ["longitude": coordinates.longitude, "latitude": coordinates.latitude]
 		AF.request(path, parameters: parameters).validate().responseData { response in
-			if response.response?.statusCode == 200 {
-				do {
+			do {
+				if response.response?.statusCode == 200 {
 					let result = try JSONDecoder().decode([Scooter].self, from: response.data!)
 					callback(.success(result))
-				} catch (let error) { print(error) }
-			} else {
-				do {
+				} else {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-					
-				} catch (let error) { print(error) }
-			}
-        }
-    }
-    
-//    static func logout(_ callback: @escaping (Result<Bool>) -> Void) {
-//		guard let token = Session.tokenKey else { showError(error: "Invalid token"); return}
-//        let path = baseUrl + "user/logout"
-//        let header: HTTPHeaders = ["Authorization": token]
-//		AF.request(path, method: .delete, headers: header).validate().responseData { response in
-//			if response.response?.statusCode == 200 {
-//				callback(.success(true))
-//			} else {
-//				do {
-//					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
-//					callback(.failure(APIError(message: result.localizedDescription)))
-//				} catch (let error) { print(error) }
-//			}
-//		}
-//	}
-	
-	static func unlockScooterPin(code: String, _ callback: @escaping (Result<BasicCallResult>) -> Void) {
-		guard let token = Session.tokenKey else { print("invalid token"); return}
+				}
+			} catch (let error) { print(error) }
+		}
+	}
+    	
+	static func unlockScooterPin(scooterID: String, code: String, _ callback: @escaping (Result<BasicCallResult>) -> Void) {
+		guard let token = Session.tokenKey else { showError(error: "Invalid token"); return}
 		
-		let path = baseUrl + "user/book/code/g6i6"
+		let path = baseUrl + "user/book/code/" + scooterID
 		let header: HTTPHeaders = ["Authorization": token]
 		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
 		let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "code": code]
+		
 		AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
-			if response.response?.statusCode == 200 {
-				do {
+			do {
+				if response.response?.statusCode == 200 {
 					let result = try JSONDecoder().decode(BasicCallResult.self, from: response.data!)
 					callback(.success(result))
-				} catch (let error) { print(error) }
-			} else {
-				do {
+				} else {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-				} catch (let error) { print(error) }
-			}
+				}
+			} catch (let error) { print(error) }
 		}
 	}
 	
@@ -110,7 +80,6 @@ class API {
 		let path = baseUrl + "user/book/info/0/0"
 		let header: HTTPHeaders = ["Authorization": token]
 		AF.request(path, method: .get, headers: header).validate().responseData { response in
-			
 			if response.response?.statusCode == 200 {
 				do {
 					var trips = try JSONDecoder().decode(TripDownload.self, from: response.data!)
@@ -132,14 +101,11 @@ class API {
 						}
 					}
 				} catch (let error)
-				{
-					print("i am on error")
-					callback(.failure(APIError(message: error.localizedDescription))) }
-			} else {
+				{ callback(.failure(APIError(message: error.localizedDescription))) } }
+			else {
 				do {
 					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 					callback(.failure(APIError(message: result.localizedDescription)))
-					
 				} catch (let error) { print(error) }
 			}
 		}
@@ -147,29 +113,26 @@ class API {
 	
 	static func basicCall(path: String, _ callback: @escaping (Result<BasicCallResult>) -> Void) {
 		guard let token = Session.tokenKey else { print("invalid token"); return }
-		let path = baseUrl + "user/book/" + path
+		let path = baseUrl + "user/" + path
 		let header: HTTPHeaders = ["Authorization": token]
 		
 		AF.request(path, method: .put, headers: header).validate().responseData { response in
-			if response.response?.statusCode == 200 {
-				do {
-					let result = try JSONDecoder().decode(BasicCallResult.self, from: response.data!)
-					callback(.success(result))
-				} catch (let error) { print(error) }
-			} else {
-				do {
-					let result = try JSONDecoder().decode(APIError.self, from: response.data!)
-					callback(.failure(APIError(message: result.localizedDescription)))
-				} catch (let error) { print(error) }
-			}
+			do {
+				if response.response?.statusCode == 200 {
+						let result = try JSONDecoder().decode(BasicCallResult.self, from: response.data!)
+						callback(.success(result))
+				} else {
+						let result = try JSONDecoder().decode(APIError.self, from: response.data!)
+						callback(.failure(APIError(message: result.localizedDescription)))
+				}
+			} catch (let error) { print(error) }
 		}
 	}
-	
 }
 
-struct BasicCallResult: Codable {
-	let message: String
-	enum CodingKeys: String, CodingKey {
-		case message = "message"
-	}
-}
+
+//enum ResultType {
+//	var types = [APIError.self, AuthResult.self] as [Any]
+//	switch types:
+//	case
+//}

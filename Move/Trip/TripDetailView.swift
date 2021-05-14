@@ -14,7 +14,6 @@ struct TripDetailView: View {
 	@State private var endRidePressed: Bool = false
 	@ObservedObject var stopWatch = StopWatch()
 	@ObservedObject var tripViewModel = TripViewModel()
-	@State var offset = CGFloat(300.0)
 	
 	let scooter: Scooter
 	let onEndRide: () -> Void
