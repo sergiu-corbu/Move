@@ -47,7 +47,7 @@ class UserViewModel: ObservableObject {
 	}
 	
 	func registerCall(_ callback: @escaping () -> Void) {
-		 API.authCall(path: "register", email: email, password: password, username: username) { result in
+		 API.registerUser(email: email, password: password, username: username) { result in
 			switch result {
 				case .success(let result):
 					Session.tokenKey = result.token
@@ -62,7 +62,7 @@ class UserViewModel: ObservableObject {
 	}
 	
 	func loginCall(_ callback: @escaping () -> Void) {
-		API.authCall(path: "login", email: email, password: password, username: nil) { result in
+		API.loginUser(email: email, password: password) { result in
 			switch result {
 				case .success(let result):
 					Session.tokenKey = result.token

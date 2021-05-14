@@ -102,7 +102,7 @@ struct MapView: View {
 	
 	var body: some View {
 		ZStack(alignment: .top) {
-			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.showLocation, annotationItems: !Session.ongoingTrip ?  mapViewModel.allScooters.filter({$0.available == true }) : []) { scooter in
+			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.locationManager.showLocation, annotationItems: !Session.ongoingTrip ?  mapViewModel.allScooters.filter({$0.available == true }) : []) { scooter in
 					MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0]))
 					{
 						Image(scooter.isSelected ? "pin-fill-active-img" : "pin-fill-img").onTapGesture {
@@ -113,13 +113,12 @@ struct MapView: View {
 			.edgesIgnoringSafeArea(.all)
 			.onTapGesture { mapViewModel.selectedScooter = nil }
 			.onAppear {
-				print(Session.tokenKey)
 				centerViewOnUserLocation()
-				if mapViewModel.showLocation {
+				if mapViewModel.locationManager.showLocation {
 					DispatchQueue.main.async { centerViewOnUserLocation() }
 				}
 			}
-			SharedElements.MapBarItems(menuAction: { onMenu(); mapViewModel.selectedScooter = nil}, text: mapViewModel.cityName, locationEnabled: mapViewModel.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil } )
+			SharedElements.MapBarItems(menuAction: { onMenu(); mapViewModel.selectedScooter = nil}, text: mapViewModel.locationManager.cityName, locationEnabled: mapViewModel.locationManager.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil } )
 		}
 	}
 }
