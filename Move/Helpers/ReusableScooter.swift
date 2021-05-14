@@ -48,7 +48,7 @@ struct ScooterElements {
 			HStack {
 				Image(batteryImage)
 				Text("\(battery)%")
-					.font(.custom(FontManager.Primary.medium, size: 15))
+					.font(.custom(FontManager.Primary.medium, size: 14))
 					.foregroundColor(.darkPurple)
 					.opacity(dimOpacity ? 0.6 : 1)
 			}.padding(.top, -0.5)
@@ -92,7 +92,7 @@ struct ScooterElements {
 			HStack {
 				MapActionButton(image: image, action:{}, border: showBorder)
 				Text(text).font(.custom(FontManager.Primary.medium, size: 14))
-			}.padding(.leading, -5)
+			}.padding(.leading, -1)
 		}
 	}
 	

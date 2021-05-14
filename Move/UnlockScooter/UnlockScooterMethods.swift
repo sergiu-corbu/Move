@@ -1,5 +1,5 @@
 //
-//  UnlockScooterCard.swift
+//  UnlockScooterMethods.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 21.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UnlockScooterCard: View {
+struct UnlockScooterMethods: View {
 	
 	let onQR: () -> Void
 	let onPin: () -> Void
@@ -17,19 +17,15 @@ struct UnlockScooterCard: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            mainBody
+			ZStack {
+				VStack(spacing: 20) {
+					ScooterElements.cardTitle
+					scooterInfo
+					unlockButtons
+				}.padding(.horizontal, 24)
+			}.padding(.top, 24)
             ScooterElements.topLine
 		}.background(SharedElements.whiteRoundedRectangle)
-    }
-    
-    private var mainBody: some View {
-        ZStack {
-            VStack(spacing: 20) {
-				ScooterElements.cardTitle
-                scooterInfo
-                unlockButtons
-            }.padding(.horizontal, 24)
-        }.padding(.top, 24)
     }
 
     private var scooterInfo: some View {
@@ -52,12 +48,12 @@ struct UnlockScooterCard: View {
             UnlockButton(text: "NFC", action: {onNFC()})
             UnlockButton(text: "QR", action: {onQR()})
             UnlockButton(text: "123", action: {onPin()})
-        }.padding(.vertical, 10)
+		}.padding(.vertical)
     }
 }
 
-struct UnlockScooterCard_Preview: PreviewProvider {
+struct UnlockScooterMethods_Preview: PreviewProvider {
     static var previews: some View {
-		UnlockScooterCard(onQR: {}, onPin: {}, onNFC: {}, scooter: Scooter.init(location: Location(coordinates: [10,2], type: "T"), locked: true, available: true, battery: 65, id: "ABCD", deviceKey: "ewfuhw", addressName: "Strada Plopilor"))
+		UnlockScooterMethods(onQR: {}, onPin: {}, onNFC: {}, scooter: Scooter.init(location: Location(coordinates: [10,2], type: "T"), locked: true, available: true, battery: 65, id: "ABCD", deviceKey: "ewfuhw", addressName: "Strada Plopilor"))
     }
 }

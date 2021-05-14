@@ -1,5 +1,5 @@
 //
-//  TripSummary.swift
+//  FinishTrip.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 05.05.2021.
@@ -7,25 +7,19 @@
 
 import SwiftUI
 
-struct TripSummary: View {
+struct FinishTrip: View {
 	@State private var isLoading: Bool = false
 	let paymentHander = Payment()
 	let onFinish: () -> Void
 	
     var body: some View {
-		VStack(alignment: .leading, spacing: 40) {
+		VStack(alignment: .leading, spacing: 30) {
 			NavigationBar(title: "Trip Summary", color: .darkPurple)
 			Image("mapDraw").frame(maxWidth: .infinity)
 			tripBoundaries
 			travelData
 			Spacer()
-			ActionButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: {
-				self.paymentHander.startPayment { (success) in
-					if success { showMessage(message: "Payment done")}
-					else { showError(error: "Paymant Failed")}
-					DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: { onFinish() })
-				}
-			})
+			ActionButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: { initiatePayment() })
 		} 
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))
@@ -56,13 +50,17 @@ struct TripSummary: View {
 		}
 	}
 	
-	var appleLogo: some View {
-		Image(systemName: "applelogo").foregroundColor(.white)
+	private func initiatePayment() {
+		self.paymentHander.startPayment { (success) in
+			if success { showMessage(message: "Payment done")}
+			else { showError(error: "Paymant Failed")}
+			DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: { onFinish() })
+		}
 	}
 }
 
 struct TripSummary_Previews: PreviewProvider {
     static var previews: some View {
-		TripSummary(onFinish: {})
+		FinishTrip(onFinish: {})
     }
 }

@@ -35,7 +35,7 @@ struct MapCoordinator: View {
 					ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed, onTapp: {showScooterCard = false})
 				}
 				if unlockPressed {
-					UnlockScooterCard(onQR: {}, onPin: { pinPressed = true }, onNFC: {}, scooter: selectedScooter)
+					UnlockScooterMethods(onQR: {}, onPin: { pinPressed = true }, onNFC: {}, scooter: selectedScooter)
 				}
 				if showTrip {
 					StartRide(scooter: selectedScooter, onStartRide: { scooter in
@@ -68,7 +68,7 @@ struct MapCoordinator: View {
 				})
 			}
 			if showSummary {
-				TripSummary(onFinish: {
+				FinishTrip(onFinish: {
 					Session.ongoingTrip = false
 					showSummary = false
 					showScooterCard = true

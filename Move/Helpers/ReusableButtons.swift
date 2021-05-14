@@ -47,7 +47,7 @@ struct ActionButton: View {
 					}
 				}
 			}).disabled(!enabled)
-		}.padding(.vertical)
+		}.padding(.vertical, 24)
 	}
 }
 

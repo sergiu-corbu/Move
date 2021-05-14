@@ -11,7 +11,7 @@ struct StartRide: View {
 	let scooter: Scooter
 	let onStartRide: (Scooter) -> Void
 	
-    var body: some View {
+	var body: some View {
 		VStack {
 			ScooterElements.topLine.frame(maxWidth: .infinity)
 			HStack {
@@ -21,13 +21,12 @@ struct StartRide: View {
 					ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: false).padding(.top, 5)
 				}.padding(.top, 30)
 				ScooterElements.scooterImage.padding(.trailing, -24)
-			}
+			}.padding(.top)
 			ActionButton(text: "Start ride", isLoading: false, enabled: true, action: { onStartRide(scooter) })
 		}
-		.padding(.top, 30)
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)
-    }
+	}
 }
 
 struct StartRide_Previews: PreviewProvider {

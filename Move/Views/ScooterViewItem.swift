@@ -17,8 +17,9 @@ struct ScooterViewItem: View {
             customBackground
             mainBody
         }
-        .frame(width: 250, height: 315)
+		.frame(width: 250, height: 315)
         .clipShape(RoundedRectangle(cornerRadius: 29))
+		.padding(.bottom)
     }
 	
 	var mainBody: some View {
@@ -35,7 +36,6 @@ struct ScooterViewItem: View {
 			ActionButton(text: "Unlock", isLoading: false, enabled: true, action: { isUnlocked.toggle()
 				onTapp()
 			})
-				.padding(.top)
 		}.padding(.horizontal, 24)
 	}
 	

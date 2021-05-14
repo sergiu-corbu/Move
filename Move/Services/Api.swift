@@ -58,6 +58,7 @@ class API {
 		let path = baseUrl + "user/book/code/" + scooterID
 		let header: HTTPHeaders = ["Authorization": token]
 		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
+		
 		let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "code": code]
 		
 		AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in

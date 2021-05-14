@@ -61,7 +61,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate ,ObservableObject, UITex
             guard let self = self else { return }
             if let error = error { print(error); return }
             guard let placemark = placemarks?.first else { return }
-            self.cityName = placemark.locality ?? "Not defined"
+			self.cityName = placemark.locality ?? "Not defined"
         }
     }
     
