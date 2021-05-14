@@ -74,13 +74,18 @@ struct ScooterElements {
 			}.foregroundColor(.white)
 		}
 	}
-	
-	static var cardTitle: some View {
-		Text("You can unlock this scooter\nthrough theese methods: ")
-			.font(.custom(FontManager.Primary.bold, size: 16))
-			.foregroundColor(Color.darkPurple)
-			.frame(maxWidth: .infinity, maxHeight: 50)
-			.multilineTextAlignment(.center)
+		
+	struct CardTitle: View {
+		let text: String
+		var semiBold: Bool = false
+		
+		var body: some View {
+			Text(text)
+				.font(.custom( semiBold ? FontManager.Primary.semiBold : FontManager.Primary.bold, size: 16))
+				.foregroundColor(Color.darkPurple)
+				.frame(maxWidth: .infinity, maxHeight: 50)
+				.multilineTextAlignment(.center)
+		}
 	}
 	
 	struct UnlockScooterMiniButton: View {

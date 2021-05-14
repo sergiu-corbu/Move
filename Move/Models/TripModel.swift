@@ -63,7 +63,10 @@ struct Trip: Codable {//, Hashable {
 		let address = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
 		var result: String = ""
 		geocoder.reverseGeocodeLocation(address) { (placemarks, error) in
-			guard let placemark = placemarks?.first else { return }
+			guard let placemark = placemarks?.first else {
+				completion("could not reverse geocode")
+				return
+			}
 			result = placemark.thoroughfare! + " " + placemark.subThoroughfare!
 			completion(result)
 		}

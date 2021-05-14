@@ -19,7 +19,7 @@ struct UnlockScooterMethods: View {
         ZStack(alignment: .top) {
 			ZStack {
 				VStack(spacing: 20) {
-					ScooterElements.cardTitle
+					ScooterElements.CardTitle(text: "You can unlock this scooter\nthrough theese methods:")
 					scooterInfo
 					unlockButtons
 				}.padding(.horizontal, 24)

@@ -55,7 +55,7 @@ struct MapCoordinator: View {
 				}
 			}
 			if pinPressed {
-				SNUnlock(onClose: {pinPressed = false}, onFinished: {
+				CodeUnlock(onClose: {pinPressed = false}, onFinished: {
 					showUnlock = true
 					pinPressed = false
 				})
@@ -113,7 +113,7 @@ struct MapView: View {
 			.edgesIgnoringSafeArea(.all)
 			.onTapGesture { mapViewModel.selectedScooter = nil }
 			.onAppear {
-				//print(Session.tokenKey)
+				print(Session.tokenKey)
 				centerViewOnUserLocation()
 				if mapViewModel.showLocation {
 					DispatchQueue.main.async { centerViewOnUserLocation() }

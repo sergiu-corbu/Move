@@ -1,5 +1,5 @@
 //
-//  ScanQR.swift
+//  QRUnlock.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 27.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScanQR: View {
+struct QRUnlock: View {
     let action: () -> Void
     var body: some View {
        VStack {
@@ -19,6 +19,6 @@ struct ScanQR: View {
 
 struct ScanQR_Previews: PreviewProvider {
     static var previews: some View {
-        ScanQR(action: {})
+        QRUnlock(action: {})
     }
 }

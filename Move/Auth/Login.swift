@@ -42,6 +42,7 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        Login(onLoginCompleted: {}, onRegisterSwitch: {})
+		Login(onLoginCompleted: {}, onRegisterSwitch: {})
+			.preferredColorScheme(.dark)
     }
 }

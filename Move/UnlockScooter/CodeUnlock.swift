@@ -1,5 +1,5 @@
 //
-//  SNUnlock.swift
+//  CodeUnlock.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 27.04.2021.
@@ -9,7 +9,7 @@ import SwiftUI
 import Introspect
 import CoreLocation
 
-struct SNUnlock: View {
+struct CodeUnlock: View {
 	
 	//@ObservedObject var mapViewModel: MapViewModel = ScooterViewModel.shared
 	@ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
