@@ -4,64 +4,40 @@
 //
 //  Created by Sergiu Corbu on 06.05.2021.
 //
-
 import Foundation
 
-class StopWatch: ObservableObject {
-	private var sourceTimer: DispatchSourceTimer?
-	private let queue = DispatchQueue(label: "stopwatch.timer")
-	private var counter: Int = 0
+struct StopWatch {
+	var time: Int = 0
+}
+
+class StopWatchViewModel: ObservableObject {
+    @Published var stopWatch: StopWatch = StopWatch()
+    var isRunning: Bool = false
+
+	var tripTime: String = "00:00"
 	
-	var stopWatchTime = "00:00" {
-		didSet { self.update() }
-	}
-	
-	func start() {
-		guard let _ = self.sourceTimer else { self.startTimer() ;return }
-		self.resumeTimer()
-	}
-	
-	func reset() {
-		self.stopWatchTime = "00:00"
-		self.counter = 0
-	}
-	
-	func update() {
-		objectWillChange.send()
-	}
-	
-	private func startTimer() {
-		self.sourceTimer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags.strict, queue: self.queue)
-		self.resumeTimer()
-	}
-	
-	private func resumeTimer() {
-		self.sourceTimer?.setEventHandler { self.updateTimer() }
-		self.sourceTimer?.schedule(deadline: .now(), repeating: 0.01)
-		self.sourceTimer?.resume()
-	}
-	
-	func stop() {
-		self.sourceTimer?.suspend()
-		self.reset()
-	}
-	
-	private func updateTimer() {
-		self.counter += 1
-		DispatchQueue.main.async { self.stopWatchTime = StopWatch.convertCountToTimeString(counter: self.counter) }
+    func play() {
+        isRunning = true
+		DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+			if self.isRunning {
+				self.stopWatch.time += 1
+				self.tripTime = StopWatchViewModel.convertCountToTimeString(counter: self.stopWatch.time)
+				self.play()
+			}
+		}
 	}
 }
 
-extension StopWatch {
+extension StopWatchViewModel {
 	static func convertCountToTimeString(counter: Int) -> String {
-		let seconds = counter / 100
+		var seconds = counter
 		let minutes = seconds / 60
-
+		
 		var secondsString = "\(seconds)"
 		var minutesString = "\(minutes)"
-		
+		if counter == 60 { seconds = 1}
 		if seconds < 10 { secondsString = "0" + secondsString }
-		if minutes < 10 { minutesString = "0" + minutesString }
+		if minutes < 60 { minutesString = "0" + minutesString }
 		return "\(minutesString):\(secondsString)"
 	}
 }

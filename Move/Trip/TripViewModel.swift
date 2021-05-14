@@ -30,7 +30,7 @@ class TripViewModel: ObservableObject {
 	func endTrip() {
 		API.basicCall(path: "book/end") { result in
 			switch result {
-				case .success: print("a")
+				case .success: print("")
 				case .failure(let error): showError(error: error.localizedDescription)
 			}
 		}

@@ -30,7 +30,10 @@ struct SNUnlock: View {
 			}
 			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
         }
-		.onAppear { unlockViewModel.onFinishedUnlock = onFinished }
+		.onAppear {
+			unlockViewModel.onFinishedUnlock = onFinished
+			
+		}
 		.onTapGesture { hideKeyboard() }
 		.background(SharedElements.purpleBackground)
     }

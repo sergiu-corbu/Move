@@ -12,7 +12,7 @@ struct TripDetailView: View {
 //	@State var tapped: Bool = false
 	@State var lockButtonPressed: Bool = false
 	@State private var endRidePressed: Bool = false
-	@ObservedObject var stopWatch = StopWatch()
+	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
 	@ObservedObject var tripViewModel = TripViewModel()
 	
 	let scooter: Scooter
@@ -29,7 +29,7 @@ struct TripDetailView: View {
 					.frame(maxWidth: .infinity)
 				ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: true).padding(.vertical, 16)
 				HStack(spacing: 55) {
-					ScooterElements.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.stopWatchTime, largeFrame: true)
+					ScooterElements.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.tripTime, largeFrame: true)
 					ScooterElements.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7")
 				}
 				tripButtons
@@ -38,7 +38,7 @@ struct TripDetailView: View {
 		//}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)
-		.onAppear(perform: { self.stopWatch.start() })
+		.onAppear { self.stopWatch.play() }
 	}
 	
 //	var expandedBody: some View {
@@ -62,7 +62,7 @@ struct TripDetailView: View {
 			lockButtonPressed.toggle()
 		}, onEndTripButton: {
 			endRidePressed = true
-			self.stopWatch.stop()
+			self.stopWatch.isRunning = false
 			tripViewModel.endTrip()
 			onEndRide()
 		})

@@ -37,7 +37,7 @@ class API {
 	}
 	
     static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void) {
-        let path = baseUrl + "scooter/"
+		let path = baseUrl + "scooter/inradius?longitude=" + "\(coordinates.longitude)" + "&latitude=" + "\(coordinates.latitude)"
 		//scooter/inradius/
         let parameters = ["longitude": coordinates.longitude, "latitude": coordinates.latitude]
 		AF.request(path, parameters: parameters).validate().responseData { response in
@@ -55,7 +55,6 @@ class API {
     	
 	static func unlockScooterPin(scooterID: String, code: String, _ callback: @escaping (Result<BasicCallResult>) -> Void) {
 		guard let token = Session.tokenKey else { showError(error: "Invalid token"); return}
-		
 		let path = baseUrl + "user/book/code/" + scooterID
 		let header: HTTPHeaders = ["Authorization": token]
 		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
