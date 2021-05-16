@@ -11,7 +11,6 @@ import NavigationStack
 struct ContentView: View {
 	@State private var isLoading = false
 	@StateObject var navigationStack: NavigationStack = NavigationStack()
-	
 	var body: some View {
 		if Session.tokenKey != nil {
 				MapCoordinator(navigationStack: navigationStack)
@@ -20,94 +19,49 @@ struct ContentView: View {
 		}
 	}
 }
-	
-//	func handleUnlockType(type: UnlockType, scooter: Scooter) {
-//		switch type {
-//			case .code: handleCodeUnlock(scooter: scooter)
-//			case .qr: break
-//			case .nfc: break
-//		}
-//	}
-//	
-//	func handleCodeUnlock(scooter: Scooter) {
-//		navigationViewModel.push(SNUnlock(onClose: {navigationViewModel.pop()}, onFinished: {
-//			navigationViewModel.push(UnlockSuccesful())
-//			DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-//				navigationViewModel.push(StartRide(scooter: scooter, onStartRide: {scooter in
-//					navigationViewModel.push(TripDetailView(tapped: false, scooter: scooter, onEndRide: {
-//						navigationViewModel.push(TripSummary())
-//					}))
-//				}))
-//			})
-//		}))
-//	}
 
 struct MapCoordinator: View {
-	var navigationStack: NavigationStack
 	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
-	
-	@State private var unlockPressed: Bool = false
-	@State private var pinPressed = false
-	@State var showUnlock = false
-	@State var showTrip = false
-	@State var showTripDetails = false
-	@State var showSummary = false
-	@State var showScooterCard = true
+	@State var container: AnyView = AnyView(EmptyView())
+	var navigationStack: NavigationStack
 	
 	var body: some View {
 		NavigationStackView(navigationStack: navigationStack) {
 			ZStack(alignment: .bottom) {
-				MapView(mapViewModel: mapViewModel, onMenu: {  handleOnMenu() })
-					.onTapGesture {
-						mapViewModel.selectedScooter = nil
-						unlockPressed = false
-						showScooterCard = true
-					}
-				if let selectedScooter = self.mapViewModel.selectedScooter {
-					if showScooterCard {
-						ScooterViewItem(scooter: selectedScooter, isUnlocked: $unlockPressed, onTapp: {showScooterCard = false})
-					} else if unlockPressed {
-						UnlockScooterMethods(onQR: {}, onPin: { pinPressed = true }, onNFC: {}, scooter: selectedScooter)
-					}
-//					if showTrip {
-//						StartRide(scooter: selectedScooter, onStartRide: { scooter in
-//							showTripDetails = true
-//							unlockPressed = false
-//							showTrip = false
-//							Session.ongoingTrip = true
-//							self.mapViewModel.getAvailableScooters()
-//						})
-//					}
-//					if showTripDetails {
-//						TripDetailView(scooter: selectedScooter, onEndRide: {
-//							mapViewModel.selectedScooter = nil
-//							showTripDetails = false
-//							showSummary = true
-//						})
-//					}
-				}
-//				if pinPressed {
-//					CodeUnlock(onClose: {pinPressed = false}, onFinished: {
-//						showUnlock = true
-//						pinPressed = false
-//					})
-//				}
-//				if showUnlock {
-//					UnlockSuccesful(onFinished: {
-//						showUnlock = false
-//						showTrip = true
-//						unlockPressed = false
-//					})
-//				}
-//				if showSummary {
-//					FinishTrip(onFinish: {
-//						Session.ongoingTrip = false
-//						showSummary = false
-//						showScooterCard = true
-//						mapViewModel.getAvailableScooters()
-//					})
-//				}
+				MapView(mapViewModel: mapViewModel, currentScooter: $mapViewModel.selectedScooter, onMenu: {  handleOnMenu() }, callBack: { scooter in
+					container = AnyView(ScooterViewItem(scooter: scooter, onUnlock: {
+						container = AnyView(UnlockScooterMethods(unlockMethod: { unlockType in
+							handleUnlockType(type: unlockType)
+						}))
+					}))
+				})
+				container
 			}
+		}
+	}
+	
+	
+	func handleCodeUnlock() {
+		navigationStack.push(CodeUnlock(onClose: { navigationStack.pop() },
+									   onFinished: {
+										container = AnyView(UnlockSuccesful(onFinished: {
+											container = AnyView(StartRide(onStartRide: {
+												container = AnyView(TripDetailView(onEndRide: {
+													container = AnyView(FinishTrip(onFinish: {
+														container = AnyView(EmptyView())
+													}))
+												}))
+											}))
+										}))
+					}
+		))
+	}
+	
+	func handleUnlockType(type: UnlockType) {
+		switch type {
+			case .code: handleCodeUnlock()
+			case .qr: break
+			case .nfc: break
 		}
 	}
 	
@@ -160,3 +114,52 @@ struct AuthCoordinator: View {
 		navigationStack.push(MapCoordinator(navigationStack: navigationStack))
 	}
 }
+
+/*
+//				if let selectedScooter = self.mapViewModel.selectedScooter {
+//					container = AnyView(ScooterViewItem(scooter: selectedScooter))
+//				}
+//					container = AnyView(ScooterViewItem(scooter: selectedScooter))
+//				}
+//					UnlockScooterMethods(unlockMethod: { unlockType  in
+//
+//					}, scooter: selectedScooter)
+
+
+//					if showTrip {
+//						StartRide(scooter: selectedScooter, onStartRide: { scooter in
+//							showTripDetails = true
+//							unlockPressed = false
+//							showTrip = false
+//							Session.ongoingTrip = true
+//							self.mapViewModel.getAvailableScooters()
+//						})
+//					}
+//					if showTripDetails {
+//						TripDetailView(scooter: selectedScooter, onEndRide: {
+//							mapViewModel.selectedScooter = nil
+//							showTripDetails = false
+//							showSummary = true
+//						})
+//					}
+//				if pinPressed {
+//					CodeUnlock(onClose: {pinPressed = false}, onFinished: {
+//						showUnlock = true
+//						pinPressed = false
+//					})
+//				}
+//				if showUnlock {
+//					UnlockSuccesful(onFinished: {
+//						showUnlock = false
+//						showTrip = true
+//						unlockPressed = false
+//					})
+//				}
+//				if showSummary {
+//					FinishTrip(onFinish: {
+//						Session.ongoingTrip = false
+//						showSummary = false
+//						showScooterCard = true
+//						mapViewModel.getAvailableScooters()
+//					})
+//				}*/

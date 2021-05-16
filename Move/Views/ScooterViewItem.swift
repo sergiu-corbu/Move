@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ScooterViewItem: View {
     let scooter: Scooter
-    @Binding var isUnlocked: Bool
-	let onTapp: () -> Void
+	let onUnlock: () -> Void
 	
     var body: some View {
         ZStack {
@@ -33,9 +32,7 @@ struct ScooterViewItem: View {
 				scooterInfo
 			}
 			location
-			ActionButton(text: "Unlock", isLoading: false, enabled: true, action: { isUnlocked.toggle()
-				onTapp()
-			})
+			ActionButton(text: "Unlock", isLoading: false, enabled: true, action: { onUnlock() })
 		}.padding(.horizontal, 24)
 	}
 	
@@ -89,6 +86,6 @@ struct ScooterViewItem: View {
 
 struct ScooterViewItem_Previews: PreviewProvider {
     static var previews: some View {
-		ScooterViewItem(scooter: Scooter(location: Location(coordinates: [10,2], type: "t"), locked: true, available: true, battery: 90, id: "asdd", deviceKey: "fsodjn", addressName: nil), isUnlocked: .constant(true), onTapp: {})
+		ScooterViewItem(scooter: Scooter(location: Location(coordinates: [10,2], type: "t"), locked: true, available: true, battery: 90, id: "asdd", deviceKey: "fsodjn", addressName: nil), onUnlock: {})
     }
 }

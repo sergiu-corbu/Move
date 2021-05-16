@@ -30,7 +30,6 @@ struct CodeUnlock: View {
         }
 		.onAppear {
 			unlockViewModel.onFinishedUnlock = onFinished
-			
 		}
 		.onTapGesture { hideKeyboard() }
 		.background(SharedElements.purpleBackground)

@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct UnlockScooterMethods: View {
-	
-	let onQR: () -> Void
-	let onPin: () -> Void
-	let onNFC: () -> Void
-	
-    let scooter: Scooter
+	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+	var scooter: Scooter {
+		return mapViewModel.selectedScooter!
+	}
+//	let onQR: () -> Void
+//	let onCode: () -> Void
+//	let onNFC: () -> Void
+	let unlockMethod: (UnlockType) -> Void
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -45,15 +47,15 @@ struct UnlockScooterMethods: View {
 	
     private var unlockButtons: some View {
         HStack(spacing: 25) {
-            UnlockButton(text: "NFC", action: {onNFC()})
-            UnlockButton(text: "QR", action: {onQR()})
-            UnlockButton(text: "123", action: {onPin()})
+			UnlockButton(text: "NFC", action: { unlockMethod(UnlockType.nfc) })
+            UnlockButton(text: "QR", action: { unlockMethod(UnlockType.qr) })
+            UnlockButton(text: "123", action: { unlockMethod(UnlockType.code) })
 		}.padding(.vertical)
     }
 }
 
 struct UnlockScooterMethods_Preview: PreviewProvider {
     static var previews: some View {
-		UnlockScooterMethods(onQR: {}, onPin: {}, onNFC: {}, scooter: Scooter.init(location: Location(coordinates: [10,2], type: "T"), locked: true, available: true, battery: 65, id: "ABCD", deviceKey: "ewfuhw", addressName: "Strada Plopilor"))
+		UnlockScooterMethods(unlockMethod: { _ in })
     }
 }

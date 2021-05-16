@@ -14,8 +14,10 @@ struct TripDetailView: View {
 	@State private var endRidePressed: Bool = false
 	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
 	@ObservedObject var tripViewModel = TripViewModel.shared
-	
-	let scooter: Scooter
+	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+	var scooter: Scooter {
+		return mapViewModel.selectedScooter!
+	}
 	let onEndRide: () -> Void
 	
 	var body: some View {
@@ -83,6 +85,6 @@ struct TripDetailView: View {
 
 struct TripDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-		TripDetailView(scooter: Scooter(location: Location(coordinates: [20,0], type: "a"), locked: true, available: true, battery: 90, id: "AVSA", deviceKey: "DQFW", addressName: nil), onEndRide: {})
+		TripDetailView(onEndRide: {})
 	}
 }

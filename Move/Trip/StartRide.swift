@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct StartRide: View {
-	let scooter: Scooter
-	let onStartRide: (Scooter) -> Void
+	var mapViewModel: MapViewModel = MapViewModel.shared
+	var scooter: Scooter {
+		return mapViewModel.selectedScooter!
+	}
+	let onStartRide: () -> Void
 	
 	var body: some View {
 		VStack {
@@ -22,7 +25,7 @@ struct StartRide: View {
 				}.padding(.top, 30)
 				ScooterElements.scooterImage.padding(.trailing, -24)
 			}.padding(.top)
-			ActionButton(text: "Start ride", isLoading: false, enabled: true, action: { onStartRide(scooter) })
+			ActionButton(text: "Start ride", isLoading: false, enabled: true, action: { onStartRide() })
 		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)
@@ -31,6 +34,6 @@ struct StartRide: View {
 
 struct StartRide_Previews: PreviewProvider {
     static var previews: some View {
-		StartRide(scooter: Scooter(location: Location(coordinates: [10,2], type: "t"), locked: true, available: true, battery: 90, id: "asdd", deviceKey: "fsodjn", addressName: nil), onStartRide: {_ in })
+		StartRide(onStartRide: {})
     }
 }
