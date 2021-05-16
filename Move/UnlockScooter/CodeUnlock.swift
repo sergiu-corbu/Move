@@ -10,10 +10,8 @@ import Introspect
 import CoreLocation
 
 struct CodeUnlock: View {
-	
-	//@ObservedObject var mapViewModel: MapViewModel = ScooterViewModel.shared
 	@ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
-
+	@State private var isLoading: Bool = false
     let onClose: () -> Void
 	let onFinished: () -> Void
 

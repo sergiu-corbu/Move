@@ -16,13 +16,17 @@ class StopWatchViewModel: ObservableObject {
 
 	var tripTime: String = "00:00"
 	
-    func play() {
+	init() {
+		self.startTimer()
+	}
+	
+    func startTimer() {
         isRunning = true
 		DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 			if self.isRunning {
 				self.stopWatch.time += 1
 				self.tripTime = StopWatchViewModel.convertCountToTimeString(counter: self.stopWatch.time)
-				self.play()
+				self.startTimer()
 			}
 		}
 	}

@@ -10,15 +10,16 @@ import CoreLocation
 import MapKit
 
 class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
-	static var shared: MapViewModel = MapViewModel()
-    let locationManager = LocationManager()
-    @Published var scooterLocation: String = ""
-	@Published var selectedScooter: Scooter?
-	
 	@Published var allScooters: [Scooter] = []
+	@Published var scooterLocation: String = ""
+	@Published var selectedScooter: Scooter?
+	@Published var locationManager = LocationManager()
+	static var shared: MapViewModel = MapViewModel()
 	
-	var location: CLLocationCoordinate2D? {
-		didSet { if oldValue == nil { reloadData() } }
+	var userLocation: CLLocationCoordinate2D? {
+		didSet {
+			if oldValue == nil { reloadData() }
+		}
 	}
 	
 	private func reloadData() {
@@ -27,7 +28,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 	}
 	
 	func getAvailableScooters() {
-		guard let location = self.location else { return }
+		guard let location = self.userLocation else { return }
 		API.getScooters(coordinates: location) { result in
 			switch result {
 				case .success(let scooters): self.allScooters = scooters
@@ -36,6 +37,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 		}
 	}
 	
+	//to be deleted
     func locationGeocode(location coordinates: CLLocationCoordinate2D, _ completion: @escaping (String) -> Void) {
         let geocoder = CLGeocoder()
         let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
@@ -47,6 +49,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
         }
     }
     
+	//to be deleted
     func selectScooter(scooter: Scooter) {
         locationGeocode(location: scooter.coordinates) { address in
             var scooter = scooter

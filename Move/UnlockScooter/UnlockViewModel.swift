@@ -10,12 +10,10 @@ import SwiftUI
 import UIKit
 
 class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
-	
-	@Published var unlockCode: [String] = ["", "", "", ""]
-	@Published var isLoading: Bool = false
-	@Published var selectedIndex: Int = 0
 	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
-	
+	@Published var unlockCode: [String] = ["", "", "", ""]
+	@Published var selectedIndex: Int = 0
+
 	let maxPins: Int = 4
 	var codeString: String = ""
 	var onFinishedUnlock: (() -> Void)?

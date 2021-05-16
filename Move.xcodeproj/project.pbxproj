@@ -37,7 +37,6 @@
 		ECB5991A264AB6A500708241 /* ScootersRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB59919264AB6A500708241 /* ScootersRowView.swift */; };
 		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
 		ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10F48262C988B006FAE6C /* ScooterModel.swift */; };
-		ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */; };
 		ECD9E5E2264D55CD0046923C /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9E5E1264D55CD0046923C /* PaymentModel.swift */; };
 		ECDAF11E2643F1C4004FF94F /* TripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */; };
 		ECDAF120264438C0004FF94F /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDAF11F264438C0004FF94F /* StopWatch.swift */; };
@@ -94,7 +93,6 @@
 		ECB59919264AB6A500708241 /* ScootersRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScootersRowView.swift; sourceTree = "<group>"; };
 		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		ECC10F48262C988B006FAE6C /* ScooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterModel.swift; sourceTree = "<group>"; };
-		ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterViewModel.swift; sourceTree = "<group>"; };
 		ECD9E5E1264D55CD0046923C /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewModel.swift; sourceTree = "<group>"; };
 		ECDAF11F264438C0004FF94F /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 			children = (
 				EC0394F6262EA9CD003668D2 /* ScooterViewItem.swift */,
 				ECB59919264AB6A500708241 /* ScootersRowView.swift */,
-				ECD7C2B1262DCE0E00BB9541 /* ScooterViewModel.swift */,
 			);
 			name = Scooter;
 			path = Views;
@@ -432,7 +429,6 @@
 				EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */,
 				ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */,
 				EC16141B2637117C00931AF0 /* ChangePasswordView.swift in Sources */,
-				ECD7C2B2262DCE0E00BB9541 /* ScooterViewModel.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Extensions&Helpers.swift in Sources */,
 				ECB5991A264AB6A500708241 /* ScootersRowView.swift in Sources */,
 				EC3BA58E2639DBAC0032A496 /* ReusableScooter.swift in Sources */,

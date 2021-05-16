@@ -15,6 +15,7 @@ class LocationManager: NSObject, ObservableObject {
 	private let geocoder = CLGeocoder()
 	@Published var location: CLLocation?
 	@Published var cityName: String = "Allow location"
+	@Published var showLocationAlert: Bool = false
 	
 	override init() {
 		super.init()
@@ -26,7 +27,7 @@ class LocationManager: NSObject, ObservableObject {
 			setupLocationManager()
 			checkLocationAuthorization()
 		} else {
-			print("go to settings to activate global location")
+			showLocationAlert = true
 		}
 	}
 	
@@ -54,12 +55,18 @@ class LocationManager: NSObject, ObservableObject {
 	
 	func geoCode() {
 		let geocoder = CLGeocoder()
-		guard let location = locationManager.location else { print("error while unwrapping"); return }
+		guard let location = locationManager.location else {
+			showError(error: "Couldn't retrieve your location")
+			return
+		}
 		geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) in
-			guard let self = self else { return }
+			guard let self = self else {
+				showError(error: "Unknown place")
+				return
+			}
 			if let error = error { print(error); return }
 			guard let placemark = placemarks?.first else { return }
-			self.cityName = placemark.locality ?? "Not defined"
+			self.cityName = placemark.locality ?? "Not found"
 		}
 	}
 }
@@ -70,7 +77,6 @@ extension LocationManager: CLLocationManagerDelegate {
 		DispatchQueue.main.async {
 			self.location = location
 			//self.locationManager.startUpdatingLocation()
-			print("lat: \(location.coordinate.latitude), long: \(location.coordinate.longitude)")
 			self.geoCode()
 		}
 	}

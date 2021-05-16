@@ -7,8 +7,24 @@
 
 import Foundation
 import SwiftUI
-import UIKit
 import SwiftMessages
+import MapKit
+
+//MARK: MapDefaultRegion
+extension MKCoordinateRegion {
+	static var defaultRegion: MKCoordinateRegion {
+		MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.753498, longitude: 23.59), latitudinalMeters: 4000, longitudinalMeters: 4000)
+	}
+}
+
+//MARK: UnlockType
+
+enum UnlockType {
+	case code
+	case qr
+	case nfc
+}
+
 
 //MARK: SwiftMessages
 public func showError(error: String) {
