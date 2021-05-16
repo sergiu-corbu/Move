@@ -8,13 +8,10 @@
 import SwiftUI
 
 struct UnlockScooterMethods: View {
-	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+	var mapViewModel: MapViewModel
 	var scooter: Scooter {
 		return mapViewModel.selectedScooter!
 	}
-//	let onQR: () -> Void
-//	let onCode: () -> Void
-//	let onNFC: () -> Void
 	let unlockMethod: (UnlockType) -> Void
     
     var body: some View {
@@ -56,6 +53,6 @@ struct UnlockScooterMethods: View {
 
 struct UnlockScooterMethods_Preview: PreviewProvider {
     static var previews: some View {
-		UnlockScooterMethods(unlockMethod: { _ in })
+		UnlockScooterMethods(mapViewModel: MapViewModel(), unlockMethod: { _ in })
     }
 }

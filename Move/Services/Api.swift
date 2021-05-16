@@ -19,7 +19,7 @@ class API {
 			if response.response?.statusCode == 200 {
 				let result = try JSONDecoder().decode(T.self, from: response.data!)
 				return .success(result)
-			} else {
+			} else { //guard ... for inactive network
 				let result = try JSONDecoder().decode(APIError.self, from: response.data!)
 				return .failure(APIError(message: result.localizedDescription))
 			}

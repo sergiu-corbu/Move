@@ -12,7 +12,6 @@ typealias PaymentHandler = (Bool) -> Void
 
 class Payment: NSObject {
 	static let paymentNetworks: [PKPaymentNetwork] = [.masterCard, .visa, .amex]
-	
 	var paymentController: PKPaymentAuthorizationController?
 	var paymentItems = [PKPaymentSummaryItem]()
 	var paymentStatus = PKPaymentAuthorizationStatus.failure
@@ -40,13 +39,11 @@ class Payment: NSObject {
 			if isPresented { print("")}
 			else { print("Failed"); self.callback!(false)}
 		})
-		
 	}
 }
 
 extension Payment: PKPaymentAuthorizationControllerDelegate {
 	func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationStatus) -> Void) {
-		
 		if payment.shippingContact?.emailAddress == nil || payment.shippingContact?.name == nil {
 			paymentStatus = .failure
 		} else {

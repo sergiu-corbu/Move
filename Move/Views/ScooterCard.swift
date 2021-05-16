@@ -1,5 +1,5 @@
 //
-//  ScooterViewItem.swift
+//  ScooterCard.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 20.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScooterViewItem: View {
+struct ScooterCard: View {
     let scooter: Scooter
 	let onUnlock: () -> Void
 	
@@ -84,8 +84,8 @@ struct ScooterViewItem: View {
 	}
 }
 
-struct ScooterViewItem_Previews: PreviewProvider {
+struct ScooterCard_Previews: PreviewProvider {
     static var previews: some View {
-		ScooterViewItem(scooter: Scooter(location: Location(coordinates: [10,2], type: "t"), locked: true, available: true, battery: 90, id: "asdd", deviceKey: "fsodjn", addressName: nil), onUnlock: {})
+		ScooterCard(scooter: Scooter(location: Location(coordinates: [10,2], type: "t"), locked: true, available: true, battery: 90, id: "asdd", deviceKey: "fsodjn", addressName: nil), onUnlock: {})
     }
 }

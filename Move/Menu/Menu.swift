@@ -1,5 +1,5 @@
 //
-//  MenuView.swift
+//  Menu.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 16.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MenuView: View {
+struct Menu: View {
 	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
 	
     let onBack: () -> Void
@@ -135,7 +135,7 @@ struct SubMenuItems: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-			MenuView(tripViewModel: TripViewModel(), onBack: {}, onSeeAll: {}, onAccount: {}, onChangePassword: {})
+			Menu(tripViewModel: TripViewModel(), onBack: {}, onSeeAll: {}, onAccount: {}, onChangePassword: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

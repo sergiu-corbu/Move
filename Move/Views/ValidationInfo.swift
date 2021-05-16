@@ -33,7 +33,7 @@ struct ValidationInfo: View {
 				Spacer()
 				ActionButton(text: "Add drivig license", isLoading: isLoading, enabled: true, action: { showActionSheet.toggle() })
                 .sheet(isPresented: $showImagePicker) {
-                    ImagePickerView(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
+                    ImagePickerController(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
                 }
                 .actionSheet(isPresented: $showActionSheet, content: {
                     let camera = ActionSheet.Button.default(Text("Take picture")) {

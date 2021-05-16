@@ -1,5 +1,5 @@
 //
-//  ImagePickerView.swift
+//  ImagePickerController.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 16.04.2021.
@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-struct ImagePickerView: UIViewControllerRepresentable {
+struct ImagePickerController: UIViewControllerRepresentable {
     
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var image: Image?

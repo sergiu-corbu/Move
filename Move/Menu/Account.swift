@@ -1,5 +1,5 @@
 //
-//  AccountView.swift
+//  Account.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 17.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AccountView: View {
+struct Account: View {
 	@StateObject var userViewModel = UserViewModel()
 	@State private var isActive: Bool = false
     
@@ -60,6 +60,6 @@ struct AccountView: View {
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountView(onBack: {}, onLogout: {}, onSave: {})
+        Account(onBack: {}, onLogout: {}, onSave: {})
     }
 }

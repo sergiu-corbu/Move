@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StartRide: View {
-	var mapViewModel: MapViewModel = MapViewModel.shared
+	var mapViewModel: MapViewModel
 	var scooter: Scooter {
 		return mapViewModel.selectedScooter!
 	}
@@ -34,6 +34,6 @@ struct StartRide: View {
 
 struct StartRide_Previews: PreviewProvider {
     static var previews: some View {
-		StartRide(onStartRide: {})
+		StartRide(mapViewModel: MapViewModel(), onStartRide: {})
     }
 }

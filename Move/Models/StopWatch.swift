@@ -13,7 +13,6 @@ struct StopWatch {
 class StopWatchViewModel: ObservableObject {
     @Published var stopWatch: StopWatch = StopWatch()
     var isRunning: Bool = false
-
 	var tripTime: String = "00:00"
 	
 	init() {
@@ -42,6 +41,7 @@ extension StopWatchViewModel {
 		if counter == 60 { seconds = 1}
 		if seconds < 10 { secondsString = "0" + secondsString }
 		if minutes < 60 { minutesString = "0" + minutesString }
+		
 		return "\(minutesString):\(secondsString)"
 	}
 }

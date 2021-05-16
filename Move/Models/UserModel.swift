@@ -18,7 +18,6 @@ struct UserModel: Codable {
 }
 
 struct AuthResult: Decodable {
-    
     let user: UserModel
     let token: String
     

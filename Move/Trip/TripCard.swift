@@ -1,5 +1,5 @@
 //
-//  TripDetailView.swift
+//  TripDetail.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 29.04.2021.
@@ -7,14 +7,13 @@
 
 import SwiftUI
 
-struct TripDetailView: View {
-	
+struct TripDetail: View {
+	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
 	@State private var isExpanded: Bool = false
 	@State private var lockButtonPressed: Bool = false
 	@State private var endRidePressed: Bool = false
-	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
-	@ObservedObject var tripViewModel = TripViewModel.shared
-	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+	var tripViewModel: TripViewModel
+	var mapViewModel: MapViewModel
 	var scooter: Scooter {
 		return mapViewModel.selectedScooter!
 	}
@@ -85,6 +84,6 @@ struct TripDetailView: View {
 
 struct TripDetailView_Previews: PreviewProvider {
 	static var previews: some View {
-		TripDetailView(onEndRide: {})
+		TripDetail(tripViewModel: TripViewModel(), mapViewModel: MapViewModel(), onEndRide: {})
 	}
 }

@@ -59,7 +59,7 @@ struct FinishTrip: View {
 	}
 }
 
-struct TripSummary_Previews: PreviewProvider {
+struct FinishTrip_Previews: PreviewProvider {
     static var previews: some View {
 		FinishTrip(onFinish: {})
     }

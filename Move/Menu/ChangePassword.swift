@@ -1,5 +1,5 @@
 //
-//  ChangePasswordView.swift
+//  ChangePassword.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 17.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChangePasswordView: View {
+struct ChangePassword: View {
 	@ObservedObject private var userViewModel = UserViewModel.shared
     let action: () -> Void
     
@@ -40,7 +40,7 @@ struct ChangePasswordView: View {
 
 struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-		ChangePasswordView(action: {})
+		ChangePassword(action: {})
             .preferredColorScheme(.light)
     }
 }

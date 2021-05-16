@@ -1,5 +1,5 @@
 //
-//  MapView.swift
+//  Interactive.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 4/11/21.
@@ -8,14 +8,14 @@
 import MapKit
 import SwiftUI
 
-struct MapView: View {
+struct InteractiveMap: View {
 	@ObservedObject var mapViewModel: MapViewModel
 	@State private var region = MKCoordinateRegion.defaultRegion
 	@State private var showAlert: Bool = false
 	@Binding var currentScooter: Scooter?
 	
 	let onMenu: () -> Void
-	let callBack: (Scooter) -> Void
+	let onSelectedScooter: (Scooter) -> Void
 	
 	var body: some View {
 		ZStack(alignment: .top) {
@@ -25,7 +25,7 @@ struct MapView: View {
 					Image(scooter.isSelected ? "pin-fill-active-img" : "pin-fill-img")
 						.onTapGesture {
 							self.mapViewModel.selectScooter(scooter: scooter)
-							callBack(scooter)
+							onSelectedScooter(scooter)
 					}
 				}
 			}

@@ -12,10 +12,10 @@ import MapKit
 class LocationManager: NSObject, ObservableObject {
 	@Published var showLocation: Bool = false
 	@Published var locationManager = CLLocationManager()
-	private let geocoder = CLGeocoder()
 	@Published var location: CLLocation?
 	@Published var cityName: String = "Allow location"
 	@Published var showLocationAlert: Bool = false
+	private let geocoder = CLGeocoder()
 	
 	override init() {
 		super.init()

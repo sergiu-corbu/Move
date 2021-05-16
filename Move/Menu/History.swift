@@ -1,5 +1,5 @@
 //
-//  HistoryView.swift
+//  History.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 16.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HistoryView: View {
+struct History: View {
 	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
     let onBack: () -> Void
 	
@@ -17,7 +17,7 @@ struct HistoryView: View {
 			ScrollView(showsIndicators: false) {
 				PullToRefresh(coordinateSpace: "pullToRefresh") { tripViewModel.downloadTrips() }
 				ForEach(0..<tripViewModel.allTrips.count, id: \.self) { index in
-					TripDetail(trip: tripViewModel.allTrips[index])
+					TripCard(trip: tripViewModel.allTrips[index])
 				}
 			}.coordinateSpace(name: "pullToRefresh")
 		}
@@ -50,7 +50,7 @@ struct PullToRefresh: View {
 	}
 }
 
-struct TripDetail: View {
+struct TripCard: View {
 	@State var trip: Trip
 	
 	var body: some View {
@@ -93,6 +93,6 @@ struct TripDetail: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-		HistoryView(tripViewModel: TripViewModel(), onBack: {})
+		History(tripViewModel: TripViewModel(), onBack: {})
     }
 }

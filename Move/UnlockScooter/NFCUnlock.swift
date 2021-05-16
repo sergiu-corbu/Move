@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct NFCUnlock: View {
+	var mapViewModel: MapViewModel
 	@State private var animate: Bool = false
-	
 	let onClose: () -> Void
-	let onQRUnlock: () -> Void
-	let onPinUnlock: () -> Void
-	let onCompleted: () -> Void
+	let onFinished: () -> Void
 	
 	var body: some View {
 		ZStack {
@@ -46,19 +44,6 @@ struct NFCUnlock: View {
 
 struct NFCUnlock_Previews: PreviewProvider {
 	static var previews: some View {
-		NFCUnlock(onClose: {}, onQRUnlock: {}, onPinUnlock: {}, onCompleted: {})
+		NFCUnlock(mapViewModel: MapViewModel(), onClose: {}, onFinished: {})
 	}
 }
-/*
-extension ZStack {
-	func alignInCenter() {
-		self
-			.alignmentGuide(VerticalAlignment.center, computeValue: { dimension in
-				dimension[VerticalAlignment.center]
-			})
-			.alignmentGuide(HorizontalAlignment.center, computeValue: { dimension in
-				dimension[HorizontalAlignment.center]
-			})
-	}
-}
-*/

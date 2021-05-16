@@ -1,5 +1,5 @@
 //
-//  ScootersRowView.swift
+//  ScootersRow.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 11.05.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScootersRowView: View {
+struct ScootersRow: View {
 	let allScooters: [Scooter]
 	
     var body: some View {
@@ -21,6 +21,6 @@ struct ScootersRowView: View {
 
 struct ScootersRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ScootersRowView(allScooters: [])
+        ScootersRow(allScooters: [])
     }
 }

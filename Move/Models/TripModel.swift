@@ -4,18 +4,10 @@
 //
 //  Created by Sergiu Corbu on 05.05.2021.
 //
-
 import Foundation
 import CoreLocation
 
-struct Trip: Codable {//, Hashable {
-//	static func == (lhs: Trip, rhs: Trip) -> Bool {
-//		return lhs.duration == rhs.duration && lhs.distance == rhs.distance
-//	}
-//	func hash(into hasher: inout Hasher) {
-//		hasher.combine(duration)
-//		hasher.combine(distance)
-//	}
+struct Trip: Codable {
 	let startStreet: [Double]
 	let endStreet: [Double]
 	let duration: Int
@@ -27,7 +19,6 @@ struct Trip: Codable {//, Hashable {
 	var endStreetCoord: CLLocationCoordinate2D {
 		return CLLocationCoordinate2D(latitude: endStreet[1], longitude: endStreet[0])
 	}
-	
 	var startLocation: String = ""
 	var endLocation: String = ""
 	

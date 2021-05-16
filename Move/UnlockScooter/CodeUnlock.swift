@@ -10,9 +10,9 @@ import Introspect
 import CoreLocation
 
 struct CodeUnlock: View {
-	@ObservedObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
 	@State private var isLoading: Bool = false
-    let onClose: () -> Void
+	@StateObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
+	let onClose: () -> Void
 	let onFinished: () -> Void
 
     var body: some View {
