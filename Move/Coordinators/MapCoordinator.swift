@@ -12,11 +12,11 @@ import SwiftUI
 struct MapCoordinator: View {
 	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
 	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
-	var navigationStack: NavigationStack
+	@ObservedObject var navigationStack: NavigationStack
 	@State var bottomContainer: AnyView = AnyView(EmptyView())
 	
 	var body: some View {
-		//NavigationStackView(navigationStack: navigationStack) {
+		NavigationStackView(navigationStack: navigationStack) {
 			ZStack(alignment: .bottom) {
 				InteractiveMap(mapViewModel: mapViewModel, currentScooter: $mapViewModel.selectedScooter, onMenu: {  menuCoordinator() }, onSelectedScooter: { scooter in
 					bottomContainer = AnyView(ScooterCard(scooter: scooter, onUnlock: {
@@ -27,10 +27,7 @@ struct MapCoordinator: View {
 				})
 				bottomContainer
 			}
-			.onAppear {
-				print(Session.tokenKey)
-			}
-		//}
+		}
 	}
 	
 	func unlckTypeCoordinator(type: UnlockType) {
@@ -42,15 +39,16 @@ struct MapCoordinator: View {
 	}
 	
 	func codeUnlockCoordinator() {
-		navigationStack.push(CodeUnlock(onClose: { navigationStack.pop() },
-						   onFinished: {
-							navigationStack.pop()
-							bottomContainer = AnyView(UnlockSuccesful(onFinished: {
-								startTripCoordinator()
-							}))}
-				))
+		bottomContainer = AnyView(CodeUnlock(onClose: {
+		}, onFinished: {
+			bottomContainer = AnyView(UnlockSuccesful(onFinished: {
+				bottomContainer = AnyView(StartRide(mapViewModel: mapViewModel, onStartRide: {
+					startTripCoordinator()
+				}))
+			}))
+		}))
 	}
-	
+
 	func startTripCoordinator() {
 		bottomContainer = AnyView(StartRide(mapViewModel: mapViewModel, onStartRide: {
 			bottomContainer = AnyView(TripDetail(tripViewModel: tripViewModel, mapViewModel: mapViewModel, onEndRide: {

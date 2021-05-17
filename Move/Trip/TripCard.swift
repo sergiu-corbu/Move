@@ -59,7 +59,7 @@ struct TripDetail: View {
 				.padding(.vertical, 12)
 			HStack(spacing: 55) {
 				ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.tripTime, largeFrame: true)
-				ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: "\(tripViewModel.ongoingTrip.distance)")
+				ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.ongoingTrip.distanceString)
 			}
 		}
 	}
@@ -69,7 +69,7 @@ struct TripDetail: View {
 			NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {isExpanded=false})
 			ScooterCardComponents.ExpandedCard(infoText: "Battery", imageName: scooter.batteryImage, data: "\(scooter.battery)%")
 			ScooterCardComponents.ExpandedCard(infoText: "Travel time", imageName: "time-img", data: stopWatch.tripTime)
-			ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: "2.7 km")
+			ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: tripViewModel.ongoingTrip.distanceString)
 		}
 	}
 	

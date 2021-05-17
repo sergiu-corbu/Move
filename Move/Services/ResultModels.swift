@@ -75,7 +75,9 @@ struct EndTripResult: Codable {
 
 struct CurrentTrip: Codable {
 	var distance: Int
-	
+	var distanceString: String {
+		return String(distance)
+	}
 	enum CodingKeys: String, CodingKey {
 		case distance = "distance"
 	}
