@@ -14,6 +14,14 @@ typealias Result<T> = Swift.Result<T, Error>
 class API {
     static let baseUrl: String = "https://escooter-tapp.herokuapp.com/api/"
 	
+	static func validateToken() -> Result<String> {
+		if let token = Session.tokenKey {
+			return .success(token)
+		} else {
+			return .failure(APIError(message: "Invalid token"))
+		}
+	}
+	
 	static func handleResponse<T: Decodable>(response: AFDataResponse<Data>) -> Result<T> {
 		do {
 			if response.response?.statusCode == 200 {
@@ -47,7 +55,7 @@ class API {
 	}
 	
     static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void) {
-		let path = baseUrl + "scooter/inradius?longitude=" + "\(coordinates.longitude)" + "&latitude=" + "\(coordinates.latitude)"
+		let path = baseUrl + "scooter/inradius?longitude=\(coordinates.longitude)&latitude=\(coordinates.latitude)"
         let parameters = ["longitude": coordinates.longitude, "latitude": coordinates.latitude]
 		AF.request(path, parameters: parameters).validate().responseData { response in
 			let result: Result<[Scooter]> = handleResponse(response: response)
@@ -56,20 +64,36 @@ class API {
 	}
     	
 	static func unlockScooterPin(scooterID: String, code: String, _ callback: @escaping (Result<BasicCallResult>) -> Void) {
-		guard let token = Session.tokenKey else {
-			callback(.failure(APIError(message: "..")))
-			return}
-		let path = baseUrl + "user/book/code/" + scooterID
-		let header: HTTPHeaders = ["Authorization": token]
-		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
-		let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "code": code]
-		AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
-			let result: Result<BasicCallResult> = handleResponse(response: response)
-			callback(result)
+		let tokenResult = validateToken()
+		switch tokenResult {
+			case .success(let token):
+				let path = baseUrl + "user/book/code/" + scooterID
+				let header: HTTPHeaders = ["Authorization": token]
+				let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
+				let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "code": code]
+				AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
+					let result: Result<BasicCallResult> = handleResponse(response: response)
+					callback(result)
+				}
+			case .failure(let error):
+				callback(.failure(APIError(message: error.localizedDescription)))
 		}
+//		guard let token = Session.tokenKey else {
+//			callback(.failure(APIError(message: "..")))
+//			return
+//		}
+//		let path = baseUrl + "user/book/code/" + scooterID
+//		let header: HTTPHeaders = ["Authorization": token]
+//		let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
+//		let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "code": code]
+//		AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
+//			let result: Result<BasicCallResult> = handleResponse(response: response)
+//			callback(result)
+//		}
 	}
 	
 	static func downloadTrips(_ callback: @escaping (Result<TripDownload>) -> Void) {
+
 		guard let token = Session.tokenKey else {
 			callback(.failure(APIError(message: "invalid token")))
 			return

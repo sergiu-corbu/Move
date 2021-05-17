@@ -27,6 +27,8 @@
 		EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */; };
 		EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = EC7F0EE026301A30004FF766 /* SwiftMessages */; };
 		EC7F0EE52630385C004FF766 /* UnlockScooterMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */; };
+		EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F226524BA30085B58A /* MapCoordinator.swift */; };
+		EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F426524BAC0085B58A /* AuthCoordinator.swift */; };
 		EC8EDD55264C1A3C00033E9D /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC8EDD54264C1A3C00033E9D /* MessageView.xib */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
@@ -83,6 +85,8 @@
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
 		EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterMethods.swift; sourceTree = "<group>"; };
+		EC8014F226524BA30085B58A /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
+		EC8014F426524BAC0085B58A /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		EC8EDD54264C1A3C00033E9D /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -203,6 +207,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		EC8014F626524BF90085B58A /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				ECDD3FC126242836003C659F /* ContentView.swift */,
+				EC8014F226524BA30085B58A /* MapCoordinator.swift */,
+				EC8014F426524BAC0085B58A /* AuthCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		ECA7B5EA263816D30063C883 /* UnlockScooter */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,7 +251,7 @@
 			children = (
 				ECDD3FBD26242836003C659F /* AppDelegate.swift */,
 				ECDD3FBF26242836003C659F /* SceneDelegate.swift */,
-				ECDD3FC126242836003C659F /* ContentView.swift */,
+				EC8014F626524BF90085B58A /* Coordinators */,
 				EC0B576726259E06005F16CB /* Auth */,
 				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
 				EC16140F26370E2500931AF0 /* Map */,
@@ -412,6 +426,7 @@
 				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
 				ECD9E5E2264D55CD0046923C /* PaymentModel.swift in Sources */,
+				EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
 				EC7F0EE52630385C004FF766 /* UnlockScooterMethods.swift in Sources */,
@@ -423,6 +438,7 @@
 				ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */,
 				EC0F8FE22638412C009D8CBB /* UnlockSuccesful.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
+				EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */,
 				ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */,
 				EC1614192637117C00931AF0 /* Menu.swift in Sources */,
 				ECFCA8502642C9F600674750 /* FinishTrip.swift in Sources */,

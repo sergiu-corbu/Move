@@ -1,24 +1,13 @@
 //
-//  ContentView.swift
+//  MapCoordinator.swift
 //  Move
 //
-//  Created by Sergiu Corbu on 4/7/21.
+//  Created by Sergiu Corbu on 17.05.2021.
 //
 
-import SwiftUI
+import Foundation
 import NavigationStack
-
-struct ContentView: View {
-	@State private var isLoading = false
-	@StateObject var navigationStack: NavigationStack = NavigationStack()
-	var body: some View {
-		if Session.tokenKey != nil {
-			MapCoordinator(navigationStack: navigationStack)
-		} else {
-			AuthCoordinator(navigationStack: navigationStack)
-		}
-	}
-}
+import SwiftUI
 
 struct MapCoordinator: View {
 	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
@@ -96,46 +85,5 @@ struct MapCoordinator: View {
 				 onChangePassword: { navigationStack.push(
 					ChangePassword(action: {navigationStack.pop()}))
 				 }))
-	}
-}
-
-
-
-struct AuthCoordinator: View {
-	@State private var isLoading = false
-	var navigationStack: NavigationStack
-	
-	var body: some View {
-		NavigationStackView(navigationStack: navigationStack) {
-			Onboarding(onFinished: { registerCoordinator() })
-		}
-	}
-	
-	func registerCoordinator() {
-		navigationStack.push(Register(onRegisterComplete: { validationCoordinator()
-		}, onLoginSwitch: {
-			navigationStack.push(
-				Login(onLoginCompleted: { mapCoodinator() },
-					  onRegisterSwitch: { registerCoordinator() }))
-		}))
-	}
-	
-	func validationCoordinator() {
-		navigationStack.push(
-			ValidationInfo(isLoading: $isLoading, onBack: { navigationStack.pop()
-			}, onNext: { image in
-				uploadImage(image: image) }))
-	}
-	
-	func uploadImage(image: Image) {
-		isLoading = true
-		DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-			isLoading = false
-			navigationStack.push(ValidationSuccess(onFindScooters: { mapCoodinator() }))
-		})
-	}
-	
-	func mapCoodinator() {
-		navigationStack.push(MapCoordinator(navigationStack: navigationStack))
 	}
 }
