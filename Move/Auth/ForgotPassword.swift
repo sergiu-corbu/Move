@@ -19,7 +19,7 @@ struct ForgotPassword: View {
             NavigationBar(color: .white, backButton: "chevron-left-white", action: { onBack() }).padding(.leading, -5)
             messageArea
 			CustomField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: FieldType.email.rawValue)
-			ActionButton(text: "Send Reset Link", enabled: userViewModel.resetPasswordEnabled && userViewModel.emailError.isEmpty, action: {
+			Buttons.PrimaryButton(text: "Send Reset Link", enabled: userViewModel.resetPasswordEnabled && userViewModel.emailError.isEmpty, action: {
                 userViewModel.email = ""
                 onCompleted()
                 showAlert.toggle()
@@ -36,7 +36,7 @@ struct ForgotPassword: View {
     }
 	var messageArea: some View {
 		VStack(alignment: .leading) {
-			AuthElements.BigTitle(text: "Forgot password")
+			AuthComponents.BigTitle(text: "Forgot password")
 			Text("Enter the email address you’re\nusing for your account bellow and we’ll send you a password reset link.")
 				.foregroundColor(.white)
 				.font(Font.custom(FontManager.Primary.medium, size: 17))

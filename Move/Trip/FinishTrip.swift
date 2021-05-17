@@ -19,7 +19,7 @@ struct FinishTrip: View {
 			tripBoundaries
 			travelData
 			Spacer()
-			ActionButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: { initiatePayment() })
+			Buttons.PrimaryButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: { initiatePayment() })
 		} 
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))
@@ -45,8 +45,8 @@ struct FinishTrip: View {
 	
 	var travelData: some View {
 		HStack(spacing: 55) {
-			ScooterElements.TripInfo(infoText: "Travel time", imageName: "time-img", time: "00:12", fontSize: 16)
-			ScooterElements.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7", fontSize: 16)
+			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: "00:12", fontSize: 16)
+			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7", fontSize: 16)
 		}
 	}
 	

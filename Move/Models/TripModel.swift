@@ -63,13 +63,3 @@ struct Trip: Codable {
 		}
 	}
 }
-
-struct TripDownload: Codable {
-	var trips: [Trip]
-	var totalTrips: Int
-	
-	enum CodingKeys: String, CodingKey {
-		case trips = "trips"
-		case totalTrips = "totalTrips"
-	}
-}

@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-//MARK: Scooter elements
-struct ScooterElements {
-	static var topLine: some View {
+struct ScooterCardComponents {
+	static var redTopLine: some View {
 		RoundedRectangle(cornerRadius: 25.0)
 			.fill(Color.coralRed)
 			.frame(width: 72, height: 4)
@@ -56,8 +55,8 @@ struct ScooterElements {
 	}
 	
 	struct UnlockRow: View {
-		let unlockButton1: UnlockOptionButton
-		let unlockButton2: UnlockOptionButton
+		let unlockButton1: Buttons.UnlockOptionButton
+		let unlockButton2: Buttons.UnlockOptionButton
 		var body: some View {
 			VStack {
 				Text("Alternately you can unlock using")
@@ -88,14 +87,14 @@ struct ScooterElements {
 		}
 	}
 	
-	struct UnlockScooterMiniButton: View {
+	struct UnlockMiniButton: View {
 		let image: String
 		let text: String
 		var showBorder: Bool = false
 		
 		var body: some View {
 			HStack {
-				MapActionButton(image: image, action:{}, border: showBorder)
+				Buttons.MapActionButton(image: image, action:{}, border: showBorder)
 				Text(text).font(.custom(FontManager.Primary.medium, size: 14))
 			}.padding(.leading, -1)
 		}
@@ -115,7 +114,7 @@ struct ScooterElements {
 		}
 	}
 	
-	struct ActionTripButton: View {
+	struct TripActionButton: View {
 		let text: String
 		let icon: String
 		let tripAction: () -> Void
@@ -186,19 +185,19 @@ struct ScooterElements {
 	
 	struct TripButtons: View {
 		@Binding var isLockedPressed: Bool
-		var onLockButton: () -> Void
-		var onUnlockButton: () -> Void
+		let onLockButton: () -> Void
+		let onUnlockButton: () -> Void
 		let onEndTripButton: () -> Void
 		
 		var body: some View {
 			HStack(spacing: 20) {
-				ScooterElements.ActionTripButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onUnlockButton() : onLockButton() })
-				ScooterElements.EndTripButton(endTrip: { onEndTripButton() })
+				ScooterCardComponents.TripActionButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onUnlockButton() : onLockButton() })
+				ScooterCardComponents.EndTripButton(endTrip: { onEndTripButton() })
 			}.padding(.vertical, 20)
 		}
 	}
 	
-	struct BigCard: View {
+	struct ExpandedCard: View {
 		let infoText: String
 		let imageName: String
 		let data: String
@@ -210,7 +209,7 @@ struct ScooterElements {
 						.stroke(Color.lightGray)
 				}
 				VStack(spacing: 15) {
-					ScooterElements.TripItemLabel(infoText: infoText, imageName: imageName)
+					ScooterCardComponents.TripItemLabel(infoText: infoText, imageName: imageName)
 					Text(data)
 						.font(.custom(FontManager.Primary.bold, size: 44))
 						.foregroundColor(.darkPurple)
@@ -221,13 +220,13 @@ struct ScooterElements {
 	}
 }
 
-struct UnlockScooterElements {
-	
+struct UnlockScooterComponents {
 	struct Title: View {
 		let title: String
 		var purpleColor: Bool = false
 		var customPadding: Bool = false
 		var customAlignment: Bool = false
+		
 		var body: some View {
 			Text(title)
 				.font(.custom(FontManager.Primary.bold, size: 32))
@@ -244,6 +243,7 @@ struct UnlockScooterElements {
 		var purpleColor: Bool = false
 		var customAlignment: Bool = false
 		var customOpacity: Bool = false
+		
 		var body: some View {
 			Text(subTitle)
 				.font(.custom(FontManager.Primary.medium, size: 16))
@@ -254,10 +254,4 @@ struct UnlockScooterElements {
 				.fixedSize(horizontal: false, vertical: true)
 		}
 	}
-}
-
-struct ScooterReusable_Previews: PreviewProvider {
-    static var previews: some View {
-		EmptyView()
-    }
 }

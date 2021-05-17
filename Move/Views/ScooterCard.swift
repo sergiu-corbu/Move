@@ -32,7 +32,7 @@ struct ScooterCard: View {
 				scooterInfo
 			}
 			location
-			ActionButton(text: "Unlock", isLoading: false, enabled: true, action: { onUnlock() })
+			Buttons.PrimaryButton(text: "Unlock", isLoading: false, enabled: true, action: { onUnlock() })
 		}.padding(.horizontal, 24)
 	}
 	
@@ -50,10 +50,10 @@ struct ScooterCard: View {
                     .font(.custom(FontManager.Primary.medium, size: 14))
 			}.padding(.bottom, 15)
             HStack {
-                MapActionButton(image: "bell-img", action: {
+				Buttons.MapActionButton(image: "bell-img", action: {
                     //ring scooter
                 }).padding(.trailing, 20)
-                MapActionButton(image: "getRoute-img", action: {
+				Buttons.MapActionButton(image: "getRoute-img", action: {
                     //open maps & navigate
                 })
             }
@@ -86,6 +86,6 @@ struct ScooterCard: View {
 
 struct ScooterCard_Previews: PreviewProvider {
     static var previews: some View {
-		ScooterCard(scooter: Scooter(location: Location(coordinates: [10,2], type: "t"), locked: true, available: true, battery: 90, id: "asdd", deviceKey: "fsodjn", addressName: nil), onUnlock: {})
+		ScooterCard(scooter: Scooter(id: "asdd", location: Location(coordinates: [10,2], type: "t"), available: true, locked: true, deviceKey: "fsodjn", battery: 90, addressName: nil), onUnlock: {})
     }
 }

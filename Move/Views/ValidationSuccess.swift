@@ -13,9 +13,9 @@ struct ValidationSuccess: View {
     var body: some View {
         VStack {
 			SharedElements.checkmarkImage.padding(.top, 70)
-			UnlockScooterElements.Title(title: "We've succesfully validated your driving license!")
+			UnlockScooterComponents.Title(title: "We've succesfully validated your driving license!")
 			Spacer()
-			ActionButton(text: "Find scooters", enabled: true, action: { onFindScooters() })
+			Buttons.PrimaryButton(text: "Find scooters", enabled: true, action: { onFindScooters() })
         }
 		.multilineTextAlignment(.center)
 		.padding(.horizontal, 24)

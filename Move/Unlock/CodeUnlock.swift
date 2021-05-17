@@ -19,14 +19,14 @@ struct CodeUnlock: View {
         ScrollView(showsIndicators: false) {
             NavigationBar(title: "Enter serial number", color: .white, backButton: "close", action: { onClose() })
                 .padding(.horizontal, 24)
-			UnlockScooterElements.Title(title: "Enter the scooter's\nserial number")
-			UnlockScooterElements.SubTitle(subTitle: "You can find it on the\nscooter's front panel").padding(.bottom, 100)
+			UnlockScooterComponents.Title(title: "Enter the scooter's\nserial number")
+			UnlockScooterComponents.SubTitle(subTitle: "You can find it on the\nscooter's front panel").padding(.bottom, 100)
 			HStack {
 				ForEach(0..<unlockViewModel.maxPins) { index in
 					DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
 				}
 			}
-			ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
+			ScooterCardComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: {}), unlockButton2: Buttons.UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
         }
 		.onAppear {
 			unlockViewModel.onFinishedUnlock = onFinished

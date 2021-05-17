@@ -19,12 +19,13 @@ struct Location: Codable {
 }
 
 struct Scooter: Identifiable, Codable {
+	let id: String
     let location: Location
+	let available: Bool
     let locked: Bool
-    let available: Bool
+	let deviceKey: String
     let battery: Int
-    let id: String
-    let deviceKey: String
+	
     var addressName: String?
     var coordinates: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: location.coordinates[1], longitude: location.coordinates[0])
@@ -47,11 +48,11 @@ struct Scooter: Identifiable, Codable {
     }
     
     enum CodingKeys: String, CodingKey {
+		case id = "tag"
         case location = "location"
-        case locked = "locked"
-        case available = "available"
+		case available = "available"
+		case locked = "locked"
+		case deviceKey = "deviceKey"
         case battery = "power"
-        case id = "tag"
-        case deviceKey = "deviceKey"
     }
 }

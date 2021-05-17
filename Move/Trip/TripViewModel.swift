@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 class TripViewModel: ObservableObject {
 	static var shared: TripViewModel = TripViewModel()
 	var allTrips: [Trip] = []
 	@Published var tripCount: Int = 0
-	
+	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
 	init() {
 		downloadTrips()
 	}
@@ -28,7 +29,7 @@ class TripViewModel: ObservableObject {
 	}
 
 	func endTrip() {
-		API.basicCall(path: "book/end") { result in
+		API.endTrip(scooterID: mapViewModel.selectedScooter!.id) { result in
 			switch result {
 				case .success: print("")
 				case .failure(let error): showError(error: error.localizedDescription)
@@ -37,7 +38,7 @@ class TripViewModel: ObservableObject {
 	}
 	
 	func lockScooter() {
-		API.basicCall(path: "book/lock") { result in
+		API.lockUnlock(path: "lock", scooterID: mapViewModel.selectedScooter!.id) { result in
 			switch result {
 				case .success: showMessage(message: "Scooter locked")
 				case .failure(let error): showError(error: error.localizedDescription)
@@ -46,7 +47,7 @@ class TripViewModel: ObservableObject {
 	}
 	
 	func unlockScooter() {
-		API.basicCall(path: "book/unlock") { result in
+		API.lockUnlock(path: "lock", scooterID: mapViewModel.selectedScooter!.id) { result in
 			switch result {
 				case .success: showMessage(message: "Scooter unlocked")
 				case .failure(let error): showError(error: error.localizedDescription)

@@ -9,8 +9,8 @@ import SwiftUI
 import NavigationStack
 
 struct ContentView: View {
-	@State private var isLoading = false
 	@StateObject var navigationStack: NavigationStack = NavigationStack()
+	
 	var body: some View {
 		if Session.tokenKey != nil {
 			MapCoordinator(navigationStack: navigationStack)

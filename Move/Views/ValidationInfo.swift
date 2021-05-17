@@ -28,10 +28,10 @@ struct ValidationInfo: View {
                     .aspectRatio(contentMode: .fill)
             }
             VStack(alignment: .leading) {
-				UnlockScooterElements.Title(title: "Before you can start\nriding", purpleColor: true, customPadding: true, customAlignment: true)
-				UnlockScooterElements.SubTitle(subTitle: "Please take a photo or upload the front side of your driving license so we can make sure that it is valid.", purpleColor: true, customAlignment: true, customOpacity: true)
+				UnlockScooterComponents.Title(title: "Before you can start\nriding", purpleColor: true, customPadding: true, customAlignment: true)
+				UnlockScooterComponents.SubTitle(subTitle: "Please take a photo or upload the front side of your driving license so we can make sure that it is valid.", purpleColor: true, customAlignment: true, customOpacity: true)
 				Spacer()
-				ActionButton(text: "Add drivig license", isLoading: isLoading, enabled: true, action: { showActionSheet.toggle() })
+				Buttons.PrimaryButton(text: "Add drivig license", isLoading: isLoading, enabled: true, action: { showActionSheet.toggle() })
                 .sheet(isPresented: $showImagePicker) {
                     ImagePickerController(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
                 }

@@ -16,7 +16,7 @@ struct ChangePassword: View {
             NavigationBar(title: "Change password", color: .darkPurple, backButton: "chevron-left-purple", action: { action() })
             inputArea
             Spacer()
-			ActionButton(text: "Save edits", isLoading: userViewModel.isLoading, enabled: userViewModel.validatePasswords, action: {
+			Buttons.PrimaryButton(text: "Save edits", isLoading: userViewModel.isLoading, enabled: userViewModel.validatePasswords, action: {
 				userViewModel.isLoading = true
 				// api call
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {

@@ -9,8 +9,8 @@ import SwiftUI
 import Introspect
 
 //MARK: Register & login elements
-struct AuthElements {
-    static var logoArea: some View {
+struct AuthComponents {
+    static var appLogo: some View {
         Image("logoOverlay-img")
             .resizable()
             .aspectRatio(contentMode: .fill)
@@ -247,13 +247,13 @@ struct SharedElements {
 					.opacity(0.8)
 					.frame(height: 70)
 				HStack {
-					MapActionButton(image: "menu-img", action: { menuAction() })
+					Buttons.MapActionButton(image: "menu-img", action: { menuAction() })
 					Spacer()
 					Text(text)
 						.foregroundColor(.darkPurple)
 						.font(.custom(FontManager.Primary.semiBold, size: 18))
 					Spacer()
-					MapActionButton(image: locationEnabled ? "location-img" : "locationDenied", action: { locationEnabled ? centerLocation() : nil })
+					Buttons.MapActionButton(image: locationEnabled ? "location-img" : "locationDenied", action: { locationEnabled ? centerLocation() : nil })
 				}
 				.padding(.horizontal, 24)
 			}

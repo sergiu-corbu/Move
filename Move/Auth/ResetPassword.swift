@@ -17,9 +17,9 @@ struct ResetPassword: View {
         VStack(alignment: .leading) {
 			NavigationBar(color: .white, backButton: "chevron-left-white", action: { onBack() })
                 .padding(.leading, -5)
-			AuthElements.BigTitle(text: "Reset password")
+			AuthComponents.BigTitle(text: "Reset password")
             inputField
-			ActionButton(text: "Reset Password", enabled: userViewModel.validatePasswords, action: {
+			Buttons.PrimaryButton(text: "Reset Password", enabled: userViewModel.validatePasswords, action: {
 				if userViewModel.validatePasswords {
 					userViewModel.password = ""
 					userViewModel.repeatPassword = ""

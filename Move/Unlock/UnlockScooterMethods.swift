@@ -18,35 +18,35 @@ struct UnlockScooterMethods: View {
         ZStack(alignment: .top) {
 			ZStack {
 				VStack(spacing: 20) {
-					ScooterElements.CardTitle(text: "You can unlock this scooter\nthrough theese methods:")
+					ScooterCardComponents.CardTitle(text: "You can unlock this scooter\nthrough theese methods:")
 					scooterInfo
 					unlockButtons
 				}.padding(.horizontal, 24)
 			}.padding(.top, 24)
-            ScooterElements.topLine
+			ScooterCardComponents.redTopLine
 		}.background(SharedElements.whiteRoundedRectangle)
     }
 
     private var scooterInfo: some View {
 		HStack(alignment: .bottom) {
             VStack(alignment: .leading) {
-                ScooterElements.scooterTitle
-                ScooterElements.ScooterId.init(id: scooter.id)
-                ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery)
+				ScooterCardComponents.scooterTitle
+				ScooterCardComponents.ScooterId.init(id: scooter.id)
+				ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery)
 					.padding(.bottom, 10)
-				ScooterElements.UnlockScooterMiniButton(image: "bell-img", text: "Ring", showBorder: true)
-				ScooterElements.UnlockScooterMiniButton(image: "missing", text: "Missing", showBorder: true)
+				ScooterCardComponents.UnlockMiniButton(image: "bell-img", text: "Ring", showBorder: true)
+				ScooterCardComponents.UnlockMiniButton(image: "missing", text: "Missing", showBorder: true)
             }
-			ScooterElements.scooterImage
+			ScooterCardComponents.scooterImage
             Spacer()
         }
     }
 	
     private var unlockButtons: some View {
         HStack(spacing: 25) {
-			UnlockButton(text: "NFC", action: { unlockMethod(UnlockType.nfc) })
-            UnlockButton(text: "QR", action: { unlockMethod(UnlockType.qr) })
-            UnlockButton(text: "123", action: { unlockMethod(UnlockType.code) })
+			Buttons.UnlockButton(text: "NFC", action: { unlockMethod(UnlockType.nfc) })
+			Buttons.UnlockButton(text: "QR", action: { unlockMethod(UnlockType.qr) })
+			Buttons.UnlockButton(text: "123", action: { unlockMethod(UnlockType.code) })
 		}.padding(.vertical)
     }
 }

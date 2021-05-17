@@ -131,20 +131,3 @@ let onboardingData = [
 	OnboardingData(title: "Parking", description: "If convenient, park at a bike rack. If not, park close to the edge of the sidewalk closest to the street. Do not block sidewalks, doors or ramps.", image: "Parking-img"),
 	OnboardingData(title: "Rules", description: "You must be 18 years or older with a valid driving licence to perate a scooter. Please follow all street signs, signals, markings and obey local traffic laws.", image: "Rules-img")
 ]
-
-//MARK: API Model
-struct BasicCallResult: Codable {
-	let message: String
-	enum CodingKeys: String, CodingKey {
-		case message = "message"
-	}
-}
-
-struct APIError: Error, Decodable {
-	var message: String
-	var localizedDescription: String { return message }
-	
-	enum CodingKeys: String, CodingKey {
-		case message = "message"
-	}
-}

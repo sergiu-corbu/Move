@@ -29,6 +29,7 @@
 		EC7F0EE52630385C004FF766 /* UnlockScooterMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */; };
 		EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F226524BA30085B58A /* MapCoordinator.swift */; };
 		EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F426524BAC0085B58A /* AuthCoordinator.swift */; };
+		EC8014F826525A1D0085B58A /* ResultModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F726525A1D0085B58A /* ResultModels.swift */; };
 		EC8EDD55264C1A3C00033E9D /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC8EDD54264C1A3C00033E9D /* MessageView.xib */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
@@ -87,6 +88,7 @@
 		EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterMethods.swift; sourceTree = "<group>"; };
 		EC8014F226524BA30085B58A /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		EC8014F426524BAC0085B58A /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		EC8014F726525A1D0085B58A /* ResultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModels.swift; sourceTree = "<group>"; };
 		EC8EDD54264C1A3C00033E9D /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -154,14 +156,14 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		EC0B576F2625C5BA005F16CB /* LicenceValidation */ = {
+		EC0B576F2625C5BA005F16CB /* Licence */ = {
 			isa = PBXGroup;
 			children = (
 				EC5F17982626FB7900A10368 /* ValidationInfo.swift */,
 				ECB7CDBB26295CBE0081B8F4 /* ImagePickerController.swift */,
 				EC0B57732625CC73005F16CB /* ValidationSuccess.swift */,
 			);
-			name = LicenceValidation;
+			name = Licence;
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -217,7 +219,7 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		ECA7B5EA263816D30063C883 /* UnlockScooter */ = {
+		ECA7B5EA263816D30063C883 /* Unlock */ = {
 			isa = PBXGroup;
 			children = (
 				ECA7B5872637E6D00063C883 /* QRUnlock.swift */,
@@ -227,7 +229,7 @@
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
 				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
 			);
-			path = UnlockScooter;
+			path = Unlock;
 			sourceTree = "<group>";
 		};
 		ECDD3FB126242836003C659F = {
@@ -253,11 +255,11 @@
 				ECDD3FBF26242836003C659F /* SceneDelegate.swift */,
 				EC8014F626524BF90085B58A /* Coordinators */,
 				EC0B576726259E06005F16CB /* Auth */,
-				EC0B576F2625C5BA005F16CB /* LicenceValidation */,
+				EC0B576F2625C5BA005F16CB /* Licence */,
 				EC16140F26370E2500931AF0 /* Map */,
 				EC16141D2637118500931AF0 /* Menu */,
 				EC7F0EE32630384F004FF766 /* Scooter */,
-				ECA7B5EA263816D30063C883 /* UnlockScooter */,
+				ECA7B5EA263816D30063C883 /* Unlock */,
 				EC3233092645454300BC9FD0 /* Trip */,
 				ECFCA84B2642BCB100674750 /* Models */,
 				ECE337BE26243A57009EC353 /* Services */,
@@ -307,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				ECE337BB26243A51009EC353 /* Api.swift */,
+				EC8014F726525A1D0085B58A /* ResultModels.swift */,
 				EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */,
 			);
 			path = Services;
@@ -455,6 +458,7 @@
 				EC0394F7262EA9CD003668D2 /* ScooterCard.swift in Sources */,
 				ECDAF11E2643F1C4004FF94F /* TripViewModel.swift in Sources */,
 				ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */,
+				EC8014F826525A1D0085B58A /* ResultModels.swift in Sources */,
 				EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */,
 				ECDD400626242B49003C659F /* UserModel.swift in Sources */,
 				ECA7B5E8263816CD0063C883 /* CodeUnlock.swift in Sources */,

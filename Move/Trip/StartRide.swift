@@ -16,16 +16,16 @@ struct StartRide: View {
 	
 	var body: some View {
 		VStack {
-			ScooterElements.topLine.frame(maxWidth: .infinity)
+			ScooterCardComponents.redTopLine.frame(maxWidth: .infinity)
 			HStack {
 				VStack(alignment: .leading, spacing: 5) {
-					ScooterElements.scooterTitle
-					ScooterElements.ScooterId(id: scooter.id)
-					ScooterElements.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: false).padding(.top, 5)
+					ScooterCardComponents.scooterTitle
+					ScooterCardComponents.ScooterId(id: scooter.id)
+					ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: false).padding(.top, 5)
 				}.padding(.top, 30)
-				ScooterElements.scooterImage.padding(.trailing, -24)
+				ScooterCardComponents.scooterImage.padding(.trailing, -24)
 			}.padding(.top)
-			ActionButton(text: "Start ride", isLoading: false, enabled: true, action: { onStartRide() })
+			Buttons.PrimaryButton(text: "Start ride", isLoading: false, enabled: true, action: { onStartRide() })
 		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)

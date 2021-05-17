@@ -31,10 +31,10 @@ struct NFCUnlock: View {
 			})
 			VStack {
 				NavigationBar(title: "Bring your phone", color: .white, backButton: "close", action: { onClose() })
-				UnlockScooterElements.Title(title: "NFC unlock")
-				UnlockScooterElements.SubTitle(subTitle: "Hold your phone close to the NFC Tag\nlocated on top of the handlebar of\nyour scooter.")
+				UnlockScooterComponents.Title(title: "NFC unlock")
+				UnlockScooterComponents.SubTitle(subTitle: "Hold your phone close to the NFC Tag\nlocated on top of the handlebar of\nyour scooter.")
 				Spacer()
-				ScooterElements.UnlockRow(unlockButton1: UnlockOptionButton(text: "QR", action: {}), unlockButton2: UnlockOptionButton(text: "123", action: {}))
+				ScooterCardComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: {}), unlockButton2: Buttons.UnlockOptionButton(text: "123", action: {}))
 			}
 		}
 		.padding(.horizontal, 24)

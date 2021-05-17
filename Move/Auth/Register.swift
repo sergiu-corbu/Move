@@ -19,12 +19,12 @@ struct Register: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading) {
-				AuthElements.logoArea
-				AuthElements.MessageArea(text: "Sign up or login and start\nriding right away")
+				AuthComponents.appLogo
+				AuthComponents.MessageArea(text: "Sign up or login and start\nriding right away")
                 inputArea
                 agreement
-				ActionButton(text: "Get started", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedRegister, action: { buttonTapped() })
-				AuthElements.SwitchAuthProcess(questionText: "You already have an account? You can", solutionText: "log in here", action: { onLoginSwitch() })
+				Buttons.PrimaryButton(text: "Get started", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedRegister, action: { buttonTapped() })
+				AuthComponents.SwitchAuthProcess(questionText: "You already have an account? You can", solutionText: "log in here", action: { onLoginSwitch() })
             }
             Spacer()
         }

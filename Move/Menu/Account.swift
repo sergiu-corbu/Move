@@ -36,20 +36,20 @@ struct Account: View {
     var footerArea: some View {
         VStack(spacing: 50) {
             Button(action: {
-                API.basicCall(path: "logout") { result in
+				API.logout({ result in
 					switch result {
 						case .success:
 							Session.tokenKey = nil
 							onLogout()
 						case .failure(let error): showError(error: error.localizedDescription)
 					}
-                }
+				})
             }, label: {
 				Label("Log out", image: "logout-img")
 					.foregroundColor(.red)
 					.font(.custom(FontManager.Primary.medium, size: 14))
             })
-			ActionButton(text: "Save edits", isLoading: userViewModel.isLoading, enabled:userViewModel.editCredentialsEnabled, action: {
+			Buttons.PrimaryButton(text: "Save edits", isLoading: userViewModel.isLoading, enabled:userViewModel.editCredentialsEnabled, action: {
 				userViewModel.isLoading = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { userViewModel.isLoading = false })
                 onSave()
