@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct Login: View {
-	@ObservedObject private var userViewModel = UserViewModel.shared
-
+	@ObservedObject private var userViewModel = UserViewModel()
     let onLoginCompleted: () -> Void
     let onRegisterSwitch: () -> Void
     
@@ -21,7 +20,9 @@ struct Login: View {
                 inputArea
 				Buttons.PrimaryButton(text: "Login", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedLogin && userViewModel.allfieldsValidatedLogin, action: {
 					userViewModel.isLoading = true
-					userViewModel.loginCall{ onLoginCompleted() }
+					userViewModel.loginCall {
+						onLoginCompleted()
+					}
 					})
 				AuthComponents.SwitchAuthProcess(questionText: "Don't have an account? You can", solutionText: "start with one here", action: { onRegisterSwitch() })
             }

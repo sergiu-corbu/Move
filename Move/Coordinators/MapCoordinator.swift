@@ -12,11 +12,11 @@ import SwiftUI
 struct MapCoordinator: View {
 	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
 	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
-	@ObservedObject var navigationStack: NavigationStack
+	var navigationStack: NavigationStack
 	@State var bottomContainer: AnyView = AnyView(EmptyView())
 	
 	var body: some View {
-		NavigationStackView(navigationStack: navigationStack) {
+		//NavigationStackView(navigationStack: navigationStack) {
 			ZStack(alignment: .bottom) {
 				InteractiveMap(mapViewModel: mapViewModel, currentScooter: $mapViewModel.selectedScooter, onMenu: {  menuCoordinator() }, onSelectedScooter: { scooter in
 					bottomContainer = AnyView(ScooterCard(scooter: scooter, onUnlock: {
@@ -30,7 +30,7 @@ struct MapCoordinator: View {
 			.onAppear {
 				print(Session.tokenKey)
 			}
-		}
+		//}
 	}
 	
 	func unlckTypeCoordinator(type: UnlockType) {
@@ -42,14 +42,13 @@ struct MapCoordinator: View {
 	}
 	
 	func codeUnlockCoordinator() {
-		navigationStack.push(
-			CodeUnlock(onClose: { navigationStack.pop() },
-					   onFinished: {
-						navigationStack.pop()
-						bottomContainer = AnyView(UnlockSuccesful(onFinished: {
-							startTripCoordinator()
-						}))}
-			))
+		navigationStack.push(CodeUnlock(onClose: { navigationStack.pop() },
+						   onFinished: {
+							navigationStack.pop()
+							bottomContainer = AnyView(UnlockSuccesful(onFinished: {
+								startTripCoordinator()
+							}))}
+				))
 	}
 	
 	func startTripCoordinator() {
@@ -78,15 +77,15 @@ struct MapCoordinator: View {
 	
 	func menuCoordinator() {
 		navigationStack.push(
-			Menu(tripViewModel: tripViewModel, onBack: { navigationStack.pop() },
-				 onSeeAll: { navigationStack.push(
-					History(tripViewModel: tripViewModel, onBack: { navigationStack.pop() }))},
-				 onAccount: { navigationStack.push(
-					Account(onBack: { navigationStack.pop() },
-							onLogout: { navigationStack.push(ContentView())},
-							onSave: { navigationStack.pop() }))},
-				 onChangePassword: { navigationStack.push(
-					ChangePassword(action: {navigationStack.pop()}))
-				 }))
+				Menu(tripViewModel: tripViewModel, onBack: { navigationStack.pop() },
+					 onSeeAll: { navigationStack.push(
+						History(tripViewModel: tripViewModel, onBack: { navigationStack.pop() }))},
+					 onAccount: { navigationStack.push(
+						Account(onBack: { navigationStack.pop() },
+								onLogout: { navigationStack.push(ContentView())},
+								onSave: { navigationStack.pop() }))},
+					 onChangePassword: { navigationStack.push(
+						ChangePassword(action: {navigationStack.pop()}))
+					 }))
 	}
 }

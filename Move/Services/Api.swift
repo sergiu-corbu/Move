@@ -37,8 +37,9 @@ class API {
 				let result = try JSONDecoder().decode(T.self, from: response.data!)
 				return .success(result)
 			} else { //guard ... for inactive network
-				let result = try JSONDecoder().decode(APIError.self, from: response.data!)
-				return .failure(APIError(message: result.localizedDescription))
+				guard let result = response.data else { return .failure(APIError(message: "network error")) }
+				let result1 = try JSONDecoder().decode(APIError.self, from: result)
+				return .failure(APIError(message: result1.localizedDescription))
 			}
 		} catch (let error) {
 			return .failure(error)
@@ -58,7 +59,9 @@ class API {
 		let path = baseUrl + "users/login"
 		let parameters = ["email": email, "password": password]
 		AF.request(path, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseData { response in
+			print(response)
 			let result: Result<AuthResult> = handleResponse(response: response)
+			print(result)
 			callback(result)
 		}
 	}

@@ -10,6 +10,7 @@ import SwiftUI
 //MARK: Buttons
 
 struct Buttons {
+	
 	struct PrimaryButton: View {
 		let text: String
 		var isLoading: Bool = false

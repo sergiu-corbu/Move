@@ -14,9 +14,7 @@ struct AuthCoordinator: View {
 	@ObservedObject var navigationStack: NavigationStack
 	
 	var body: some View {
-		NavigationStackView(navigationStack: navigationStack) {
-			Onboarding(onFinished: { registerCoordinator() })
-		}
+		Onboarding(onFinished: { registerCoordinator() })
 	}
 	
 	func registerCoordinator() {
