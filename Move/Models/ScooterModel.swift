@@ -56,3 +56,10 @@ struct Scooter: Identifiable, Codable {
         case battery = "power"
     }
 }
+
+struct LockUnlockResult: Codable {
+	let scooter: Scooter
+	enum CodingKeys: String, CodingKey {
+		case scooter = "scooter"
+	}
+}

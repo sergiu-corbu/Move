@@ -124,14 +124,14 @@ class API {
 		}
 	}
 	
-	static func lockUnlock(path: String, scooterID: String, _ callback: @escaping (Result<Scooter>) -> Void){
+	static func lockUnlock(path: String, scooterID: String, _ callback: @escaping (Result<LockUnlockResult>) -> Void){
 		let token = validateToken()
 		switch token {
 			case .success(let header):
 				let path = baseUrl + "scooters/\(path)?tag=\(scooterID)"
 				let parameters: [String:String] = ["tag": scooterID]
 				AF.request(path, method: .put, parameters: parameters, headers: header).validate().responseData { response in
-					let result: Result<Scooter> = handleResponse(response: response)
+					let result: Result<LockUnlockResult> = handleResponse(response: response)
 					callback(result)
 				}
 			case .failure(let error):
@@ -139,14 +139,28 @@ class API {
 		}
 	}
 	
-	static func endTrip(scooterID: String, _ callback: @escaping (Result<EndTrip>) -> Void){
+	static func endTrip(scooterID: String, _ callback: @escaping (Result<EndTripResult>) -> Void){
 		let token = validateToken()
 		switch token {
 			case .success(let header):
 				let path = baseUrl + "bookings/end?tag=\(scooterID)"
 				let parameters: [String:String] = ["tag": scooterID]
 				AF.request(path, method: .put, parameters: parameters, headers: header).validate().responseData { response in
-					let result: Result<EndTrip> = handleResponse(response: response)
+					let result: Result<EndTripResult> = handleResponse(response: response)
+					callback(result)
+				}
+			case .failure(let error):
+				callback(.failure(APIError(message: error.localizedDescription)))
+		}
+	}
+	
+	static func updateTrip(_ callback: @escaping (Result<CurrentTrip>) -> Void){
+		let token = validateToken()
+		switch token {
+			case .success(let header):
+				let path = baseUrl + "bookings/ongoing"
+				AF.request(path, method: .get, headers: header).validate().responseData { response in
+					let result: Result<CurrentTrip> = handleResponse(response: response)
 					callback(result)
 				}
 			case .failure(let error):
@@ -161,6 +175,22 @@ class API {
 				let path = baseUrl + "users/logout"
 				AF.request(path, method: .delete, headers: header).validate().responseData { response in
 					let result: Result<Logout> = handleResponse(response: response)
+					callback(result)
+				}
+			case .failure(let error):
+				callback(.failure(APIError(message: error.localizedDescription)))
+		}
+	}
+	
+	static func pingScooter(scooterKey: String, _ callback: @escaping (Result<Ping>) -> Void) {
+		let token = validateToken()
+		switch token {
+			case .success(let header):
+				let path = baseUrl + "users/ping/"
+				let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
+				let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "deviceKey": scooterKey]
+				AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
+					let result: Result<Ping> = handleResponse(response: response)
 					callback(result)
 				}
 			case .failure(let error):

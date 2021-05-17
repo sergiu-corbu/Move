@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AuthCoordinator: View {
 	@State private var isLoading = false
-	var navigationStack: NavigationStack
+	@ObservedObject var navigationStack: NavigationStack
 	
 	var body: some View {
 		NavigationStackView(navigationStack: navigationStack) {

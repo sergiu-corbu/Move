@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Menu: View {
-	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
+	@ObservedObject var tripViewModel: TripViewModel
 	
     let onBack: () -> Void
     let onSeeAll: () -> Void

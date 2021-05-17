@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct History: View {
-	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
+	@ObservedObject var tripViewModel: TripViewModel
     let onBack: () -> Void
 	
     var body: some View {

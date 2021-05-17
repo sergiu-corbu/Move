@@ -12,7 +12,7 @@ struct TripDetail: View {
 	@State private var isExpanded: Bool = false
 	@State private var lockButtonPressed: Bool = false
 	@State private var endRidePressed: Bool = false
-	var tripViewModel: TripViewModel
+	@ObservedObject var tripViewModel: TripViewModel
 	var mapViewModel: MapViewModel
 	var scooter: Scooter {
 		return mapViewModel.selectedScooter!
@@ -40,6 +40,13 @@ struct TripDetail: View {
 			}
 			tripButtons
 		}
+		.onAppear {
+			tripViewModel.updateTrip()
+			DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+				print("trip updated")
+				tripViewModel.updateTrip()
+			}
+		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)
 	}
@@ -52,7 +59,7 @@ struct TripDetail: View {
 				.padding(.vertical, 12)
 			HStack(spacing: 55) {
 				ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.tripTime, largeFrame: true)
-				ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7")
+				ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: "\(tripViewModel.ongoingTrip.distance)")
 			}
 		}
 	}

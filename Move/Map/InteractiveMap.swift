@@ -30,7 +30,7 @@ struct InteractiveMap: View {
 				}
 			}
 			.edgesIgnoringSafeArea(.all)
-			.onTapGesture { mapViewModel.selectedScooter = nil }
+			//.onTapGesture { mapViewModel.selectedScooter = nil }
 			.onAppear {
 				if mapViewModel.locationManager.showLocationAlert {
 					showAlert = true
@@ -41,7 +41,7 @@ struct InteractiveMap: View {
 					}
 				}
 			}
-			SharedElements.MapBarItems(menuAction: { onMenu(); mapViewModel.selectedScooter = nil}, text: mapViewModel.locationManager.cityName, locationEnabled: mapViewModel.locationManager.showLocation, centerLocation: { centerViewOnUserLocation(); mapViewModel.selectedScooter = nil } )
+			SharedElements.MapBarItems(menuAction: { onMenu() }, text: mapViewModel.locationManager.cityName, locationEnabled: mapViewModel.locationManager.showLocation, centerLocation: { centerViewOnUserLocation() } )
 		}
 		.alert(isPresented: $showAlert) {
 			Alert.init(title: Text("Enable location services"), dismissButton: .default(Text("Go to Settings"), action: {

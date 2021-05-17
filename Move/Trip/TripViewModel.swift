@@ -9,16 +9,18 @@ import Foundation
 import SwiftUI
 
 class TripViewModel: ObservableObject {
+	@Published var ongoingTrip: CurrentTrip = CurrentTrip.init(distance: 0)
+	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+	@Published var tripCount: Int = 0
 	static var shared: TripViewModel = TripViewModel()
 	var allTrips: [Trip] = []
-	@Published var tripCount: Int = 0
-	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+	
 	init() {
 		downloadTrips()
 	}
 	
 	func downloadTrips() {
-		API.downloadTrips({ result in
+		API.downloadTrips( { result in
 			switch result {
 				case .success(let trips):
 					self.allTrips = trips.trips
@@ -26,6 +28,17 @@ class TripViewModel: ObservableObject {
 				case .failure(let error): showError(error: error.localizedDescription)
 			}
 		})
+	}
+	
+	func updateTrip() {
+		API.updateTrip { result in
+			switch result {
+				case .success(let ongoingTrip):
+					self.ongoingTrip.distance = ongoingTrip.distance
+				case .failure(let error):
+					showError(error: error.localizedDescription)
+			}
+		}
 	}
 
 	func endTrip() {

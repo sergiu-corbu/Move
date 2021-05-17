@@ -212,19 +212,6 @@ struct SharedElements {
 			.frame(width: 172, height: 172)
 	}
 	
-	struct NFCCircle: View {
-		let width: CGFloat
-		let height: CGFloat
-		let opacity: Double
-		var body: some View {
-			Circle()
-				.strokeBorder(Color.white, lineWidth: CGFloat(opacity*3))
-				.opacity(opacity)
-				.clipShape(Circle())
-				.frame(width: width, height: height)
-		}
-	}
-	
 	static var purpleBackground: some View {
 		Image("rect-background-img")
 			.resizable()

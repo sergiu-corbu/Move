@@ -12,8 +12,8 @@ import SwiftUI
 struct MapCoordinator: View {
 	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
 	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
+	@ObservedObject var navigationStack: NavigationStack
 	@State var bottomContainer: AnyView = AnyView(EmptyView())
-	var navigationStack: NavigationStack
 	
 	var body: some View {
 		NavigationStackView(navigationStack: navigationStack) {
@@ -26,6 +26,9 @@ struct MapCoordinator: View {
 					}))
 				})
 				bottomContainer
+			}
+			.onAppear {
+				print(Session.tokenKey)
 			}
 		}
 	}
@@ -52,7 +55,7 @@ struct MapCoordinator: View {
 	func startTripCoordinator() {
 		bottomContainer = AnyView(StartRide(mapViewModel: mapViewModel, onStartRide: {
 			bottomContainer = AnyView(TripDetail(tripViewModel: tripViewModel, mapViewModel: mapViewModel, onEndRide: {
-				bottomContainer = AnyView(FinishTrip(onFinish: {
+				bottomContainer = AnyView(FinishTrip(tripViewModel: tripViewModel, onFinish: {
 					Session.ongoingTrip = false
 					mapViewModel.selectedScooter = nil
 					mapViewModel.getAvailableScooters()
@@ -75,9 +78,9 @@ struct MapCoordinator: View {
 	
 	func menuCoordinator() {
 		navigationStack.push(
-			Menu(onBack: { navigationStack.pop() },
+			Menu(tripViewModel: tripViewModel, onBack: { navigationStack.pop() },
 				 onSeeAll: { navigationStack.push(
-					History(onBack: { navigationStack.pop() }))},
+					History(tripViewModel: tripViewModel, onBack: { navigationStack.pop() }))},
 				 onAccount: { navigationStack.push(
 					Account(onBack: { navigationStack.pop() },
 							onLogout: { navigationStack.push(ContentView())},

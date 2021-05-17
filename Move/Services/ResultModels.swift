@@ -53,14 +53,37 @@ struct StartTrip: Codable {
 	}
 }
 
-struct EndTrip: Codable {
-	let startTime: String
-	let endTime: String
-	let ongoing: Bool
+struct EndTripResult: Codable {
+	let trip: EndTrip
+	
+	struct EndTrip: Codable {
+		let startTime: String
+		let endTime: String
+		let ongoing: Bool
+		
+		enum CodingKeys: String, CodingKey {
+			case startTime = "startTime"
+			case endTime = "endTime"
+			case ongoing = "ongoing"
+		}
+	}
+
+	enum CodingKeys: String, CodingKey {
+		case trip = "trip"
+	}
+}
+
+struct CurrentTrip: Codable {
+	var distance: Int
 	
 	enum CodingKeys: String, CodingKey {
-		case startTime = "startTime"
-		case endTime = "endTime"
-		case ongoing = "ongoing"
+		case distance = "distance"
+	}
+}
+
+struct Ping: Codable {
+	let ping: Bool
+	enum CodingKeys: String, CodingKey {
+		case ping = "ping"
 	}
 }

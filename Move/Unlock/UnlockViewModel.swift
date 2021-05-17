@@ -28,8 +28,8 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 				API.unlockScooterPin(scooterID: selectedScooter.id, code: codeString) { result in
 					switch result {
 						case .success: self.onFinishedUnlock?()
-						case .failure(let error):
-							showError(error: error.localizedDescription)
+						case .failure:
+							showError(error: "Incorect code")
 							self.codeString = ""
 							self.selectedIndex = 0
 							self.unlockCode = ["", "", "", ""]

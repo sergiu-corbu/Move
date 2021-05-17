@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FinishTrip: View {
 	@State private var isLoading: Bool = false
+	@ObservedObject var tripViewModel: TripViewModel
 	let paymentHander = Payment()
 	let onFinish: () -> Void
 	
@@ -46,7 +47,7 @@ struct FinishTrip: View {
 	var travelData: some View {
 		HStack(spacing: 55) {
 			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: "00:12", fontSize: 16)
-			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: "2.7", fontSize: 16)
+			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: "\(tripViewModel.ongoingTrip.distance)", fontSize: 16)
 		}
 	}
 	
@@ -61,6 +62,6 @@ struct FinishTrip: View {
 
 struct FinishTrip_Previews: PreviewProvider {
     static var previews: some View {
-		FinishTrip(onFinish: {})
+		FinishTrip(tripViewModel: TripViewModel(), onFinish: {})
     }
 }
