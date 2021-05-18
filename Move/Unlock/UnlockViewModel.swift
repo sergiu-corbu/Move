@@ -13,6 +13,7 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
 	@Published var unlockCode: [String] = ["", "", "", ""]
 	@Published var selectedIndex: Int = 0
+	
 	static let shared: UnlockViewModel = UnlockViewModel()
 	let maxPins: Int = 4
 	var codeString: String = ""

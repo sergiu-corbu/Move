@@ -73,29 +73,18 @@ struct EndTripResult: Codable {
 	}
 }
 
-struct Trip1: Codable {
-	var ongoing: Bool
-	
-	enum CodingKeys: String, CodingKey {
-		case ongoing = "ongoing"
-	}
-}
-
-struct CurrentTrip: Codable {
-	var trip: Trip1
-	var distance: Int
-	var distanceString: String {
-		return String(distance)
-	}
-	enum CodingKeys: String, CodingKey {
-		case trip = "trip"
-		case distance = "distance"
-	}
-}
 
 struct Ping: Codable {
 	let ping: Bool
 	enum CodingKeys: String, CodingKey {
 		case ping = "ping"
+	}
+}
+
+struct UploadImage: Codable {
+	let licenseKey: String
+	
+	enum CodingKeys: String, CodingKey {
+		case licenseKey = "driverLicenseKey"
 	}
 }

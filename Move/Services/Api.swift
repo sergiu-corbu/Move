@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import CoreLocation
+import SwiftUI
 
 typealias Result<T> = Swift.Result<T, Error>
 
@@ -44,6 +45,34 @@ class API {
 		} catch (let error) {
 			return .failure(error)
 		}
+	}
+	
+	static func uploadLicense(selectedImage: Image, _ callback: @escaping (Result<UploadImage>) -> Void) {
+		let token = validateToken()
+		switch token {
+			case .success(let header):
+				let path = baseUrl + "users/upload"
+				let uiImage = selectedImage.uiImage()
+				let imageData = uiImage.jpegData(compressionQuality: 0.85)
+				let parameters = ["file": imageData!]
+				AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
+					let result: Result<UploadImage> = handleResponse(response: response)
+					print(result)
+					callback(result)
+				}
+//				AF.upload(multipartFormData: { multiData in
+//					if let data = imageData {
+//						multiData.append(data, withName: "driverLicense", fileName: "img.jpg", mimeType: "image/jpg")
+//					}
+//				}, to: path, method: .post, headers: header).validate().responseData { response in
+//					let result: Result<UploadImage> = handleResponse(response: response)
+//					print(result)
+//					//callback(result)
+//				}
+			case .failure(let error):
+				callback(.failure(APIError(message: error.localizedDescription)))
+		}
+		
 	}
 	
 	static func registerUser(email: String, password: String, username: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
@@ -157,13 +186,13 @@ class API {
 		}
 	}
 	
-	static func updateTrip(_ callback: @escaping (Result<CurrentTrip>) -> Void){
+	static func updateTrip(_ callback: @escaping (Result<CurrentTripResult>) -> Void){
 		let token = validateToken()
 		switch token {
 			case .success(let header):
 				let path = baseUrl + "bookings/ongoing"
 				AF.request(path, method: .get, headers: header).validate().responseData { response in
-					let result: Result<CurrentTrip> = handleResponse(response: response)
+					let result: Result<CurrentTripResult> = handleResponse(response: response)
 					callback(result)
 				}
 			case .failure(let error):
@@ -201,3 +230,5 @@ class API {
 		}
 	}
 }
+
+

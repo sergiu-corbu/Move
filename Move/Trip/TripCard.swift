@@ -9,10 +9,10 @@ import SwiftUI
 
 struct TripDetail: View {
 	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
+	@ObservedObject var tripViewModel: TripViewModel
 	@State private var isExpanded: Bool = false
 	@State private var lockButtonPressed: Bool = false
 	@State private var endRidePressed: Bool = false
-	@ObservedObject var tripViewModel: TripViewModel
 	var scooter: Scooter 
 	let onEndRide: () -> Void
 	
@@ -54,9 +54,9 @@ struct TripDetail: View {
 			ScooterCardComponents.CardTitle(text: "Trip Details", semiBold: true)
 			ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: true)
 				.padding(.vertical, 12)
-			HStack(spacing: 55) {
+			HStack(spacing: 60) {
 				ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.tripTime, largeFrame: true)
-				ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.ongoingTrip.distanceString)
+				ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.currentTrip?.distanceString ?? "0")
 			}
 		}
 	}
@@ -66,7 +66,7 @@ struct TripDetail: View {
 			NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {isExpanded=false})
 			ScooterCardComponents.ExpandedCard(infoText: "Battery", imageName: scooter.batteryImage, data: "\(scooter.battery)%")
 			ScooterCardComponents.ExpandedCard(infoText: "Travel time", imageName: "time-img", data: stopWatch.tripTime)
-			ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: tripViewModel.ongoingTrip.distanceString)
+			ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: tripViewModel.currentTrip?.distanceString ?? "0")
 		}
 	}
 	

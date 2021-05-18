@@ -23,27 +23,16 @@ struct InteractiveMap: View {
 				{
 					Image(scooter.isSelected ? "pin-fill-active-img" : "pin-fill-img")
 						.onTapGesture {
-							mapViewModel.selectedScooter = scooter
+							mapViewModel.selectScooter(scooter: scooter)
 							if let currentScooter = mapViewModel.selectedScooter {
 								onSelectedScooter(currentScooter)
 							}
-							
-//							if mapViewModel.selectedScooter == nil {
-//								self.mapViewModel.selectScooter(scooter: scooter)
-//								self.currentScooter = scooter
-//								onSelectedScooter(scooter)
-//							}
-//							} else {
-//								onSelectedScooter(mapViewModel.se)
-//								mapViewModel.selectedScooter = nil
-//							}
-							
 					}
 				}
 			}
 			.edgesIgnoringSafeArea(.all)
 			.onAppear {
-				print(Session.tokenKey)
+				print(Session.tokenKey as Any)
 				if mapViewModel.locationManager.showLocationAlert {
 					showAlert = true
 				} else {

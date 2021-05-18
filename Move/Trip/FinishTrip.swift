@@ -47,7 +47,7 @@ struct FinishTrip: View {
 	var travelData: some View {
 		HStack(spacing: 55) {
 			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: "00:12", fontSize: 16)
-			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: "\(tripViewModel.ongoingTrip.distance)", fontSize: 16)
+			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.currentTrip?.distanceString, fontSize: 16)
 		}
 	}
 	

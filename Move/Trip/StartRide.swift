@@ -24,6 +24,7 @@ struct StartRide: View {
 				ScooterCardComponents.scooterImage.padding(.trailing, -24)
 			}.padding(.top)
 			Buttons.PrimaryButton(text: "Start ride", isLoading: isLoading, enabled: true, action: { onStartRide() })
+				.padding(.bottom, -10)
 		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)

@@ -9,44 +9,33 @@ import SwiftUI
 
 struct NFCUnlock: View {
 	@State private var animate: Bool = false
-	var mapViewModel: MapViewModel
 	let onClose: () -> Void
 	let onFinished: () -> Void
+	let unlockMethod: (UnlockType) -> Void
 	
 	var body: some View {
 		ZStack {
 			ZStack {
-				Image("logoText")
+				Image("nfcLogo")
 				ZStack {
-					Circle()
-						.strokeBorder(Color.white, lineWidth: 0.9)
-						.opacity(0.3)
-						.clipShape(Circle())
-						.frame(width: 353, height: 350)
-						.scaleEffect(animate ? 1.5 : 1)
-					Circle()
-						.strokeBorder(Color.white, lineWidth: 1.8)
-						.opacity(0.6)
-						.clipShape(Circle())
-						.frame(width: 258, height: 258)
-						.scaleEffect(animate ? 1.2 : 0.9)
-					Circle()
-						.strokeBorder(Color.white, lineWidth: 3)
-						.opacity(1)
-						.clipShape(Circle())
-						.frame(width: 172, height: 172)
+					NFCCircle(animate: $animate, width: 353, height: 353, opacity: 0.3)
+					NFCCircle(animate: $animate, width: 258, height: 258, opacity: 0.6)
+					NFCCircle(animate: $animate, width: 172, height: 172, opacity: 1, noAnimation: true)
 				}
-				.onAppear {
-					animate = true
-				}
-				.animation(Animation.linear(duration: 2).repeatForever(autoreverses: false), value: animate)
+				.onAppear { animate = true }
+				.animation(
+					Animation
+						.spring()
+						.speed(0.35)
+						.repeatForever(autoreverses: false)
+				)
 			}
 			VStack {
 				NavigationBar(title: "Bring your phone", color: .white, backButton: "close", action: { onClose() })
 				UnlockScooterComponents.Title(title: "NFC unlock")
 				UnlockScooterComponents.SubTitle(subTitle: "Hold your phone close to the NFC Tag\nlocated on top of the handlebar of\nyour scooter.")
 				Spacer()
-				ScooterCardComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: {}), unlockButton2: Buttons.UnlockOptionButton(text: "123", action: {}))
+				ScooterCardComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "123", action: { unlockMethod(.code) }))
 			}
 		}
 		.padding(.horizontal, 24)
@@ -54,8 +43,25 @@ struct NFCUnlock: View {
 	}
 }
 
+struct NFCCircle: View {
+	@Binding var animate: Bool
+	let width: CGFloat
+	let height: CGFloat
+	let opacity: Double
+	var noAnimation: Bool = false
+	
+	var body: some View {
+		Circle()
+			.strokeBorder(Color.white, lineWidth: CGFloat(opacity*3))
+			.opacity(opacity)
+			.clipShape(Circle())
+			.frame(width: width, height: height)
+			.scaleEffect(noAnimation ? 1 : ( animate ? 1.5 : 1))
+	}
+}
+
 struct NFCUnlock_Previews: PreviewProvider {
 	static var previews: some View {
-		NFCUnlock(mapViewModel: MapViewModel(), onClose: {}, onFinished: {})
+		NFCUnlock(onClose: {}, onFinished: {}, unlockMethod: { _ in})
 	}
 }

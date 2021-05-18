@@ -10,10 +10,12 @@ import Introspect
 import CoreLocation
 
 struct CodeUnlock: View {
-	@State private var isLoading: Bool = false
 	@StateObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
+	@State private var isLoading: Bool = false
+
 	let onClose: () -> Void
 	let onFinished: () -> Void
+	let unlockMethod: (UnlockType) -> Void
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -26,7 +28,8 @@ struct CodeUnlock: View {
 					DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
 				}
 			}
-			ScooterCardComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: {}), unlockButton2: Buttons.UnlockOptionButton(text: "NFC", action: {})).padding(.top, 100)
+			ScooterCardComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "NFC", action: { unlockMethod(.nfc) }))
+				.padding(.top, 100)
         }
 		.onAppear {
 			unlockViewModel.onFinishedUnlock = onFinished
@@ -51,7 +54,7 @@ struct DigitField: View {
 
 	var body: some View {
 		TextField("", text: $digit)
-			.keyboardType(.numberPad)
+			.keyboardType(.default)
 			.accentColor(.black)
 			.multilineTextAlignment(.center)
 			.padding(.horizontal, 5)

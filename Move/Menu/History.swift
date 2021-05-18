@@ -6,20 +6,26 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct History: View {
 	@ObservedObject var tripViewModel: TripViewModel
+	@State private var isRefreshing: Bool = false
     let onBack: () -> Void
 	
     var body: some View {
 		VStack(spacing: 30) {
 			NavigationBar(title: "History", color: .darkPurple, backButton: "chevron-left-purple", action: { onBack() })
 			ScrollView(showsIndicators: false) {
-				PullToRefresh(coordinateSpace: "pullToRefresh") { tripViewModel.downloadTrips() }
+				//PullToRefresh(coordinateSpace: "pullToRefresh") { tripViewModel.downloadTrips() }
 				ForEach(0..<tripViewModel.allTrips.count, id: \.self) { index in
 					TripCard(trip: tripViewModel.allTrips[index])
 				}
-			}.coordinateSpace(name: "pullToRefresh")
+			}
+			.introspectScrollView { scrollView in
+				scrollView.refreshControl?.beginRefreshing()
+			}
+			//.coordinateSpace(name: "pullToRefresh")
 		}
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))

@@ -11,9 +11,9 @@ struct ContentView: View {
 	@StateObject var navigationStack: NavigationStack = NavigationStack()
 	
 	var body: some View {
-		if Session.tokenKey != nil {
+		if Session.tokenKey != nil && Session.licenseVerified {
 			NavigationStackView(navigationStack: navigationStack) {
-				MapCoordinator(navigationStack: navigationStack)
+				MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView()))
 			} } else {
 				NavigationStackView(navigationStack: navigationStack) {
 					AuthCoordinator(navigationStack: navigationStack)
