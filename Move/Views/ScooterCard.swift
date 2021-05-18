@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScooterCard: View {
-    let scooter: Scooter
+	var scooter: Scooter
 	let onUnlock: () -> Void
 	
     var body: some View {
@@ -91,8 +91,8 @@ struct ScooterCard: View {
 	}
 }
 
-struct ScooterCard_Previews: PreviewProvider {
-    static var previews: some View {
-		ScooterCard(scooter: Scooter(id: "asdd", location: Location(coordinates: [10,2], type: "t"), available: true, locked: true, deviceKey: "fsodjn", battery: 90, addressName: nil), onUnlock: {})
-    }
-}
+//struct ScooterCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//		ScooterCard(scooter: Scooter(id: "asdd", location: Location(coordinates: [10,2], type: "t"), available: true, locked: true, deviceKey: "fsodjn", battery: 90, addressName: nil), onUnlock: {})
+//    }
+//}

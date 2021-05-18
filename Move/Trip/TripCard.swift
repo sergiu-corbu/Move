@@ -13,10 +13,7 @@ struct TripDetail: View {
 	@State private var lockButtonPressed: Bool = false
 	@State private var endRidePressed: Bool = false
 	@ObservedObject var tripViewModel: TripViewModel
-	var mapViewModel: MapViewModel
-	var scooter: Scooter {
-		return mapViewModel.selectedScooter!
-	}
+	var scooter: Scooter 
 	let onEndRide: () -> Void
 	
 	var body: some View {
@@ -88,9 +85,9 @@ struct TripDetail: View {
 		})
 	}
 }
-
-struct TripDetailView_Previews: PreviewProvider {
-	static var previews: some View {
-		TripDetail(tripViewModel: TripViewModel(), mapViewModel: MapViewModel(), onEndRide: {})
-	}
-}
+//
+//struct TripDetailView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		TripDetail(tripViewModel: TripViewModel(), mapViewModel: MapViewModel(), onEndRide: {})
+//	}
+//}

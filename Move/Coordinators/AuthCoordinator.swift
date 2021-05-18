@@ -19,11 +19,7 @@ struct AuthCoordinator: View {
 	
 	func registerCoordinator() {
 		navigationStack.push(Register(onRegisterComplete: { validationCoordinator()
-		}, onLoginSwitch: {
-			navigationStack.push(
-				Login(onLoginCompleted: { mapCoodinator() },
-					  onRegisterSwitch: { registerCoordinator() }))
-		}))
+		}, onLoginSwitch: { loginCoordinator() }))
 	}
 	
 	func validationCoordinator() {
@@ -43,6 +39,11 @@ struct AuthCoordinator: View {
 	
 	func mapCoodinator() {
 		navigationStack.push(MapCoordinator(navigationStack: navigationStack))
+	}
+	
+	func loginCoordinator() {
+		navigationStack.push(Login(onLoginCompleted: { mapCoodinator() },
+				  onRegisterSwitch: { registerCoordinator() }))
 	}
 }
 

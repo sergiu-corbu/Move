@@ -16,51 +16,73 @@ struct MapCoordinator: View {
 	@State var bottomContainer: AnyView = AnyView(EmptyView())
 	
 	var body: some View {
-		NavigationStackView(navigationStack: navigationStack) {
-			ZStack(alignment: .bottom) {
-				InteractiveMap(mapViewModel: mapViewModel, currentScooter: $mapViewModel.selectedScooter, onMenu: {  menuCoordinator() }, onSelectedScooter: { scooter in
-					bottomContainer = AnyView(ScooterCard(scooter: scooter, onUnlock: {
-						bottomContainer = AnyView(UnlockScooterMethods(mapViewModel: mapViewModel, unlockMethod: { unlockType in
-							unlckTypeCoordinator(type: unlockType)
-						}))
-					}))
-				})
-				bottomContainer
-			}
+		ZStack(alignment: .bottom) {
+			InteractiveMap(mapViewModel: mapViewModel, onMenu: {  menuCoordinator() }, onSelectedScooter: { selectedScooter in
+				bottomContainer = AnyView(ScooterCard(scooter: selectedScooter, onUnlock: {
+					showUnlockMethods(selectedScooter: selectedScooter)
+				}))
+			})
+			bottomContainer
+		}
+		.onAppear {
+//			tripViewModel.updateTrip()
+//			if tripViewModel.ongoingTrip.trip.ongoing {
+//				showTripDetail(selectedScooter: )
+//			}
 		}
 	}
 	
-	func unlckTypeCoordinator(type: UnlockType) {
+	func unlckTypeCoordinator(selectedScooter: Scooter, type: UnlockType) {
 		switch type {
-			case .code: codeUnlockCoordinator()
+			case .code: showCodeUnlock(selectedScooter: selectedScooter)
 			case .qr: qrCoordinator()
 			case .nfc: nfcCoordinator()
 		}
 	}
 	
-	func codeUnlockCoordinator() {
+	func showUnlockMethods(selectedScooter: Scooter) {
+		bottomContainer = AnyView(UnlockScooterMethods(scooter: selectedScooter, unlockMethod: { unlockType in
+			unlckTypeCoordinator(selectedScooter: selectedScooter, type: unlockType)
+		}))
+	}
+	
+	func showCodeUnlock(selectedScooter: Scooter) {
 		bottomContainer = AnyView(CodeUnlock(onClose: {
+			showUnlockMethods(selectedScooter: selectedScooter)
 		}, onFinished: {
-			bottomContainer = AnyView(UnlockSuccesful(onFinished: {
-				bottomContainer = AnyView(StartRide(mapViewModel: mapViewModel, onStartRide: {
-					startTripCoordinator()
-				}))
+			showUnlockSuccess(selectedScooter: selectedScooter)
+		}))
+	}
+	
+	func showUnlockSuccess(selectedScooter: Scooter) {
+		bottomContainer = AnyView(UnlockSuccesful(onFinished: {
+			bottomContainer = AnyView(StartRide(scooter: selectedScooter,  onStartRide: {
+				showStartRide(selectedScooter: selectedScooter)
 			}))
 		}))
 	}
 
-	func startTripCoordinator() {
-		bottomContainer = AnyView(StartRide(mapViewModel: mapViewModel, onStartRide: {
-			bottomContainer = AnyView(TripDetail(tripViewModel: tripViewModel, mapViewModel: mapViewModel, onEndRide: {
-				bottomContainer = AnyView(FinishTrip(tripViewModel: tripViewModel, onFinish: {
-					Session.ongoingTrip = false
-					mapViewModel.selectedScooter = nil
-					mapViewModel.getAvailableScooters()
-					bottomContainer = AnyView(EmptyView())
-				}))
-			}))
+	func showStartRide(selectedScooter: Scooter) {
+		bottomContainer = AnyView(StartRide(scooter: selectedScooter , onStartRide: {
+			showTripDetail(selectedScooter: selectedScooter)
 		}))
 	}
+	
+	func showTripDetail(selectedScooter: Scooter) {
+		bottomContainer = AnyView(TripDetail(tripViewModel: tripViewModel, scooter: selectedScooter, onEndRide: {
+			showFinishTrip()
+		}))
+	}
+	
+	func showFinishTrip() {
+		bottomContainer = AnyView(FinishTrip(tripViewModel: tripViewModel, onFinish: {
+			Session.ongoingTrip = false
+			mapViewModel.selectedScooter = nil
+			mapViewModel.getAvailableScooters()
+			bottomContainer = AnyView(EmptyView())
+		}))
+	}
+	
 	
 	func nfcCoordinator() {
 		navigationStack.push(NFCUnlock(mapViewModel: mapViewModel, onClose: { navigationStack.pop()
@@ -73,17 +95,26 @@ struct MapCoordinator: View {
 		
 	}
 	
+	
+	//MARK: Menu navigation
 	func menuCoordinator() {
-		navigationStack.push(
-				Menu(tripViewModel: tripViewModel, onBack: { navigationStack.pop() },
-					 onSeeAll: { navigationStack.push(
-						History(tripViewModel: tripViewModel, onBack: { navigationStack.pop() }))},
-					 onAccount: { navigationStack.push(
-						Account(onBack: { navigationStack.pop() },
-								onLogout: { navigationStack.push(ContentView())},
-								onSave: { navigationStack.pop() }))},
-					 onChangePassword: { navigationStack.push(
-						ChangePassword(action: {navigationStack.pop()}))
-					 }))
+		navigationStack.push(Menu(tripViewModel: tripViewModel, onBack: { navigationStack.pop() },
+					 onSeeAll: { historyCoordinator() },
+					 onAccount: { accountCoordinator() },
+					 onChangePassword: { passwordCoordinator() }))
+	}
+	
+	func accountCoordinator() {
+		navigationStack.push(Account(onBack: { navigationStack.pop() },
+					onLogout: { navigationStack.push(ContentView())},
+					onSave: { navigationStack.pop() }))
+	}
+	
+	func historyCoordinator() {
+		navigationStack.push(History(tripViewModel: tripViewModel, onBack: { navigationStack.pop() }))
+	}
+	
+	func passwordCoordinator() {
+		navigationStack.push(ChangePassword(action: {navigationStack.pop()}))
 	}
 }

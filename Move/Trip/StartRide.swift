@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct StartRide: View {
-	var mapViewModel: MapViewModel
-	var scooter: Scooter {
-		return mapViewModel.selectedScooter!
-	}
+	@State private var isLoading: Bool = false
+	var scooter: Scooter
 	let onStartRide: () -> Void
 	
 	var body: some View {
@@ -25,15 +23,15 @@ struct StartRide: View {
 				}.padding(.top, 30)
 				ScooterCardComponents.scooterImage.padding(.trailing, -24)
 			}.padding(.top)
-			Buttons.PrimaryButton(text: "Start ride", isLoading: false, enabled: true, action: { onStartRide() })
+			Buttons.PrimaryButton(text: "Start ride", isLoading: isLoading, enabled: true, action: { onStartRide() })
 		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)
 	}
 }
 
-struct StartRide_Previews: PreviewProvider {
-    static var previews: some View {
-		StartRide(mapViewModel: MapViewModel(), onStartRide: {})
-    }
-}
+//struct StartRide_Previews: PreviewProvider {
+//    static var previews: some View {
+//		StartRide(mapViewModel: MapViewModel(), onStartRide: {})
+//    }
+//}

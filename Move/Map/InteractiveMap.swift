@@ -12,26 +12,38 @@ struct InteractiveMap: View {
 	@ObservedObject var mapViewModel: MapViewModel
 	@State private var region = MKCoordinateRegion.defaultRegion
 	@State private var showAlert: Bool = false
-	@Binding var currentScooter: Scooter?
 	
 	let onMenu: () -> Void
 	let onSelectedScooter: (Scooter) -> Void
 	
 	var body: some View {
 		ZStack(alignment: .top) {
-			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.locationManager.showLocation, annotationItems: !Session.ongoingTrip ?  mapViewModel.allScooters.filter({$0.available == true }) : []) { scooter in
+			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.locationManager.showLocation, annotationItems: !Session.ongoingTrip ?  mapViewModel.allScooters.filter({$0.available == true }) : [] ) { scooter in
 				MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0]))
 				{
 					Image(scooter.isSelected ? "pin-fill-active-img" : "pin-fill-img")
 						.onTapGesture {
-							self.mapViewModel.selectScooter(scooter: scooter)
-							onSelectedScooter(scooter)
+							mapViewModel.selectedScooter = scooter
+							if let currentScooter = mapViewModel.selectedScooter {
+								onSelectedScooter(currentScooter)
+							}
+							
+//							if mapViewModel.selectedScooter == nil {
+//								self.mapViewModel.selectScooter(scooter: scooter)
+//								self.currentScooter = scooter
+//								onSelectedScooter(scooter)
+//							}
+//							} else {
+//								onSelectedScooter(mapViewModel.se)
+//								mapViewModel.selectedScooter = nil
+//							}
+							
 					}
 				}
 			}
 			.edgesIgnoringSafeArea(.all)
-			//.onTapGesture { mapViewModel.selectedScooter = nil }
 			.onAppear {
+				print(Session.tokenKey)
 				if mapViewModel.locationManager.showLocationAlert {
 					showAlert = true
 				} else {

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class TripViewModel: ObservableObject {
-	@Published var ongoingTrip: CurrentTrip = CurrentTrip.init(distance: 0)
+	@Published var ongoingTrip: CurrentTrip = CurrentTrip.init(trip: Trip1(ongoing: false), distance: 0)
 	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
 	@Published var tripCount: Int = 0
 	static var shared: TripViewModel = TripViewModel()
@@ -35,8 +35,8 @@ class TripViewModel: ObservableObject {
 			switch result {
 				case .success(let ongoingTrip):
 					self.ongoingTrip.distance = ongoingTrip.distance
-				case .failure(let error):
-					showError(error: error.localizedDescription)
+					self.ongoingTrip.trip.ongoing = ongoingTrip.trip.ongoing
+				case .failure: break//showError(error: error.localizedDescription + "update trip")
 			}
 		}
 	}

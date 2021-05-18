@@ -73,12 +73,22 @@ struct EndTripResult: Codable {
 	}
 }
 
+struct Trip1: Codable {
+	var ongoing: Bool
+	
+	enum CodingKeys: String, CodingKey {
+		case ongoing = "ongoing"
+	}
+}
+
 struct CurrentTrip: Codable {
+	var trip: Trip1
 	var distance: Int
 	var distanceString: String {
 		return String(distance)
 	}
 	enum CodingKeys: String, CodingKey {
+		case trip = "trip"
 		case distance = "distance"
 	}
 }

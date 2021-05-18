@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct UnlockScooterMethods: View {
-	var mapViewModel: MapViewModel
-	var scooter: Scooter {
-		return mapViewModel.selectedScooter!
-	}
+	var scooter: Scooter
 	let unlockMethod: (UnlockType) -> Void
     
     var body: some View {
@@ -50,9 +47,9 @@ struct UnlockScooterMethods: View {
 		}.padding(.vertical)
     }
 }
-
-struct UnlockScooterMethods_Preview: PreviewProvider {
-    static var previews: some View {
-		UnlockScooterMethods(mapViewModel: MapViewModel(), unlockMethod: { _ in })
-    }
-}
+//
+//struct UnlockScooterMethods_Preview: PreviewProvider {
+//    static var previews: some View {
+//		UnlockScooterMethods(scooter:  unlockMethod: { _ in })
+//    }
+//}
