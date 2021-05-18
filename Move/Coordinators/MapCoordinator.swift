@@ -10,91 +10,99 @@ import NavigationStack
 import SwiftUI
 
 struct MapCoordinator: View {
-	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+	@StateObject var mapViewModel: MapViewModel = MapViewModel()
+	//@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
 	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
 	@ObservedObject var navigationStack: NavigationStack
 	@State var bottomContainer: AnyView
 	
 	var body: some View {
 		ZStack(alignment: .bottom) {
-			InteractiveMap(mapViewModel: mapViewModel,tripViewModel: tripViewModel, onMenu: {  menuCoordinator() }, mapDataCallback: { trip, selectedScooter in
-				if let trip = trip {
-					print(trip.scooter.id)
-					if trip.ongoing {
-						showTripDetail(selectedScooter: selectedScooter)
-					}
-				} else {
+			InteractiveMap(tripViewModel: tripViewModel, onMenu: {  menuCoordinator() }, onScooterSelected: {  selectedScooter in
 					showScooterCard(selectedScooter: selectedScooter)
 				}
-			})
+			)
 			bottomContainer
 		}
-	}
-	
-	func unlckTypeCoordinator(selectedScooter: Scooter, type: UnlockType) {
-		switch type {
-			case .code: showCode(selectedScooter: selectedScooter)
-			case .qr: showQR(selectedScooter: selectedScooter)
-			case .nfc: showNFC(selectedScooter: selectedScooter)
+		.onAppear {
+			tripViewModel.updateTrip() {
+				if let currentTrip = tripViewModel.currentTrip {
+					if currentTrip.trip.ongoing {
+						tripViewModel.currentTrip = currentTrip
+						showTripDetail()
+					}
+				}
+			}
 		}
+		.environmentObject(mapViewModel)
 	}
 	
-	func showUnlockMethods(selectedScooter: Scooter) {
-		bottomContainer = AnyView(UnlockScooterMethods(scooter: selectedScooter, unlockMethod: { unlockType in
-			unlckTypeCoordinator(selectedScooter: selectedScooter, type: unlockType)
-		}))
-	}
-	
-	func showCode(selectedScooter: Scooter) {
-		bottomContainer = AnyView(CodeUnlock(onClose: {
-			showUnlockMethods(selectedScooter: selectedScooter)
-		}, onFinished: {
-			showUnlockSuccess(selectedScooter: selectedScooter)
-		}, unlockMethod: { unlockType in
-			unlckTypeCoordinator(selectedScooter: selectedScooter, type: unlockType)
-		}))
-	}
-	
-	func showNFC(selectedScooter: Scooter) {
-		bottomContainer = AnyView(NFCUnlock(onClose: { showUnlockMethods(selectedScooter: selectedScooter)
-		}, onFinished: {
-			// start ride..
-		}, unlockMethod: { unlockType in
-			unlckTypeCoordinator(selectedScooter: selectedScooter, type: unlockType)
-		}))
-	}
-	
-	func showQR(selectedScooter: Scooter) {
-		bottomContainer = AnyView(QRUnlock(onClose: { showUnlockMethods(selectedScooter: selectedScooter)}, unlockMethod: { unlockType in
-			unlckTypeCoordinator(selectedScooter: selectedScooter, type: unlockType)
-		}))
+	func unlckTypeCoordinator(type: UnlockType) {
+		switch type {
+			case .code: showCode()
+			case .qr: showQR()
+			case .nfc: showNFC()
+		}
 	}
 	
 	func showScooterCard(selectedScooter: Scooter) {
-		bottomContainer = AnyView(ScooterCard(scooter: selectedScooter, onUnlock: {
-			showUnlockMethods(selectedScooter: selectedScooter)
+		bottomContainer = AnyView(ScooterCard( onUnlock: {
+			showUnlockMethods()
 		}, onDragDown: {
 			bottomContainer = AnyView(EmptyView())
 			mapViewModel.selectedScooter = nil
 		}))
 	}
 	
-	func showUnlockSuccess(selectedScooter: Scooter) {
-		bottomContainer = AnyView(UnlockSuccesful(onFinished: {
-			bottomContainer = AnyView(StartRide(scooter: selectedScooter,  onStartRide: {
-				showStartRide(selectedScooter: selectedScooter)
-			}))
-		}))
-	}
-
-	func showStartRide(selectedScooter: Scooter) {
-		bottomContainer = AnyView(StartRide(scooter: selectedScooter , onStartRide: {
-			showTripDetail(selectedScooter: selectedScooter)
+	
+	func showUnlockMethods() {
+		bottomContainer = AnyView(UnlockScooterMethods(unlockMethod: { unlockType in
+			unlckTypeCoordinator( type: unlockType)
 		}))
 	}
 	
-	func showTripDetail(selectedScooter: Scooter) {
-		bottomContainer = AnyView(TripDetail(tripViewModel: tripViewModel, scooter: selectedScooter, onEndRide: {
+	func showCode() {
+		guard let selectedScooter = mapViewModel.selectedScooter else {
+			return
+		}
+		bottomContainer = AnyView(CodeUnlock(unlockViewModel: UnlockViewModel(scooter: selectedScooter) , onClose: {
+			showUnlockMethods()
+		}, onFinished: {
+			showUnlockSuccess()
+		}, unlockMethod: { unlockType in
+			unlckTypeCoordinator(type: unlockType)
+		}))
+	}
+	
+	func showNFC() {
+		bottomContainer = AnyView(NFCUnlock(onClose: { showUnlockMethods()
+		}, onFinished: {
+			// start ride..
+		}, unlockMethod: { unlockType in
+			unlckTypeCoordinator(type: unlockType)
+		}))
+	}
+	
+	func showQR() {
+		bottomContainer = AnyView(QRUnlock(onClose: { showUnlockMethods()}, unlockMethod: { unlockType in
+			unlckTypeCoordinator(type: unlockType)
+		}))
+	}
+	
+	func showUnlockSuccess() {
+		bottomContainer = AnyView(UnlockSuccesful(onFinished: {
+			showStartRide()
+		}))
+	}
+
+	func showStartRide() {
+		bottomContainer = AnyView(StartRide(onStartRide: {
+			showTripDetail()
+		}))
+	}
+	
+	func showTripDetail() {
+		bottomContainer = AnyView(TripDetail(tripViewModel: tripViewModel, onEndRide: {
 			showFinishTrip()
 		}))
 	}
@@ -104,7 +112,6 @@ struct MapCoordinator: View {
 			Session.ongoingTrip = false
 			mapViewModel.selectedScooter = nil
 			mapViewModel.getAvailableScooters()
-			tripViewModel.updateTrip()
 			bottomContainer = AnyView(EmptyView())
 		}))
 	}

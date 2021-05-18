@@ -10,7 +10,7 @@ import Introspect
 import CoreLocation
 
 struct CodeUnlock: View {
-	@StateObject var unlockViewModel: UnlockViewModel = UnlockViewModel()
+	@StateObject var unlockViewModel: UnlockViewModel
 	@State private var isLoading: Bool = false
 
 	let onClose: () -> Void

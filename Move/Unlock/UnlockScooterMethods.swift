@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UnlockScooterMethods: View {
-	var scooter: Scooter
+	@EnvironmentObject var mapViewModel: MapViewModel
 	let unlockMethod: (UnlockType) -> Void
     
     var body: some View {
@@ -28,8 +28,8 @@ struct UnlockScooterMethods: View {
 		HStack(alignment: .bottom) {
             VStack(alignment: .leading) {
 				ScooterCardComponents.scooterTitle
-				ScooterCardComponents.ScooterId.init(id: scooter.id)
-				ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery)
+				ScooterCardComponents.ScooterId.init(id: mapViewModel.selectedScooter?.id ?? "")
+				ScooterCardComponents.ScooterBattery(batteryImage: mapViewModel.selectedScooter?.batteryImage ?? "", battery: mapViewModel.selectedScooter?.battery ?? 0)
 					.padding(.bottom, 10)
 				ScooterCardComponents.UnlockMiniButton(image: "bell-img", text: "Ring", showBorder: true)
 				ScooterCardComponents.UnlockMiniButton(image: "missing", text: "Missing", showBorder: true)

@@ -10,10 +10,11 @@ import SwiftUI
 struct TripDetail: View {
 	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
 	@ObservedObject var tripViewModel: TripViewModel
+	@EnvironmentObject var mapViewModel: MapViewModel
 	@State private var isExpanded: Bool = false
 	@State private var lockButtonPressed: Bool = false
 	@State private var endRidePressed: Bool = false
-	var scooter: Scooter 
+	
 	let onEndRide: () -> Void
 	
 	var body: some View {
@@ -40,7 +41,6 @@ struct TripDetail: View {
 		.onAppear {
 			tripViewModel.updateTrip()
 			DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-				print("trip updated")
 				tripViewModel.updateTrip()
 			}
 		}
@@ -52,7 +52,7 @@ struct TripDetail: View {
 		VStack(alignment: .leading, spacing: 10) {
 			ScooterCardComponents.redTopLine.frame(maxWidth: .infinity)
 			ScooterCardComponents.CardTitle(text: "Trip Details", semiBold: true)
-			ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: true)
+			ScooterCardComponents.ScooterBattery(batteryImage: mapViewModel.selectedScooter?.batteryImage ?? "", battery: mapViewModel.selectedScooter?.battery ?? 0, dimOpacity: true)
 				.padding(.vertical, 12)
 			HStack(spacing: 60) {
 				ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.tripTime, largeFrame: true)
@@ -64,7 +64,7 @@ struct TripDetail: View {
 	var expandedBody: some View {
 		VStack(spacing: 24) {
 			NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {isExpanded=false})
-			ScooterCardComponents.ExpandedCard(infoText: "Battery", imageName: scooter.batteryImage, data: "\(scooter.battery)%")
+			ScooterCardComponents.ExpandedCard(infoText: "Battery", imageName: mapViewModel.selectedScooter?.batteryImage ?? "", data: "\(mapViewModel.selectedScooter?.battery ?? 0)%")
 			ScooterCardComponents.ExpandedCard(infoText: "Travel time", imageName: "time-img", data: stopWatch.tripTime)
 			ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: tripViewModel.currentTrip?.distanceString ?? "0")
 		}

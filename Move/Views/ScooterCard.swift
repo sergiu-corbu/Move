@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ScooterCard: View {
-	var scooter: Scooter
+	@EnvironmentObject var mapViewModel: MapViewModel
 	let onUnlock: () -> Void
 	let onDragDown: () -> Void
 	
@@ -48,17 +48,17 @@ struct ScooterCard: View {
             Text("Scooter")
                 .font(.custom(FontManager.Primary.medium, size: 14))
                 .opacity(0.6)
-            Text("#\(scooter.id)")
+			Text("#\(mapViewModel.selectedScooter?.id ?? "")")
                 .font(.custom(FontManager.Primary.bold, size: 20))
                 .lineLimit(1)
             HStack {
-                Image(scooter.batteryImage)
-                Text("\(scooter.battery)%")
+                Image(mapViewModel.selectedScooter?.batteryImage ?? "")
+				Text("\(mapViewModel.selectedScooter?.battery ?? 0)%")
                     .font(.custom(FontManager.Primary.medium, size: 14))
 			}.padding(.bottom, 15)
             HStack {
 				Buttons.MapActionButton(image: "bell-img", action: {
-					API.pingScooter(scooterKey: scooter.deviceKey) { result in
+					API.pingScooter(scooterKey: mapViewModel.selectedScooter?.deviceKey ?? "") { result in
 						switch result {
 							case .success(let result):
 								showMessage(message: String(result.ping))
@@ -77,7 +77,7 @@ struct ScooterCard: View {
     var location: some View {
         HStack(alignment: .top) {
             Image("pin-img")
-            Text(scooter.addressName ?? "n/a")
+			Text(mapViewModel.selectedScooter?.addressName ?? "n/a")
                 .foregroundColor(.darkPurple)
                 .font(.custom(FontManager.Primary.medium, size: 16))
         }.padding(.top)

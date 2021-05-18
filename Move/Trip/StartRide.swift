@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct StartRide: View {
+	@EnvironmentObject var mapViewModel: MapViewModel
 	@State private var isLoading: Bool = false
-	var scooter: Scooter
+	
 	let onStartRide: () -> Void
 	
 	var body: some View {
@@ -18,13 +19,16 @@ struct StartRide: View {
 			HStack {
 				VStack(alignment: .leading, spacing: 5) {
 					ScooterCardComponents.scooterTitle
-					ScooterCardComponents.ScooterId(id: scooter.id)
-					ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: false).padding(.top, 5)
+					ScooterCardComponents.ScooterId(id: mapViewModel.selectedScooter?.id ?? "")
+					ScooterCardComponents.ScooterBattery(batteryImage: mapViewModel.selectedScooter?.batteryImage ?? "", battery: mapViewModel.selectedScooter?.battery ?? 0, dimOpacity: false).padding(.top, 5)
 				}.padding(.top, 30)
 				ScooterCardComponents.scooterImage.padding(.trailing, -24)
 			}.padding(.top)
-			Buttons.PrimaryButton(text: "Start ride", isLoading: isLoading, enabled: true, action: { onStartRide() })
-				.padding(.bottom, -10)
+			Buttons.PrimaryButton(text: "Start ride", isLoading: isLoading, enabled: true, action: {
+				onStartRide()
+				
+			})
+			.padding(.bottom, -10)
 		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)

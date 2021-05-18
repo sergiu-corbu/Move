@@ -9,13 +9,13 @@ import MapKit
 import SwiftUI
 
 struct InteractiveMap: View {
-	@ObservedObject var mapViewModel: MapViewModel
+	@EnvironmentObject var mapViewModel: MapViewModel
 	@ObservedObject var tripViewModel: TripViewModel
 	@State private var region = MKCoordinateRegion.defaultRegion
 	@State private var showAlert: Bool = false
 	
 	let onMenu: () -> Void
-	let mapDataCallback: (CurrentTrip?, Scooter) -> Void
+	let onScooterSelected: (Scooter) -> Void
 	
 	var body: some View {
 		ZStack(alignment: .top) {
@@ -25,19 +25,12 @@ struct InteractiveMap: View {
 						.onTapGesture {
 							mapViewModel.selectScooter(scooter: scooter)
 							if let currentScooter = mapViewModel.selectedScooter {
-								mapDataCallback(nil, currentScooter)
+								onScooterSelected(currentScooter)
 							}
 					}
 				}
 			}
 			.onAppear {
-				tripViewModel.updateTrip()
-				if let currentTrip = tripViewModel.currentTrip {
-					if currentTrip.trip.ongoing {
-						print("\(currentTrip.trip.scooter)")
-						mapDataCallback(currentTrip.trip ,currentTrip.trip.scooter)
-					}
-				}
 				print(Session.tokenKey as Any)
 				manageLocation()
 			}

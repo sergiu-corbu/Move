@@ -9,10 +9,11 @@ import Foundation
 import SwiftUI
 
 class TripViewModel: ObservableObject {
-	@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
+	
+	static var shared: TripViewModel = TripViewModel()
+	
 	@Published var currentTrip: CurrentTripResult?
 	@Published var tripCount: Int = 0
-	static var shared: TripViewModel = TripViewModel()
 	var allTrips: [Trip] = []
 	
 	init() {
@@ -30,27 +31,34 @@ class TripViewModel: ObservableObject {
 		})
 	}
 	
-	func updateTrip() {
+	func updateTrip(_ callback: (() -> Void)? = nil) {
 		API.updateTrip { result in
 			switch result {
 				case .success(let currentTrip): print("checking for ungoing trip")
 					self.currentTrip = currentTrip
+					callback?()
 				case .failure: print("")
 			}
 		}
 	}
 
 	func endTrip() {
-		API.endTrip(scooterID: mapViewModel.selectedScooter!.id) { result in
+		guard let scooter = self.currentTrip?.trip.scooter else {
+			return
+		}
+		API.endTrip(scooterID: scooter.id) { result in
 			switch result {
-				case .success: print("trip ended")
+				case .success: print("")
 				case .failure(let error): showError(error: error.localizedDescription)
 			}
 		}
 	}
 	
 	func lockScooter() {
-		API.lockUnlock(path: "lock", scooterID: mapViewModel.selectedScooter!.id) { result in
+		guard let scooter = self.currentTrip?.trip.scooter else {
+			return
+		}
+		API.lockUnlock(path: "lock", scooterID: scooter.id) { result in
 			switch result {
 				case .success: showMessage(message: "Scooter locked")
 				case .failure(let error): showError(error: error.localizedDescription)
@@ -59,7 +67,10 @@ class TripViewModel: ObservableObject {
 	}
 	
 	func unlockScooter() {
-		API.lockUnlock(path: "lock", scooterID: mapViewModel.selectedScooter!.id) { result in
+		guard let scooter = self.currentTrip?.trip.scooter else {
+			return
+		}
+		API.lockUnlock(path: "lock", scooterID: scooter.id) { result in
 			switch result {
 				case .success: showMessage(message: "Scooter unlocked")
 				case .failure(let error): showError(error: error.localizedDescription)

@@ -14,7 +14,6 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 	@Published var scooterLocation: String = ""
 	@Published var selectedScooter: Scooter?
 	@Published var locationManager = LocationManager()
-	static var shared: MapViewModel = MapViewModel()
 	
 	var userLocation: CLLocationCoordinate2D? {
 		didSet {
