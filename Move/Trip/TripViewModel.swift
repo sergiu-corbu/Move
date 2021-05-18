@@ -33,10 +33,9 @@ class TripViewModel: ObservableObject {
 	func updateTrip() {
 		API.updateTrip { result in
 			switch result {
-				case .success(let currentTrip):
+				case .success(let currentTrip): print("checking for ungoing trip")
 					self.currentTrip = currentTrip
-				case .failure(let error):
-					showError(error: error.localizedDescription + "update trip")
+				case .failure: print("")
 			}
 		}
 	}
@@ -44,7 +43,7 @@ class TripViewModel: ObservableObject {
 	func endTrip() {
 		API.endTrip(scooterID: mapViewModel.selectedScooter!.id) { result in
 			switch result {
-				case .success: print("")
+				case .success: print("trip ended")
 				case .failure(let error): showError(error: error.localizedDescription)
 			}
 		}

@@ -17,20 +17,18 @@ struct MapCoordinator: View {
 	
 	var body: some View {
 		ZStack(alignment: .bottom) {
-			InteractiveMap(mapViewModel: mapViewModel, onMenu: {  menuCoordinator() }, onSelectedScooter: { selectedScooter in
-				bottomContainer = AnyView(ScooterCard(scooter: selectedScooter, onUnlock: {
-					showUnlockMethods(selectedScooter: selectedScooter)
-				}))
+			InteractiveMap(mapViewModel: mapViewModel,tripViewModel: tripViewModel, onMenu: {  menuCoordinator() }, mapDataCallback: { trip, selectedScooter in
+				if let trip = trip {
+					print(trip.ongoing)
+					if trip.ongoing {
+						print("i am showing ongoing trip")
+						showTripDetail(selectedScooter: selectedScooter)
+					}
+				} else {
+					showScooterCard(selectedScooter: selectedScooter)
+				}
 			})
 			bottomContainer
-		}
-		.onAppear {
-			tripViewModel.updateTrip()
-			if let currentTrip = tripViewModel.currentTrip {
-				if currentTrip.trip.ongoing {
-					showTripDetail(selectedScooter: currentTrip.trip.scooter)
-				}
-			}
 		}
 	}
 	
@@ -73,6 +71,14 @@ struct MapCoordinator: View {
 		}))
 	}
 	
+	func showScooterCard(selectedScooter: Scooter) {
+		bottomContainer = AnyView(ScooterCard(scooter: selectedScooter, onUnlock: {
+			showUnlockMethods(selectedScooter: selectedScooter)
+		}, onDragDown: {
+			bottomContainer = AnyView(EmptyView())
+			mapViewModel.selectedScooter = nil
+		}))
+	}
 	
 	func showUnlockSuccess(selectedScooter: Scooter) {
 		bottomContainer = AnyView(UnlockSuccesful(onFinished: {
@@ -99,6 +105,7 @@ struct MapCoordinator: View {
 			Session.ongoingTrip = false
 			mapViewModel.selectedScooter = nil
 			mapViewModel.getAvailableScooters()
+			tripViewModel.updateTrip()
 			bottomContainer = AnyView(EmptyView())
 		}))
 	}

@@ -10,12 +10,19 @@ import SwiftUI
 struct ScooterCard: View {
 	var scooter: Scooter
 	let onUnlock: () -> Void
+	let onDragDown: () -> Void
 	
     var body: some View {
         ZStack {
             customBackground
             mainBody
         }
+		.gesture(
+			DragGesture()
+				.onChanged({ _ in
+					onDragDown()
+				})
+		)
 		.frame(width: 250, height: 315)
         .clipShape(RoundedRectangle(cornerRadius: 29))
 		.padding(.bottom)

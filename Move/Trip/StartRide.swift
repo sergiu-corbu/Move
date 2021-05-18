@@ -30,9 +30,3 @@ struct StartRide: View {
 		.background(SharedElements.whiteRoundedRectangle)
 	}
 }
-
-//struct StartRide_Previews: PreviewProvider {
-//    static var previews: some View {
-//		StartRide(mapViewModel: MapViewModel(), onStartRide: {})
-//    }
-//}

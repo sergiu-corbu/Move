@@ -37,19 +37,19 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 		}
 	}
 	
-	//to be deleted
     func locationGeocode(location coordinates: CLLocationCoordinate2D, _ completion: @escaping (String) -> Void) {
         let geocoder = CLGeocoder()
         let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
         geocoder.reverseGeocodeLocation(scooterLocation) { (placemarks, error) in //[weak self] (placemarks, error) in
             if let error = error { print(error); return }
             guard let placemark = placemarks?.first else { return }
-            let result = placemark.thoroughfare! + " " + placemark.subThoroughfare!
+			let streetName: String = placemark.thoroughfare ?? "n/a"
+			let streetNumber: String = placemark.subThoroughfare ?? "n/a"
+			let result = streetName + " " + streetNumber
             completion(result)
         }
     }
     
-	//to be deleted
     func selectScooter(scooter: Scooter) {
         locationGeocode(location: scooter.coordinates) { address in
             var scooter = scooter
