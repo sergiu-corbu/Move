@@ -29,7 +29,6 @@
 		EC7F0EE52630385C004FF766 /* UnlockScooterMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */; };
 		EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F226524BA30085B58A /* MapCoordinator.swift */; };
 		EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F426524BAC0085B58A /* AuthCoordinator.swift */; };
-		EC8014F826525A1D0085B58A /* ResultModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F726525A1D0085B58A /* ResultModels.swift */; };
 		EC8EDD55264C1A3C00033E9D /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC8EDD54264C1A3C00033E9D /* MessageView.xib */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
@@ -88,7 +87,6 @@
 		EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterMethods.swift; sourceTree = "<group>"; };
 		EC8014F226524BA30085B58A /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		EC8014F426524BAC0085B58A /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
-		EC8014F726525A1D0085B58A /* ResultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultModels.swift; sourceTree = "<group>"; };
 		EC8EDD54264C1A3C00033E9D /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -309,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				ECE337BB26243A51009EC353 /* Api.swift */,
-				EC8014F726525A1D0085B58A /* ResultModels.swift */,
 				EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */,
 			);
 			path = Services;
@@ -458,7 +455,6 @@
 				EC0394F7262EA9CD003668D2 /* ScooterCard.swift in Sources */,
 				ECDAF11E2643F1C4004FF94F /* TripViewModel.swift in Sources */,
 				ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */,
-				EC8014F826525A1D0085B58A /* ResultModels.swift in Sources */,
 				EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */,
 				ECDD400626242B49003C659F /* UserModel.swift in Sources */,
 				ECA7B5E8263816CD0063C883 /* CodeUnlock.swift in Sources */,

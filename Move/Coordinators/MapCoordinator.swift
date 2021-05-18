@@ -19,9 +19,8 @@ struct MapCoordinator: View {
 		ZStack(alignment: .bottom) {
 			InteractiveMap(mapViewModel: mapViewModel,tripViewModel: tripViewModel, onMenu: {  menuCoordinator() }, mapDataCallback: { trip, selectedScooter in
 				if let trip = trip {
-					print(trip.ongoing)
+					print(trip.scooter.id)
 					if trip.ongoing {
-						print("i am showing ongoing trip")
 						showTripDetail(selectedScooter: selectedScooter)
 					}
 				} else {

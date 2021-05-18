@@ -26,3 +26,27 @@ struct AuthResult: Decodable {
         case token = "token"
     }
 }
+
+struct Logout: Codable {
+	let message: String
+	enum CodingKeys: String, CodingKey {
+		case message = "message"
+	}
+}
+
+struct APIError: Error, Decodable {
+	var message: String
+	var localizedDescription: String { return message }
+	
+	enum CodingKeys: String, CodingKey {
+		case message = "message"
+	}
+}
+
+struct UploadImage: Codable {
+	let licenseKey: String
+	
+	enum CodingKeys: String, CodingKey {
+		case licenseKey = "driverLicenseKey"
+	}
+}

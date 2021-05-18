@@ -91,3 +91,11 @@ struct CurrentTripResult: Codable {
 		case distance = "distance"
 	}
 }
+
+struct Ping: Codable {
+	let ping: Bool
+	enum CodingKeys: String, CodingKey {
+		case ping = "ping"
+	}
+}
+

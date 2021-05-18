@@ -34,7 +34,7 @@ struct InteractiveMap: View {
 				tripViewModel.updateTrip()
 				if let currentTrip = tripViewModel.currentTrip {
 					if currentTrip.trip.ongoing {
-						print("\(currentTrip.trip.ongoing)")
+						print("\(currentTrip.trip.scooter)")
 						mapDataCallback(currentTrip.trip ,currentTrip.trip.scooter)
 					}
 				}
