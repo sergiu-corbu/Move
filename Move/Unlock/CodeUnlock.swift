@@ -54,7 +54,7 @@ struct DigitField: View {
 
 	var body: some View {
 		TextField("", text: $digit)
-			.keyboardType(.default)
+			.keyboardType(.numberPad)
 			.accentColor(.black)
 			.multilineTextAlignment(.center)
 			.padding(.horizontal, 5)

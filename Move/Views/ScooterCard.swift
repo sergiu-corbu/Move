@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ScooterCard: View {
+	
 	@EnvironmentObject var mapViewModel: MapViewModel
+	
 	let onUnlock: () -> Void
 	let onDragDown: () -> Void
 	
@@ -71,7 +73,8 @@ struct ScooterCard: View {
                     //open maps & navigate
                 })
             }
-        }.foregroundColor(.darkPurple)
+        }
+		.foregroundColor(.darkPurple)
     }
     
     var location: some View {

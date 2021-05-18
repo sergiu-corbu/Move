@@ -10,11 +10,13 @@ import CoreLocation
 import MapKit
 
 class LocationManager: NSObject, ObservableObject {
-	@Published var showLocation: Bool = false
+	
 	@Published var locationManager = CLLocationManager()
 	@Published var location: CLLocation?
 	@Published var cityName: String = "Allow location"
+	@Published var showLocation: Bool = false
 	@Published var showLocationAlert: Bool = false
+	
 	private let geocoder = CLGeocoder()
 	
 	override init() {
@@ -38,9 +40,12 @@ class LocationManager: NSObject, ObservableObject {
 	
 	func checkLocationAuthorization() {
 		switch locationManager.authorizationStatus {
-			case .authorizedWhenInUse, .authorizedAlways: startTrackingUserLocation()
-			case .notDetermined: locationManager.requestWhenInUseAuthorization()
-			case .denied, .restricted: break
+			case .authorizedWhenInUse, .authorizedAlways:
+				startTrackingUserLocation()
+			case .notDetermined:
+				locationManager.requestWhenInUseAuthorization()
+			case .denied, .restricted:
+				break
 			@unknown default:
 				assert(false, "handle new added case")
 				break
@@ -64,7 +69,10 @@ class LocationManager: NSObject, ObservableObject {
 				showError(error: "Unknown place")
 				return
 			}
-			if let error = error { print(error); return }
+			if let error = error {
+				showError(error: error.localizedDescription)
+				return
+			}
 			guard let placemark = placemarks?.first else { return }
 			self.cityName = placemark.locality ?? "Not found"
 		}
@@ -72,6 +80,7 @@ class LocationManager: NSObject, ObservableObject {
 }
 
 extension LocationManager: CLLocationManagerDelegate {
+	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		guard let location = locations.last else { return }
 		DispatchQueue.main.async {

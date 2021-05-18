@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserModel: Codable {
+	
     let email: String
     let username: String
     
@@ -18,6 +19,7 @@ struct UserModel: Codable {
 }
 
 struct AuthResult: Decodable {
+	
     let user: UserModel
     let token: String
     
@@ -28,6 +30,7 @@ struct AuthResult: Decodable {
 }
 
 struct Logout: Codable {
+	
 	let message: String
 	enum CodingKeys: String, CodingKey {
 		case message = "message"
@@ -35,6 +38,7 @@ struct Logout: Codable {
 }
 
 struct APIError: Error, Decodable {
+	
 	var message: String
 	var localizedDescription: String { return message }
 	
@@ -44,6 +48,7 @@ struct APIError: Error, Decodable {
 }
 
 struct UploadImage: Codable {
+	
 	let licenseKey: String
 	
 	enum CodingKeys: String, CodingKey {

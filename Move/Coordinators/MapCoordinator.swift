@@ -10,18 +10,18 @@ import NavigationStack
 import SwiftUI
 
 struct MapCoordinator: View {
-	@StateObject var mapViewModel: MapViewModel = MapViewModel()
-	//@ObservedObject var mapViewModel: MapViewModel = MapViewModel.shared
-	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
+	
 	@ObservedObject var navigationStack: NavigationStack
+	@StateObject var mapViewModel: MapViewModel = MapViewModel()
+	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
+	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
 	@State var bottomContainer: AnyView
 	
 	var body: some View {
 		ZStack(alignment: .bottom) {
-			InteractiveMap(tripViewModel: tripViewModel, onMenu: {  menuCoordinator() }, onScooterSelected: {  selectedScooter in
+			InteractiveMap(tripViewModel: tripViewModel, onMenu: { menuCoordinator() }, onScooterSelected: {  selectedScooter in
 					showScooterCard(selectedScooter: selectedScooter)
-				}
-			)
+				})
 			bottomContainer
 		}
 		.onAppear {
@@ -53,7 +53,6 @@ struct MapCoordinator: View {
 			mapViewModel.selectedScooter = nil
 		}))
 	}
-	
 	
 	func showUnlockMethods() {
 		bottomContainer = AnyView(UnlockScooterMethods(unlockMethod: { unlockType in
@@ -98,11 +97,12 @@ struct MapCoordinator: View {
 	func showStartRide() {
 		bottomContainer = AnyView(StartRide(onStartRide: {
 			showTripDetail()
+			stopWatch.startTimer()
 		}))
 	}
 	
 	func showTripDetail() {
-		bottomContainer = AnyView(TripDetail(tripViewModel: tripViewModel, onEndRide: {
+		bottomContainer = AnyView(TripDetail(stopWatch: stopWatch, tripViewModel: tripViewModel, onEndRide: {
 			showFinishTrip()
 		}))
 	}
@@ -112,16 +112,18 @@ struct MapCoordinator: View {
 			Session.ongoingTrip = false
 			mapViewModel.selectedScooter = nil
 			mapViewModel.getAvailableScooters()
+			stopWatch.resetTimer()
 			bottomContainer = AnyView(EmptyView())
 		}))
 	}
 	
 	//MARK: Menu navigation
 	func menuCoordinator() {
-		navigationStack.push(Menu(tripViewModel: tripViewModel, onBack: { navigationStack.pop() },
-					 onSeeAll: { historyCoordinator() },
-					 onAccount: { accountCoordinator() },
-					 onChangePassword: { passwordCoordinator() }))
+		navigationStack.push(Menu(tripViewModel: tripViewModel,
+					onBack: { navigationStack.pop() },
+					onSeeAll: { historyCoordinator() },
+					onAccount: { accountCoordinator() },
+					onChangePassword: { passwordCoordinator() }))
 	}
 	
 	func accountCoordinator() {

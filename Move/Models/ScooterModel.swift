@@ -19,6 +19,7 @@ struct Location: Codable {
 }
 
 struct Scooter: Identifiable, Codable {
+	
 	let id: String
     let location: Location
 	let available: Bool
@@ -31,6 +32,7 @@ struct Scooter: Identifiable, Codable {
         return CLLocationCoordinate2D(latitude: location.coordinates[1], longitude: location.coordinates[0])
     }
 	var isSelected: Bool = false
+	
     var batteryImage: String {
         var batteryImage: String = ""
         if battery <= 5 {
@@ -58,15 +60,16 @@ struct Scooter: Identifiable, Codable {
 }
 
 struct LockUnlockResult: Codable {
+	
 	let scooter: Scooter
+	
 	enum CodingKeys: String, CodingKey {
 		case scooter = "scooter"
 	}
 }
 
-
-
 struct CurrentTrip: Codable {
+	
 	var ongoing: Bool
 	let scooter: Scooter
 	
@@ -77,6 +80,7 @@ struct CurrentTrip: Codable {
 }
 
 struct CurrentTripResult: Codable {
+	
 	var trip: CurrentTrip
 	var distance: Int
 	var duration: Int
@@ -93,7 +97,9 @@ struct CurrentTripResult: Codable {
 }
 
 struct Ping: Codable {
+	
 	let ping: Bool
+	
 	enum CodingKeys: String, CodingKey {
 		case ping = "ping"
 	}

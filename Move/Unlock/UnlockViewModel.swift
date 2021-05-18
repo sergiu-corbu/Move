@@ -1,5 +1,5 @@
 //
-//  UnlockScooterViewModel.swift
+//  UnlockViewModel.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 27.04.2021.
@@ -10,10 +10,11 @@ import SwiftUI
 import UIKit
 
 class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
+	
 	@Published var unlockCode: [String] = ["", "", "", ""]
 	@Published var selectedIndex: Int = 0
+	
 	let scooter: Scooter
-//	static let shared: UnlockViewModel = UnlockViewModel()
 	let maxPins: Int = 4
 	var codeString: String = ""
 	var onFinishedUnlock: (() -> Void)?
@@ -28,7 +29,6 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 		if selectedIndex  < 3 { selectedIndex += 1 }
 		else {
 			textField.resignFirstResponder()
-			
 			API.unlockScooterPin(scooterID: scooter.id, code: codeString) { result in
 				switch result {
 					case .success:

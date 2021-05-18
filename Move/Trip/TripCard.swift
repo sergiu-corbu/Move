@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TripDetail: View {
-	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
+
+	@ObservedObject var stopWatch: StopWatchViewModel
 	@ObservedObject var tripViewModel: TripViewModel
 	@EnvironmentObject var mapViewModel: MapViewModel
 	@State private var isExpanded: Bool = false

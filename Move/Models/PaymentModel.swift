@@ -43,6 +43,7 @@ class Payment: NSObject {
 }
 
 extension Payment: PKPaymentAuthorizationControllerDelegate {
+	
 	func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationStatus) -> Void) {
 		if payment.shippingContact?.emailAddress == nil || payment.shippingContact?.name == nil {
 			paymentStatus = .failure

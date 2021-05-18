@@ -10,6 +10,7 @@ import CoreLocation
 import MapKit
 
 class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
+	
 	@Published var allScooters: [Scooter] = []
 	@Published var scooterLocation: String = ""
 	@Published var selectedScooter: Scooter?
@@ -21,17 +22,29 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 		}
 	}
 	
+	func selectScooter(scooter: Scooter) {
+		locationGeocode(location: scooter.coordinates) { address in
+			var scooter = scooter
+			scooter.addressName = address
+			self.selectedScooter = scooter
+		}
+	}
+	
 	private func reloadData() {
 		getAvailableScooters()
-		DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: { self.reloadData() })
+		DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
+			self.reloadData()
+		})
 	}
 	
 	func getAvailableScooters() {
 		guard let location = self.userLocation else { return }
 		API.getScooters(coordinates: location) { result in
 			switch result {
-				case .success(let scooters): self.allScooters = scooters
-				case .failure(let error): showError(error: error.localizedDescription)
+				case .success(let scooters):
+					self.allScooters = scooters
+				case .failure(let error):
+					showError(error: error.localizedDescription)
 			}
 		}
 	}
@@ -40,20 +53,15 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
         let geocoder = CLGeocoder()
         let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
         geocoder.reverseGeocodeLocation(scooterLocation) { (placemarks, error) in //[weak self] (placemarks, error) in
-            if let error = error { print(error); return }
+            if let error = error {
+				showError(error: error.localizedDescription)
+				return
+			}
             guard let placemark = placemarks?.first else { return }
 			let streetName: String = placemark.thoroughfare ?? "n/a"
 			let streetNumber: String = placemark.subThoroughfare ?? "n/a"
 			let result = streetName + " " + streetNumber
             completion(result)
-        }
-    }
-    
-    func selectScooter(scooter: Scooter) {
-        locationGeocode(location: scooter.coordinates) { address in
-            var scooter = scooter
-            scooter.addressName = address
-            self.selectedScooter = scooter
         }
     }
 }

@@ -11,13 +11,10 @@ struct StopWatch {
 }
 
 class StopWatchViewModel: ObservableObject {
+	
     @Published var stopWatch: StopWatch = StopWatch()
     var isRunning: Bool = false
 	var tripTime: String = "00:00"
-	
-	init() {
-		self.startTimer()
-	}
 	
     func startTimer() {
         isRunning = true
@@ -28,6 +25,12 @@ class StopWatchViewModel: ObservableObject {
 				self.startTimer()
 			}
 		}
+	}
+	
+	func resetTimer() {
+		isRunning = false
+		tripTime = "00:00"
+		stopWatch.time = 0
 	}
 }
 

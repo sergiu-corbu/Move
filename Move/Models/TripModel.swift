@@ -8,6 +8,7 @@ import Foundation
 import CoreLocation
 
 struct Trip: Codable {
+	
 	let startStreet: [Double]
 	let endStreet: [Double]
 	let duration: Int
@@ -64,8 +65,8 @@ struct Trip: Codable {
 	}
 }
 
-
-struct TripDownload: Codable {
+struct TripResult: Codable {
+	
 	var trips: [Trip]
 	var totalTrips: Int
 	
@@ -77,6 +78,7 @@ struct TripDownload: Codable {
 
 
 struct TripDecoding: Codable {
+	
 	let path: [[Double]]
 	let startTime: String
 	let ongoing: Bool
@@ -87,7 +89,9 @@ struct TripDecoding: Codable {
 		case ongoing = "ongoing"
 	}
 }
+
 struct StartTrip: Codable {
+	
 	let trip: TripDecoding
 	
 	enum CodingKeys: String, CodingKey {
@@ -96,9 +100,11 @@ struct StartTrip: Codable {
 }
 
 struct EndTripResult: Codable {
+	
 	let trip: EndTrip
 	
 	struct EndTrip: Codable {
+		
 		let startTime: String
 		let endTime: String
 		let ongoing: Bool

@@ -5,10 +5,11 @@
 //  Created by Sergiu Corbu on 4/11/21.
 //
 
-import MapKit
 import SwiftUI
+import MapKit
 
 struct InteractiveMap: View {
+	
 	@EnvironmentObject var mapViewModel: MapViewModel
 	@ObservedObject var tripViewModel: TripViewModel
 	@State private var region = MKCoordinateRegion.defaultRegion
@@ -18,8 +19,9 @@ struct InteractiveMap: View {
 	let onScooterSelected: (Scooter) -> Void
 	
 	var body: some View {
+		
 		ZStack(alignment: .top) {
-			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.locationManager.showLocation, annotationItems: !Session.ongoingTrip ? mapViewModel.allScooters.filter({$0.available == true }) : [] ) { scooter in
+			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.locationManager.showLocation, annotationItems: !Session.ongoingTrip ? mapViewModel.allScooters.filter({$0.available == true }) : []) { scooter in
 				MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: scooter.location.coordinates[1], longitude: scooter.location.coordinates[0])) {
 					Image(scooter.isSelected ? "pin-fill-active-img" : "pin-fill-img")
 						.onTapGesture {
@@ -35,6 +37,7 @@ struct InteractiveMap: View {
 				manageLocation()
 			}
 			.edgesIgnoringSafeArea(.all)
+			
 			SharedElements.MapBarItems(menuAction: { onMenu() }, text: mapViewModel.locationManager.cityName, locationEnabled: mapViewModel.locationManager.showLocation, centerLocation: { centerViewOnUserLocation() } )
 		}
 		.alert(isPresented: $showAlert) { alertView }

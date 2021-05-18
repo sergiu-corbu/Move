@@ -39,20 +39,6 @@ class API {
 		}
 	}
 	
-	static func uploadLicense(selectedImage: Image, _ callback: @escaping (Result<UploadImage>) -> Void) {
-		requestBody { header in
-			let path = baseUrl + "users/upload"
-			let uiImage = selectedImage.uiImage()
-			let imageData = uiImage.jpegData(compressionQuality: 0.85)
-			let parameters = ["file": imageData!]
-			AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
-				let result: Result<UploadImage> = handleResponse(response: response)
-				print(result)
-				callback(result)
-			}
-		}
-	}
-	
 	static func registerUser(email: String, password: String, username: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
 		let path = baseUrl + "users/register"
 		let parameters = ["email": email, "username": username, "password": password]
@@ -92,7 +78,7 @@ class API {
 		}
 	}
 	
-	static func downloadTrips(_ callback: @escaping (Result<TripDownload>) -> Void) {
+	static func downloadTrips(_ callback: @escaping (Result<TripResult>) -> Void) {
 		/*guard let token = Session.tokenKey else {
 			callback(.failure(APIError(message: "invalid token")))
 			return

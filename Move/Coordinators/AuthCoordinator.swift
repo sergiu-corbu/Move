@@ -31,17 +31,17 @@ struct AuthCoordinator: View {
 	
 	func uploadImage(image: Image) {
 		isLoading = true
-		API.uploadLicense(selectedImage: image) { result in
-			switch result {
-				case .success(let result):
-					Session.licenseVerified = true
-					navigationStack.push(ValidationSuccess(onFindScooters: { mapCoodinator() }))
-					print(result)
-				case .failure(let error):
-					print(error)
-			}
-			isLoading = false
-		}
+//		API.uploadLicense(selectedImage: image) { result in
+//			switch result {
+//				case .success(let result):
+//					Session.licenseVerified = true
+//					navigationStack.push(ValidationSuccess(onFindScooters: { mapCoodinator() }))
+//					print(result)
+//				case .failure(let error):
+//					print(error)
+//			}
+//			isLoading = false
+//		}
 //		DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
 //			isLoading = false
 //			navigationStack.push(ValidationSuccess(onFindScooters: { mapCoodinator() }))
