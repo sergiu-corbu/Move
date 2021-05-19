@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct UnlockScooterMethods: View {
+	
 	@EnvironmentObject var mapViewModel: MapViewModel
 	let unlockMethod: (UnlockType) -> Void
-    
+	
     var body: some View {
         ZStack(alignment: .top) {
 			ZStack {
@@ -18,10 +19,13 @@ struct UnlockScooterMethods: View {
 					ScooterCardComponents.CardTitle(text: "You can unlock this scooter\nthrough theese methods:")
 					scooterInfo
 					unlockButtons
-				}.padding(.horizontal, 24)
-			}.padding(.top, 24)
+				}
+				.padding(.horizontal, 24)
+			}
+			.padding(.top, 24)
 			ScooterCardComponents.redTopLine
-		}.background(SharedElements.whiteRoundedRectangle)
+		}
+		.background(SharedElements.whiteRoundedRectangle)
     }
 
     private var scooterInfo: some View {
@@ -31,8 +35,16 @@ struct UnlockScooterMethods: View {
 				ScooterCardComponents.ScooterId.init(id: mapViewModel.selectedScooter?.id ?? "")
 				ScooterCardComponents.ScooterBattery(batteryImage: mapViewModel.selectedScooter?.batteryImage ?? "", battery: mapViewModel.selectedScooter?.battery ?? 0)
 					.padding(.bottom, 10)
-				ScooterCardComponents.UnlockMiniButton(image: "bell-img", text: "Ring", showBorder: true)
-				ScooterCardComponents.UnlockMiniButton(image: "missing", text: "Missing", showBorder: true)
+				ScooterCardComponents.UnlockMiniButton(image: "bell-img", text: "Ring", showBorder: true, action: {
+					API.pingScooter(scooterKey: mapViewModel.selectedScooter!.id) { result in
+						switch result {
+							case .success: print("")
+							case .failure(let error):
+								showError(error: error.localizedDescription)
+						}
+					}
+				})
+				ScooterCardComponents.UnlockMiniButton(image: "missing", text: "Missing", showBorder: true, action: { })
             }
 			ScooterCardComponents.scooterImage
             Spacer()
@@ -44,12 +56,7 @@ struct UnlockScooterMethods: View {
 			Buttons.UnlockButton(text: "NFC", action: { unlockMethod(UnlockType.nfc) })
 			Buttons.UnlockButton(text: "QR", action: { unlockMethod(UnlockType.qr) })
 			Buttons.UnlockButton(text: "123", action: { unlockMethod(UnlockType.code) })
-		}.padding(.vertical)
+		}
+		.padding(.vertical)
     }
 }
-//
-//struct UnlockScooterMethods_Preview: PreviewProvider {
-//    static var previews: some View {
-//		UnlockScooterMethods(scooter:  unlockMethod: { _ in })
-//    }
-//}

@@ -52,10 +52,12 @@ struct FinishTrip: View {
 	}
 	
 	private func initiatePayment() {
+		isLoading = true
 		self.paymentHander.startPayment { (success) in
 			if success { showMessage(message: "Payment done")}
 			else { showError(error: "Paymant Failed")}
-			DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: { onFinish() })
+			isLoading = false
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { onFinish() })
 		}
 	}
 }

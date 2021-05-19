@@ -35,7 +35,7 @@ struct NFCUnlock: View {
 				UnlockScooterComponents.Title(title: "NFC unlock")
 				UnlockScooterComponents.SubTitle(subTitle: "Hold your phone close to the NFC Tag\nlocated on top of the handlebar of\nyour scooter.")
 				Spacer()
-				ScooterCardComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "123", action: { unlockMethod(.code) }))
+				UnlockScooterComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "123", action: { unlockMethod(.code) }))
 			}
 		}
 		.padding(.horizontal, 24)
@@ -57,11 +57,5 @@ struct NFCCircle: View {
 			.clipShape(Circle())
 			.frame(width: width, height: height)
 			.scaleEffect(noAnimation ? 1 : ( animate ? 1.5 : 1))
-	}
-}
-
-struct NFCUnlock_Previews: PreviewProvider {
-	static var previews: some View {
-		NFCUnlock(onClose: {}, onFinished: {}, unlockMethod: { _ in})
 	}
 }

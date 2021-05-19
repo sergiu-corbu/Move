@@ -33,7 +33,7 @@ struct ChangePassword: View {
         VStack(alignment: .leading, spacing: 20) {
 			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.oldPassword.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
 			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.newPassword.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
-			CustomField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: FieldType.confirmNewPassword.rawValue, textColor: Color.darkPurple, isSecuredField: true, upperTextOpacity: true)
+			CustomField(input: $userViewModel.newPassword, activeField: userViewModel.isActive, textField: FieldType.confirmNewPassword.rawValue, textColor: Color.darkPurple, isSecuredField: true, upperTextOpacity: true)
         }.padding(.top, 40)
     }
 }

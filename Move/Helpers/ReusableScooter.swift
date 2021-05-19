@@ -53,27 +53,7 @@ struct ScooterCardComponents {
 			}.padding(.top, -0.5)
 		}
 	}
-	
-	struct UnlockRow: View {
-		let unlockButton1: Buttons.UnlockOptionButton
-		let unlockButton2: Buttons.UnlockOptionButton
-		var body: some View {
-			VStack {
-				Text("Alternately you can unlock using")
-					.font(.custom(FontManager.Primary.medium, size: 16))
-				HStack {
-					Spacer()
-					unlockButton1
-					Text("or")
-						.font(.custom(FontManager.Primary.bold, size: 16))
-						.padding(.horizontal, 20)
-					unlockButton2
-					Spacer()
-				}.padding(.vertical, 20)
-			}.foregroundColor(.white)
-		}
-	}
-		
+			
 	struct CardTitle: View {
 		let text: String
 		var semiBold: Bool = false
@@ -91,10 +71,11 @@ struct ScooterCardComponents {
 		let image: String
 		let text: String
 		var showBorder: Bool = false
+		let action: () -> Void
 		
 		var body: some View {
 			HStack {
-				Buttons.MapActionButton(image: image, action:{}, border: showBorder)
+				Buttons.MapActionButton(image: image, action:{ action() }, border: showBorder)
 				Text(text).font(.custom(FontManager.Primary.medium, size: 14))
 			}.padding(.leading, -1)
 		}
@@ -243,15 +224,36 @@ struct UnlockScooterComponents {
 		var purpleColor: Bool = false
 		var customAlignment: Bool = false
 		var customOpacity: Bool = false
+		var fullOpacity: Bool = false
 		
 		var body: some View {
 			Text(subTitle)
 				.font(.custom(FontManager.Primary.medium, size: 16))
 				.foregroundColor(purpleColor ? .darkPurple : .white)
 				.multilineTextAlignment(customAlignment ? .leading : .center)
-				.opacity(customOpacity ? 0.7 : 0.6)
+				.opacity(fullOpacity ? 1 : (customOpacity ? 0.7 : 0.6))
 				.lineSpacing(5)
 				.fixedSize(horizontal: false, vertical: true)
+		}
+	}
+	
+	struct UnlockRow: View {
+		let unlockButton1: Buttons.UnlockOptionButton
+		let unlockButton2: Buttons.UnlockOptionButton
+		var body: some View {
+			VStack {
+				Text("Alternately you can unlock using")
+					.font(.custom(FontManager.Primary.medium, size: 16))
+				HStack {
+					Spacer()
+					unlockButton1
+					Text("or")
+						.font(.custom(FontManager.Primary.bold, size: 16))
+						.padding(.horizontal, 20)
+					unlockButton2
+					Spacer()
+				}.padding(.vertical, 20)
+			}.foregroundColor(.white)
 		}
 	}
 }

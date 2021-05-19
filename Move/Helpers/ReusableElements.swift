@@ -70,6 +70,7 @@ struct NavigationBar: View {
 	var flashLight: Bool?
 	var backButton: String?
 	var action: (() -> Void)?
+	var action2: (() -> Void)?
 	
 	var body: some View {
 		ZStack {
@@ -88,11 +89,13 @@ struct NavigationBar: View {
 						.frame(width: 40, height: 40)
 				}
 			}
-			if flashLight == true {
+			if flashLight == true && action2 != nil {
 				HStack {
 					Spacer()
-					Image("bulb-img")
-						.padding(.trailing, 15)
+					Button(action: { action2!() }, label: {
+						Image("bulb-img")
+							.padding(.trailing, 15)
+					})
 				}
 			}
 			if let action = action, let backButton = backButton {

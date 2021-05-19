@@ -13,7 +13,7 @@ struct ContentView: View {
 	
 	var body: some View {
 		
-		if Session.tokenKey != nil && Session.licenseVerified {
+		if Session.tokenKey != nil && Session.licenseVerified && !Session.userSuspended {
 			NavigationStackView(navigationStack: navigationStack) {
 				MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView()))
 			} } else {

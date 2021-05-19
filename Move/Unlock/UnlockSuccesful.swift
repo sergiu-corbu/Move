@@ -8,22 +8,21 @@
 import SwiftUI
 
 struct UnlockSuccesful: View {
+	
 	let onFinished: () -> Void
 	
     var body: some View {
-        ZStack {
-			SharedElements.purpleBackground
-            VStack {
-				UnlockScooterComponents.Title(title: "Unlock\nsuccessful")
-					.padding(.top, 50)
-				Spacer()
-				SharedElements.checkmarkImage
-					.padding(.bottom, 50)
-				UnlockScooterComponents.SubTitle(subTitle: "Please respect all the driving regulations\nand other participants in traffic while using\nour scooters.")
-					.padding(.top, 50)
-                Spacer()
-            }
-        }
+		VStack {
+			UnlockScooterComponents.Title(title: "Unlock\nsuccessful")
+				.frame(maxWidth: .infinity)
+				.padding(.bottom, 50)
+			SharedElements.checkmarkImage
+				.padding(.vertical, 50)
+			UnlockScooterComponents.SubTitle(subTitle: "Please respect all the driving regulations\nand other participants in traffic while using\nour scooters.")
+				.padding(.top, 70)
+		}
+		.frame(maxHeight: .infinity)
+		.background(SharedElements.purpleBackground)
 		.onAppear {
 			DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { onFinished() })
 		}

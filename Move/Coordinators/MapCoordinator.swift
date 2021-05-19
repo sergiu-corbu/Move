@@ -13,7 +13,7 @@ struct MapCoordinator: View {
 	
 	@ObservedObject var navigationStack: NavigationStack
 	@StateObject var mapViewModel: MapViewModel = MapViewModel()
-	@ObservedObject var tripViewModel: TripViewModel = TripViewModel.shared
+	@StateObject var tripViewModel: TripViewModel = TripViewModel()
 	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
 	@State var bottomContainer: AnyView
 	

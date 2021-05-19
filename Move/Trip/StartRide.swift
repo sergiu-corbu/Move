@@ -10,7 +10,6 @@ import SwiftUI
 struct StartRide: View {
 	
 	@EnvironmentObject var mapViewModel: MapViewModel
-	@State private var isLoading: Bool = false
 	
 	let onStartRide: () -> Void
 	
@@ -26,11 +25,10 @@ struct StartRide: View {
 				}
 				.padding(.top, 30)
 				ScooterCardComponents.scooterImage.padding(.trailing, -24)
-			}.padding(.top)
-			Buttons.PrimaryButton(text: "Start ride", isLoading: isLoading, enabled: true, action: {
-				onStartRide()
-			})
-			.padding(.bottom, -10)
+			}
+			.padding(.top)
+			Buttons.PrimaryButton(text: "Start ride", enabled: true, action: { onStartRide() })
+				.padding(.bottom, -10)
 		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)

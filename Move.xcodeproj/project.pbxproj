@@ -29,6 +29,9 @@
 		EC7F0EE52630385C004FF766 /* UnlockScooterMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */; };
 		EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F226524BA30085B58A /* MapCoordinator.swift */; };
 		EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F426524BAC0085B58A /* AuthCoordinator.swift */; };
+		EC8A841C2654164D00A75BF0 /* QRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A841B2654164D00A75BF0 /* QRViewModel.swift */; };
+		EC8A841E2654399100A75BF0 /* MKMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A841D2654399100A75BF0 /* MKMap.swift */; };
+		EC8A842226543DA500A75BF0 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8A842126543DA500A75BF0 /* ExternalAccessory.framework */; };
 		EC8EDD55264C1A3C00033E9D /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC8EDD54264C1A3C00033E9D /* MessageView.xib */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
@@ -87,6 +90,9 @@
 		EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterMethods.swift; sourceTree = "<group>"; };
 		EC8014F226524BA30085B58A /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		EC8014F426524BAC0085B58A /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		EC8A841B2654164D00A75BF0 /* QRViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewModel.swift; sourceTree = "<group>"; };
+		EC8A841D2654399100A75BF0 /* MKMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMap.swift; sourceTree = "<group>"; };
+		EC8A842126543DA500A75BF0 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		EC8EDD54264C1A3C00033E9D /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC8A842226543DA500A75BF0 /* ExternalAccessory.framework in Frameworks */,
 				ECDD3FE626242951003C659F /* NavigationStack in Frameworks */,
 				ECDD3FE226242943003C659F /* Alamofire in Frameworks */,
 				EC0EDD5226369312006B6D9D /* Introspect in Frameworks */,
@@ -169,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FFD26242985003C659F /* InteractiveMap.swift */,
+				EC8A841D2654399100A75BF0 /* MKMap.swift */,
 				ECA49AB72631F58700D9D701 /* MapViewModel.swift */,
 				EC0A943A264EC56800F53EE6 /* LocationManager.swift */,
 			);
@@ -217,14 +225,23 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		EC8A842026543DA500A75BF0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EC8A842126543DA500A75BF0 /* ExternalAccessory.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ECA7B5EA263816D30063C883 /* Unlock */ = {
 			isa = PBXGroup;
 			children = (
-				ECA7B5872637E6D00063C883 /* QRUnlock.swift */,
 				ECA7B5E7263816CD0063C883 /* CodeUnlock.swift */,
+				ECA7B5872637E6D00063C883 /* QRUnlock.swift */,
 				ECE0D233263A8CE7004C448E /* NFCUnlock.swift */,
 				EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */,
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
+				EC8A841B2654164D00A75BF0 /* QRViewModel.swift */,
 				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
 			);
 			path = Unlock;
@@ -235,6 +252,7 @@
 			children = (
 				ECDD3FBC26242836003C659F /* Move */,
 				ECDD3FBB26242836003C659F /* Products */,
+				EC8A842026543DA500A75BF0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -422,6 +440,7 @@
 				ECB7CDBC26295CBE0081B8F4 /* ImagePickerController.swift in Sources */,
 				ECE0D236263AC810004C448E /* TripCard.swift in Sources */,
 				EC16141A2637117C00931AF0 /* History.swift in Sources */,
+				EC8A841E2654399100A75BF0 /* MKMap.swift in Sources */,
 				ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */,
 				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
@@ -452,6 +471,7 @@
 				ECDD400026242985003C659F /* InteractiveMap.swift in Sources */,
 				EC0A943B264EC56800F53EE6 /* LocationManager.swift in Sources */,
 				ECDD3FC226242836003C659F /* ContentView.swift in Sources */,
+				EC8A841C2654164D00A75BF0 /* QRViewModel.swift in Sources */,
 				EC0394F7262EA9CD003668D2 /* ScooterCard.swift in Sources */,
 				ECDAF11E2643F1C4004FF94F /* TripViewModel.swift in Sources */,
 				ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */,
@@ -585,6 +605,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Move/Preview Content\"";
 				DEVELOPMENT_TEAM = 2T3LUD4AA9;
@@ -607,6 +628,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Move/Preview Content\"";
 				DEVELOPMENT_TEAM = 2T3LUD4AA9;

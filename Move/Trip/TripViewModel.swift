@@ -10,8 +10,6 @@ import SwiftUI
 
 class TripViewModel: ObservableObject {
 	
-	static var shared: TripViewModel = TripViewModel()
-	
 	@Published var currentTrip: CurrentTripResult?
 	@Published var tripCount: Int = 0
 	

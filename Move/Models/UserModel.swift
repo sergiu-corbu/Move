@@ -55,3 +55,7 @@ struct UploadImage: Codable {
 		case licenseKey = "driverLicenseKey"
 	}
 }
+//
+//struct ResetPassword: Codable {
+//
+//}

@@ -12,6 +12,7 @@ struct ResetPassword: View {
     @State private var showAlert: Bool = false
     
     let onBack: () -> Void
+	let onFinish: () -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -20,11 +21,7 @@ struct ResetPassword: View {
 			AuthComponents.BigTitle(text: "Reset password")
             inputField
 			Buttons.PrimaryButton(text: "Reset Password", enabled: userViewModel.validatePasswords, action: {
-				if userViewModel.validatePasswords {
-					userViewModel.password = ""
-					userViewModel.repeatPassword = ""
-				}
-				else { showError(error: "Couldn't reset") }
+				buttonAction()
 			})
 			.padding(.top, 20)
 			.alert(isPresented: $showAlert) {
@@ -39,14 +36,27 @@ struct ResetPassword: View {
 
     var inputField: some View {
         VStack {
-			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.newPassword.rawValue, isSecuredField: true, error: userViewModel.passwordError)
-			CustomField(input: $userViewModel.repeatPassword, activeField: userViewModel.isActive, textField: FieldType.confirmNewPassword.rawValue, isSecuredField: true, error: userViewModel.repeatPasswordError)
+			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.oldPassword.rawValue, isSecuredField: true, error: userViewModel.passwordError)
+			CustomField(input: $userViewModel.newPassword, activeField: userViewModel.isActive, textField: FieldType.newPassword.rawValue, isSecuredField: true, error: userViewModel.newPasswordError)
         }
     }
+	
+	private func buttonAction() {
+		if userViewModel.validatePasswords {
+			userViewModel.resetPasswordCall {
+				onFinish()
+			}
+		}
+		else {
+			userViewModel.password = ""
+			userViewModel.newPassword = ""
+			showError(error: "Couldn't reset")
+		}
+	}
 }
 
 struct ResetPassword_Previews: PreviewProvider {
     static var previews: some View {
-        ResetPassword(onBack: {})
+		ResetPassword(onBack: {}, onFinish: {})
     }
 }

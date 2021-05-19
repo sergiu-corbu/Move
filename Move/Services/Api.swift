@@ -39,6 +39,8 @@ class API {
 		}
 	}
 	
+	//MARK: User
+	
 	static func registerUser(email: String, password: String, username: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
 		let path = baseUrl + "users/register"
 		let parameters = ["email": email, "username": username, "password": password]
@@ -56,6 +58,27 @@ class API {
 			callback(result)
 		}
 	}
+	
+	static func resetPassword(oldPassword: String, newPassword: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
+		let path = baseUrl + "users/reset"
+		let parameters = ["oldpassword": oldPassword, "newpassword": newPassword]
+		AF.request(path, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseData { response in
+			let result: Result<AuthResult> = handleResponse(response: response)
+			callback(result)
+		}
+	}
+	
+	static func logout(_ callback: @escaping (Result<Logout>) -> Void) {
+		requestBody { header in
+			let path = baseUrl + "users/logout"
+			AF.request(path, method: .delete, headers: header).validate().responseData { response in
+				let result: Result<Logout> = handleResponse(response: response)
+				callback(result)
+			}
+		}
+	}
+	
+	//MARK: Scooter
 	
     static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void) {
 		let path = baseUrl + "scooters/inradius?longitude=\(coordinates.longitude)&latitude=\(coordinates.latitude)"
@@ -77,6 +100,20 @@ class API {
 			}
 		}
 	}
+	
+	static func pingScooter(scooterKey: String, _ callback: @escaping (Result<Ping>) -> Void) {
+		requestBody { header in
+			let path = baseUrl + "users/ping/"
+			let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
+			let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "deviceKey": scooterKey]
+			AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
+				let result: Result<Ping> = handleResponse(response: response)
+				callback(result)
+			}
+		}
+	}
+	
+	//MARK: Trip
 	
 	static func downloadTrips(_ callback: @escaping (Result<TripResult>) -> Void) {
 		/*guard let token = Session.tokenKey else {
@@ -140,28 +177,6 @@ class API {
 			let path = baseUrl + "bookings/ongoing"
 			AF.request(path, method: .get, headers: header).validate().responseData { response in
 				let result: Result<CurrentTripResult> = handleResponse(response: response)
-				callback(result)
-			}
-		}
-	}
-	
-	static func logout(_ callback: @escaping (Result<Logout>) -> Void) {
-		requestBody { header in
-			let path = baseUrl + "users/logout"
-			AF.request(path, method: .delete, headers: header).validate().responseData { response in
-				let result: Result<Logout> = handleResponse(response: response)
-				callback(result)
-			}
-		}
-	}
-	
-	static func pingScooter(scooterKey: String, _ callback: @escaping (Result<Ping>) -> Void) {
-		requestBody { header in
-			let path = baseUrl + "users/ping/"
-			let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
-			let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "deviceKey": scooterKey]
-			AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
-				let result: Result<Ping> = handleResponse(response: response)
 				callback(result)
 			}
 		}

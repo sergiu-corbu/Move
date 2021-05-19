@@ -41,6 +41,7 @@ struct TripDetail: View {
 		}
 		.onAppear {
 			tripViewModel.updateTrip()
+			print(mapViewModel.selectedScooter?.id ?? "no scooter selected")
 			DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
 				tripViewModel.updateTrip()
 			}

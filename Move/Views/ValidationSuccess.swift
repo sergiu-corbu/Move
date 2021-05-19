@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ValidationSuccess: View {
+	
+	@State private var isLoading: Bool = false
     let onFindScooters: () -> Void
     
     var body: some View {
@@ -15,7 +17,11 @@ struct ValidationSuccess: View {
 			SharedElements.checkmarkImage.padding(.top, 70)
 			UnlockScooterComponents.Title(title: "We've succesfully validated your driving license!")
 			Spacer()
-			Buttons.PrimaryButton(text: "Find scooters", enabled: true, action: { onFindScooters() })
+			Buttons.PrimaryButton(text: "Find scooters",isLoading: isLoading, enabled: true, action: {
+				isLoading = true
+				onFindScooters()
+				isLoading = false
+			})
         }
 		.multilineTextAlignment(.center)
 		.padding(.horizontal, 24)

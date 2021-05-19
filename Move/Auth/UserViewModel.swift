@@ -17,13 +17,8 @@ class UserViewModel: ObservableObject {
 	@Published var passwordError = ""
     
 	//MARK: Reset password
-    @Published var repeatPassword: String = "" {
-		didSet {
-			if password != repeatPassword { repeatPasswordError = "Passwords doesn't match!" }
-			else { repeatPasswordError = "" }
-		}
-    }
-	@Published var repeatPasswordError: String = ""
+	@Published var newPassword: String = ""
+	@Published var newPasswordError: String = ""
 	@Published var isActive: Bool = false
 	@Published var isLoading: Bool = false
 	
@@ -76,6 +71,17 @@ class UserViewModel: ObservableObject {
 		}
 	}
 	
+	func resetPasswordCall(_ callback: @escaping () -> Void) {
+		API.resetPassword(oldPassword: password, newPassword: newPassword) { result in
+			switch result {
+				case .success:
+					showMessage(message: "Password reset successful")
+				case .failure(let error):
+					showError(error: error.localizedDescription)
+			}
+		}
+	}
+	
 	private func clearFields() {
 		username = ""
 		password = ""
@@ -89,5 +95,5 @@ class UserViewModel: ObservableObject {
     var allfieldsValidatedRegister: Bool { return emailError.isEmpty && passwordError.isEmpty }
 	var allfieldsCompletedLogin: Bool { return email != "" && password.count > 5 && isLoading == false }
     var allfieldsValidatedLogin: Bool { return emailError.isEmpty && passwordError.isEmpty }
-	var validatePasswords: Bool { return password != "" && repeatPassword != "" && passwordError.isEmpty && repeatPasswordError.isEmpty }
+	var validatePasswords: Bool { return password != "" && newPassword != "" && passwordError.isEmpty && newPasswordError.isEmpty }
 }
