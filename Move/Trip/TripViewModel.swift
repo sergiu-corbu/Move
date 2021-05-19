@@ -10,8 +10,11 @@ import SwiftUI
 
 class TripViewModel: ObservableObject {
 	
-	@Published var currentTrip: CurrentTripResult?
 	@Published var tripCount: Int = 0
+	@Published var currentTripTime: Int = 0
+	@Published var currentTripDistance: Int = 0
+	@Published var ongoing: Bool = false
+	@Published var currentTripScooter: Scooter?
 	
 	var allTrips: [Trip] = []
 	
@@ -20,7 +23,7 @@ class TripViewModel: ObservableObject {
 	}
 	
 	func unwrapScooter(_ callback: @escaping (Scooter) -> Void) {
-		guard let scooter = self.currentTrip?.trip.scooter else {
+		guard let scooter = self.currentTripScooter else {
 			return
 		}
 		callback(scooter)
@@ -41,7 +44,10 @@ class TripViewModel: ObservableObject {
 		API.updateTrip { result in
 			switch result {
 				case .success(let currentTrip):
-					self.currentTrip = currentTrip
+					self.currentTripDistance = currentTrip.distance
+					self.currentTripScooter = currentTrip.trip.scooter
+					self.currentTripTime = currentTrip.duration
+					self.ongoing = currentTrip.trip.ongoing
 					callback?()
 				case .failure: break
 			}

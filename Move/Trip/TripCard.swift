@@ -9,12 +9,11 @@ import SwiftUI
 
 struct TripDetail: View {
 
+	@EnvironmentObject var tripViewModel: TripViewModel
 	@ObservedObject var stopWatch: StopWatchViewModel
-	@ObservedObject var tripViewModel: TripViewModel
-	@EnvironmentObject var mapViewModel: MapViewModel
+	@State private var buttonPressed: Bool = false
 	@State private var isExpanded: Bool = false
-	@State private var lockButtonPressed: Bool = false
-	@State private var endRidePressed: Bool = false
+	var scooter: Scooter
 	
 	let onEndRide: () -> Void
 	
@@ -41,7 +40,7 @@ struct TripDetail: View {
 		}
 		.onAppear {
 			tripViewModel.updateTrip()
-			print(mapViewModel.selectedScooter?.id ?? "no scooter selected")
+			print(scooter.id)
 			DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
 				tripViewModel.updateTrip()
 			}
@@ -54,11 +53,11 @@ struct TripDetail: View {
 		VStack(alignment: .leading, spacing: 10) {
 			ScooterCardComponents.redTopLine.frame(maxWidth: .infinity)
 			ScooterCardComponents.CardTitle(text: "Trip Details", semiBold: true)
-			ScooterCardComponents.ScooterBattery(batteryImage: mapViewModel.selectedScooter?.batteryImage ?? "", battery: mapViewModel.selectedScooter?.battery ?? 0, dimOpacity: true)
+			ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery, dimOpacity: true)
 				.padding(.vertical, 12)
 			HStack(spacing: 60) {
 				ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.tripTime, largeFrame: true)
-				ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.currentTrip?.distanceString ?? "0")
+				ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: String(tripViewModel.currentTripDistance))
 			}
 		}
 	}
@@ -66,30 +65,23 @@ struct TripDetail: View {
 	var expandedBody: some View {
 		VStack(spacing: 24) {
 			NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {isExpanded=false})
-			ScooterCardComponents.ExpandedCard(infoText: "Battery", imageName: mapViewModel.selectedScooter?.batteryImage ?? "", data: "\(mapViewModel.selectedScooter?.battery ?? 0)%")
+			ScooterCardComponents.ExpandedCard(infoText: "Battery", imageName: scooter.batteryImage, data: String(scooter.battery)+"%")
 			ScooterCardComponents.ExpandedCard(infoText: "Travel time", imageName: "time-img", data: stopWatch.tripTime)
-			ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: tripViewModel.currentTrip?.distanceString ?? "0")
+			ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: String(tripViewModel.currentTripDistance))
 		}
 	}
 	
 	private var tripButtons: some View {
-		ScooterCardComponents.TripButtons(isLockedPressed: $lockButtonPressed, onLockButton: {
+		ScooterCardComponents.TripButtons(isLockedPressed: $buttonPressed, onLockButton: {
 			tripViewModel.lockScooter()
-			lockButtonPressed.toggle()
+			buttonPressed.toggle()
 		}, onUnlockButton: {
 			tripViewModel.unlockScooter()
-			lockButtonPressed.toggle()
+			buttonPressed.toggle()
 		}, onEndTripButton: {
-			endRidePressed = true
 			self.stopWatch.isRunning = false
 			tripViewModel.endTrip()
 			onEndRide()
 		})
 	}
 }
-//
-//struct TripDetailView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		TripDetail(tripViewModel: TripViewModel(), mapViewModel: MapViewModel(), onEndRide: {})
-//	}
-//}

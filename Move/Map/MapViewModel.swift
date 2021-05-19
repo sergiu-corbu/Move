@@ -11,6 +11,8 @@ import MapKit
 
 class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 	
+	static var shared: MapViewModel = MapViewModel()
+	
 	@Published var allScooters: [Scooter] = []
 	@Published var scooterLocation: String = ""
 	@Published var selectedScooter: Scooter?

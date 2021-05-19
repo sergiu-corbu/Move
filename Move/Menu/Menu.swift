@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Menu: View {
-	@ObservedObject var tripViewModel: TripViewModel
+	@EnvironmentObject var tripViewModel: TripViewModel
 	
     let onBack: () -> Void
     let onSeeAll: () -> Void
@@ -135,7 +135,7 @@ struct SubMenuItems: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-			Menu(tripViewModel: TripViewModel(), onBack: {}, onSeeAll: {}, onAccount: {}, onChangePassword: {})
+			Menu(onBack: {}, onSeeAll: {}, onAccount: {}, onChangePassword: {})
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

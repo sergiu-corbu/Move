@@ -20,6 +20,7 @@
 		EC16143F2637148000931AF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC16143E2637148000931AF0 /* LaunchScreen.storyboard */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
+		EC3A259E2654FD920056A725 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A259D2654FD920056A725 /* MenuCoordinator.swift */; };
 		EC3BA58C2639DB140032A496 /* ReusableButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ReusableButtons.swift */; };
 		EC3BA58E2639DBAC0032A496 /* ReusableScooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
@@ -83,6 +84,7 @@
 		EC16143E2637148000931AF0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
+		EC3A259D2654FD920056A725 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
 		EC3BA58B2639DB140032A496 /* ReusableButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableButtons.swift; sourceTree = "<group>"; };
 		EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableScooter.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			children = (
 				ECDD3FC126242836003C659F /* ContentView.swift */,
 				EC8014F226524BA30085B58A /* MapCoordinator.swift */,
+				EC3A259D2654FD920056A725 /* MenuCoordinator.swift */,
 				EC8014F426524BAC0085B58A /* AuthCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -456,6 +459,7 @@
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
 				ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */,
 				EC0F8FE22638412C009D8CBB /* UnlockSuccesful.swift in Sources */,
+				EC3A259E2654FD920056A725 /* MenuCoordinator.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
 				EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */,
 				ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */,

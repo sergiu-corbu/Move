@@ -26,7 +26,7 @@ struct Scooter: Identifiable, Codable {
     let locked: Bool
 	let deviceKey: String
     let battery: Int
-	
+
     var addressName: String?
     var coordinates: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: location.coordinates[1], longitude: location.coordinates[0])

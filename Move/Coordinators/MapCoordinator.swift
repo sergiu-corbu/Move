@@ -15,6 +15,7 @@ struct MapCoordinator: View {
 	@StateObject var mapViewModel: MapViewModel = MapViewModel()
 	@StateObject var tripViewModel: TripViewModel = TripViewModel()
 	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
+	
 	@State var bottomContainer: AnyView
 	
 	var body: some View {
@@ -26,14 +27,14 @@ struct MapCoordinator: View {
 		}
 		.onAppear {
 			tripViewModel.updateTrip() {
-				if let currentTrip = tripViewModel.currentTrip {
-					if currentTrip.trip.ongoing {
-						tripViewModel.currentTrip = currentTrip
-						showTripDetail()
+				if tripViewModel.ongoing {
+					unwrapScooter { scooter in
+						showTripDetail(currentScooter: scooter)
 					}
 				}
 			}
 		}
+		.environmentObject(tripViewModel)
 		.environmentObject(mapViewModel)
 	}
 	
@@ -96,19 +97,23 @@ struct MapCoordinator: View {
 
 	func showStartRide() {
 		bottomContainer = AnyView(StartRide(onStartRide: {
-			showTripDetail()
-			stopWatch.startTimer()
+			tripViewModel.updateTrip {
+				unwrapScooter { scooter in
+					showTripDetail(currentScooter: scooter)
+					stopWatch.startTimer()
+				}
+			}
 		}))
 	}
 	
-	func showTripDetail() {
-		bottomContainer = AnyView(TripDetail(stopWatch: stopWatch, tripViewModel: tripViewModel, onEndRide: {
+	func showTripDetail(currentScooter: Scooter) {
+		bottomContainer = AnyView(TripDetail(stopWatch: stopWatch, scooter: currentScooter , onEndRide: {
 			showFinishTrip()
 		}))
 	}
 	
 	func showFinishTrip() {
-		bottomContainer = AnyView(FinishTrip(tripViewModel: tripViewModel, onFinish: {
+		bottomContainer = AnyView(FinishTrip(onFinish: {
 			Session.ongoingTrip = false
 			mapViewModel.selectedScooter = nil
 			mapViewModel.getAvailableScooters()
@@ -119,8 +124,7 @@ struct MapCoordinator: View {
 	
 	//MARK: Menu navigation
 	func menuCoordinator() {
-		navigationStack.push(Menu(tripViewModel: tripViewModel,
-					onBack: { navigationStack.pop() },
+		navigationStack.push(Menu(onBack: { navigationStack.pop() },
 					onSeeAll: { historyCoordinator() },
 					onAccount: { accountCoordinator() },
 					onChangePassword: { passwordCoordinator() }))
@@ -133,10 +137,18 @@ struct MapCoordinator: View {
 	}
 	
 	func historyCoordinator() {
-		navigationStack.push(History(tripViewModel: tripViewModel, onBack: { navigationStack.pop() }))
+		navigationStack.push(History(onBack: { navigationStack.pop() }))
 	}
 	
 	func passwordCoordinator() {
 		navigationStack.push(ChangePassword(action: {navigationStack.pop()}))
+	}
+	
+	private func unwrapScooter(_ callback: @escaping (Scooter) -> Void) {
+		guard let scooter = tripViewModel.currentTripScooter else {
+			showError(error: "No selected scooter")
+			return
+		}
+		callback(scooter)
 	}
 }

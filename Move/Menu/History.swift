@@ -9,7 +9,7 @@ import SwiftUI
 import Introspect
 
 struct History: View {
-	@ObservedObject var tripViewModel: TripViewModel
+	@EnvironmentObject var tripViewModel: TripViewModel
 	@State private var isRefreshing: Bool = false
     let onBack: () -> Void
 	
@@ -99,6 +99,6 @@ struct TripCard: View {
 
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
-		History(tripViewModel: TripViewModel(), onBack: {})
+		History(onBack: {})
     }
 }
