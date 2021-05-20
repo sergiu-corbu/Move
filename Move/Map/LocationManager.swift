@@ -68,11 +68,7 @@ class LocationManager: NSObject, ObservableObject {
 			guard let self = self else {
 				showError(error: "Unknown place")
 				return
-			}
-			if let error = error {
-				showError(error: error.localizedDescription)
-				return
-			}
+			}//treat error
 			guard let placemark = placemarks?.first else { return }
 			self.cityName = placemark.locality ?? "Not found"
 		}
@@ -85,7 +81,7 @@ extension LocationManager: CLLocationManagerDelegate {
 		guard let location = locations.last else { return }
 		DispatchQueue.main.async {
 			self.location = location
-			//self.locationManager.startUpdatingLocation()
+			self.locationManager.startUpdatingLocation()
 			self.geoCode()
 		}
 	}

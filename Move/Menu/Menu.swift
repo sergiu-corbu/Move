@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Menu: View {
+	
 	@EnvironmentObject var tripViewModel: TripViewModel
 	
     let onBack: () -> Void
@@ -76,7 +77,9 @@ struct Menu: View {
 			MenuItems(icon: "flag-img", title: "Legal", components: [
 						SubMenuItems(title: "Terms and Conditions", index: 0),
 						SubMenuItems(title: "Privacy Policy", index: 1)])
-            MenuItems(icon: "star-img", title: "Rate Us", components: [])
+			MenuItems(icon: "star-img", title: "Rate Us", components: []) {
+				UIApplication.shared.open(URL(string: "itms-apps://itunes.apple.com/")!)
+			}
         }
     }
 }
@@ -86,6 +89,7 @@ struct MenuItems: View {
     let icon: String
     let title: String
     let components: [SubMenuItems]
+	var action: (() -> Void)?
     
     var body: some View {
         VStack (alignment: .leading) {
@@ -93,10 +97,15 @@ struct MenuItems: View {
                 Image(icon)
                     .padding([.top, .trailing], 20)
                 VStack(alignment: .leading) {
-                    Text(title)
-                        .foregroundColor(.darkPurple)
-                        .font(.custom(FontManager.Primary.bold, size: 18))
-						.padding(.vertical, 20)
+					if let action = action {
+						Button(action: {
+							action()
+						}, label: {
+							customText
+						})
+					} else {
+						customText
+					}
                     if components.count > 0 {
                         ForEach(0..<components.count) { index in
                             components[index]
@@ -107,6 +116,13 @@ struct MenuItems: View {
             }
         }
     }
+	
+	var customText: some View {
+		Text(title)
+			.foregroundColor(.darkPurple)
+			.font(.custom(FontManager.Primary.bold, size: 18))
+			.padding(.vertical, 20)
+	}
 }
 
 struct SubMenuItems: View {

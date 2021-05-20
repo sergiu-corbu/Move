@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct FinishTrip: View {
+	
 	@EnvironmentObject var tripViewModel: TripViewModel
 	@State private var isLoading: Bool = false
 	
-	let paymentHander = Payment()
 	let onFinish: () -> Void
 	
     var body: some View {
@@ -36,8 +36,8 @@ struct FinishTrip: View {
 				.overlay(
 					HStack {
 						VStack(alignment: .leading) {
-							TripReusable.TripLocation(infoText: "From", address: "Str. Avram Iancu nr. 26 Cladirea 2", extraPadding: false, spaceBetween: 0.5, expandInline: true)
-							TripReusable.TripLocation(infoText: "To", address: "Gradina Miko", extraPadding: false, spaceBetween: 0.5, expandInline: true)
+							TripReusable.TripLocation(infoText: "From", address: tripViewModel.startStreet, extraPadding: false, spaceBetween: 0.5, expandInline: true)
+							TripReusable.TripLocation(infoText: "To", address: tripViewModel.endStreet, extraPadding: false, spaceBetween: 0.5, expandInline: true)
 						}
 						Spacer()
 					}
@@ -47,18 +47,27 @@ struct FinishTrip: View {
 	
 	var travelData: some View {
 		HStack(spacing: 55) {
-			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: "00:12", fontSize: 16)
+			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: tripViewModel.currentTripTime.description, fontSize: 16)
 			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.currentTripDistance.description, fontSize: 16)
 		}
 	}
 	
 	private func initiatePayment() {
 		isLoading = true
-		self.paymentHander.startPayment { (success) in
-			if success { showMessage(message: "Payment done")}
-			else { showError(error: "Paymant Failed")}
+		let paymentHander = Payment(totalPrice: tripViewModel.price)
+		paymentHander.startPayment { (success) in
 			isLoading = false
-			DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { onFinish() })
+			if success {
+				showMessage(message: "Payment done")
+			}
+			else {
+				showError(error: "Paymant Failed")
+			}
+			
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+				onFinish()
+			})
+			
 		}
 	}
 }

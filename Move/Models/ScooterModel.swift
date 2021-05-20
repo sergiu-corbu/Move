@@ -68,34 +68,6 @@ struct LockUnlockResult: Codable {
 	}
 }
 
-struct CurrentTrip: Codable {
-	
-	var ongoing: Bool
-	let scooter: Scooter
-	
-	enum CodingKeys: String, CodingKey {
-		case ongoing = "ongoing"
-		case scooter = "scooter"
-	}
-}
-
-struct CurrentTripResult: Codable {
-	
-	var trip: CurrentTrip
-	var distance: Int
-	var duration: Int
-	
-	var distanceString: String {
-		return String(distance)
-	}
-	
-	enum CodingKeys: String, CodingKey {
-		case trip = "trip"
-		case duration = "duration"
-		case distance = "distance"
-	}
-}
-
 struct Ping: Codable {
 	
 	let ping: Bool

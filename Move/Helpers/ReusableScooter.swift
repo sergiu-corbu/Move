@@ -125,7 +125,7 @@ struct ScooterCardComponents {
 						if largeFrame {
 							Text("\(time)")
 								.font(.custom(FontManager.Primary.bold, size: fontSize))
-								.frame(width: 95)
+								.frame(width: 95, height: 40)
 						} else {
 							Text("\(time)")
 								.font(.custom(FontManager.Primary.bold, size: fontSize))
@@ -165,6 +165,7 @@ struct ScooterCardComponents {
 	}
 	
 	struct TripButtons: View {
+		
 		@Binding var isLockedPressed: Bool
 		let onLockButton: () -> Void
 		let onUnlockButton: () -> Void
@@ -174,7 +175,8 @@ struct ScooterCardComponents {
 			HStack(spacing: 20) {
 				ScooterCardComponents.TripActionButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onUnlockButton() : onLockButton() })
 				ScooterCardComponents.EndTripButton(endTrip: { onEndTripButton() })
-			}.padding(.vertical, 20)
+			}
+			.padding(.top, 10)
 		}
 	}
 	
@@ -182,6 +184,7 @@ struct ScooterCardComponents {
 		let infoText: String
 		let imageName: String
 		let data: String
+		var showKMLabel: Bool?
 		
 		var body: some View {
 			ZStack {
@@ -190,10 +193,17 @@ struct ScooterCardComponents {
 						.stroke(Color.lightGray)
 				}
 				VStack(spacing: 15) {
-					ScooterCardComponents.TripItemLabel(infoText: infoText, imageName: imageName)
-					Text(data)
-						.font(.custom(FontManager.Primary.bold, size: 44))
-						.foregroundColor(.darkPurple)
+					VStack {
+						ScooterCardComponents.TripItemLabel(infoText: infoText, imageName: imageName)
+						Text(data)
+							.font(.custom(FontManager.Primary.bold, size: 44))
+							.foregroundColor(.darkPurple)
+						if showKMLabel != nil {
+							Text("km")
+								.foregroundColor(.darkPurple)
+								.font(.custom(FontManager.Primary.medium, size: 16))
+						}
+					}
 				}
 				.padding(.vertical, 40)
 			}
@@ -252,8 +262,11 @@ struct UnlockScooterComponents {
 						.padding(.horizontal, 20)
 					unlockButton2
 					Spacer()
-				}.padding(.vertical, 20)
-			}.foregroundColor(.white)
+				}
+				.padding(.top, 20)
+				.padding(.bottom, 40)
+			}
+			.foregroundColor(.white)
 		}
 	}
 }

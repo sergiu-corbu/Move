@@ -7,12 +7,13 @@
 
 import SwiftUI
 import BetterSafariView
+import Introspect
 
 struct Register: View {
 	@ObservedObject var userViewModel = UserViewModel.shared
     @State private var termsPresented: Bool = false
     @State private var privacyPresented: Bool = false
-    
+	
     let onRegisterComplete: () -> Void
     let onLoginSwitch: () -> Void
 
@@ -33,20 +34,20 @@ struct Register: View {
 		.background(SharedElements.purpleBackground)
     }
     
-    var inputArea: some View {
-        VStack(alignment: .leading) {
+	var inputArea: some View {
+		VStack(alignment: .leading) {
 			CustomField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: FieldType.email.rawValue, error: userViewModel.emailError)
 			CustomField(input: $userViewModel.username, activeField: userViewModel.isActive, textField: FieldType.username.rawValue)
-            VStack(alignment: .leading) {
+			VStack(alignment: .leading) {
 				CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.password.rawValue, isSecuredField: true, error: userViewModel.passwordError)
-                if userViewModel.password == "" && userViewModel.isActive  {
-                    Text("Use a strong password (min. 8 characters and use symbols")
-                        .font(.custom(FontManager.Primary.regular, size: 13))
-                        .foregroundColor(.white)
-                }
-            }
-        }
-    }
+				if userViewModel.password == "" && userViewModel.isActive  {
+					Text("Use a strong password (min. 8 characters and use symbols")
+						.font(.custom(FontManager.Primary.regular, size: 13))
+						.foregroundColor(.white)
+				}
+			}
+		}
+	}
 
     var agreement: some View {
         VStack(alignment: .leading) {

@@ -9,6 +9,7 @@ import SwiftUI
 import Introspect
 
 struct History: View {
+	
 	@EnvironmentObject var tripViewModel: TripViewModel
 	@State private var isRefreshing: Bool = false
     let onBack: () -> Void
@@ -57,6 +58,7 @@ struct PullToRefresh: View {
 }
 
 struct TripCard: View {
+	
 	@State var trip: Trip
 	
 	var body: some View {
@@ -84,8 +86,8 @@ struct TripCard: View {
 	
 	var tripBoundaries: some View {
 		VStack(alignment: .leading) {
-			TripReusable.TripLocation(infoText: "From", address: trip.startLocation)
-			TripReusable.TripLocation(infoText: "To", address: trip.endLocation)
+			TripReusable.TripLocation(infoText: "From", address: trip.startStreet)
+			TripReusable.TripLocation(infoText: "To", address: trip.endStreet)
 		}
 	}
 	

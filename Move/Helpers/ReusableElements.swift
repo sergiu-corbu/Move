@@ -74,12 +74,10 @@ struct NavigationBar: View {
 	
 	var body: some View {
 		ZStack {
-			HStack {
-				Text(title ?? "")
-					.font(.custom(FontManager.Primary.semiBold, size: 17))
-					.foregroundColor(color)
-					.frame(maxWidth: .infinity)
-			}
+			Text(title ?? "")
+				.font(.custom(FontManager.Primary.semiBold, size: 17))
+				.foregroundColor(color)
+				.frame(maxWidth: .infinity)
 			if let avatar = avatar {
 				HStack {
 					Spacer()
@@ -94,7 +92,8 @@ struct NavigationBar: View {
 					Spacer()
 					Button(action: { action2!() }, label: {
 						Image("bulb-img")
-							.padding(.trailing, 15)
+							.frame(width: 30, height: 30)
+							//.padding([.bottom, .leading], 20)
 					})
 				}
 			}
@@ -107,7 +106,8 @@ struct NavigationBar: View {
 					Spacer()
 				}
 			}
-		}.padding(.top, 10)
+		}
+		.padding(.top,10)
 	}
 }
 
@@ -165,13 +165,13 @@ struct CustomField: View {
 				Spacer()
 				if !input.isEmpty && activeField {
 					Button(action: {
-						if isSecuredField { showSecured.toggle() } else { input = "" } }, label: {
-							Image(isSecuredField ? ( showSecured ? "eye-img": "eye-off-img") : "close-img")
-								.padding(.all, 5)
-								.foregroundColor(.fadePurple) })
+							if isSecuredField { showSecured.toggle() } else { input = "" } }, label: {
+								Image(isSecuredField ? ( showSecured ? "eye-img": "eye-off-img") : "close-img")
+									.padding(.all, 5)
+									.foregroundColor(.fadePurple) })
 				}
 			}
-
+			
 			if let error = self.error {
 				if activeField && !input.isEmpty && !error.isEmpty {
 					Divider()
@@ -201,6 +201,7 @@ struct CustomField: View {
 		}.padding(.vertical, 6)
 	}
 }
+
 
 struct SharedElements {
 	

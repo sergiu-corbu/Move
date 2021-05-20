@@ -8,6 +8,7 @@
 import Foundation
 import NavigationStack
 import SwiftUI
+import CoreLocation
 
 struct MapCoordinator: View {
 	
@@ -15,9 +16,9 @@ struct MapCoordinator: View {
 	@StateObject var mapViewModel: MapViewModel = MapViewModel()
 	@StateObject var tripViewModel: TripViewModel = TripViewModel()
 	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
-	
+
 	@State var bottomContainer: AnyView
-	
+
 	var body: some View {
 		ZStack(alignment: .bottom) {
 			InteractiveMap(tripViewModel: tripViewModel, onMenu: { menuCoordinator() }, onScooterSelected: {  selectedScooter in
@@ -25,17 +26,19 @@ struct MapCoordinator: View {
 				})
 			bottomContainer
 		}
+		.environmentObject(tripViewModel)
+		.environmentObject(mapViewModel)
 		.onAppear {
 			tripViewModel.updateTrip() {
 				if tripViewModel.ongoing {
 					unwrapScooter { scooter in
+						stopWatch.stopWatch.time = tripViewModel.currentTripTime / 100000
 						showTripDetail(currentScooter: scooter)
+						stopWatch.startTimer()
 					}
 				}
 			}
 		}
-		.environmentObject(tripViewModel)
-		.environmentObject(mapViewModel)
 	}
 	
 	func unlckTypeCoordinator(type: UnlockType) {
@@ -63,9 +66,11 @@ struct MapCoordinator: View {
 	
 	func showCode() {
 		guard let selectedScooter = mapViewModel.selectedScooter else {
+			showError(error: "Scooter not available")
 			return
 		}
-		bottomContainer = AnyView(CodeUnlock(unlockViewModel: UnlockViewModel(scooter: selectedScooter) , onClose: {
+		
+		bottomContainer = AnyView(CodeUnlock(unlockViewModel: UnlockViewModel(scooter: selectedScooter, userLocation: getUserCoordinates() ) , onClose: {
 			showUnlockMethods()
 		}, onFinished: {
 			showUnlockSuccess()
@@ -100,6 +105,7 @@ struct MapCoordinator: View {
 			tripViewModel.updateTrip {
 				unwrapScooter { scooter in
 					showTripDetail(currentScooter: scooter)
+					stopWatch.stopWatch.time = 0
 					stopWatch.startTimer()
 				}
 			}
@@ -108,7 +114,10 @@ struct MapCoordinator: View {
 	
 	func showTripDetail(currentScooter: Scooter) {
 		bottomContainer = AnyView(TripDetail(stopWatch: stopWatch, scooter: currentScooter , onEndRide: {
-			showFinishTrip()
+			tripViewModel.streetsGeocode {
+				tripViewModel.endTrip()
+				showFinishTrip()
+			}
 		}))
 	}
 	
@@ -121,27 +130,13 @@ struct MapCoordinator: View {
 			bottomContainer = AnyView(EmptyView())
 		}))
 	}
-	
-	//MARK: Menu navigation
-	func menuCoordinator() {
-		navigationStack.push(Menu(onBack: { navigationStack.pop() },
-					onSeeAll: { historyCoordinator() },
-					onAccount: { accountCoordinator() },
-					onChangePassword: { passwordCoordinator() }))
-	}
-	
-	func accountCoordinator() {
-		navigationStack.push(Account(onBack: { navigationStack.pop() },
-					onLogout: { navigationStack.push(ContentView())},
-					onSave: { navigationStack.pop() }))
-	}
-	
-	func historyCoordinator() {
-		navigationStack.push(History(onBack: { navigationStack.pop() }))
-	}
-	
-	func passwordCoordinator() {
-		navigationStack.push(ChangePassword(action: {navigationStack.pop()}))
+
+	func getUserCoordinates() -> [Double] {
+		var userCoordinates: [Double] = []
+		guard let coordinates = mapViewModel.locationManager.location else { return [0.0, 0,0] }
+		userCoordinates.append(coordinates.coordinate.latitude)
+		userCoordinates.append(coordinates.coordinate.longitude)
+		return userCoordinates
 	}
 	
 	private func unwrapScooter(_ callback: @escaping (Scooter) -> Void) {
@@ -150,5 +145,9 @@ struct MapCoordinator: View {
 			return
 		}
 		callback(scooter)
+	}
+	
+	func menuCoordinator() {
+		navigationStack.push(MenuCoordinator(navigationStack: navigationStack, tripViewModel: tripViewModel))
 	}
 }

@@ -15,10 +15,15 @@ class Payment: NSObject {
 	var paymentController: PKPaymentAuthorizationController?
 	var paymentItems = [PKPaymentSummaryItem]()
 	var paymentStatus = PKPaymentAuthorizationStatus.failure
+	var totalPrice: Int
 	var callback: PaymentHandler?
 	
+	init(totalPrice: Int) {
+		self.totalPrice = totalPrice
+	}
+	
 	func startPayment(completion: @escaping PaymentHandler) {
-		let ammount = PKPaymentSummaryItem(label: "TOTAL", amount: 34)
+		let ammount = PKPaymentSummaryItem(label: "TOTAL", amount: 0.0)
 		
 		paymentItems = [ammount]
 		callback = completion

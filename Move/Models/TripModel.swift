@@ -9,59 +9,18 @@ import CoreLocation
 
 struct Trip: Codable {
 	
-	let startStreet: [Double]
-	let endStreet: [Double]
+	let startStreet: String
+	let endStreet: String
 	let duration: Int
 	let distance: Float
-	
-	var startStreetCoord: CLLocationCoordinate2D {
-		return CLLocationCoordinate2D(latitude: startStreet[1], longitude: startStreet[0])
-	}
-	var endStreetCoord: CLLocationCoordinate2D {
-		return CLLocationCoordinate2D(latitude: endStreet[1], longitude: endStreet[0])
-	}
-	var startLocation: String = ""
-	var endLocation: String = ""
+	let ongoing: Bool
 	
 	enum CodingKeys: String, CodingKey {
 		case startStreet = "startStreet"
 		case endStreet = "endStreet"
 		case duration = "duration"
 		case distance = "totalDistance"
-	}
-	
-	func computeAddress(_ completion: @escaping (Trip) -> Void) {
-		var trip = self
-		if trip.startLocation != "" && trip.endLocation != "" {
-			completion(trip)
-			return
-		}
-		locationGeocode(location: startStreetCoord) { result in
-			trip.startLocation = result
-			if trip.startLocation != "" && trip.endLocation != "" {
-				completion(trip)
-			}
-		}
-		locationGeocode(location: endStreetCoord) { result in
-			trip.endLocation = result
-			if trip.startLocation != "" && trip.endLocation != "" {
-				completion(trip)
-			}
-		}
-	}
-	
-	func locationGeocode(location coordinates: CLLocationCoordinate2D, completion: @escaping (String) -> Void) {
-		let geocoder = CLGeocoder()
-		let address = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
-		var result: String = ""
-		geocoder.reverseGeocodeLocation(address) { (placemarks, error) in
-			guard let placemark = placemarks?.first else {
-				completion("could not reverse geocode")
-				return
-			}
-			result = placemark.thoroughfare! + " " + placemark.subThoroughfare!
-			completion(result)
-		}
+		case ongoing = "ongoing"
 	}
 }
 
@@ -76,26 +35,25 @@ struct TripResult: Codable {
 	}
 }
 
-
-struct TripDecoding: Codable {
-	
-	let path: [[Double]]
-	let startTime: String
-	let ongoing: Bool
-	
-	enum CodingKeys: String, CodingKey {
-		case path = "path"
-		case startTime = "startTime"
-		case ongoing = "ongoing"
-	}
-}
-
 struct StartTrip: Codable {
 	
 	let trip: TripDecoding
 	
 	enum CodingKeys: String, CodingKey {
 		case trip = "trip"
+	}
+	
+	struct TripDecoding: Codable {
+		
+		let path: [[Double]]
+		let startTime: String
+		let ongoing: Bool
+		
+		enum CodingKeys: String, CodingKey {
+			case path = "path"
+			case startTime = "startTime"
+			case ongoing = "ongoing"
+		}
 	}
 }
 
@@ -105,18 +63,48 @@ struct EndTripResult: Codable {
 	
 	struct EndTrip: Codable {
 		
-		let startTime: String
-		let endTime: String
-		let ongoing: Bool
+		let duration: Int
+		let totalDistance: Int
+		let price: Int
 		
 		enum CodingKeys: String, CodingKey {
-			case startTime = "startTime"
-			case endTime = "endTime"
-			case ongoing = "ongoing"
+			case duration = "duration"
+			case totalDistance = "totalDistance"
+			case price = "price"
 		}
 	}
 	
 	enum CodingKeys: String, CodingKey {
 		case trip = "trip"
+	}
+}
+
+struct OngoingTrip: Codable {
+	
+	var ongoing: Bool
+	var path: [[Double]]
+	let scooter: Scooter
+	
+	enum CodingKeys: String, CodingKey {
+		case path = "path"
+		case ongoing = "ongoing"
+		case scooter = "scooter"
+	}
+}
+
+struct OngoingTripResult: Codable {
+	
+	var trip: OngoingTrip
+	var distance: Int
+	var duration: Int
+	
+	var distanceString: String {
+		return String(distance)
+	}
+	
+	enum CodingKeys: String, CodingKey {
+		case trip = "trip"
+		case duration = "duration"
+		case distance = "distance"
 	}
 }

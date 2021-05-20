@@ -21,6 +21,10 @@
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
 		EC3A259E2654FD920056A725 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A259D2654FD920056A725 /* MenuCoordinator.swift */; };
+		EC3A25A226555F8B0056A725 /* QRCameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */; };
+		EC3A25A4265562800056A725 /* QRCameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A3265562800056A725 /* QRCameraPreview.swift */; };
+		EC3A25A62655652F0056A725 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A52655652F0056A725 /* QRScannerView.swift */; };
+		EC3A25A8265571740056A725 /* text.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A7265571740056A725 /* text.swift */; };
 		EC3BA58C2639DB140032A496 /* ReusableButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ReusableButtons.swift */; };
 		EC3BA58E2639DBAC0032A496 /* ReusableScooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
@@ -85,6 +89,10 @@
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		EC3A259D2654FD920056A725 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
+		EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraDelegate.swift; sourceTree = "<group>"; };
+		EC3A25A3265562800056A725 /* QRCameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraPreview.swift; sourceTree = "<group>"; };
+		EC3A25A52655652F0056A725 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
+		EC3A25A7265571740056A725 /* text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text.swift; sourceTree = "<group>"; };
 		EC3BA58B2639DB140032A496 /* ReusableButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableButtons.swift; sourceTree = "<group>"; };
 		EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableScooter.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
@@ -157,6 +165,7 @@
 				ECDD3FD6262428C7003C659F /* Register.swift */,
 				EC0B576426259DF8005F16CB /* Login.swift */,
 				EC1673C32625662C007A180D /* ForgotPassword.swift */,
+				EC3A25A7265571740056A725 /* text.swift */,
 				EC1673C62625802D007A180D /* ResetPassword.swift */,
 				EC9C7BB826255E5700FD5605 /* UserViewModel.swift */,
 			);
@@ -178,9 +187,9 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FFD26242985003C659F /* InteractiveMap.swift */,
-				EC8A841D2654399100A75BF0 /* MKMap.swift */,
 				ECA49AB72631F58700D9D701 /* MapViewModel.swift */,
 				EC0A943A264EC56800F53EE6 /* LocationManager.swift */,
+				EC8A841D2654399100A75BF0 /* MKMap.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -245,6 +254,9 @@
 				EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */,
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
 				EC8A841B2654164D00A75BF0 /* QRViewModel.swift */,
+				EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */,
+				EC3A25A52655652F0056A725 /* QRScannerView.swift */,
+				EC3A25A3265562800056A725 /* QRCameraPreview.swift */,
 				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
 			);
 			path = Unlock;
@@ -450,6 +462,7 @@
 				ECD9E5E2264D55CD0046923C /* PaymentModel.swift in Sources */,
 				EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */,
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
+				EC3A25A62655652F0056A725 /* QRScannerView.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
 				EC7F0EE52630385C004FF766 /* UnlockScooterMethods.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
@@ -459,6 +472,7 @@
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
 				ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */,
 				EC0F8FE22638412C009D8CBB /* UnlockSuccesful.swift in Sources */,
+				EC3A25A4265562800056A725 /* QRCameraPreview.swift in Sources */,
 				EC3A259E2654FD920056A725 /* MenuCoordinator.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
 				EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */,
@@ -466,11 +480,13 @@
 				EC1614192637117C00931AF0 /* Menu.swift in Sources */,
 				ECFCA8502642C9F600674750 /* FinishTrip.swift in Sources */,
 				EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */,
+				EC3A25A8265571740056A725 /* text.swift in Sources */,
 				ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */,
 				EC16141B2637117C00931AF0 /* ChangePassword.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Extensions&Helpers.swift in Sources */,
 				ECB5991A264AB6A500708241 /* ScootersRow.swift in Sources */,
 				EC3BA58E2639DBAC0032A496 /* ReusableScooter.swift in Sources */,
+				EC3A25A226555F8B0056A725 /* QRCameraDelegate.swift in Sources */,
 				ECDD3FD7262428C7003C659F /* Register.swift in Sources */,
 				ECDD400026242985003C659F /* InteractiveMap.swift in Sources */,
 				EC0A943B264EC56800F53EE6 /* LocationManager.swift in Sources */,

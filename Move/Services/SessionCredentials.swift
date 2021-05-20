@@ -29,6 +29,4 @@ struct Session {
 	
 	static var licenseVerified: Bool = true
 	static var ongoingTrip: Bool = false
-	static var userSuspended: Bool = false
 }
-

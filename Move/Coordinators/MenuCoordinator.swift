@@ -11,22 +11,30 @@ import NavigationStack
 struct MenuCoordinator: View {
 	
 	@ObservedObject var navigationStack: NavigationStack
+	@ObservedObject var tripViewModel: TripViewModel
 	
     var body: some View {
-		NavigationStackView(navigationStack: navigationStack) {
-			Menu(onBack: { }, onSeeAll: {
-				
-			}, onAccount: {
-				
-			}, onChangePassword: {
-				
-			})
-		}
+		Menu(onBack: { navigationStack.pop() }, onSeeAll: {
+			historyCoordinator()
+		}, onAccount: {
+			accountCoordinator()
+		}, onChangePassword: {
+			passwordCoordinator()
+		})
+		.environmentObject(tripViewModel)
     }
-}
 
-struct MenuCoordinator_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuCoordinator()
-    }
+	func accountCoordinator() {
+		navigationStack.push(Account(onBack: { navigationStack.pop() },
+									 onLogout: { navigationStack.push(ContentView())},
+									 onSave: { navigationStack.pop() }))
+	}
+	
+	func historyCoordinator() {
+		navigationStack.push(History(onBack: { navigationStack.pop() }).environmentObject(tripViewModel))
+	}
+	
+	func passwordCoordinator() {
+		navigationStack.push(ChangePassword(action: {navigationStack.pop()}))
+	}
 }

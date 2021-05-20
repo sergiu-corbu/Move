@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct NFCUnlock: View {
+
 	@State private var animate: Bool = false
+	
 	let onClose: () -> Void
 	let onFinished: () -> Void
 	let unlockMethod: (UnlockType) -> Void
@@ -44,6 +46,7 @@ struct NFCUnlock: View {
 }
 
 struct NFCCircle: View {
+	
 	@Binding var animate: Bool
 	let width: CGFloat
 	let height: CGFloat

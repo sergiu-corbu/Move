@@ -28,8 +28,8 @@ struct Account: View {
     
     var inputArea: some View {
         VStack(alignment: .leading, spacing: 20) {
-			CustomField(input: $userViewModel.username, activeField: isActive, textField: FieldType.username.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
-			CustomField(input: $userViewModel.email, activeField: isActive, textField: FieldType.email.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
+//			CustomField(input: $userViewModel.username, activeField: isActive, textField: FieldType.username.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
+//			CustomField(input: $userViewModel.email, activeField: isActive, textField: FieldType.email.rawValue, textColor: Color.darkPurple, upperTextOpacity: true)
         }.padding(.top, 40)
     }
 	
