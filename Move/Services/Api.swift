@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import CoreLocation
+import SwiftUI
 import NavigationStack
 
 typealias Result<T> = Swift.Result<T, Error>
@@ -126,7 +127,7 @@ class API {
 	//MARK: Trip
 	static func downloadTrips(pageSize: Int, _ callback: @escaping (Result<TripResult>) -> Void) {
 		requestBody { header in
-			let path = baseUrl + "bookings/?start=20&pageSize=\(pageSize)"
+			let path = baseUrl + "bookings/?start=0&pageSize=\(pageSize)"
 			AF.request(path, method: .get, headers: header).validate().responseData { response in
 				let result: Result<TripResult> = handleResponse(response: response)
 				callback(result)
@@ -151,7 +152,6 @@ class API {
 			let parameters: [String:String] = ["startStreet": startStreet, "endStreet": endStreet]
 			AF.request(path, method: .put, parameters: parameters, headers: header).validate().responseData { response in
 				let result: Result<EndTripResult> = handleResponse(response: response)
-				print(result)
 				callback(result)
 			}
 		}
@@ -166,33 +166,20 @@ class API {
 			}
 		}
 	}
-}
-
-/*
-if let trips = try? result.get() {
-	var trips = trips
-	DispatchQueue.global(qos: .userInteractive).async {
-		let dispatchGroup = DispatchGroup()
-		var result: [Trip] = []
-		for trip in trips.trips {
-			dispatchGroup.enter()
-			trip.computeAddress { trip in
-				result.append(trip)
-				dispatchGroup.leave()
+	static func uploadLicense(selectedImage: Image, _ callback: @escaping (Result<UploadImage>) -> Void) {
+		requestBody { header in
+			let path = baseUrl + "users/upload"
+			let uiImage = selectedImage.uiImage()
+			let imageData = uiImage.jpegData(compressionQuality: 0.85)
+			AF.upload(multipartFormData: { multipartFormData in
+				if let data = imageData {
+					multipartFormData.append(data, withName: "file", fileName: "image.jpg")
+				}
+			}, to: path, usingThreshold: UInt64.init(), method: .post, headers: header, fileManager: FileManager.default).validate().responseData {
+				response in
+				let result: Result<UploadImage> = handleResponse(response: response)
+				callback(result)
 			}
-			dispatchGroup.wait()
-		}
-		trips.trips = result
-		trips.totalTrips = result.count
-		DispatchQueue.main.async {
-			callback(.success(trips))
 		}
 	}
-*/
-
-//
-//class UserStatus: ObservableObject {
-//	static var shared: UserStatus = UserStatus()
-//	@Published var isSuspended: Bool = false
-//
-//}
+}

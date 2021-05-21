@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import MapKit
 import CoreLocation
 
 class TripViewModel: ObservableObject {
@@ -21,10 +22,11 @@ class TripViewModel: ObservableObject {
 	@Published var price: Int = 0
 	@Published var startStreet: String = ""
 	@Published var endStreet: String = ""
-	
+	@Published var allTrips: [Trip] = []
+	@Published var tripRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.74834800, longitude: 23.58783800), latitudinalMeters: 1700, longitudinalMeters: 1700)
 	// put them inside a class
-	var path: [[Double]] = []
-	var allTrips: [Trip] = []
+	@Published var path: [[Double]] = []
+	
 
 	func streetsGeocode(_ callback: @escaping () -> Void) {
 		let geocoder = CLGeocoder()
@@ -61,8 +63,8 @@ class TripViewModel: ObservableObject {
 		// callback down here
 	}
 	
-	func downloadTrips() {
-		API.downloadTrips(pageSize: 33,  { result in
+	func downloadTrips(pageSize: Int) {
+		API.downloadTrips(pageSize: pageSize,  { result in
 			switch result {
 				case .success(let trips):
 					self.allTrips = trips.trips
@@ -86,8 +88,18 @@ class TripViewModel: ObservableObject {
 			}
 		}
 	}
+	
+	func updateTripContinuosly(_ callback: (() -> Void)? = nil) {
+		updateTrip {
+			callback?()
+			DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+				print("trip updated..")
+				self.updateTripContinuosly()
+			}
+		}
+	}
 
-	func endTrip() {
+	func endTrip(_ callback: @escaping () -> Void) {
 		unwrapScooter { [self] scooter in
 			API.endTrip(scooterID: scooter.id, startStreet: startStreet, endStreet: startStreet) { result in
 				switch result {
@@ -95,8 +107,12 @@ class TripViewModel: ObservableObject {
 						self.currentTripTime = result.trip.duration / 100000
 						self.currentTripDistance = result.trip.totalDistance
 						self.price = result.trip.price
+//						self.tripRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: path.first![1], longitude: path.first![0]), span: MKCoordinateSpan(latitudeDelta: 700, longitudeDelta: 700))
+//						print(self.tripRegion)
+						callback()
 					case .failure(let error):
 						showError(error: error.localizedDescription)
+						callback()
 				}
 			}
 		}

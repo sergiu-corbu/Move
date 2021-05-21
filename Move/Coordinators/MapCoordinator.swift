@@ -35,6 +35,7 @@ struct MapCoordinator: View {
 					unwrapScooter { scooter in
 						stopWatch.stopWatch.time = tripViewModel.currentTripTime / 100000
 						showTripDetail(currentScooter: scooter)
+						tripViewModel.updateTripContinuosly()
 						stopWatch.startTimer()
 					}
 				}
@@ -106,7 +107,7 @@ struct MapCoordinator: View {
 
 	func showStartRide() {
 		bottomContainer = AnyView(StartRide(onStartRide: {
-			tripViewModel.updateTrip {
+			tripViewModel.updateTripContinuosly {
 				unwrapScooter { scooter in
 					showTripDetail(currentScooter: scooter)
 					stopWatch.stopWatch.time = 0
@@ -119,14 +120,15 @@ struct MapCoordinator: View {
 	func showTripDetail(currentScooter: Scooter) {
 		bottomContainer = AnyView(TripDetail(stopWatch: stopWatch, scooter: currentScooter , onEndRide: {
 			tripViewModel.streetsGeocode {
-				tripViewModel.endTrip()
-				showFinishTrip()
+				tripViewModel.endTrip {
+					showFinishTrip()
+				}
 			}
 		}))
 	}
 	
 	func showFinishTrip() {
-		bottomContainer = AnyView(FinishTrip(onFinish: {
+		bottomContainer = AnyView(FinishTrip(tripRegion: tripViewModel.tripRegion, onFinish: {
 			Session.ongoingTrip = false
 			mapViewModel.selectedScooter = nil
 			mapViewModel.getAvailableScooters()

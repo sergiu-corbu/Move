@@ -35,7 +35,7 @@ struct Menu: View {
                 }
             }.padding(.horizontal, 24)
         }
-		.onAppear { tripViewModel.downloadTrips() }
+		.onAppear { tripViewModel.downloadTrips(pageSize: 10) }
 		.background(Color.white.edgesIgnoringSafeArea(.all))
     }
 	

@@ -209,10 +209,6 @@ struct CustomField: View {
 
 struct SharedElements {
 	
-	static var whiteRoundedRectangle: some View {
-		Color.white.cornerRadius(32, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.bottom)
-	}
-	
 	static var checkmarkImage: some View {
 		Image("checkmark-img")
 			.resizable()
@@ -267,6 +263,14 @@ struct SharedElements {
 					.underline()
 			})
 		}
+	}
+	
+	static var whiteRoundedRectangle: some View {
+		return Color.white.cornerRadius(32, corners: [.topLeft, .topRight]).edgesIgnoringSafeArea(.bottom)
+	}
+	
+	static var whiteBackground: some View {
+		return Color.white.edgesIgnoringSafeArea(.all)
 	}
 
 }

@@ -26,6 +26,7 @@
 		EC3A25A62655652F0056A725 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A52655652F0056A725 /* QRScannerView.swift */; };
 		EC3BA58C2639DB140032A496 /* ReusableButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ReusableButtons.swift */; };
 		EC3BA58E2639DBAC0032A496 /* ReusableScooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */; };
+		EC53E18226580CCC00868080 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53E18126580CCC00868080 /* NFCReader.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
 		EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */; };
@@ -34,7 +35,6 @@
 		EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F226524BA30085B58A /* MapCoordinator.swift */; };
 		EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F426524BAC0085B58A /* AuthCoordinator.swift */; };
 		EC8A841C2654164D00A75BF0 /* QRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A841B2654164D00A75BF0 /* QRViewModel.swift */; };
-		EC8A841E2654399100A75BF0 /* MKMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A841D2654399100A75BF0 /* MKMap.swift */; };
 		EC8A842226543DA500A75BF0 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8A842126543DA500A75BF0 /* ExternalAccessory.framework */; };
 		EC8EDD55264C1A3C00033E9D /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC8EDD54264C1A3C00033E9D /* MessageView.xib */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
@@ -93,13 +93,13 @@
 		EC3A25A52655652F0056A725 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		EC3BA58B2639DB140032A496 /* ReusableButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableButtons.swift; sourceTree = "<group>"; };
 		EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableScooter.swift; sourceTree = "<group>"; };
+		EC53E18126580CCC00868080 /* NFCReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCReader.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
 		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
 		EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockScooterMethods.swift; sourceTree = "<group>"; };
 		EC8014F226524BA30085B58A /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		EC8014F426524BAC0085B58A /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		EC8A841B2654164D00A75BF0 /* QRViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewModel.swift; sourceTree = "<group>"; };
-		EC8A841D2654399100A75BF0 /* MKMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMap.swift; sourceTree = "<group>"; };
 		EC8A842126543DA500A75BF0 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		EC8EDD54264C1A3C00033E9D /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
@@ -186,7 +186,6 @@
 				ECDD3FFD26242985003C659F /* InteractiveMap.swift */,
 				ECA49AB72631F58700D9D701 /* MapViewModel.swift */,
 				EC0A943A264EC56800F53EE6 /* LocationManager.swift */,
-				EC8A841D2654399100A75BF0 /* MKMap.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -211,6 +210,18 @@
 				ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */,
 			);
 			path = Trip;
+			sourceTree = "<group>";
+		};
+		EC53E1802658013C00868080 /* QR */ = {
+			isa = PBXGroup;
+			children = (
+				ECA7B5872637E6D00063C883 /* QRUnlock.swift */,
+				EC8A841B2654164D00A75BF0 /* QRViewModel.swift */,
+				EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */,
+				EC3A25A52655652F0056A725 /* QRScannerView.swift */,
+				EC3A25A3265562800056A725 /* QRCameraPreview.swift */,
+			);
+			path = QR;
 			sourceTree = "<group>";
 		};
 		EC7F0EE32630384F004FF766 /* Scooter */ = {
@@ -246,14 +257,11 @@
 			isa = PBXGroup;
 			children = (
 				ECA7B5E7263816CD0063C883 /* CodeUnlock.swift */,
-				ECA7B5872637E6D00063C883 /* QRUnlock.swift */,
+				EC53E1802658013C00868080 /* QR */,
 				ECE0D233263A8CE7004C448E /* NFCUnlock.swift */,
+				EC53E18126580CCC00868080 /* NFCReader.swift */,
 				EC7F0EE42630385C004FF766 /* UnlockScooterMethods.swift */,
 				EC0F8FE12638412C009D8CBB /* UnlockSuccesful.swift */,
-				EC8A841B2654164D00A75BF0 /* QRViewModel.swift */,
-				EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */,
-				EC3A25A52655652F0056A725 /* QRScannerView.swift */,
-				EC3A25A3265562800056A725 /* QRCameraPreview.swift */,
 				ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */,
 			);
 			path = Unlock;
@@ -452,7 +460,6 @@
 				ECB7CDBC26295CBE0081B8F4 /* ImagePickerController.swift in Sources */,
 				ECE0D236263AC810004C448E /* TripCard.swift in Sources */,
 				EC16141A2637117C00931AF0 /* History.swift in Sources */,
-				EC8A841E2654399100A75BF0 /* MKMap.swift in Sources */,
 				ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */,
 				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
@@ -461,6 +468,7 @@
 				EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */,
 				EC3A25A62655652F0056A725 /* QRScannerView.swift in Sources */,
 				EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */,
+				EC53E18226580CCC00868080 /* NFCReader.swift in Sources */,
 				EC7F0EE52630385C004FF766 /* UnlockScooterMethods.swift in Sources */,
 				ECDD400126242985003C659F /* Onboarding.swift in Sources */,
 				ECA7B5882637E6D00063C883 /* QRUnlock.swift in Sources */,

@@ -19,7 +19,6 @@ struct CodeUnlock: View {
 	let unlockMethod: (UnlockType) -> Void
 
     var body: some View {
-		
 		GeometryReader { geometry in
 			VStack {
 				NavigationBar(title: "Enter serial number", color: .white, backButton: "close", action: { onClose() })

@@ -23,35 +23,28 @@ struct AuthCoordinator: View {
 	}
 	
 	func validationCoordinator() {
-		navigationStack.push(
-			ValidationInfo(isLoading: $isLoading, onBack: { navigationStack.pop()
-			}, onNext: { image in
-				uploadImage(image: image) }))
+		navigationStack.push(ValidationInfo(isLoading: $isLoading, onBack: { navigationStack.pop() }, onNext: { image in
+				uploadImage(image: image)
+			}))
 	}
-	
+
 	func uploadImage(image: Image) {
 		isLoading = true
-//		API.uploadLicense(selectedImage: image) { result in
-//			switch result {
-//				case .success(let result):
-//					Session.licenseVerified = true
-//					navigationStack.push(ValidationSuccess(onFindScooters: { mapCoodinator() }))
-//					print(result)
-//				case .failure(let error):
-//					print(error)
-//			}
-//			isLoading = false
-//		}
-//		DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-//			isLoading = false
-//			navigationStack.push(ValidationSuccess(onFindScooters: { mapCoodinator() }))
-//		})
+		API.uploadLicense(selectedImage: image) { result in
+			switch result {
+				case .success:
+					Session.licenseVerified = true
+					navigationStack.push(ValidationSuccess(onFindScooters: { mapCoodinator() }))
+				case .failure(let error):
+					showError(error: error.localizedDescription)
+			}
+			isLoading = false
+		}
 	}
 	
 	func mapCoodinator() {
 		navigationStack.push(MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView())))
 	}
-	
 	func loginCoordinator() {
 		navigationStack.push(Login(onLoginCompleted: { mapCoodinator() },
 				  onRegisterSwitch: { registerCoordinator() }))

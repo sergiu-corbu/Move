@@ -183,7 +183,7 @@ struct ScooterCardComponents {
 				ScooterCardComponents.TripActionButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onUnlockButton() : onLockButton() })
 				ScooterCardComponents.EndTripButton(endTrip: { onEndTripButton() })
 			}
-			.padding(.top, 10)
+			.padding(.vertical, 10)
 		}
 	}
 	
@@ -195,31 +195,35 @@ struct ScooterCardComponents {
 		var showKMLabel: Bool?
 		
 		var body: some View {
-			ZStack {
-				GeometryReader { geometry in
-					RoundedRectangle(cornerRadius: 29)
-						.stroke(Color.lightGray)
-				}
-				VStack(spacing: 15) {
-					VStack {
-						ScooterCardComponents.TripItemLabel(infoText: infoText, imageName: imageName)
-						Text(data)
-							.font(.custom(FontManager.Primary.bold, size: 44))
-							.foregroundColor(.darkPurple)
-						if showKMLabel != nil {
-							Text("km")
-								.foregroundColor(.darkPurple)
-								.font(.custom(FontManager.Primary.medium, size: 16))
-						}
+			GeometryReader { geometry in
+				ZStack {
+					GeometryReader { geometry in
+						RoundedRectangle(cornerRadius: 29)
+							.stroke(Color.lightPurple.opacity(0.6))
 					}
+					VStack {
+						VStack {
+							ScooterCardComponents.TripItemLabel(infoText: infoText, imageName: imageName)
+							Text(data)
+								.font(.custom(FontManager.Primary.bold, size: 44))
+								.foregroundColor(.darkPurple)
+							if showKMLabel != nil {
+								Text("km")
+									.foregroundColor(.darkPurple)
+									.font(.custom(FontManager.Primary.medium, size: 16))
+							}
+						}
+						.frame(maxHeight: .infinity)
+					}
+					.padding(.vertical, geometry.size.height * 0.05)
 				}
-				.padding(.vertical, 40)
 			}
 		}
 	}
 }
 
 struct UnlockScooterComponents {
+	
 	struct Title: View {
 		let title: String
 		var purpleColor: Bool = false

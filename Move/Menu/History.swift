@@ -12,14 +12,17 @@ struct History: View {
 	
 	@EnvironmentObject var tripViewModel: TripViewModel
 	@State private var isRefreshing: Bool = false
-	@State private var pageSize: Int = 10
+	@State private var pageSize: Int = 20
     let onBack: () -> Void
 	
     var body: some View {
 		VStack(spacing: 30) {
 			NavigationBar(title: "History", color: .darkPurple, backButton: "chevron-left-purple", action: { onBack() })
 			ScrollView(showsIndicators: false) {
-				//PullToRefresh(coordinateSpace: "pullToRefresh") { tripViewModel.downloadTrips() }
+				PullToRefresh(coordinateSpace: "pullToRefresh") {
+					tripViewModel.downloadTrips(pageSize: pageSize)
+					self.pageSize += 10
+				}
 				ForEach(0..<tripViewModel.allTrips.count, id: \.self) { index in
 					TripCard(trip: tripViewModel.allTrips[index])
 				}
@@ -27,7 +30,7 @@ struct History: View {
 //			.introspectScrollView { scrollView in
 //				scrollView.refreshControl?.beginRefreshing()
 //			}
-			//.coordinateSpace(name: "pullToRefresh")
+			.coordinateSpace(name: "pullToRefresh")
 		}
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))

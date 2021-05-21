@@ -37,7 +37,6 @@ struct InteractiveMap: View {
 				manageLocation()
 			}
 			.edgesIgnoringSafeArea(.all)
-			
 			SharedElements.MapBarItems(menuAction: { onMenu() }, text: mapViewModel.locationManager.cityName, locationEnabled: mapViewModel.locationManager.showLocation, centerLocation: { centerViewOnUserLocation() } )
 		}
 		.alert(isPresented: $showAlert) { alertView }

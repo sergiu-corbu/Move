@@ -8,6 +8,8 @@ import SwiftUI
 import NavigationStack
 
 struct ContentView: View {
+	@State var isLoading: Bool = false
+	
 	var navigationStack: NavigationStack = SceneDelegate.navigationStack
 
 	var body: some View {
