@@ -12,6 +12,7 @@ struct History: View {
 	
 	@EnvironmentObject var tripViewModel: TripViewModel
 	@State private var isRefreshing: Bool = false
+	@State private var pageSize: Int = 10
     let onBack: () -> Void
 	
     var body: some View {
@@ -23,38 +24,14 @@ struct History: View {
 					TripCard(trip: tripViewModel.allTrips[index])
 				}
 			}
-			.introspectScrollView { scrollView in
-				scrollView.refreshControl?.beginRefreshing()
-			}
+//			.introspectScrollView { scrollView in
+//				scrollView.refreshControl?.beginRefreshing()
+//			}
 			//.coordinateSpace(name: "pullToRefresh")
 		}
 		.padding(.horizontal, 24)
 		.background(Color.white.edgesIgnoringSafeArea(.all))
     }
-}
-
-struct PullToRefresh: View {
-	@State private var isRefreshing: Bool = false
-	let coordinateSpace: String
-	let onRefresh: () -> Void
-
-	var body: some View {
-		GeometryReader { geometry in
-			if (geometry.frame(in: .named(coordinateSpace)).midY > 50) {
-				Spacer()
-					.onAppear { isRefreshing.toggle() }
-			} else if (geometry.frame(in: .named(coordinateSpace)).maxY < 20) {
-				Spacer()
-					.onAppear { isRefreshing.toggle(); onRefresh() }
-			}
-			if isRefreshing {
-				ProgressView()
-					.progressViewStyle(CircularProgressViewStyle(tint: .black))
-					.scaleEffect(1.5)
-					.frame(maxWidth: .infinity)
-			}
-		}.padding(.top, -50)
-	}
 }
 
 struct TripCard: View {
@@ -103,4 +80,28 @@ struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
 		History(onBack: {})
     }
+}
+
+struct PullToRefresh: View {
+	@State private var isRefreshing: Bool = false
+	let coordinateSpace: String
+	let onRefresh: () -> Void
+	
+	var body: some View {
+		GeometryReader { geometry in
+			if (geometry.frame(in: .named(coordinateSpace)).midY > 50) {
+				Spacer()
+					.onAppear { isRefreshing.toggle() }
+			} else if (geometry.frame(in: .named(coordinateSpace)).maxY < 20) {
+				Spacer()
+					.onAppear { isRefreshing.toggle(); onRefresh() }
+			}
+			if isRefreshing {
+				ProgressView()
+					.progressViewStyle(CircularProgressViewStyle(tint: .black))
+					.scaleEffect(1.5)
+					.frame(maxWidth: .infinity)
+			}
+		}.padding(.top, -50)
+	}
 }

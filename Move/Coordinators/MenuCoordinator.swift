@@ -26,7 +26,7 @@ struct MenuCoordinator: View {
 
 	func accountCoordinator() {
 		navigationStack.push(Account(onBack: { navigationStack.pop() },
-									 onLogout: { navigationStack.push(ContentView())},
+									 onLogout: { navigationStack.push(AuthCoordinator(navigationStack: NavigationStack()))},
 									 onSave: { navigationStack.pop() }))
 	}
 	

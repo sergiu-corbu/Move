@@ -17,13 +17,14 @@ struct Login: View {
             VStack (alignment: .leading) {
 				AuthComponents.appLogo
 				AuthComponents.MessageArea(text: "Sign up or login and start\nriding right away")
-                inputArea
+				CustomField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: FieldType.email.rawValue)
+				CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.password.rawValue, isSecuredField: true)
 				Buttons.PrimaryButton(text: "Login", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedLogin && userViewModel.allfieldsValidatedLogin, action: {
 					userViewModel.isLoading = true
 					userViewModel.loginCall {
 						onLoginCompleted()
 					}
-					})
+				})
 				AuthComponents.SwitchAuthProcess(questionText: "Don't have an account? You can", solutionText: "start with one here", action: { onRegisterSwitch() })
             }
             Spacer()
@@ -31,13 +32,6 @@ struct Login: View {
 		.onTapGesture { hideKeyboard() }
         .padding(.horizontal, 24)
 		.background(SharedElements.purpleBackground)
-    }
-    
-    var inputArea: some View {
-        VStack(alignment: .leading) {
-//			CustomField(input: $userViewModel.email, activeField: userViewModel.isActive, textField: FieldType.email.rawValue)
-//			CustomField(input: $userViewModel.password, activeField: userViewModel.isActive, textField: FieldType.password.rawValue, isSecuredField: true)
-        }
     }
 }
 

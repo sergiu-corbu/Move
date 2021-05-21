@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 import CoreLocation
-import SwiftUI
+import NavigationStack
 
 typealias Result<T> = Swift.Result<T, Error>
 
@@ -31,10 +31,8 @@ class API {
 				let result = try JSONDecoder().decode(T.self, from: response.data!)
 				return .success(result)
 			} else if response.response?.statusCode == 401 {
-				print("user suspended")
 				Session.tokenKey = nil
-				let userStatus = UserStatus.init()
-				userStatus.isSuspended = true
+				SceneDelegate.navigationStack.push(AuthCoordinator(navigationStack: SceneDelegate.navigationStack))
 				return .failure(APIError(message: "User is suspended"))
 			} else { //guard ... for inactive network
 				guard let result = response.data else { return .failure(APIError(message: "network error")) }
@@ -126,9 +124,9 @@ class API {
 	}
 	
 	//MARK: Trip
-	static func downloadTrips(_ callback: @escaping (Result<TripResult>) -> Void) {
+	static func downloadTrips(pageSize: Int, _ callback: @escaping (Result<TripResult>) -> Void) {
 		requestBody { header in
-			let path = baseUrl + "bookings/?start=0&PageSize=10"
+			let path = baseUrl + "bookings/?start=20&pageSize=\(pageSize)"
 			AF.request(path, method: .get, headers: header).validate().responseData { response in
 				let result: Result<TripResult> = handleResponse(response: response)
 				callback(result)
@@ -192,7 +190,9 @@ if let trips = try? result.get() {
 	}
 */
 
-
-class UserStatus: ObservableObject {
-	@Published var isSuspended: Bool = false
-}
+//
+//class UserStatus: ObservableObject {
+//	static var shared: UserStatus = UserStatus()
+//	@Published var isSuspended: Bool = false
+//
+//}

@@ -24,7 +24,6 @@
 		EC3A25A226555F8B0056A725 /* QRCameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */; };
 		EC3A25A4265562800056A725 /* QRCameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A3265562800056A725 /* QRCameraPreview.swift */; };
 		EC3A25A62655652F0056A725 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A52655652F0056A725 /* QRScannerView.swift */; };
-		EC3A25A8265571740056A725 /* text.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A7265571740056A725 /* text.swift */; };
 		EC3BA58C2639DB140032A496 /* ReusableButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58B2639DB140032A496 /* ReusableButtons.swift */; };
 		EC3BA58E2639DBAC0032A496 /* ReusableScooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
@@ -92,7 +91,6 @@
 		EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraDelegate.swift; sourceTree = "<group>"; };
 		EC3A25A3265562800056A725 /* QRCameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraPreview.swift; sourceTree = "<group>"; };
 		EC3A25A52655652F0056A725 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
-		EC3A25A7265571740056A725 /* text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = text.swift; sourceTree = "<group>"; };
 		EC3BA58B2639DB140032A496 /* ReusableButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableButtons.swift; sourceTree = "<group>"; };
 		EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableScooter.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 				ECDD3FD6262428C7003C659F /* Register.swift */,
 				EC0B576426259DF8005F16CB /* Login.swift */,
 				EC1673C32625662C007A180D /* ForgotPassword.swift */,
-				EC3A25A7265571740056A725 /* text.swift */,
 				EC1673C62625802D007A180D /* ResetPassword.swift */,
 				EC9C7BB826255E5700FD5605 /* UserViewModel.swift */,
 			);
@@ -480,7 +477,6 @@
 				EC1614192637117C00931AF0 /* Menu.swift in Sources */,
 				ECFCA8502642C9F600674750 /* FinishTrip.swift in Sources */,
 				EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */,
-				EC3A25A8265571740056A725 /* text.swift in Sources */,
 				ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */,
 				EC16141B2637117C00931AF0 /* ChangePassword.swift in Sources */,
 				ECDD3FEE26242970003C659F /* Extensions&Helpers.swift in Sources */,

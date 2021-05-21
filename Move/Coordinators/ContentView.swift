@@ -8,11 +8,10 @@ import SwiftUI
 import NavigationStack
 
 struct ContentView: View {
-	
-	@StateObject var navigationStack: NavigationStack = NavigationStack()
-	@ObservedObject var userStatus: UserStatus = UserStatus()
+	var navigationStack: NavigationStack = SceneDelegate.navigationStack
+
 	var body: some View {
-		if Session.tokenKey != nil && Session.licenseVerified && !userStatus.isSuspended {
+		if Session.tokenKey != nil && Session.licenseVerified {
 			NavigationStackView(navigationStack: navigationStack) {
 				MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView()))
 			} } else {

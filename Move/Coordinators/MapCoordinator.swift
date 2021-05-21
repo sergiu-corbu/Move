@@ -23,7 +23,7 @@ struct MapCoordinator: View {
 		ZStack(alignment: .bottom) {
 			InteractiveMap(onMenu: { menuCoordinator() }, onScooterSelected: {  selectedScooter in
 				showUnlockMethods()
-					//showScooterCard(selectedScooter: selectedScooter)
+				//showScooterCard(selectedScooter: selectedScooter)
 				})
 			bottomContainer
 		}

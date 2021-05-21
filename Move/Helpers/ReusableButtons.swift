@@ -68,8 +68,8 @@ struct Buttons {
 		var progressView: some View {
 			ProgressView()
 				.progressViewStyle(CircularProgressViewStyle(tint: .white))
-				.scaleEffect(1.5)
 				.frame(width: 30, height: 30)
+				.scaleEffect(1.5)
 				.padding(.trailing, 16)
 		}
 	}

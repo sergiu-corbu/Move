@@ -38,8 +38,8 @@ class TripViewModel: ObservableObject {
 				showError(error: "could not reverse geocode")
 				return
 			}
-			let streetName: String = placemark.thoroughfare ?? "n/a"
-			let streetNumber: String = placemark.subThoroughfare ?? "n/a"
+			let streetName: String = placemark.thoroughfare ?? ""
+			let streetNumber: String = placemark.subThoroughfare ?? ""
 			let result = streetName + " " + streetNumber
 			self.startStreet = result
 			callback()
@@ -62,7 +62,7 @@ class TripViewModel: ObservableObject {
 	}
 	
 	func downloadTrips() {
-		API.downloadTrips( { result in
+		API.downloadTrips(pageSize: 33,  { result in
 			switch result {
 				case .success(let trips):
 					self.allTrips = trips.trips
