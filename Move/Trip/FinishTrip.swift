@@ -37,7 +37,7 @@ struct FinishTrip: View {
 					HStack {
 						VStack(alignment: .leading) {
 							TripReusable.TripLocation(infoText: "From", address: tripViewModel.startStreet, extraPadding: false, spaceBetween: 0.5, expandInline: true)
-							TripReusable.TripLocation(infoText: "To", address: tripViewModel.endStreet, extraPadding: false, spaceBetween: 0.5, expandInline: true)
+							TripReusable.TripLocation(infoText: "To", address: tripViewModel.startStreet, extraPadding: false, spaceBetween: 0.5, expandInline: true)
 						}
 						Spacer()
 					}

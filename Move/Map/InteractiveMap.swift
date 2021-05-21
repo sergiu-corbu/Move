@@ -11,7 +11,7 @@ import MapKit
 struct InteractiveMap: View {
 	
 	@EnvironmentObject var mapViewModel: MapViewModel
-	@ObservedObject var tripViewModel: TripViewModel
+	@EnvironmentObject var tripViewModel: TripViewModel
 	@State private var region = MKCoordinateRegion.defaultRegion
 	@State private var showAlert: Bool = false
 	
@@ -33,7 +33,7 @@ struct InteractiveMap: View {
 				}
 			}
 			.onAppear {
-				print(Session.tokenKey as Any)
+				//print(Session.tokenKey as Any)
 				manageLocation()
 			}
 			.edgesIgnoringSafeArea(.all)

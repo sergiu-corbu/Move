@@ -10,6 +10,7 @@ import Introspect
 
 //MARK: Register & login elements
 struct AuthComponents {
+	
     static var appLogo: some View {
         Image("logoOverlay-img")
             .resizable()
@@ -20,6 +21,7 @@ struct AuthComponents {
    
     struct BigTitle: View {
         let text: String
+		
         var body: some View {
             Text(text)
                 .foregroundColor(.white)
@@ -27,8 +29,10 @@ struct AuthComponents {
                 .padding(.bottom, 15)
         }
     }
+	
     struct MessageArea: View {
         let text: String
+		
         var body: some View {
             VStack(alignment: .leading) {
                 Text("Let's get started")
@@ -64,6 +68,7 @@ struct AuthComponents {
 
 // MARK: navigation bar
 struct NavigationBar: View {
+	
 	var title: String?
 	let color: Color
 	var avatar: String?
@@ -93,7 +98,6 @@ struct NavigationBar: View {
 					Button(action: { action2!() }, label: {
 						Image("bulb-img")
 							.frame(width: 30, height: 30)
-							//.padding([.bottom, .leading], 20)
 					})
 				}
 			}
@@ -121,8 +125,9 @@ enum FieldType: String {
 	case confirmNewPassword = "Confirm new password"
 }
 
-//MARK: fields
+
 struct CustomField: View {
+	
 	@Binding var input: String
 	@State var activeField: Bool
 	@State private var showSecured: Bool = true
@@ -171,7 +176,6 @@ struct CustomField: View {
 									.foregroundColor(.fadePurple) })
 				}
 			}
-			
 			if let error = self.error {
 				if activeField && !input.isEmpty && !error.isEmpty {
 					Divider()
@@ -254,6 +258,7 @@ struct SharedElements {
 	struct CustomSmallButton: View {
 		let text: String
 		let action: () -> Void
+		
 		var body: some View {
 			Button(action: { action() }, label: {
 				Text(text)
@@ -267,12 +272,14 @@ struct SharedElements {
 }
 
 struct TripReusable {
+	
 	struct TripLocation: View {
 		let infoText: String
 		let address: String
 		var extraPadding: Bool = true
 		var spaceBetween: CGFloat = 0
 		var expandInline: Bool = false
+		
 		var body: some View {
 			VStack(alignment: .leading) {
 				Text(infoText)
@@ -291,6 +298,7 @@ struct TripReusable {
 	}
 	
 	struct TripData: View {
+		
 		let infoText: String
 		let data: String
 		var showTime: Bool = false

@@ -12,7 +12,6 @@ struct ContentView: View {
 	@StateObject var navigationStack: NavigationStack = NavigationStack()
 	@ObservedObject var userStatus: UserStatus = UserStatus()
 	var body: some View {
-		//Register(onRegisterComplete: {}, onLoginSwitch: {})
 		if Session.tokenKey != nil && Session.licenseVerified && !userStatus.isSuspended {
 			NavigationStackView(navigationStack: navigationStack) {
 				MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView()))

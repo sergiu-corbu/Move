@@ -34,8 +34,6 @@ extension View {
 	}
 }
 
-
-
 //MARK: UIView to UIImage
 extension UIView {
 	func uiImage() -> UIImage {

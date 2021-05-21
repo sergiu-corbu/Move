@@ -60,14 +60,14 @@ struct ScooterCard: View {
 			}.padding(.bottom, 15)
             HStack {
 				Buttons.MapActionButton(image: "bell-img", action: {
-					API.pingScooter(scooterKey: mapViewModel.selectedScooter?.deviceKey ?? "") { result in
-						switch result {
-							case .success(let result):
-								showMessage(message: String(result.ping))
-							case .failure(let error):
-								showError(error: error.localizedDescription)
-						}
-					}
+//					API.pingScooter(scooterKey: mapViewModel.selectedScooter?.deviceKey ?? "") { result in
+//						switch result {
+//							case .success(let result):
+//								showMessage(message: String(result.ping))
+//							case .failure(let error):
+//								showError(error: error.localizedDescription)
+//						}
+//					}
                 }).padding(.trailing, 20)
 				Buttons.MapActionButton(image: "getRoute-img", action: {
                     //open maps & navigate

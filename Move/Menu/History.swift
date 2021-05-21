@@ -93,7 +93,7 @@ struct TripCard: View {
 	
 	var tripTime: some View {
 		VStack(alignment: .leading) {
-			TripReusable.TripData(infoText: "Travel time", data: String(trip.duration/60), showTime: true)
+			TripReusable.TripData(infoText: "Travel time", data: String(trip.duration/100000), showTime: true)
 			TripReusable.TripData(infoText: "Distance", data: String(trip.distance)).padding(.top, 16)
 		}
 	}

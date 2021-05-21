@@ -89,7 +89,7 @@ class TripViewModel: ObservableObject {
 
 	func endTrip() {
 		unwrapScooter { [self] scooter in
-			API.endTrip(scooterID: scooter.id, startStreet: startStreet, endStreet: "self.endStreet") { result in
+			API.endTrip(scooterID: scooter.id, startStreet: startStreet, endStreet: startStreet) { result in
 				switch result {
 					case .success(let result):
 						self.currentTripTime = result.trip.duration / 100000

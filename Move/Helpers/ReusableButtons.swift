@@ -22,35 +22,55 @@ struct Buttons {
 			HStack {
 				Button(action: { action() }, label: {
 					ZStack(alignment: .trailing) {
-						HStack {
-							Text(text)
-							if isBlackBackground {
-								Image("Alogo").padding(.top, -2)
-								Text("Pay")
-									.padding(.leading, -3)
-									.padding(.top, -1) //maybe not ok
-							}
-						}
+						mainBody
 						.foregroundColor(enabled ? .white : .fadePurple)
-						.font(enabled ? Font.custom(FontManager.Primary.bold, size: isBlackBackground ? 18 : 16) : Font.custom(FontManager.Primary.medium, size: 16))
+						.font(enabled ? Font.custom(FontManager.Primary.bold, size: isBlackBackground ? 18 : 16) :
+								Font.custom(FontManager.Primary.medium, size: 16))
 						.frame(maxWidth: .infinity)
 						.padding(.horizontal, 46)
 						.padding(.all, 20)
-						.background(RoundedRectangle(cornerRadius: 16.0)
-										.strokeBorder(Color.coralRed, lineWidth: !isBlackBackground ? 1 : 0)
-										.background(RoundedRectangle(cornerRadius: 16.0).fill(enabled ? (!isBlackBackground ? Color.coralRed : .black) : Color.clear))
-										.opacity(enabled ? 1 : 0.3)
-						)
+						.background(buttonBackground)
 						if isLoading == true {
-							ProgressView()
-								.progressViewStyle(CircularProgressViewStyle(tint: .white))
-								.scaleEffect(1.5)
-								.frame(width: 30, height: 30)
-								.padding(.trailing, 16)
+							progressView
 						}
 					}
-				}).disabled(!enabled)
-			}.padding(.vertical, 24)
+				})
+				.disabled(!enabled)
+			}
+			.padding(.vertical, 24)
+		}
+		
+		var mainBody: some View {
+			HStack {
+				Text(text)
+				if isBlackBackground {
+					applePay
+				}
+			}
+		}
+		
+		var applePay: some View {
+			HStack {
+				Image("Alogo").padding(.top, -2)
+				Text("Pay")
+					.padding(.leading, -3)
+					.padding(.top, -1) //maybe not ok
+			}
+		}
+		
+		var buttonBackground: some View {
+			RoundedRectangle(cornerRadius: 16.0)
+				.strokeBorder(Color.coralRed, lineWidth: !isBlackBackground ? 1 : 0)
+				.background(RoundedRectangle(cornerRadius: 16.0).fill(enabled ? (!isBlackBackground ? Color.coralRed : .black) : Color.clear))
+				.opacity(enabled ? 1 : 0.3)
+		}
+		
+		var progressView: some View {
+			ProgressView()
+				.progressViewStyle(CircularProgressViewStyle(tint: .white))
+				.scaleEffect(1.5)
+				.frame(width: 30, height: 30)
+				.padding(.trailing, 16)
 		}
 	}
 	
@@ -66,7 +86,9 @@ struct Buttons {
 						RoundedRectangle(cornerRadius: 13)
 							.strokeBorder(Color.lightGray)
 							.foregroundColor(.white)
-					} else { RoundedRectangle(cornerRadius: 13).foregroundColor(.white) }
+					} else {
+						RoundedRectangle(cornerRadius: 13).foregroundColor(.white)
+					}
 					Image(image)
 				}
 				.shadow(color: Color(UIColor.systemGray5), radius: 3, x: 5, y: 4)

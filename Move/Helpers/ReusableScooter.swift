@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ScooterCardComponents {
+	
 	static var redTopLine: some View {
 		RoundedRectangle(cornerRadius: 25.0)
 			.fill(Color.coralRed)
 			.frame(width: 72, height: 4)
 	}
+	
 	static var scooterTitle: some View {
 		Text("Scooter")
 			.font(.custom(FontManager.Primary.medium, size: 16))
@@ -20,6 +22,7 @@ struct ScooterCardComponents {
 			.opacity(0.6)
 			.padding(.bottom, 1)
 	}
+	
 	static var scooterImage: some View {
 		HStack {
 			Spacer()
@@ -75,9 +78,11 @@ struct ScooterCardComponents {
 		
 		var body: some View {
 			HStack {
-				Buttons.MapActionButton(image: image, action:{ action() }, border: showBorder)
-				Text(text).font(.custom(FontManager.Primary.medium, size: 14))
-			}.padding(.leading, -1)
+				Buttons.MapActionButton(image: image, action: { action() }, border: showBorder)
+				Text(text)
+					.font(.custom(FontManager.Primary.medium, size: 14))
+			}
+			.padding(.leading, -1)
 		}
 	}
 	
@@ -110,6 +115,7 @@ struct ScooterCardComponents {
 	}
 	
 	struct TripInfo: View {
+		
 		let infoText: String
 		let imageName: String
 		var time: String?
@@ -130,7 +136,6 @@ struct ScooterCardComponents {
 							Text("\(time)")
 								.font(.custom(FontManager.Primary.bold, size: fontSize))
 						}
-						
 						Text("min")
 							.font(.custom(FontManager.Primary.bold, size: 16))
 							.padding(.bottom, fontSize == 32 ? 3.5 : 0)
@@ -154,6 +159,7 @@ struct ScooterCardComponents {
 	}
 	
 	struct TripItemLabel: View {
+		
 		let infoText: String
 		let imageName: String
 		
@@ -167,6 +173,7 @@ struct ScooterCardComponents {
 	struct TripButtons: View {
 		
 		@Binding var isLockedPressed: Bool
+		
 		let onLockButton: () -> Void
 		let onUnlockButton: () -> Void
 		let onEndTripButton: () -> Void
@@ -181,6 +188,7 @@ struct ScooterCardComponents {
 	}
 	
 	struct ExpandedCard: View {
+		
 		let infoText: String
 		let imageName: String
 		let data: String

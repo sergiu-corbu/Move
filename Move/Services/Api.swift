@@ -113,11 +113,11 @@ class API {
 		}
 	}
 	
-	static func pingScooter(scooterKey: String, _ callback: @escaping (Result<Ping>) -> Void) {
+	static func pingScooter(scooterKey: String, location: [Double], _ callback: @escaping (Result<Ping>) -> Void) {
 		requestBody { header in
 			let path = baseUrl + "users/ping/"
-			let coordinates: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 46.7566, longitude: 23.594)
-			let parameters = ["long": String(coordinates.longitude), "lat": String(coordinates.latitude), "deviceKey": scooterKey]
+			let parameters: [String:String] = ["deviceKey": scooterKey,"lat": String(location[0]), "long": String(location[1])]
+			print(parameters)
 			AF.request(path, method: .post, parameters: parameters, headers: header).validate().responseData { response in
 				let result: Result<Ping> = handleResponse(response: response)
 				callback(result)

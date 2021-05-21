@@ -21,8 +21,9 @@ struct MapCoordinator: View {
 
 	var body: some View {
 		ZStack(alignment: .bottom) {
-			InteractiveMap(tripViewModel: tripViewModel, onMenu: { menuCoordinator() }, onScooterSelected: {  selectedScooter in
-					showScooterCard(selectedScooter: selectedScooter)
+			InteractiveMap(onMenu: { menuCoordinator() }, onScooterSelected: {  selectedScooter in
+				showUnlockMethods()
+					//showScooterCard(selectedScooter: selectedScooter)
 				})
 			bottomContainer
 		}
@@ -61,6 +62,9 @@ struct MapCoordinator: View {
 	func showUnlockMethods() {
 		bottomContainer = AnyView(UnlockScooterMethods(unlockMethod: { unlockType in
 			unlckTypeCoordinator( type: unlockType)
+		}, onDragDown: {
+			bottomContainer = AnyView(EmptyView())
+			mapViewModel.selectedScooter = nil
 		}))
 	}
 	
@@ -146,7 +150,7 @@ struct MapCoordinator: View {
 		}
 		callback(scooter)
 	}
-	
+		
 	func menuCoordinator() {
 		navigationStack.push(MenuCoordinator(navigationStack: navigationStack, tripViewModel: tripViewModel))
 	}
