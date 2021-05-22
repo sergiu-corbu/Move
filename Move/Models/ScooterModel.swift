@@ -31,7 +31,11 @@ struct Scooter: Identifiable, Codable {
     var coordinates: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: location.coordinates[1], longitude: location.coordinates[0])
     }
-	var isSelected: Bool = false
+	var scooterLocation: CLLocation {
+		return CLLocation(latitude: location.coordinates[1], longitude: location.coordinates[0])
+	}
+	
+	var isInCluster: Bool = false
 	
     var batteryImage: String {
         var batteryImage: String = ""

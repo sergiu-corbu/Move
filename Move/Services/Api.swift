@@ -11,7 +11,7 @@ import CoreLocation
 import SwiftUI
 import NavigationStack
 
-typealias Result<T> = Swift.Result<T, Error>
+typealias Result<T> = Swift.Result<T, APIError>
 
 class API {
 	
@@ -33,15 +33,17 @@ class API {
 				return .success(result)
 			} else if response.response?.statusCode == 401 {
 				Session.tokenKey = nil
-				SceneDelegate.navigationStack.push(AuthCoordinator(navigationStack: SceneDelegate.navigationStack))
-				return .failure(APIError(message: "User is suspended"))
-			} else { //guard ... for inactive network
+				//SceneDelegate.navigationStack.push(AuthCoordinator(navigationStack: SceneDelegate.navigationStack))
+				guard let result = response.data else { return .failure(APIError(message: "network error")) }
+				let result1 = try JSONDecoder().decode(APIError.self, from: result)
+				return .failure(APIError(message: result1.message))
+			} else {
 				guard let result = response.data else { return .failure(APIError(message: "network error")) }
 				let result1 = try JSONDecoder().decode(APIError.self, from: result)
 				return .failure(APIError(message: result1.localizedDescription))
 			}
 		} catch (let error) {
-			return .failure(error)
+			return .failure(APIError(message: error.localizedDescription))
 		}
 	}
 	
@@ -51,14 +53,6 @@ class API {
 		let parameters = ["email": email, "username": username, "password": password]
 		AF.request(path, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseData { response in
 			let result: Result<AuthResult> = handleResponse(response: response)
-			switch result {
-				case .success(let result):
-					print(result)
-				case .failure(let error):
-					print(error)
-					if error.localizedDescription == "User is suspended" {
-					}
-			}
 			callback(result)
 		}
 	}
@@ -130,6 +124,7 @@ class API {
 			let path = baseUrl + "bookings/?start=0&pageSize=\(pageSize)"
 			AF.request(path, method: .get, headers: header).validate().responseData { response in
 				let result: Result<TripResult> = handleResponse(response: response)
+				print(response.response?.statusCode)
 				callback(result)
 			}
 		}

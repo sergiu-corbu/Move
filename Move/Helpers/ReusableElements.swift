@@ -273,6 +273,23 @@ struct SharedElements {
 		return Color.white.edgesIgnoringSafeArea(.all)
 	}
 
+	struct ClusterPin: View {
+		let number: Int
+		let onTapCluster: () -> Void
+		
+		var body: some View {
+			Image("pin-fill-img")
+				.overlay(
+					Text(number.description)
+						.font(.caption)
+						.padding(.bottom, 5)
+				)
+				.onTapGesture {
+					onTapCluster()
+				}
+			
+		}
+	}
 }
 
 struct TripReusable {

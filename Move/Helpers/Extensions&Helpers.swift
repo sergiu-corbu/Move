@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 import SwiftMessages
 import MapKit
+import NavigationStack
+
 
 //MARK: MapDefaultRegion
 extension MKCoordinateRegion {
@@ -18,7 +20,6 @@ extension MKCoordinateRegion {
 }
 
 //MARK: swiftui view to UIView
-
 extension View {
 	func uiImage() -> UIImage {
 		let controller = UIHostingController(rootView: self)

@@ -11,16 +11,13 @@ struct ScootersRow: View {
 	let allScooters: [Scooter]
 	
     var body: some View {
-		ScrollView(.horizontal, showsIndicators: false) {
-			ForEach(0..<allScooters.count) { index in
-				//ScooterViewItem(scooter: allScooters[index], isUnlocked: .constant(false), onTapp: {})
-			}
-		}
-    }
+		EmptyView()
+	}
 }
 
 struct ScootersRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ScootersRow(allScooters: [])
+		ScootersRow(allScooters: [Scooter(id: "123", location: Location(coordinates: [0,0], type: ""), available: true, locked: true, deviceKey: "123", battery: 90),
+								  Scooter(id: "123", location: Location(coordinates: [0,0], type: ""), available: true, locked: true, deviceKey: "123", battery: 90),Scooter(id: "123", location: Location(coordinates: [0,0], type: ""), available: true, locked: true, deviceKey: "123", battery: 90),Scooter(id: "123", location: Location(coordinates: [0,0], type: ""), available: true, locked: true, deviceKey: "123", battery: 90)])
     }
 }

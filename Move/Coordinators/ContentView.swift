@@ -9,8 +9,8 @@ import NavigationStack
 
 struct ContentView: View {
 	@State var isLoading: Bool = false
-	
-	var navigationStack: NavigationStack = SceneDelegate.navigationStack
+	@StateObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
+	//var navigationStack: NavigationStack = SceneDelegate.navigationStack
 
 	var body: some View {
 		if Session.tokenKey != nil && Session.licenseVerified {
@@ -18,7 +18,7 @@ struct ContentView: View {
 				MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView()))
 			} } else {
 				NavigationStackView(navigationStack: navigationStack) {
-					AuthCoordinator(navigationStack: navigationStack)
+					AuthCoordinator()
 				}
 			}
 	}

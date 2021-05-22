@@ -11,25 +11,28 @@ import SwiftUI
 import CoreLocation
 
 struct MapCoordinator: View {
-	
-	@ObservedObject var navigationStack: NavigationStack
+	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	@StateObject var mapViewModel: MapViewModel = MapViewModel()
 	@StateObject var tripViewModel: TripViewModel = TripViewModel()
 	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
-
+	@State var showScooters: Bool = false
 	@State var bottomContainer: AnyView
 
 	var body: some View {
 		ZStack(alignment: .bottom) {
 			InteractiveMap(onMenu: { menuCoordinator() }, onScooterSelected: {  selectedScooter in
-				showUnlockMethods()
-				//showScooterCard(selectedScooter: selectedScooter)
+				if selectedScooter.count > 1 {
+					showScooterRow(scooterList: selectedScooter)
+				} else {
+					showUnlockMethods()
+				}
 				})
 			bottomContainer
 		}
 		.environmentObject(tripViewModel)
 		.environmentObject(mapViewModel)
 		.onAppear {
+			print(Session.tokenKey)
 			tripViewModel.updateTrip() {
 				if tripViewModel.ongoing {
 					unwrapScooter { scooter in
@@ -51,13 +54,21 @@ struct MapCoordinator: View {
 		}
 	}
 	
-	func showScooterCard(selectedScooter: Scooter) {
-		bottomContainer = AnyView(ScooterCard( onUnlock: {
-			showUnlockMethods()
-		}, onDragDown: {
-			bottomContainer = AnyView(EmptyView())
-			mapViewModel.selectedScooter = nil
-		}))
+	func showScooterRow(scooterList: [Scooter]) {
+		bottomContainer = AnyView(
+			ScrollView(.horizontal, showsIndicators: false) {
+				HStack {
+					ForEach(0..<scooterList.count) { index in
+						ScooterCard(scooter: scooterList[index], onUnlock: {
+							mapViewModel.selectedScooter = scooterList[index]
+							showUnlockMethods()
+						})
+					}
+				}
+				.padding(.leading, 10)
+				.padding(.bottom, 20)
+			}
+		)
 	}
 	
 	func showUnlockMethods() {
@@ -154,6 +165,6 @@ struct MapCoordinator: View {
 	}
 		
 	func menuCoordinator() {
-		navigationStack.push(MenuCoordinator(navigationStack: navigationStack, tripViewModel: tripViewModel))
+		navigationStack.push(MenuCoordinator().environmentObject(tripViewModel))
 	}
 }

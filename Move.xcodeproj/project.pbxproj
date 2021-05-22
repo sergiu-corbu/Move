@@ -20,6 +20,7 @@
 		EC16143F2637148000931AF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC16143E2637148000931AF0 /* LaunchScreen.storyboard */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
+		EC33EABB26590F39001AAB27 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = EC33EABA26590F39001AAB27 /* SwiftUIPager */; };
 		EC3A259E2654FD920056A725 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A259D2654FD920056A725 /* MenuCoordinator.swift */; };
 		EC3A25A226555F8B0056A725 /* QRCameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */; };
 		EC3A25A4265562800056A725 /* QRCameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A3265562800056A725 /* QRCameraPreview.swift */; };
@@ -147,6 +148,7 @@
 				EC8A842226543DA500A75BF0 /* ExternalAccessory.framework in Frameworks */,
 				ECDD3FE626242951003C659F /* NavigationStack in Frameworks */,
 				ECDD3FE226242943003C659F /* Alamofire in Frameworks */,
+				EC33EABB26590F39001AAB27 /* SwiftUIPager in Frameworks */,
 				EC0EDD5226369312006B6D9D /* Introspect in Frameworks */,
 				EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */,
 				EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */,
@@ -384,6 +386,7 @@
 				EC5F17952626D38800A10368 /* BetterSafariView */,
 				EC7F0EE026301A30004FF766 /* SwiftMessages */,
 				EC0EDD5126369312006B6D9D /* Introspect */,
+				EC33EABA26590F39001AAB27 /* SwiftUIPager */,
 			);
 			productName = Move;
 			productReference = ECDD3FBA26242836003C659F /* Move.app */;
@@ -418,6 +421,7 @@
 				EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
 				EC7F0EDF26301A30004FF766 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 				EC0EDD5026369312006B6D9D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				EC33EAB926590F39001AAB27 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
 			);
 			productRefGroup = ECDD3FBB26242836003C659F /* Products */;
 			projectDirPath = "";
@@ -702,6 +706,14 @@
 				minimumVersion = 0.1.3;
 			};
 		};
+		EC33EAB926590F39001AAB27 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
 		EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
@@ -741,6 +753,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC0EDD5026369312006B6D9D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		EC33EABA26590F39001AAB27 /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC33EAB926590F39001AAB27 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
 		};
 		EC5F17952626D38800A10368 /* BetterSafariView */ = {
 			isa = XCSwiftPackageProductDependency;

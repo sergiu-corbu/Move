@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AuthCoordinator: View {
 	@State private var isLoading = false
-	@ObservedObject var navigationStack: NavigationStack
+	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	
 	var body: some View {
 		Onboarding(onFinished: { registerCoordinator() })
@@ -43,7 +43,7 @@ struct AuthCoordinator: View {
 	}
 	
 	func mapCoodinator() {
-		navigationStack.push(MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView())))
+		navigationStack.push(MapCoordinator(bottomContainer: AnyView(EmptyView())))
 	}
 	func loginCoordinator() {
 		navigationStack.push(Login(onLoginCompleted: { mapCoodinator() },

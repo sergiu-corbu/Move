@@ -8,13 +8,42 @@
 import Foundation
 import CoreLocation
 import MapKit
+import SwiftUI
+import NavigationStack
 
 class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 	
+	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	@Published var allScooters: [Scooter] = []
 	@Published var scooterLocation: String = ""
 	@Published var selectedScooter: Scooter?
 	@Published var locationManager = LocationManager()
+	@Published var clusters: [Cluster] = []
+	
+	func makeClusters() {
+		for i in 0..<allScooters.count {
+			var currentCluster: Cluster = Cluster()
+			var currentScooter: Scooter = allScooters[i]
+			for j in i + 1..<allScooters.count {
+				if currentScooter.scooterLocation.distance(from: allScooters[j].scooterLocation) < 40 && !allScooters[j].isInCluster {
+					if !currentScooter.isInCluster {
+						currentCluster.scooters.append(currentScooter)
+						currentCluster.scooters.append(allScooters[j])
+					} else {
+						currentCluster.scooters.append(allScooters[j])
+					}
+					currentScooter.isInCluster = true
+					allScooters[j].isInCluster = true
+				}
+			}
+			if !currentScooter.isInCluster {
+				currentCluster.scooters.append(currentScooter)
+			}
+			if !currentCluster.scooters.isEmpty {
+				clusters.append(currentCluster)
+			}
+		}
+	}
 	
 	var userLocation: CLLocationCoordinate2D? {
 		didSet {
@@ -43,8 +72,14 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 			switch result {
 				case .success(let scooters):
 					self.allScooters = scooters
+					self.makeClusters()
 				case .failure(let error):
-					showError(error: error.localizedDescription)
+					if error.localizedDescription == "You are not authorized to access this resource." {
+						self.navigationStack.push(AuthCoordinator())
+						showError(error: "User suspended")
+					} else {
+						showError(error: error.localizedDescription)
+					}
 			}
 		}
 	}
@@ -64,4 +99,24 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
             completion(result)
         }
     }
+}
+
+struct Cluster: Identifiable {
+	var id = UUID()
+	var scooters: [Scooter] = []
+	var latitude: Double {
+		var median: Double = 0
+		for scooter in scooters {
+			median += scooter.coordinates.latitude
+		}
+		return median / Double(scooters.count)
+	}
+	
+	var longitude: Double {
+		var median: Double = 0
+		for scooter in scooters {
+			median += scooter.coordinates.longitude
+		}
+		return median / Double(scooters.count)
+	}
 }

@@ -6,13 +6,16 @@
 //
 
 import Foundation
+import SwiftUI
+import NavigationStack
 
 class UserViewModel: ObservableObject {
+	@EnvironmentObject var navigationStack: NavigationStack
 	static var shared: UserViewModel = UserViewModel()
     //MARK: Register & Login
-	@Published var email: String = ""
+	@Published var email: String = "sergiu_@icloud.com"
     @Published var username: String = ""
-    @Published var password: String = ""
+    @Published var password: String = "123456Ss"
 	@Published var emailError = ""
 	@Published var passwordError = ""
     
@@ -64,8 +67,17 @@ class UserViewModel: ObservableObject {
 					Session.username = result.user.username
 					callback()
 				case .failure(let error):
-					showError(error: error.localizedDescription)
-					self.clearFields()
+					break
+//					checkFor401(failureMessage: error.localizedDescription) { isSuspended in
+//						print(isSuspended)
+//						if isSuspended {
+//							self.navigationStack.push(ContentView())
+//						} else {
+//							self.clearFields()
+//							showError(error: error.localizedDescription)
+//						}
+//					}
+					
 			}
 			self.isLoading = false
 		}

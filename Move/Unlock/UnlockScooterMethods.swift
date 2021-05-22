@@ -15,6 +15,7 @@ struct UnlockScooterMethods: View {
 	
 	let unlockMethod: (UnlockType) -> Void
 	let onDragDown: () -> Void
+	
 	var userLocation: CLLocation {
 		if let location = mapViewModel.locationManager.location {
 			return CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)

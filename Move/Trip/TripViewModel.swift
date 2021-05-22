@@ -9,10 +9,12 @@ import Foundation
 import SwiftUI
 import MapKit
 import CoreLocation
+import NavigationStack
 
 class TripViewModel: ObservableObject {
 	
 	@EnvironmentObject var mapViewModel: MapViewModel
+	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	
 	@Published var tripCount: Int = 0
 	@Published var currentTripTime: Int = 0
@@ -27,7 +29,9 @@ class TripViewModel: ObservableObject {
 	// put them inside a class
 	@Published var path: [[Double]] = []
 	
-
+//	init(navigationStack: NavigationStack) {
+//		self.navigationStack = navigationStack
+//	}
 	func streetsGeocode(_ callback: @escaping () -> Void) {
 		let geocoder = CLGeocoder()
 		let startCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: path[0][1], longitude: path[0][0])
@@ -69,7 +73,13 @@ class TripViewModel: ObservableObject {
 				case .success(let trips):
 					self.allTrips = trips.trips
 					self.tripCount = trips.totalTrips
-				case .failure(let error): showError(error: error.localizedDescription)
+				case .failure(let error):
+					if error.localizedDescription == "You are not authorized to access this resource." {
+						self.navigationStack.push(AuthCoordinator())
+						showError(error: "User suspended")
+					} else {
+						showError(error: error.localizedDescription)
+					}
 			}
 		})
 	}
@@ -84,7 +94,12 @@ class TripViewModel: ObservableObject {
 					self.ongoing = currentTrip.trip.ongoing
 					self.path = currentTrip.trip.path
 					callback?()
-				case .failure: break
+				case .failure(let error):
+					if error.localizedDescription == "You are not authorized to access this resource." {
+						self.navigationStack.push(AuthCoordinator())
+//					} else {
+//						showError(error: error.localizedDescription)
+					}
 			}
 		}
 	}
@@ -93,7 +108,6 @@ class TripViewModel: ObservableObject {
 		updateTrip {
 			callback?()
 			DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-				print("trip updated..")
 				self.updateTripContinuosly()
 			}
 		}
@@ -111,7 +125,11 @@ class TripViewModel: ObservableObject {
 //						print(self.tripRegion)
 						callback()
 					case .failure(let error):
-						showError(error: error.localizedDescription)
+						if error.localizedDescription == "You are not authorized to access this resource." {
+							self.navigationStack.push(AuthCoordinator())
+						} else {
+							showError(error: error.localizedDescription)
+						}
 						callback()
 				}
 			}

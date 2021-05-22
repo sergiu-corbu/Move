@@ -10,8 +10,8 @@ import NavigationStack
 
 struct MenuCoordinator: View {
 	
-	@ObservedObject var navigationStack: NavigationStack
-	@ObservedObject var tripViewModel: TripViewModel
+	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
+	@EnvironmentObject var tripViewModel: TripViewModel
 	
     var body: some View {
 		Menu(onBack: { navigationStack.pop() }, onSeeAll: {
@@ -26,7 +26,7 @@ struct MenuCoordinator: View {
 
 	func accountCoordinator() {
 		navigationStack.push(Account(onBack: { navigationStack.pop() },
-									 onLogout: { navigationStack.push(AuthCoordinator(navigationStack: NavigationStack()))},
+									 onLogout: { navigationStack.push(ContentView())},
 									 onSave: { navigationStack.pop() }))
 	}
 	
