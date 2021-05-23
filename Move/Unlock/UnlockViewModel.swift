@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import UIKit
-import CoreLocation
 
 class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 	
@@ -16,13 +15,13 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 	@Published var selectedIndex: Int = 0
 	
 	let scooter: Scooter
-	let userLocation: [Double]
+	let userCoordinates: [Double]
 	var codeString: String = ""
 	var onFinishedUnlock: (() -> Void)?
 	
-	init(scooter: Scooter, userLocation: [Double]) {
+	init(scooter: Scooter, coordinates: [Double]) {
 		self.scooter = scooter
-		self.userLocation = userLocation
+		self.userCoordinates = coordinates
 	}
 	
 	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -31,12 +30,12 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 		if selectedIndex  < 3 { selectedIndex += 1 }
 		else {
 			textField.resignFirstResponder()
-			API.unlockScooterPin(code: codeString, location: userLocation) { result in
+			API.unlockScooterPin(code: codeString, location: userCoordinates) { result in
 				switch result {
 					case .success:
 						self.onFinishedUnlock?()
-					case .failure:
-						showError(error: "Incorect code")
+					case .failure(let error):
+						showError(error: error.localizedDescription)
 						self.codeString = ""
 						self.selectedIndex = 0
 						self.unlockCode = ["", "", "", ""]

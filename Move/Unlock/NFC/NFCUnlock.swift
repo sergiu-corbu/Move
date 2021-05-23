@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NFCUnlock: View {
-
+	
+	@ObservedObject var nfcReader = NFCReader()
 	@State private var animate: Bool = false
 	
 	let onClose: () -> Void
@@ -42,6 +43,9 @@ struct NFCUnlock: View {
 		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.purpleBackground)
+		.onAppear {
+			nfcReader.scan()
+		}
 	}
 }
 

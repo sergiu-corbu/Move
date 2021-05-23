@@ -7,9 +7,7 @@
 
 import Foundation
 import Alamofire
-import CoreLocation
 import SwiftUI
-import NavigationStack
 
 typealias Result<T> = Swift.Result<T, APIError>
 
@@ -33,7 +31,6 @@ class API {
 				return .success(result)
 			} else if response.response?.statusCode == 401 {
 				Session.tokenKey = nil
-				//SceneDelegate.navigationStack.push(AuthCoordinator(navigationStack: SceneDelegate.navigationStack))
 				guard let result = response.data else { return .failure(APIError(message: "network error")) }
 				let result1 = try JSONDecoder().decode(APIError.self, from: result)
 				return .failure(APIError(message: result1.message))
@@ -88,12 +85,13 @@ class API {
 	}
 	
 	//MARK: Scooter
-    static func getScooters(coordinates: CLLocationCoordinate2D ,_ callback: @escaping (Result<[Scooter]>) -> Void) {
-		let path = baseUrl + "scooters/inradius?longitude=\(coordinates.longitude)&latitude=\(coordinates.latitude)"
-        let parameters = ["longitude": coordinates.longitude, "latitude": coordinates.latitude]
-		AF.request(path, parameters: parameters).validate().responseData { response in
-			let result: Result<[Scooter]> = handleResponse(response: response)
-			callback(result)
+    static func getScooters(coordinates: [Double], _ callback: @escaping (Result<[Scooter]>) -> Void) {
+		requestBody { header in
+			let path = baseUrl + "scooters/inradius?longitude=\(coordinates[1])&latitude=\(coordinates[0])"
+			AF.request(path, headers: header).validate().responseData { response in
+				let result: Result<[Scooter]> = handleResponse(response: response)
+				callback(result)
+			}
 		}
 	}
 
@@ -153,15 +151,16 @@ class API {
 		}
 	}
 	
-	static func updateTrip(_ callback: @escaping (Result<OngoingTripResult>) -> Void) {
+	static func updateTrip(_ callback: @escaping (Result<OngoingTrip>) -> Void) {
 		requestBody { header in
 			let path = baseUrl + "bookings/ongoing"
 			AF.request(path, method: .get, headers: header).validate().responseData { response in
-				let result: Result<OngoingTripResult> = handleResponse(response: response)
+				let result: Result<OngoingTrip> = handleResponse(response: response)
 				callback(result)
 			}
 		}
 	}
+	
 	static func uploadLicense(selectedImage: Image, _ callback: @escaping (Result<UploadImage>) -> Void) {
 		requestBody { header in
 			let path = baseUrl + "users/upload"
@@ -170,8 +169,7 @@ class API {
 			AF.upload(multipartFormData: { multipartFormData in
 				if let data = imageData {
 					multipartFormData.append(data, withName: "file", fileName: "image.jpg")
-				}
-			}, to: path, usingThreshold: UInt64.init(), method: .post, headers: header, fileManager: FileManager.default).validate().responseData {
+				} }, to: path, usingThreshold: UInt64.init(), method: .post, headers: header, fileManager: FileManager.default).validate().responseData {
 				response in
 				let result: Result<UploadImage> = handleResponse(response: response)
 				callback(result)

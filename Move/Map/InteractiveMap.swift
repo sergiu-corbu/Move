@@ -16,33 +16,35 @@ struct InteractiveMap: View {
 	@State private var showAlert: Bool = false
 	
 	let onMenu: () -> Void
-	let onScooterSelected: ([Scooter]) -> Void
+	let scootersInCluster: ([Scooter]) -> Void
 	
 	var body: some View {
-		
 		ZStack(alignment: .top) {
-			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.locationManager.showLocation, annotationItems: !Session.ongoingTrip ? mapViewModel.clusters : []) { cluster in
+			Map(coordinateRegion: $region, interactionModes: .all, showsUserLocation: mapViewModel.locationManager.showUserLocation, annotationItems: !Session.ongoingTrip ? mapViewModel.clusters : []) { cluster in
 				MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: cluster.latitude, longitude: cluster.longitude)) {
 					if cluster.scooters.count > 1 {
 						SharedElements.ClusterPin(number: cluster.scooters.count, onTapCluster: {
-							onScooterSelected(cluster.scooters)
+							scootersInCluster(cluster.scooters)
 						})
 					} else {
-						Image("pin-fill-active-img")
+						SharedElements.singleScooter
 							.onTapGesture {
 								mapViewModel.selectScooter(scooter: cluster.scooters[0])
 								if let currentScooter = mapViewModel.selectedScooter {
-									onScooterSelected([currentScooter])
+									scootersInCluster([currentScooter])
 								}
 							}
 					}
 				}
 			}
+			.edgesIgnoringSafeArea(.all)
 			.onAppear {
+				if !Session.ongoingTrip {
+					mapViewModel.reloadData()
+				}
 				manageLocation()
 			}
-			.edgesIgnoringSafeArea(.all)
-			SharedElements.MapBarItems(menuAction: { onMenu() }, text: mapViewModel.locationManager.cityName, locationEnabled: mapViewModel.locationManager.showLocation, centerLocation: { centerViewOnUserLocation() } )
+			SharedElements.MapBarItems(menuAction: { onMenu() }, text: mapViewModel.locationManager.cityName, locationEnabled: mapViewModel.locationManager.showUserLocation, centerLocation: { centerViewOnUserLocation() } )
 		}
 		.alert(isPresented: $showAlert) {
 			Alert.init(title: Text("Enable location services"),
@@ -53,19 +55,17 @@ struct InteractiveMap: View {
 	}
 	
 	private func manageLocation() {
-		if mapViewModel.locationManager.showLocationAlert {
+		if mapViewModel.locationManager.locationDisabled {
 			showAlert = true
 		} else {
-		//	centerViewOnUserLocation()
-			if mapViewModel.locationManager.showLocation {
+			if mapViewModel.locationManager.showUserLocation {
 				DispatchQueue.main.async { centerViewOnUserLocation() }
 			}
 		}
 	}
 	
 	private func centerViewOnUserLocation() {
-		guard let location = mapViewModel.locationManager.locationManager.location?.coordinate else { return }
-		region = MKCoordinateRegion(center: location, latitudinalMeters: 900, longitudinalMeters: 900)
-		mapViewModel.userLocation = location
+		guard let location = mapViewModel.locationManager.locationManager.location else { return }
+		region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 900, longitudinalMeters: 900)
 	}
 }

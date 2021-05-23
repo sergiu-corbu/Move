@@ -7,15 +7,14 @@
 
 import Foundation
 import CoreLocation
-import MapKit
 
 class LocationManager: NSObject, ObservableObject {
 	
 	@Published var locationManager = CLLocationManager()
 	@Published var location: CLLocation?
 	@Published var cityName: String = "Allow location"
-	@Published var showLocation: Bool = false
-	@Published var showLocationAlert: Bool = false
+	@Published var showUserLocation: Bool = false
+	@Published var locationDisabled: Bool = false
 	
 	private let geocoder = CLGeocoder()
 	
@@ -26,16 +25,12 @@ class LocationManager: NSObject, ObservableObject {
 	
 	func checkLocationServices() {
 		if CLLocationManager.locationServicesEnabled() {
-			setupLocationManager()
+			locationManager.delegate = self
+			locationManager.desiredAccuracy = kCLLocationAccuracyBest
 			checkLocationAuthorization()
 		} else {
-			showLocationAlert = true
+			locationDisabled = true
 		}
-	}
-	
-	func setupLocationManager() {
-		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 	}
 	
 	func checkLocationAuthorization() {
@@ -53,9 +48,9 @@ class LocationManager: NSObject, ObservableObject {
 	}
 	
 	func startTrackingUserLocation() {
-		showLocation = true
-		locationManager.startUpdatingLocation()
+		showUserLocation = true
 		geoCode()
+		locationManager.startUpdatingLocation()
 	}
 	
 	func geoCode() {
@@ -68,7 +63,7 @@ class LocationManager: NSObject, ObservableObject {
 			guard let self = self else {
 				showError(error: "Unknown place")
 				return
-			}//treat error
+			}
 			guard let placemark = placemarks?.first else { return }
 			self.cityName = placemark.locality ?? "Not found"
 		}
@@ -76,13 +71,13 @@ class LocationManager: NSObject, ObservableObject {
 }
 
 extension LocationManager: CLLocationManagerDelegate {
-	
+
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		guard let location = locations.last else { return }
 		DispatchQueue.main.async {
 			self.location = location
 			self.locationManager.startUpdatingLocation()
-			self.geoCode()
+			//self.geoCode()
 		}
 	}
 }

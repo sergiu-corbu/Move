@@ -16,8 +16,7 @@ struct MenuCoordinator: View {
     var body: some View {
 		Menu { menuNavigation in
 			handleMenuNavigation(type: menuNavigation)
-		}
-		.environmentObject(tripViewModel)
+		}.environmentObject(tripViewModel)
     }
 	
 	func handleMenuNavigation(type: MenuNavigation) {
@@ -44,9 +43,7 @@ struct MenuCoordinator: View {
 	func goToHistory() {
 		navigationStack.push(History { historyNavigation in
 				handleMenuNavigation(type: historyNavigation)
-			}
-			.environmentObject(tripViewModel)
-		)
+			}.environmentObject(tripViewModel))
 	}
 	
 	func passwordCoordinator() {

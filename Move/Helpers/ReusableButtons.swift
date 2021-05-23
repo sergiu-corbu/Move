@@ -28,7 +28,7 @@ struct Buttons {
 								Font.custom(FontManager.Primary.medium, size: 16))
 						.frame(maxWidth: .infinity)
 						.padding(.horizontal, 46)
-						.padding(.all, 20)
+							.padding(.all, 20)
 						.background(buttonBackground)
 						if isLoading == true {
 							progressView

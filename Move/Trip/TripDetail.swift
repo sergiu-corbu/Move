@@ -16,11 +16,9 @@ struct TripDetail: View {
 	@State private var isExpanded: Bool = false
 	
 	var scooter: Scooter
-	
 	let onEndRide: () -> Void
 	
 	var body: some View {
-		
 		if !isExpanded {
 			mainBody
 				.gesture(
@@ -72,7 +70,7 @@ struct TripDetail: View {
 		.background(SharedElements.whiteBackground)
 	}
 
-	private var tripButtons: some View {
+	var tripButtons: some View {
 		ScooterCardComponents.TripButtons(isLockedPressed: $buttonPressed, isLoading: $endTrip, onLockButton: {
 			tripViewModel.lockScooter()
 			buttonPressed.toggle()

@@ -9,7 +9,6 @@ import NavigationStack
 import SwiftUI
 
 struct AuthCoordinator: View {
-	
 	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	
 	var body: some View {
@@ -62,5 +61,4 @@ struct AuthCoordinator: View {
 			handleAuthNavigation(type: authNavigation)
 		})
 	}
-	
 }

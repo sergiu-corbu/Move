@@ -79,7 +79,7 @@ struct EndTripResult: Codable {
 	}
 }
 
-struct OngoingTrip: Codable {
+struct OngoingTripDecoding: Codable {
 	
 	var ongoing: Bool
 	var path: [[Double]]
@@ -92,9 +92,9 @@ struct OngoingTrip: Codable {
 	}
 }
 
-struct OngoingTripResult: Codable {
+struct OngoingTrip: Codable {
 	
-	var trip: OngoingTrip
+	var trip: OngoingTripDecoding
 	var distance: Int
 	var duration: Int
 	

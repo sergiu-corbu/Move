@@ -11,6 +11,7 @@ struct StartRide: View {
 	
 	@EnvironmentObject var mapViewModel: MapViewModel
 	@State private var isLoading: Bool = false
+	
 	let onStartRide: () -> Void
 	
 	var body: some View {
@@ -24,14 +25,15 @@ struct StartRide: View {
 						.padding(.top, 5)
 				}
 				.padding(.top, 30)
-				ScooterCardComponents.scooterImage.padding(.trailing, -24)
+				ScooterCardComponents.scooterImage
+					.padding(.trailing, -24)
 			}
 			.padding(.top)
 			Buttons.PrimaryButton(text: "Start ride", isLoading: isLoading, enabled: true, action: {
-									self.isLoading.toggle()
-									onStartRide()
+				self.isLoading.toggle()
+				onStartRide()
 			})
-				.padding(.bottom, -10)
+			.padding(.bottom, -10)
 		}
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteRoundedRectangle)

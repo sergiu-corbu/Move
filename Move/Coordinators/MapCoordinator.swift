@@ -19,7 +19,7 @@ struct MapCoordinator: View {
 
 	var body: some View {
 		ZStack(alignment: .bottom) {
-			InteractiveMap(onMenu: { menuCoordinator() }, onScooterSelected: {  selectedScooter in
+			InteractiveMap(onMenu: { menuCoordinator() }, scootersInCluster: { selectedScooter in
 				selectedScooter.count > 1 ? showScooterRow(scooterList: selectedScooter) : showUnlockMethods()
 			})
 			bottomContainer
@@ -27,16 +27,7 @@ struct MapCoordinator: View {
 		.environmentObject(tripViewModel)
 		.environmentObject(mapViewModel)
 		.onAppear {
-			tripViewModel.updateTrip() {
-				if tripViewModel.ongoing {
-					unwrapScooter { scooter in
-						stopWatch.stopWatch.time = tripViewModel.currentTripTime / 100000
-						showTripDetail(currentScooter: scooter)
-						tripViewModel.updateTripContinuosly()
-						stopWatch.startTimer()
-					}
-				}
-			}
+			checkForOngoingTrip()
 		}
 	}
 	
@@ -49,25 +40,15 @@ struct MapCoordinator: View {
 	}
 	
 	func showScooterRow(scooterList: [Scooter]) {
-		bottomContainer = AnyView(
-			//ScootersRow(scooterList: scooterList)
-			ScrollView(.horizontal, showsIndicators: false) {
-				HStack {
-					ForEach(0..<scooterList.count) { index in
-						ScooterCard(scooter: scooterList[index], onUnlock: {
-							mapViewModel.selectedScooter = scooterList[index]
-							showUnlockMethods()
-						})
-					}
-				}
-				.padding(.leading, 10)
-				.padding(.bottom, 20)
-			}
-		)
+		bottomContainer = AnyView(ScootersRow(scooterList: scooterList, onSelectScooter: { scooter in
+			mapViewModel.selectedScooter = scooter
+			showUnlockMethods()
+		}))
 	}
 	
 	func showUnlockMethods() {
-		bottomContainer = AnyView(UnlockScooterMethods(unlockMethod: { unlockType in
+		guard let selectedScooter = mapViewModel.selectedScooter else { return }
+		bottomContainer = AnyView(UnlockMethods(scooter: selectedScooter, unlockMethod: { unlockType in
 			unlckTypeCoordinator( type: unlockType)
 		}, onDragDown: {
 			bottomContainer = AnyView(EmptyView())
@@ -80,8 +61,7 @@ struct MapCoordinator: View {
 			showError(error: "Scooter not available")
 			return
 		}
-		
-		bottomContainer = AnyView(CodeUnlock(unlockViewModel: UnlockViewModel(scooter: selectedScooter, userLocation: getUserCoordinates() ) , onClose: {
+		bottomContainer = AnyView(CodeUnlock(unlockViewModel: UnlockViewModel(scooter: selectedScooter, coordinates: mapViewModel.userCoordinates), onClose: {
 			showUnlockMethods()
 		}, onFinished: {
 			showUnlockSuccess()
@@ -143,14 +123,6 @@ struct MapCoordinator: View {
 			bottomContainer = AnyView(EmptyView())
 		}))
 	}
-
-	func getUserCoordinates() -> [Double] {
-		var userCoordinates: [Double] = []
-		guard let coordinates = mapViewModel.locationManager.location else { return [0.0, 0,0] }
-		userCoordinates.append(coordinates.coordinate.latitude)
-		userCoordinates.append(coordinates.coordinate.longitude)
-		return userCoordinates
-	}
 	
 	private func unwrapScooter(_ callback: @escaping (Scooter) -> Void) {
 		guard let scooter = tripViewModel.currentTripScooter else {
@@ -158,6 +130,19 @@ struct MapCoordinator: View {
 			return
 		}
 		callback(scooter)
+	}
+	
+	func checkForOngoingTrip() {
+		tripViewModel.updateTrip() {
+			if tripViewModel.ongoing {
+				unwrapScooter { scooter in
+					stopWatch.stopWatch.time = tripViewModel.currentTripTime / 100000
+					showTripDetail(currentScooter: scooter)
+					tripViewModel.updateTripContinuosly()
+					stopWatch.startTimer()
+				}
+			}
+		}
 	}
 		
 	func menuCoordinator() {

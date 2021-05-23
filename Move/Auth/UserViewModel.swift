@@ -13,14 +13,12 @@ class UserViewModel: ObservableObject {
 	
 	@EnvironmentObject var navigationStack: NavigationStack
 	static var shared: UserViewModel = UserViewModel()
-    //MARK: Register & Login
-	@Published var email: String = ""
+  
+	@Published var email: String = "sergiu_@icloud.com"
     @Published var username: String = ""
-    @Published var password: String = ""
+    @Published var password: String = "123456Ss"
 	@Published var emailError = ""
 	@Published var passwordError = ""
-    
-	//MARK: Reset password
 	@Published var newPassword: String = ""
 	@Published var newPasswordError: String = ""
 	@Published var isActive: Bool = false
@@ -69,6 +67,7 @@ class UserViewModel: ObservableObject {
 					callback()
 				case .failure(let error):
 					showError(error: error.localizedDescription)
+					self.clearFields()
 			}
 			self.isLoading = false
 		}

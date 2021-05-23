@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScooterCard: View {
 	
+	@EnvironmentObject var mapViewModel: MapViewModel
 	let scooter: Scooter
 	let onUnlock: () -> Void
 	
@@ -25,10 +26,12 @@ struct ScooterCard: View {
 				}
 				location
 				Buttons.PrimaryButton(text: "Unlock", isLoading: false, enabled: true, action: { onUnlock() })
+					.padding(.bottom, -24)
+					.padding(.top, -12)
 			}
 			.padding(.horizontal, 24)
 		}
-		.frame(width: 250, height: 315)
+		.frame(width: 250, height: 290)
 		.clipShape(RoundedRectangle(cornerRadius: 29))
 		.padding(.bottom)
 		.background(customBackground)
@@ -48,18 +51,9 @@ struct ScooterCard: View {
 			}.padding(.bottom, 15)
             HStack {
 				Buttons.MapActionButton(image: "bell-img", action: {
-//					API.pingScooter(scooterKey: mapViewModel.selectedScooter?.deviceKey ?? "") { result in
-//						switch result {
-//							case .success(let result):
-//								showMessage(message: String(result.ping))
-//							case .failure(let error):
-//								showError(error: error.localizedDescription)
-//						}
-//					}
+				//	mapViewModel.pingScooter(scooter: scooter)
                 }).padding(.trailing, 20)
-				Buttons.MapActionButton(image: "getRoute-img", action: {
-                    //open maps & navigate
-                })
+				Buttons.MapActionButton(image: "getRoute-img", action: {})
             }
         }
 		.foregroundColor(.darkPurple)

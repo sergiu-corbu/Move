@@ -8,7 +8,10 @@
 import Foundation
 import CoreNFC
 
-class NFCReader: NSObject, NFCTagReaderSessionDelegate {
+class NFCReader: NSObject, NFCTagReaderSessionDelegate, ObservableObject {
+	
+	@Published var scannedCode: Data?
+	
 	func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
 		//
 	}

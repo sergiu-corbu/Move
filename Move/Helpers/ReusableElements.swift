@@ -209,6 +209,12 @@ struct CustomField: View {
 
 struct SharedElements {
 	
+	static var singleScooter: some View {
+		Image("pin-fill-active-img")
+			.frame(width: 50, height: 50)
+			.clipShape(Capsule())
+	}
+	
 	static var checkmarkImage: some View {
 		Image("checkmark-img")
 			.resizable()
@@ -279,6 +285,8 @@ struct SharedElements {
 		
 		var body: some View {
 			Image("pin-fill-img")
+				.frame(width: 50, height: 50)
+				.clipShape(Capsule())
 				.overlay(
 					Text(number.description)
 						.font(.caption)
@@ -287,7 +295,6 @@ struct SharedElements {
 				.onTapGesture {
 					onTapCluster()
 				}
-			
 		}
 	}
 }

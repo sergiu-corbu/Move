@@ -12,7 +12,6 @@ import CoreLocation
 struct FinishTrip: View {
 	
 	@EnvironmentObject var tripViewModel: TripViewModel
-	
 	@State var isLoading: Bool = false
 	@State var tripRegion: MKCoordinateRegion
 	
@@ -74,6 +73,7 @@ struct FinishTrip: View {
 	var tripStreets: some View {
 		VStack(alignment: .leading) {
 			TripReusable.TripLocation(infoText: "From", address: tripViewModel.startStreet, spaceBetween: 0.5, expandInline: true)
+				.padding(.top, 10)
 			TripReusable.TripLocation(infoText: "To", address: tripViewModel.startStreet, spaceBetween: 0.5, expandInline: true)
 				.padding(.bottom, 10)
 		}

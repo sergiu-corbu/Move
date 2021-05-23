@@ -68,18 +68,13 @@ class TripViewModel: ObservableObject {
 	}
 	
 	func downloadTrips(pageSize: Int) {
-		API.downloadTrips(pageSize: pageSize,  { result in
+		API.downloadTrips(pageSize: pageSize, { result in
 			switch result {
 				case .success(let trips):
 					self.allTrips = trips.trips
 					self.tripCount = trips.totalTrips
 				case .failure(let error):
-					if error.localizedDescription == "You are not authorized to access this resource." {
-						self.navigationStack.push(AuthCoordinator())
-						showError(error: "User suspended")
-					} else {
-						showError(error: error.localizedDescription)
-					}
+					handleFailure(error: error, navigationStack: self.navigationStack)
 			}
 		})
 	}
@@ -95,11 +90,7 @@ class TripViewModel: ObservableObject {
 					self.path = currentTrip.trip.path
 					callback?()
 				case .failure(let error):
-					if error.localizedDescription == "You are not authorized to access this resource." {
-						self.navigationStack.push(AuthCoordinator())
-//					} else {
-//						showError(error: error.localizedDescription)
-					}
+					handleFailure(error: error, navigationStack: self.navigationStack, hideError: true)
 			}
 		}
 	}
@@ -125,11 +116,7 @@ class TripViewModel: ObservableObject {
 //						print(self.tripRegion)
 						callback()
 					case .failure(let error):
-						if error.localizedDescription == "You are not authorized to access this resource." {
-							self.navigationStack.push(AuthCoordinator())
-						} else {
-							showError(error: error.localizedDescription)
-						}
+						handleFailure(error: error, navigationStack: self.navigationStack)
 						callback()
 				}
 			}

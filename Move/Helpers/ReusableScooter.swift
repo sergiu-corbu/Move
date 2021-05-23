@@ -184,7 +184,7 @@ struct ScooterCardComponents {
 				//ScooterCardComponents.EndTripButton(endTrip: { onEndTripButton() })
 				Buttons.PrimaryButton(text: "End", isLoading: isLoading, enabled: true, isBlackBackground: false, action: { onEndTripButton() })
 			}
-			.padding(.vertical, 10)
+			.padding(.top, 10)
 		}
 	}
 	

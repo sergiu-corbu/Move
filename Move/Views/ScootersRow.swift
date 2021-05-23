@@ -6,14 +6,44 @@
 //
 
 import SwiftUI
-import SwiftUIPager
+//import SwiftUIPager
 
 struct ScootersRow: View {
 	let scooterList: [Scooter]
-	//@StateObject var page: Page = .first()
-    var body: some View {
-		VStack {
-			Spacer()
+	let onSelectScooter: (Scooter) -> Void
+	
+	private func getScale(proxy: GeometryProxy) -> CGFloat {
+		var scale: CGFloat = 1
+		let x = proxy.frame(in: .global).minX
+		let diff = abs(x)
+		if diff < 130 {
+			scale = 1 + (120-diff) / 500
+		}
+		return scale
+	}
+	
+	var body: some View {
+		ScrollView(.horizontal, showsIndicators: false) {
+			HStack(spacing: 70) {
+				ForEach(0..<scooterList.count) { index in
+					GeometryReader { geometry in
+						let scale = getScale(proxy: geometry)
+						ScooterCard(scooter: scooterList[index], onUnlock: {
+							onSelectScooter(scooterList[index])
+						})
+						.scaleEffect(CGSize(width: scale, height: scale))
+						.offset(x: 50, y: 50)
+					}
+					.frame(width: 220, height: 380)
+				}
+			}
+			.padding(.horizontal, 10)
+		}
+	}
+}
+/*
+VStack {
+Spacer()
 //			Pager(page: self.page, data: self.scooters,  id: \.self) { scooter in
 //				VStack {
 //					Text("Page \(scooter.id)")
@@ -28,14 +58,7 @@ struct ScootersRow: View {
 //			.itemSpacing(10)
 //			.interactive(rotation: true)
 //			.interactive(scale: 0.8)
-		}
-		.background(Color.fadePurple2)
-	}
 }
-
-struct ScootersRowView_Previews: PreviewProvider {
-    static var previews: some View {
-		ScootersRow(scooterList: [Scooter(id: "123", location: Location(coordinates: [0,0], type: ""), available: true, locked: true, deviceKey: "123", battery: 90),
-								  Scooter(id: "123", location: Location(coordinates: [0,0], type: ""), available: true, locked: true, deviceKey: "1453", battery: 90),Scooter(id: "12311", location: Location(coordinates: [0,0], type: ""), available: true, locked: true, deviceKey: "23", battery: 90),Scooter(id: "11111", location: Location(coordinates: [0,0], type: ""), available: true, locked: true, deviceKey: "3", battery: 90)])
-    }
+.background(Color.fadePurple2)
 }
+*/

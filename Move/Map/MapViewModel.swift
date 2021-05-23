@@ -5,50 +5,61 @@
 //  Created by Sergiu Corbu on 22.04.2021.
 //
 
-import Foundation
-import CoreLocation
-import MapKit
 import SwiftUI
+import CoreLocation
 import NavigationStack
 
 class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 	
 	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
-	@Published var allScooters: [Scooter] = []
-	@Published var scooterLocation: String = ""
-	@Published var selectedScooter: Scooter?
 	@Published var locationManager = LocationManager()
 	@Published var clusters: [Cluster] = []
+	@Published var selectedScooter: Scooter?
 	
-	func makeClusters() {
-		for i in 0..<allScooters.count {
-			var currentCluster: Cluster = Cluster()
-			var currentScooter: Scooter = allScooters[i]
-			for j in i + 1..<allScooters.count {
-				if currentScooter.scooterLocation.distance(from: allScooters[j].scooterLocation) < 40 && !allScooters[j].isInCluster {
-					if !currentScooter.isInCluster {
-						currentCluster.scooters.append(currentScooter)
-						currentCluster.scooters.append(allScooters[j])
-					} else {
-						currentCluster.scooters.append(allScooters[j])
-					}
-					currentScooter.isInCluster = true
-					allScooters[j].isInCluster = true
-				}
-			}
-			if !currentScooter.isInCluster {
-				currentCluster.scooters.append(currentScooter)
-			}
-			if !currentCluster.scooters.isEmpty {
-				clusters.append(currentCluster)
-			}
+	var userLocation: CLLocation {
+		guard let location = locationManager.locationManager.location else {
+			showError(error: "Cannot get user location")
+			return CLLocation(latitude: 0, longitude: 0)
 		}
+		return CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+	}
+
+	var distanceToScooter: Double {
+		if let scooter = selectedScooter {
+			let scooterLocation = CLLocation(latitude: scooter.coordinates.latitude, longitude: scooter.coordinates.longitude)
+			return userLocation.distance(from: scooterLocation)
+		}
+		showError(error: "Cannot get scooter location")
+		return 10000
 	}
 	
-	var userLocation: CLLocationCoordinate2D? {
-		didSet {
-			if oldValue == nil { reloadData() }
+	var userCoordinates: [Double] {
+		return [userLocation.coordinate.latitude, userLocation.coordinate.longitude]
+	}
+	
+	func makeClusters(scooterList: [Scooter]) {
+		var scooters: [Scooter] = scooterList
+		var clusters: [Cluster] = []
+		for i in 0..<scooters.count {
+			var cluster: Cluster = Cluster()
+			for j in i + 1..<scooters.count {
+				if scooters[i].scooterLocation.distance(from: scooters[j].scooterLocation) < 40 && !scooters[j].isInCluster { // add battery > 20
+					if !scooters[i].isInCluster {
+						cluster.scooters.append(scooters[i])
+						cluster.scooters.append(scooters[j])
+					} else {
+						cluster.scooters.append(scooters[j])
+					}
+					scooters[i].isInCluster = true
+					scooters[j].isInCluster = true
+				}
+			}
+			if !scooters[i].isInCluster {
+				cluster.scooters.append(scooters[i])
+			}
+			clusters.append(cluster)
 		}
+		self.clusters = clusters.filter( { !$0.scooters.isEmpty })
 	}
 	
 	func selectScooter(scooter: Scooter) {
@@ -59,44 +70,25 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 		}
 	}
 	
-	private func reloadData() {
+	func reloadData() {
 		getAvailableScooters()
-		DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 60, execute: {
 			self.reloadData()
 		})
 	}
 	
 	func getAvailableScooters() {
-		guard let location = self.userLocation else { return }
-		API.getScooters(coordinates: location) { result in
+		API.getScooters(coordinates: userCoordinates) { result in
 			switch result {
 				case .success(let scooters):
-					self.allScooters = scooters
-					self.makeClusters()
+					self.makeClusters(scooterList: scooters)
 				case .failure(let error):
-					if error.localizedDescription == "You are not authorized to access this resource." {
-						self.navigationStack.push(AuthCoordinator())
-						showError(error: "User suspended")
-					} else {
-						showError(error: error.localizedDescription)
-					}
+					handleFailure(error: error, navigationStack: self.navigationStack)
 			}
 		}
 	}
 	
-    func locationGeocode(location coordinates: CLLocationCoordinate2D, _ completion: @escaping (String) -> Void) {
-        let geocoder = CLGeocoder()
-        let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
-        geocoder.reverseGeocodeLocation(scooterLocation) { (placemarks, error) in //[weak self] (placemarks, error) in
-            if let error = error {
-				showError(error: error.localizedDescription)
-				return
-			}
-            guard let placemark = placemarks?.first else { return }
-			let streetName: String = placemark.thoroughfare ?? "n/a"
-			let streetNumber: String = placemark.subThoroughfare ?? "n/a"
-			let result = streetName + " " + streetNumber
-            completion(result)
-        }
-    }
+	func pingScooter(scooter: Scooter) {
+		API.pingScooter(scooterKey: scooter.deviceKey, location: [userLocation.coordinate.latitude, userLocation.coordinate.longitude]) { _ in}
+	}
 }

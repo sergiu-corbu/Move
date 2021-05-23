@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 import SwiftMessages
 import MapKit
+import CoreLocation
 import NavigationStack
-
 
 //MARK: MapDefaultRegion
 extension MKCoordinateRegion {
@@ -150,3 +150,32 @@ let onboardingData = [
 	OnboardingData(title: "Parking", description: "If convenient, park at a bike rack. If not, park close to the edge of the sidewalk closest to the street. Do not block sidewalks, doors or ramps.", image: "Parking-img"),
 	OnboardingData(title: "Rules", description: "You must be 18 years or older with a valid driving licence to perate a scooter. Please follow all street signs, signals, markings and obey local traffic laws.", image: "Rules-img")
 ]
+
+//MARK: helper functions
+
+func locationGeocode(location coordinates: CLLocationCoordinate2D, _ completion: @escaping (String) -> Void) {
+	let geocoder = CLGeocoder()
+	let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
+	geocoder.reverseGeocodeLocation(scooterLocation) { (placemarks, error) in
+		if let error = error {
+			showError(error: error.localizedDescription)
+			return
+		}
+		guard let placemark = placemarks?.first else { return }
+		let streetName: String = placemark.thoroughfare ?? "n/a"
+		let streetNumber: String = placemark.subThoroughfare ?? "n/a"
+		let result = streetName + " " + streetNumber
+		completion(result)
+	}
+}
+
+
+func handleFailure(error: APIError, navigationStack: NavigationStack, hideError: Bool = false) {
+	if error.localizedDescription == "You are not authorized to access this resource." {
+		navigationStack.push(AuthCoordinator())
+		showError(error: "User suspended")
+	} else if !hideError {
+		showError(error: error.localizedDescription)
+	}
+}
+
