@@ -22,7 +22,7 @@ struct QRUnlock: View {
 				.codeFound(callback: self.qrViewModel.onFoundQrCode(code:))
 				.edgesIgnoringSafeArea(.all)
 			VStack {
-				NavigationBar(title: "Unlock Scooter", color: .white, flashLight: true, backButton: "close", action: { onClose() }) {
+				NavigationBar(title: "Unlock scooter", color: .white, flashLight: true, backButton: "close", action: { onClose() }) {
 					if torchOn {
 						torchOn = false
 					} else {

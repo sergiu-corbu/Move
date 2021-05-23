@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct Location: Codable {
+struct Location: Codable, Hashable {
     let coordinates: [Double]
     let type: String
     
@@ -18,8 +18,11 @@ struct Location: Codable {
     }
 }
 
-struct Scooter: Identifiable, Codable {
-	
+struct Scooter: Identifiable, Codable, Equatable, Hashable {
+	static func == (lhs: Scooter, rhs: Scooter) -> Bool {
+		return true
+	}
+
 	let id: String
     let location: Location
 	let available: Bool
@@ -61,6 +64,26 @@ struct Scooter: Identifiable, Codable {
 		case deviceKey = "deviceKey"
         case battery = "power"
     }
+}
+
+struct Cluster: Identifiable {
+	var id = UUID()
+	var scooters: [Scooter] = []
+	var latitude: Double {
+		var median: Double = 0
+		for scooter in scooters {
+			median += scooter.coordinates.latitude
+		}
+		return median / Double(scooters.count)
+	}
+	
+	var longitude: Double {
+		var median: Double = 0
+		for scooter in scooters {
+			median += scooter.coordinates.longitude
+		}
+		return median / Double(scooters.count)
+	}
 }
 
 struct LockUnlockResult: Codable {

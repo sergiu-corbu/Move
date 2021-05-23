@@ -10,12 +10,12 @@ import BetterSafariView
 import Introspect
 
 struct Register: View {
-	@ObservedObject var userViewModel = UserViewModel.shared
+	
+	@StateObject var userViewModel = UserViewModel()
     @State private var termsPresented: Bool = false
     @State private var privacyPresented: Bool = false
 	
-    let onRegisterComplete: () -> Void
-    let onLoginSwitch: () -> Void
+	let authNavigation: (AuthNavigation) -> Void
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -25,7 +25,8 @@ struct Register: View {
                 inputArea
                 agreement
 				Buttons.PrimaryButton(text: "Get started", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedRegister, action: { buttonTapped() })
-				AuthComponents.SwitchAuthProcess(questionText: "You already have an account? You can", solutionText: "log in here", action: { onLoginSwitch() })
+				AuthComponents.SwitchAuthProcess(questionText: "You already have an account? You can", solutionText: "log in here", action: { authNavigation(.switchToLogin)
+				})
             }
             Spacer()
         }
@@ -76,13 +77,13 @@ struct Register: View {
 		userViewModel.validateFields()
 		if  userViewModel.allfieldsValidatedRegister {
 			userViewModel.isLoading = true
-			userViewModel.registerCall { onRegisterComplete() }
+			userViewModel.registerCall { authNavigation(.registerCompleted) }
 		}
 	}
 }
 
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
-            Register(onRegisterComplete: {}, onLoginSwitch: {})
+		Register { _ in}
 	}
 }

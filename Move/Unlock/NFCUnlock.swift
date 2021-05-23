@@ -34,7 +34,7 @@ struct NFCUnlock: View {
 			}
 			VStack {
 				NavigationBar(title: "Bring your phone", color: .white, backButton: "close", action: { onClose() })
-				UnlockScooterComponents.Title(title: "NFC unlock")
+				UnlockScooterComponents.Title(title: "Unlock scooter")
 				UnlockScooterComponents.SubTitle(subTitle: "Hold your phone close to the NFC Tag\nlocated on top of the handlebar of\nyour scooter.")
 				Spacer()
 				UnlockScooterComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "123", action: { unlockMethod(.code) }))

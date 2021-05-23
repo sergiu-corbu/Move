@@ -13,9 +13,9 @@ struct ImagePickerController: UIViewControllerRepresentable {
     var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @Binding var image: Image?
     @Binding var isPresented: Bool
-    
+	
     func makeCoordinator() -> ImagePickerViewCoordinator {
-        return ImagePickerViewCoordinator(image: $image, isPresented: $isPresented)
+		return ImagePickerViewCoordinator(image: $image, isPresented: $isPresented)
     }
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
@@ -34,8 +34,8 @@ class ImagePickerViewCoordinator: NSObject, UINavigationControllerDelegate, UIIm
     
     @Binding var image: Image?
     @Binding var isPresented: Bool
-    
-    init(image: Binding<Image?>, isPresented: Binding<Bool>) {
+	
+	init(image: Binding<Image?>, isPresented: Binding<Bool>) {
         self._image = image
         self._isPresented = isPresented
     }

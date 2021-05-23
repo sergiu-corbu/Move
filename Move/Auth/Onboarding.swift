@@ -10,7 +10,7 @@ import SwiftUI
 struct Onboarding: View {
     
     @State private var currentIndex: Int = 0
-    let onFinished: () -> Void
+    let authNavigation: (AuthNavigation) -> Void
 	
     var title: String {
         return onboardingData[currentIndex].title
@@ -52,13 +52,16 @@ struct Onboarding: View {
                 .foregroundColor(.darkPurple)
             Spacer()
             if  !lastPage {
-                Button(action: { onFinished() }, label: {
+                Button(action: {
+					authNavigation(.onboardingFinished)
+				}, label: {
                     Text("Skip")
                         .font(.custom(FontManager.Primary.semiBold, size: 18))
                         .foregroundColor(.fadePurple)
                 })
             }
-        }.padding(.bottom, 20)
+        }
+		.padding(.bottom, 20)
     }
     
 	var descriptionLine: some View {
@@ -78,7 +81,12 @@ struct Onboarding: View {
 			PageControl(currentIndex: $currentIndex)
 			Spacer()
 			Button(action: {
-				if currentIndex == onboardingData.count - 1 { onFinished() } else { currentIndex += 1 }
+				if currentIndex == onboardingData.count - 1 {
+					authNavigation(.onboardingFinished)
+				}
+				else {
+					currentIndex += 1
+				}
 			}, label: {
 				HStack {
 					Text(lastPage ? "Get Started" : "Next")
@@ -110,7 +118,7 @@ struct PageControl: View {
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-            Onboarding(onFinished: {})
+			Onboarding(authNavigation: {_ in })
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

@@ -11,15 +11,7 @@ struct Menu: View {
 	
 	@EnvironmentObject var tripViewModel: TripViewModel
 	
-    let onBack: () -> Void
-    let onSeeAll: () -> Void
-    let onAccount: () -> Void
-    let onChangePassword: () -> Void
-	
-	var isUser: Bool {
-		if Session.username != nil { return true }
-		else { return false }
-	}
+	let menuNavigation: (MenuNavigation) -> Void
 	
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -28,15 +20,20 @@ struct Menu: View {
                 .frame(width: 250, height: 300)
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
-					NavigationBar(title: isUser ? "Hi, \(Session.username!)!" : "No user", color: .darkPurple, avatar: "avatar-img", backButton: "chevron-left-purple", action: { onBack() })
+					NavigationBar(title: Session.username != nil ? "Hi, \(Session.username!)!" : "No user", color: .darkPurple, avatar: "avatar-img", backButton: "chevron-left-purple", action: {
+						menuNavigation(.goBack)
+					})
                     historyView
                     menuOptions
                     Spacer()
                 }
-            }.padding(.horizontal, 24)
+            }
+			.padding(.horizontal, 24)
         }
-		.onAppear { tripViewModel.downloadTrips(pageSize: 10) }
 		.background(Color.white.edgesIgnoringSafeArea(.all))
+		.onAppear {
+			tripViewModel.downloadTrips(pageSize: 10)
+		}
     }
 	
     var historyView: some View {
@@ -44,7 +41,10 @@ struct Menu: View {
             RoundedRectangle(cornerRadius: 28)
                 .foregroundColor(.lightPurple)
                 .frame(height: 110)
-                .background(Image("history-background-img").resizable())
+                .background(
+					Image("history-background-img")
+						.resizable()
+				)
             HStack {
                 VStack(alignment: .leading) {
                     Text("History")
@@ -55,7 +55,9 @@ struct Menu: View {
                         .font(.custom(FontManager.Primary.medium, size: 16))
                 }
                 Spacer()
-				Button(action: { onSeeAll() }, label: {
+				Button(action: {
+					menuNavigation(.goToHistory)
+				}, label: {
 						HStack {
 							Text("See all")
 								.foregroundColor(.white)
@@ -65,15 +67,24 @@ struct Menu: View {
 								.foregroundColor(.white)
 						}
 						.padding(.all, 16)
-						.background(Rectangle().foregroundColor(.coralRed).cornerRadius(16))})
-			}.padding(.horizontal, 30)
-        }.padding(.top, 20)
+						.background(
+							RoundedRectangle(cornerRadius: 16)
+								.foregroundColor(.coralRed)
+						)
+				})
+			}
+			.padding(.horizontal, 30)
+        }
+		.padding(.top, 20)
     }
     var menuOptions: some View {
         VStack(alignment: .leading) {
             MenuItems(icon: "wheel-img", title: "General Settings", components: [
-						SubMenuItems(title: "Account", index: 0, callback: { onAccount()}),
-						SubMenuItems(title: "Change password",index: 1, callback: { onChangePassword() })])
+						SubMenuItems(title: "Account", index: 0, callback: {
+							menuNavigation(.goToAccount)
+						}),
+						SubMenuItems(title: "Change password",index: 1, callback: { menuNavigation(.goToChangePassword)
+						})])
 			MenuItems(icon: "flag-img", title: "Legal", components: [
 						SubMenuItems(title: "Terms and Conditions", index: 0),
 						SubMenuItems(title: "Privacy Policy", index: 1)])
@@ -151,7 +162,7 @@ struct SubMenuItems: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPhone SE (2nd generation)", "iPhone 12"], id: \.self) { deviceName in
-			Menu(onBack: {}, onSeeAll: {}, onAccount: {}, onChangePassword: {})
+			Menu(menuNavigation: { _ in })
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)
         }

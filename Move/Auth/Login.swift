@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct Login: View {
+	
 	@ObservedObject private var userViewModel = UserViewModel()
-    let onLoginCompleted: () -> Void
-    let onRegisterSwitch: () -> Void
+    
+	let authNavigation: (AuthNavigation) -> Void
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -22,10 +23,12 @@ struct Login: View {
 				Buttons.PrimaryButton(text: "Login", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedLogin && userViewModel.allfieldsValidatedLogin, action: {
 					userViewModel.isLoading = true
 					userViewModel.loginCall {
-						onLoginCompleted()
+						authNavigation(.loginCompleted)
 					}
 				})
-				AuthComponents.SwitchAuthProcess(questionText: "Don't have an account? You can", solutionText: "start with one here", action: { onRegisterSwitch() })
+				AuthComponents.SwitchAuthProcess(questionText: "Don't have an account? You can", solutionText: "start with one here", action: {
+					authNavigation(.switchToRegister)
+				})
             }
             Spacer()
         }
@@ -37,7 +40,7 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-		Login(onLoginCompleted: {}, onRegisterSwitch: {})
+		Login(authNavigation: { _ in })
 			.preferredColorScheme(.dark)
     }
 }

@@ -173,7 +173,7 @@ struct ScooterCardComponents {
 	struct TripButtons: View {
 		
 		@Binding var isLockedPressed: Bool
-		
+		@Binding var isLoading: Bool
 		let onLockButton: () -> Void
 		let onUnlockButton: () -> Void
 		let onEndTripButton: () -> Void
@@ -181,7 +181,8 @@ struct ScooterCardComponents {
 		var body: some View {
 			HStack(spacing: 20) {
 				ScooterCardComponents.TripActionButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onUnlockButton() : onLockButton() })
-				ScooterCardComponents.EndTripButton(endTrip: { onEndTripButton() })
+				//ScooterCardComponents.EndTripButton(endTrip: { onEndTripButton() })
+				Buttons.PrimaryButton(text: "End", isLoading: isLoading, enabled: true, isBlackBackground: false, action: { onEndTripButton() })
 			}
 			.padding(.vertical, 10)
 		}
@@ -236,7 +237,7 @@ struct UnlockScooterComponents {
 				.foregroundColor(purpleColor ? .darkPurple : .white)
 				.multilineTextAlignment(customAlignment ? .leading : .center)
 				.padding(.bottom, customPadding ? 10 : 20)
-				.padding(.top, customPadding ? 10 : 35)
+				.padding(.top, customPadding ? 0 : 35)
 				.fixedSize(horizontal: false, vertical: true)
 		}
 	}

@@ -29,7 +29,7 @@ struct AuthResult: Decodable {
     }
 }
 
-struct Logout: Codable {
+struct BasicResult: Codable {
 	
 	let message: String
 	enum CodingKeys: String, CodingKey {

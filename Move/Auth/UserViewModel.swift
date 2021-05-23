@@ -10,12 +10,13 @@ import SwiftUI
 import NavigationStack
 
 class UserViewModel: ObservableObject {
+	
 	@EnvironmentObject var navigationStack: NavigationStack
 	static var shared: UserViewModel = UserViewModel()
     //MARK: Register & Login
-	@Published var email: String = "sergiu_@icloud.com"
+	@Published var email: String = ""
     @Published var username: String = ""
-    @Published var password: String = "123456Ss"
+    @Published var password: String = ""
 	@Published var emailError = ""
 	@Published var passwordError = ""
     
@@ -67,27 +68,30 @@ class UserViewModel: ObservableObject {
 					Session.username = result.user.username
 					callback()
 				case .failure(let error):
-					break
-//					checkFor401(failureMessage: error.localizedDescription) { isSuspended in
-//						print(isSuspended)
-//						if isSuspended {
-//							self.navigationStack.push(ContentView())
-//						} else {
-//							self.clearFields()
-//							showError(error: error.localizedDescription)
-//						}
-//					}
-					
+					showError(error: error.localizedDescription)
 			}
 			self.isLoading = false
 		}
 	}
 	
-	func resetPasswordCall(_ callback: @escaping () -> Void) {
+	func resetPasswordCall(_ callback: (() -> Void)? = nil) {
 		API.resetPassword(oldPassword: password, newPassword: newPassword) { result in
 			switch result {
 				case .success:
 					showMessage(message: "Password reset successful")
+					callback?()
+				case .failure(let error):
+					showError(error: error.localizedDescription)
+			}
+		}
+	}
+	
+	func uploadImage(image: Image, _ callback: @escaping () -> Void) {
+		API.uploadLicense(selectedImage: image) { result in
+			switch result {
+				case .success:
+					Session.licenseVerified = true
+					callback()
 				case .failure(let error):
 					showError(error: error.localizedDescription)
 			}

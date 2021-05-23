@@ -19,30 +19,27 @@ struct CodeUnlock: View {
 	let unlockMethod: (UnlockType) -> Void
 
     var body: some View {
-		GeometryReader { geometry in
-			VStack {
-				NavigationBar(title: "Enter serial number", color: .white, backButton: "close", action: { onClose() })
-					.padding(.horizontal, 24)
-				ScrollView(showsIndicators: false) {
-					UnlockScooterComponents.Title(title: "Enter the scooter's\nserial number")
-					UnlockScooterComponents.SubTitle(subTitle: "You can find it on the\nscooter's front panel")
-					HStack {
-						ForEach(0..<4) { index in
-							DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
-						}
+		VStack {
+			NavigationBar(title: "Unlock scooter", color: .white, backButton: "close", action: { onClose() })
+				.padding(.horizontal, 24)
+			UnlockScooterComponents.Title(title: "Enter the scooter's\nserial number")
+			UnlockScooterComponents.SubTitle(subTitle: "You can find it on the\nscooter's front panel")
+			ScrollView(showsIndicators: false) {
+				HStack {
+					ForEach(0..<4) { index in
+						DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
+							.padding(.vertical, 30)
 					}
-					.padding(.top, geometry.size.height / 6)
-					UnlockScooterComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "NFC", action: { unlockMethod(.nfc) }))
-						.padding(.top, geometry.size.height * 0.2)
 				}
+				UnlockScooterComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "NFC", action: { unlockMethod(.nfc) }))
 			}
-			.onAppear {
-				unlockViewModel.onFinishedUnlock = onFinished
-			}
-			.onTapGesture {
-				hideKeyboard()
-			}
-			.background(SharedElements.purpleBackground)
+		}
+		.background(SharedElements.purpleBackground)
+		.onAppear {
+			unlockViewModel.onFinishedUnlock = onFinished
+		}
+		.onTapGesture {
+			hideKeyboard()
 		}
     }
 	

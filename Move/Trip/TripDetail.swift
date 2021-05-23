@@ -12,6 +12,7 @@ struct TripDetail: View {
 	@EnvironmentObject var tripViewModel: TripViewModel
 	@ObservedObject var stopWatch: StopWatchViewModel
 	@State private var buttonPressed: Bool = false
+	@State private var endTrip: Bool = false
 	@State private var isExpanded: Bool = false
 	
 	var scooter: Scooter
@@ -72,13 +73,14 @@ struct TripDetail: View {
 	}
 
 	private var tripButtons: some View {
-		ScooterCardComponents.TripButtons(isLockedPressed: $buttonPressed, onLockButton: {
+		ScooterCardComponents.TripButtons(isLockedPressed: $buttonPressed, isLoading: $endTrip, onLockButton: {
 			tripViewModel.lockScooter()
 			buttonPressed.toggle()
 		}, onUnlockButton: {
 			tripViewModel.unlockScooter()
 			buttonPressed.toggle()
 		}, onEndTripButton: {
+			endTrip.toggle()
 			self.stopWatch.isRunning = false
 			onEndRide()
 		})

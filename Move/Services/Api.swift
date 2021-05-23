@@ -66,20 +66,22 @@ class API {
 		}
 	}
 	
-	static func resetPassword(oldPassword: String, newPassword: String, _ callback: @escaping (Result<AuthResult>) -> Void) {
+	static func resetPassword(oldPassword: String, newPassword: String, _ callback: @escaping (Result<BasicResult>) -> Void) {
 		let path = baseUrl + "users/reset"
 		let parameters = ["oldpassword": oldPassword, "newpassword": newPassword]
-		AF.request(path, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).validate().responseData { response in
-			let result: Result<AuthResult> = handleResponse(response: response)
-			callback(result)
+		requestBody { header in
+			AF.request(path, method: .patch, parameters: parameters, encoder: JSONParameterEncoder.default, headers: header).validate().responseData { response in
+				let result: Result<BasicResult> = handleResponse(response: response)
+				callback(result)
+			}
 		}
 	}
 	
-	static func logout(_ callback: @escaping (Result<Logout>) -> Void) {
+	static func logout(_ callback: @escaping (Result<BasicResult>) -> Void) {
 		requestBody { header in
 			let path = baseUrl + "users/logout"
 			AF.request(path, method: .delete, headers: header).validate().responseData { response in
-				let result: Result<Logout> = handleResponse(response: response)
+				let result: Result<BasicResult> = handleResponse(response: response)
 				callback(result)
 			}
 		}
@@ -124,7 +126,6 @@ class API {
 			let path = baseUrl + "bookings/?start=0&pageSize=\(pageSize)"
 			AF.request(path, method: .get, headers: header).validate().responseData { response in
 				let result: Result<TripResult> = handleResponse(response: response)
-				print(response.response?.statusCode)
 				callback(result)
 			}
 		}

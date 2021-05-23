@@ -100,23 +100,3 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
         }
     }
 }
-
-struct Cluster: Identifiable {
-	var id = UUID()
-	var scooters: [Scooter] = []
-	var latitude: Double {
-		var median: Double = 0
-		for scooter in scooters {
-			median += scooter.coordinates.latitude
-		}
-		return median / Double(scooters.count)
-	}
-	
-	var longitude: Double {
-		var median: Double = 0
-		for scooter in scooters {
-			median += scooter.coordinates.longitude
-		}
-		return median / Double(scooters.count)
-	}
-}

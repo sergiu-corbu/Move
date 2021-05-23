@@ -5,49 +5,62 @@
 //  Created by Sergiu Corbu on 17.05.2021.
 //
 
-import Foundation
 import NavigationStack
 import SwiftUI
 
 struct AuthCoordinator: View {
-	@State private var isLoading = false
+	
 	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	
 	var body: some View {
-		Onboarding(onFinished: { registerCoordinator() })
+		Onboarding { authNavigation in
+			handleAuthNavigation(type: authNavigation)
+		}
+	}
+	
+	func handleAuthNavigation(type: AuthNavigation) {
+		switch type {
+			case .back:
+				navigationStack.pop()
+			case .onboardingFinished, .switchToRegister:
+				registerCoordinator()
+			case .switchToLogin:
+				loginCoordinator()
+			case .registerCompleted:
+				validationCoordinator()
+			case .loginCompleted, .openMap:
+				mapCoodinator()
+			case .imageUploadCompleted:
+				validationSuccess()
+		}
 	}
 	
 	func registerCoordinator() {
-		navigationStack.push(Register(onRegisterComplete: { validationCoordinator()
-		}, onLoginSwitch: { loginCoordinator() }))
+		navigationStack.push(Register { authNavigation in
+				handleAuthNavigation(type: authNavigation)
+		})
+	}
+	
+	func loginCoordinator() {
+		navigationStack.push(Login { authNavigation in
+			handleAuthNavigation(type: authNavigation)
+		})
 	}
 	
 	func validationCoordinator() {
-		navigationStack.push(ValidationInfo(isLoading: $isLoading, onBack: { navigationStack.pop() }, onNext: { image in
-				uploadImage(image: image)
-			}))
-	}
-
-	func uploadImage(image: Image) {
-		isLoading = true
-		API.uploadLicense(selectedImage: image) { result in
-			switch result {
-				case .success:
-					Session.licenseVerified = true
-					navigationStack.push(ValidationSuccess(onFindScooters: { mapCoodinator() }))
-				case .failure(let error):
-					showError(error: error.localizedDescription)
-			}
-			isLoading = false
-		}
+		navigationStack.push(ValidationInfo { authNavigation in
+			handleAuthNavigation(type: authNavigation)
+		})
 	}
 	
 	func mapCoodinator() {
 		navigationStack.push(MapCoordinator(bottomContainer: AnyView(EmptyView())))
 	}
-	func loginCoordinator() {
-		navigationStack.push(Login(onLoginCompleted: { mapCoodinator() },
-				  onRegisterSwitch: { registerCoordinator() }))
+	
+	func validationSuccess() {
+		navigationStack.push(ValidationSuccess { authNavigation in
+			handleAuthNavigation(type: authNavigation)
+		})
 	}
+	
 }
-

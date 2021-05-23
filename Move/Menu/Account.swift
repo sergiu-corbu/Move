@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct Account: View {
+	
 	@StateObject var userViewModel = UserViewModel()
 	@State private var isActive: Bool = false
     
-    let onBack: () -> Void
-    let onLogout: () -> Void
-    let onSave: () -> Void
+	let accountNavigation: (MenuNavigation) -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
-            NavigationBar(title: "Account", color: .darkPurple, backButton: "chevron-left-purple", action: { onBack() })
+            NavigationBar(title: "Account", color: .darkPurple, backButton: "chevron-left-purple", action: {
+				accountNavigation(.goBack)
+			})
             inputArea
             Spacer()
             footerArea
         }
 		.padding(.horizontal, 24)
-        .background(Color.white)
+		.background(Color.white.edgesIgnoringSafeArea(.all))
     }
     
     var inputArea: some View {
@@ -40,8 +41,9 @@ struct Account: View {
 					switch result {
 						case .success:
 							Session.tokenKey = nil
-							onLogout()
-						case .failure(let error): showError(error: error.localizedDescription)
+							accountNavigation(.logoutUser)
+						case .failure(let error):
+							showError(error: error.localizedDescription)
 					}
 				})
             }, label: {
@@ -52,14 +54,15 @@ struct Account: View {
 			Buttons.PrimaryButton(text: "Save edits", isLoading: userViewModel.isLoading, enabled:userViewModel.editCredentialsEnabled, action: {
 				userViewModel.isLoading = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: { userViewModel.isLoading = false })
-                onSave()
-            }).padding(.bottom, 30)
+				accountNavigation(.goBack)
+            })
+			.padding(.bottom, 30)
         }
     }
 }
 
 struct AccountView_Previews: PreviewProvider {
     static var previews: some View {
-        Account(onBack: {}, onLogout: {}, onSave: {})
-    }
+		Account { _ in }
+	}
 }

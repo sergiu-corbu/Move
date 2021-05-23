@@ -21,6 +21,7 @@
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
 		EC33EABB26590F39001AAB27 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = EC33EABA26590F39001AAB27 /* SwiftUIPager */; };
+		EC33EABD265952BA001AAB27 /* NavigationPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC33EABC265952BA001AAB27 /* NavigationPaths.swift */; };
 		EC3A259E2654FD920056A725 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A259D2654FD920056A725 /* MenuCoordinator.swift */; };
 		EC3A25A226555F8B0056A725 /* QRCameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */; };
 		EC3A25A4265562800056A725 /* QRCameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A3265562800056A725 /* QRCameraPreview.swift */; };
@@ -68,7 +69,7 @@
 		ECDD400126242985003C659F /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFF26242985003C659F /* Onboarding.swift */; };
 		ECDD400626242B49003C659F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* UserModel.swift */; };
 		ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D233263A8CE7004C448E /* NFCUnlock.swift */; };
-		ECE0D236263AC810004C448E /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D235263AC810004C448E /* TripCard.swift */; };
+		ECE0D236263AC810004C448E /* TripDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D235263AC810004C448E /* TripDetail.swift */; };
 		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
 		ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFCA8492642AB5100674750 /* StartRide.swift */; };
 		ECFCA84E2642C10500674750 /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFCA84D2642C10500674750 /* TripModel.swift */; };
@@ -88,6 +89,7 @@
 		EC16143E2637148000931AF0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EC1673C32625662C007A180D /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		EC1673C62625802D007A180D /* ResetPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
+		EC33EABC265952BA001AAB27 /* NavigationPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPaths.swift; sourceTree = "<group>"; };
 		EC3A259D2654FD920056A725 /* MenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCoordinator.swift; sourceTree = "<group>"; };
 		EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraDelegate.swift; sourceTree = "<group>"; };
 		EC3A25A3265562800056A725 /* QRCameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCameraPreview.swift; sourceTree = "<group>"; };
@@ -133,7 +135,7 @@
 		ECDD3FFF26242985003C659F /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		ECDD400526242B49003C659F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		ECE0D233263A8CE7004C448E /* NFCUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCUnlock.swift; sourceTree = "<group>"; };
-		ECE0D235263AC810004C448E /* TripCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCard.swift; sourceTree = "<group>"; };
+		ECE0D235263AC810004C448E /* TripDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetail.swift; sourceTree = "<group>"; };
 		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		ECFCA8492642AB5100674750 /* StartRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRide.swift; sourceTree = "<group>"; };
 		ECFCA84D2642C10500674750 /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
@@ -207,7 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				ECFCA8492642AB5100674750 /* StartRide.swift */,
-				ECE0D235263AC810004C448E /* TripCard.swift */,
+				ECE0D235263AC810004C448E /* TripDetail.swift */,
 				ECFCA84F2642C9F600674750 /* FinishTrip.swift */,
 				ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */,
 			);
@@ -334,6 +336,7 @@
 			children = (
 				ECDD3FEA26242970003C659F /* Extensions&Helpers.swift */,
 				ECDD3FEB26242970003C659F /* ReusableElements.swift */,
+				EC33EABC265952BA001AAB27 /* NavigationPaths.swift */,
 				EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */,
 				EC3BA58B2639DB140032A496 /* ReusableButtons.swift */,
 				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
@@ -462,7 +465,7 @@
 				EC1614182637117C00931AF0 /* Account.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
 				ECB7CDBC26295CBE0081B8F4 /* ImagePickerController.swift in Sources */,
-				ECE0D236263AC810004C448E /* TripCard.swift in Sources */,
+				ECE0D236263AC810004C448E /* TripDetail.swift in Sources */,
 				EC16141A2637117C00931AF0 /* History.swift in Sources */,
 				ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */,
 				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
@@ -487,6 +490,7 @@
 				EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */,
 				ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */,
 				EC1614192637117C00931AF0 /* Menu.swift in Sources */,
+				EC33EABD265952BA001AAB27 /* NavigationPaths.swift in Sources */,
 				ECFCA8502642C9F600674750 /* FinishTrip.swift in Sources */,
 				EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */,
 				ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */,

@@ -10,31 +10,48 @@ import NavigationStack
 
 struct MenuCoordinator: View {
 	
-	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	@EnvironmentObject var tripViewModel: TripViewModel
+	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	
     var body: some View {
-		Menu(onBack: { navigationStack.pop() }, onSeeAll: {
-			historyCoordinator()
-		}, onAccount: {
-			accountCoordinator()
-		}, onChangePassword: {
-			passwordCoordinator()
-		})
+		Menu { menuNavigation in
+			handleMenuNavigation(type: menuNavigation)
+		}
 		.environmentObject(tripViewModel)
     }
+	
+	func handleMenuNavigation(type: MenuNavigation) {
+		switch type {
+			case .goBack:
+				navigationStack.pop()
+			case .goToAccount:
+				goToAccount()
+			case .goToChangePassword:
+				passwordCoordinator()
+			case .goToHistory:
+				goToHistory()
+			case .logoutUser:
+				navigationStack.push(AuthCoordinator())
+		}
+	}
 
-	func accountCoordinator() {
-		navigationStack.push(Account(onBack: { navigationStack.pop() },
-									 onLogout: { navigationStack.push(ContentView())},
-									 onSave: { navigationStack.pop() }))
+	func goToAccount() {
+		navigationStack.push(Account { accountNavigation in
+				handleMenuNavigation(type: accountNavigation)
+			})
 	}
 	
-	func historyCoordinator() {
-		navigationStack.push(History(onBack: { navigationStack.pop() }).environmentObject(tripViewModel))
+	func goToHistory() {
+		navigationStack.push(History { historyNavigation in
+				handleMenuNavigation(type: historyNavigation)
+			}
+			.environmentObject(tripViewModel)
+		)
 	}
 	
 	func passwordCoordinator() {
-		navigationStack.push(ChangePassword(action: {navigationStack.pop()}))
+		navigationStack.push(ChangePassword { passwordNavigation in
+			handleMenuNavigation(type: passwordNavigation)
+		})
 	}
 }

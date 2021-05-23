@@ -5,34 +5,28 @@
 //  Created by Sergiu Corbu on 17.05.2021.
 //
 
-import Foundation
 import NavigationStack
 import SwiftUI
 import CoreLocation
 
 struct MapCoordinator: View {
+	
 	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
 	@StateObject var mapViewModel: MapViewModel = MapViewModel()
 	@StateObject var tripViewModel: TripViewModel = TripViewModel()
 	@StateObject var stopWatch: StopWatchViewModel = StopWatchViewModel()
-	@State var showScooters: Bool = false
 	@State var bottomContainer: AnyView
 
 	var body: some View {
 		ZStack(alignment: .bottom) {
 			InteractiveMap(onMenu: { menuCoordinator() }, onScooterSelected: {  selectedScooter in
-				if selectedScooter.count > 1 {
-					showScooterRow(scooterList: selectedScooter)
-				} else {
-					showUnlockMethods()
-				}
-				})
+				selectedScooter.count > 1 ? showScooterRow(scooterList: selectedScooter) : showUnlockMethods()
+			})
 			bottomContainer
 		}
 		.environmentObject(tripViewModel)
 		.environmentObject(mapViewModel)
 		.onAppear {
-			print(Session.tokenKey)
 			tripViewModel.updateTrip() {
 				if tripViewModel.ongoing {
 					unwrapScooter { scooter in
@@ -56,6 +50,7 @@ struct MapCoordinator: View {
 	
 	func showScooterRow(scooterList: [Scooter]) {
 		bottomContainer = AnyView(
+			//ScootersRow(scooterList: scooterList)
 			ScrollView(.horizontal, showsIndicators: false) {
 				HStack {
 					ForEach(0..<scooterList.count) { index in
@@ -118,6 +113,7 @@ struct MapCoordinator: View {
 
 	func showStartRide() {
 		bottomContainer = AnyView(StartRide(onStartRide: {
+			Session.ongoingTrip = true
 			tripViewModel.updateTripContinuosly {
 				unwrapScooter { scooter in
 					showTripDetail(currentScooter: scooter)

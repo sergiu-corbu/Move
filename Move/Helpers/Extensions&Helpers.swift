@@ -45,15 +45,6 @@ extension UIView {
 	}
 }
 
-//MARK: UnlockType
-
-enum UnlockType {
-	case code
-	case qr
-	case nfc
-}
-
-
 //MARK: SwiftMessages
 public func showError(error: String) {
 	let view = MessageView.viewFromNib(layout: .messageView, bundle: Bundle.main)

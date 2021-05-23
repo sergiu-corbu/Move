@@ -25,7 +25,7 @@ class TripViewModel: ObservableObject {
 	@Published var startStreet: String = ""
 	@Published var endStreet: String = ""
 	@Published var allTrips: [Trip] = []
-	@Published var tripRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.74834800, longitude: 23.58783800), latitudinalMeters: 1700, longitudinalMeters: 1700)
+	@Published var tripRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.74834800, longitude: 23.58783800), latitudinalMeters: 1400, longitudinalMeters: 1400)
 	// put them inside a class
 	@Published var path: [[Double]] = []
 	
@@ -168,4 +168,10 @@ class TripViewModel: ObservableObject {
 		}
 		callback(scooter)
 	}
+}
+
+struct TripLocation: Identifiable {
+	let id = UUID()
+	let coordinates: CLLocationCoordinate2D
+	let image: Image
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
 
 struct FinishTrip: View {
 	
@@ -17,6 +18,18 @@ struct FinishTrip: View {
 	
 	let onFinish: () -> Void
 	
+	var startLocation: TripLocation {
+		return TripLocation(coordinates: CLLocationCoordinate2D(latitude: 46.760628, longitude: 23.586817), image: Image("startArrow"))
+	}
+	
+	var endLocation: TripLocation {
+		return TripLocation(coordinates: CLLocationCoordinate2D(latitude: 46.756210, longitude: 23.594485), image: Image("endPin"))
+
+	}
+	var annotations: [TripLocation] {
+		return [startLocation, endLocation]
+	}
+
     var body: some View {
 		VStack(alignment: .leading, spacing: 30) {
 			NavigationBar(title: "Trip Summary", color: .darkPurple)
@@ -49,17 +62,20 @@ struct FinishTrip: View {
 	}
 	
 	var tripMap: some View {
-		Map(coordinateRegion: $tripRegion)//, annotationItems: <#T##RandomAccessCollection#>, annotationContent: <#T##(Identifiable) -> MapAnnotationProtocol#>)
-			.frame(height: 170)
-			.clipShape(RoundedRectangle(cornerRadius: 16))
+		Map(coordinateRegion: $tripRegion, annotationItems: annotations) { item in
+			MapAnnotation(coordinate: item.coordinates) {
+				item.image
+			}
+		}
+		.frame(height: 170)
+		.clipShape(RoundedRectangle(cornerRadius: 16))
 	}
 	
 	var tripStreets: some View {
-		HStack {
-			VStack(alignment: .leading) {
-				TripReusable.TripLocation(infoText: "From", address: tripViewModel.startStreet, spaceBetween: 0.5, expandInline: true)
-				TripReusable.TripLocation(infoText: "To", address: tripViewModel.startStreet, spaceBetween: 0.5, expandInline: true)
-			}
+		VStack(alignment: .leading) {
+			TripReusable.TripLocation(infoText: "From", address: tripViewModel.startStreet, spaceBetween: 0.5, expandInline: true)
+			TripReusable.TripLocation(infoText: "To", address: tripViewModel.startStreet, spaceBetween: 0.5, expandInline: true)
+				.padding(.bottom, 10)
 		}
 	}
 	
