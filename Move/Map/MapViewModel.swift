@@ -87,8 +87,4 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 			}
 		}
 	}
-	
-	func pingScooter(scooter: Scooter) {
-		API.pingScooter(scooterKey: scooter.deviceKey, location: [userLocation.coordinate.latitude, userLocation.coordinate.longitude]) { _ in}
-	}
 }

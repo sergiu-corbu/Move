@@ -26,8 +26,8 @@ struct History: View {
 					tripViewModel.downloadTrips(pageSize: pageSize)
 					self.pageSize += 10
 				}
-				ForEach(0..<tripViewModel.allTrips.count, id: \.self) { index in
-					TripCard(trip: tripViewModel.allTrips[index])
+				ForEach(0..<tripViewModel.trip.allTrips.count, id: \.self) { index in
+					TripCard(trip: tripViewModel.trip.allTrips[index])
 				}
 			}
 			.coordinateSpace(name: "pullToRefresh")

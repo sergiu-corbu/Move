@@ -95,7 +95,7 @@ struct MapCoordinator: View {
 		bottomContainer = AnyView(StartRide(onStartRide: {
 			Session.ongoingTrip = true
 			tripViewModel.updateTripContinuosly {
-				unwrapScooter { scooter in
+				unwrapScooter(scooter: mapViewModel.selectedScooter) { scooter in
 					showTripDetail(currentScooter: scooter)
 					stopWatch.stopWatch.time = 0
 					stopWatch.startTimer()
@@ -115,7 +115,7 @@ struct MapCoordinator: View {
 	}
 	
 	func showFinishTrip() {
-		bottomContainer = AnyView(FinishTrip(tripRegion: tripViewModel.tripRegion, onFinish: {
+		bottomContainer = AnyView(FinishTrip(tripRegion: tripViewModel.trip.tripRegion, onFinish: {
 			Session.ongoingTrip = false
 			mapViewModel.selectedScooter = nil
 			mapViewModel.getAvailableScooters()
@@ -124,19 +124,11 @@ struct MapCoordinator: View {
 		}))
 	}
 	
-	private func unwrapScooter(_ callback: @escaping (Scooter) -> Void) {
-		guard let scooter = tripViewModel.currentTripScooter else {
-			showError(error: "No selected scooter")
-			return
-		}
-		callback(scooter)
-	}
-	
 	func checkForOngoingTrip() {
 		tripViewModel.updateTrip() {
-			if tripViewModel.ongoing {
-				unwrapScooter { scooter in
-					stopWatch.stopWatch.time = tripViewModel.currentTripTime / 100000
+			if tripViewModel.trip.ongoing {
+				unwrapScooter(scooter: tripViewModel.trip.tripScooter) { scooter in
+					stopWatch.stopWatch.time = tripViewModel.trip.time / 100000 
 					showTripDetail(currentScooter: scooter)
 					tripViewModel.updateTripContinuosly()
 					stopWatch.startTimer()

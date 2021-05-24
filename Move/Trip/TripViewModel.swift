@@ -15,27 +15,13 @@ class TripViewModel: ObservableObject {
 	
 	@EnvironmentObject var mapViewModel: MapViewModel
 	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
-	
 	@Published var tripCount: Int = 0
-	@Published var currentTripTime: Int = 0
-	@Published var currentTripDistance: Int = 0
-	@Published var ongoing: Bool = false
-	@Published var currentTripScooter: Scooter?
-	@Published var price: Int = 0
-	@Published var startStreet: String = ""
-	@Published var endStreet: String = ""
-	@Published var allTrips: [Trip] = []
-	@Published var tripRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.74834800, longitude: 23.58783800), latitudinalMeters: 1400, longitudinalMeters: 1400)
-	// put them inside a class
-	@Published var path: [[Double]] = []
-	
-//	init(navigationStack: NavigationStack) {
-//		self.navigationStack = navigationStack
-//	}
+	@Published var trip: TripModel = TripModel()
+
 	func streetsGeocode(_ callback: @escaping () -> Void) {
 		let geocoder = CLGeocoder()
-		let startCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: path[0][1], longitude: path[0][0])
-		let endCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: path[0][1], longitude: path[0][0])
+		let startCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: trip.path[0][1], longitude: trip.path[0][0])
+		let endCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: trip.path[0][1], longitude: trip.path[0][0])
 		let startAddress = CLLocation(latitude: startCoord.latitude, longitude: startCoord.longitude)
 		//let endAddress = CLLocation(latitude: endCoord.latitude, longitude: endCoord.longitude)
 		
@@ -47,7 +33,7 @@ class TripViewModel: ObservableObject {
 			let streetName: String = placemark.thoroughfare ?? ""
 			let streetNumber: String = placemark.subThoroughfare ?? ""
 			let result = streetName + " " + streetNumber
-			self.startStreet = result
+			self.trip.startStreet = result
 			callback()
 		}
 		
@@ -71,7 +57,7 @@ class TripViewModel: ObservableObject {
 		API.downloadTrips(pageSize: pageSize, { result in
 			switch result {
 				case .success(let trips):
-					self.allTrips = trips.trips
+					self.trip.allTrips = trips.trips
 					self.tripCount = trips.totalTrips
 				case .failure(let error):
 					handleFailure(error: error, navigationStack: self.navigationStack)
@@ -83,11 +69,11 @@ class TripViewModel: ObservableObject {
 		API.updateTrip { result in
 			switch result {
 				case .success(let currentTrip):
-					self.currentTripDistance = currentTrip.distance
-					self.currentTripScooter = currentTrip.trip.scooter
-					self.currentTripTime = currentTrip.duration
-					self.ongoing = currentTrip.trip.ongoing
-					self.path = currentTrip.trip.path
+					self.trip.distance = currentTrip.distance
+					self.trip.tripScooter = currentTrip.trip.scooter
+					self.trip.time = currentTrip.duration
+					self.trip.ongoing = currentTrip.trip.ongoing
+					self.trip.path = currentTrip.trip.path
 					callback?()
 				case .failure(let error):
 					handleFailure(error: error, navigationStack: self.navigationStack, hideError: true)
@@ -106,12 +92,12 @@ class TripViewModel: ObservableObject {
 
 	func endTrip(_ callback: @escaping () -> Void) {
 		unwrapScooter { [self] scooter in
-			API.endTrip(scooterID: scooter.id, startStreet: startStreet, endStreet: startStreet) { result in
+			API.endTrip(scooterID: scooter.id, startStreet: trip.startStreet, endStreet: trip.startStreet) { result in
 				switch result {
 					case .success(let result):
-						self.currentTripTime = result.trip.duration / 100000
-						self.currentTripDistance = result.trip.totalDistance
-						self.price = result.trip.price
+						self.trip.time = result.trip.duration / 100000
+						self.trip.distance = result.trip.totalDistance
+						self.trip.price = result.trip.price
 //						self.tripRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: path.first![1], longitude: path.first![0]), span: MKCoordinateSpan(latitudeDelta: 700, longitudeDelta: 700))
 //						print(self.tripRegion)
 						callback()
@@ -150,15 +136,23 @@ class TripViewModel: ObservableObject {
 	}
 	
 	func unwrapScooter(_ callback: @escaping (Scooter) -> Void) {
-		guard let scooter = self.currentTripScooter else {
+		guard let scooter = self.trip.tripScooter else {
 			return
 		}
 		callback(scooter)
 	}
 }
 
-struct TripLocation: Identifiable {
-	let id = UUID()
-	let coordinates: CLLocationCoordinate2D
-	let image: Image
-}
+
+/*
+@Published var tripCount: Int = 0
+@Published var time: Int = 0
+@Published var distance: Int = 0
+@Published var ongoing: Bool = false
+@Published var tripScooter: Scooter?
+@Published var price: Int = 0
+@Published var startStreet: String = ""
+@Published var endStreet: String = ""
+@Published var allTrips: [Trip] = []
+@Published var tripRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.74834800, longitude: 23.58783800), latitudinalMeters: 1400, longitudinalMeters: 1400)
+@Published var path: [[Double]] = []*/

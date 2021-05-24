@@ -80,14 +80,12 @@ struct Menu: View {
     var menuOptions: some View {
         VStack(alignment: .leading) {
             MenuItems(icon: "wheel-img", title: "General Settings", components: [
-						SubMenuItems(title: "Account", index: 0, callback: {
-							menuNavigation(.goToAccount)
-						}),
-						SubMenuItems(title: "Change password",index: 1, callback: { menuNavigation(.goToChangePassword)
-						})])
+						SubMenuItems(title: "Account", index: 0, isLink: false, callback: { menuNavigation(.goToAccount) }),
+						SubMenuItems(title: "Change password",index: 1, isLink: false, callback: { menuNavigation(.goToChangePassword) })
+			])
 			MenuItems(icon: "flag-img", title: "Legal", components: [
-						SubMenuItems(title: "Terms and Conditions", index: 0),
-						SubMenuItems(title: "Privacy Policy", index: 1)])
+						SubMenuItems(title: "Terms and Conditions", index: 0, url: "https://google.com"),
+						SubMenuItems(title: "Privacy Policy", index: 1, url: "https://google.com")])
 			MenuItems(icon: "star-img", title: "Rate Us", components: []) {
 				UIApplication.shared.open(URL(string: "itms-apps://itunes.apple.com/")!)
 			}
@@ -140,16 +138,18 @@ struct SubMenuItems: View {
     
     let title: String
 	let index: Int
-	//let url: String
-    var isNavButton: Bool = false
+	var isLink: Bool = true
+	var url: String?
 	var callback: (() -> Void)?
    
-    var body: some View {
-       // if isNavButton {
-         //   Link(destination: URL(string: url)!, label: { text })
-      //  } else {
-            Button(action: { callback?() }, label: { text })
-      //  }
+	var body: some View {
+		if isLink {
+			if let url = url {
+				Link(destination: URL(string: url)!, label: { text })
+			}
+		} else {
+			Button(action: { callback?() }, label: { text })
+		}
     }
 	
 	var text: some View {

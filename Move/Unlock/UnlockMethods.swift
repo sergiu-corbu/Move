@@ -49,7 +49,8 @@ struct UnlockMethods: View {
 				ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery)
 					.padding(.bottom, 10)
 				ScooterCardComponents.UnlockMiniButton(image: "bell-img", text: "Ring", showBorder: true, action: {
-					mapViewModel.pingScooter(scooter: scooter)
+					let location = mapViewModel.userLocation.coordinate
+					API.pingScooter(scooterKey: scooter.deviceKey, location: [location.latitude, location.longitude]) { _ in}
 				})
 				.disabled(!scooterInRange)
 				ScooterCardComponents.UnlockMiniButton(image: "missing", text: "Missing", showBorder: true, action: { })

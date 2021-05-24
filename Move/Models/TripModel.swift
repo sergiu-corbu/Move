@@ -6,6 +6,8 @@
 //
 import Foundation
 import CoreLocation
+import SwiftUI
+import MapKit
 
 struct Trip: Codable {
 	
@@ -107,4 +109,23 @@ struct OngoingTrip: Codable {
 		case duration = "duration"
 		case distance = "distance"
 	}
+}
+
+struct TripLocation: Identifiable {
+	let id = UUID()
+	let coordinates: CLLocationCoordinate2D
+	let image: Image
+}
+
+struct TripModel {
+	var time: Int = 0
+	var distance: Int = 0
+	var ongoing: Bool = false
+	var tripScooter: Scooter?
+	var price: Int = 0
+	var startStreet: String = ""
+	var endStreet: String = ""
+	var allTrips: [Trip] = []
+	var tripRegion: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.74834800, longitude: 23.58783800), latitudinalMeters: 1400, longitudinalMeters: 1400)
+	var path: [[Double]] = []
 }

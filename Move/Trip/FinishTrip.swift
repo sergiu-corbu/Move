@@ -53,13 +53,6 @@ struct FinishTrip: View {
 		}
 	}
 	
-	var tripData: some View {
-		HStack(spacing: 55) {
-			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: tripViewModel.currentTripTime.description, fontSize: 16)
-			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.currentTripDistance.description, fontSize: 16)
-		}
-	}
-	
 	var tripMap: some View {
 		Map(coordinateRegion: $tripRegion, annotationItems: annotations) { item in
 			MapAnnotation(coordinate: item.coordinates) {
@@ -72,16 +65,23 @@ struct FinishTrip: View {
 	
 	var tripStreets: some View {
 		VStack(alignment: .leading) {
-			TripReusable.TripLocation(infoText: "From", address: tripViewModel.startStreet, spaceBetween: 0.5, expandInline: true)
+			TripReusable.TripLocation(infoText: "From", address: tripViewModel.trip.startStreet, spaceBetween: 0.5, expandInline: true)
 				.padding(.top, 10)
-			TripReusable.TripLocation(infoText: "To", address: tripViewModel.startStreet, spaceBetween: 0.5, expandInline: true)
+			TripReusable.TripLocation(infoText: "To", address: tripViewModel.trip.startStreet, spaceBetween: 0.5, expandInline: true)
 				.padding(.bottom, 10)
 		}
 	}
 	
+	var tripData: some View {
+		HStack(spacing: 55) {
+			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: convertTime(time: tripViewModel.trip.time), fontSize: 16)
+			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.trip.distance.description, fontSize: 16)
+		}
+	}
+
 	func initiatePayment() {
 		isLoading = true
-		let paymentHander = Payment(totalPrice: tripViewModel.price)
+		let paymentHander = Payment(totalPrice: tripViewModel.trip.price)
 		paymentHander.startPayment { (success) in
 			isLoading = false
 			if success {
