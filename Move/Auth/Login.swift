@@ -34,6 +34,7 @@ struct Login: View {
         }
 		.onTapGesture { hideKeyboard() }
         .padding(.horizontal, 24)
+		.colorScheme(.dark)
 		.background(SharedElements.purpleBackground)
     }
 }
