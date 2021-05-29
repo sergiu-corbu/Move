@@ -14,6 +14,7 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 	@Published var unlockCode: [String] = ["", "", "", ""]
 	@Published var selectedIndex: Int = 0
 	
+	var startStreet: String = ""
 	let scooter: Scooter
 	let userCoordinates: [Double]
 	var codeString: String = ""
@@ -30,20 +31,32 @@ class UnlockViewModel: NSObject, ObservableObject, UITextFieldDelegate {
 		if selectedIndex  < 3 { selectedIndex += 1 }
 		else {
 			textField.resignFirstResponder()
-			API.unlockScooterPin(code: codeString, location: userCoordinates) { result in
-				switch result {
-					case .success:
-						self.onFinishedUnlock?()
-					case .failure(let error):
-						showError(error: error.localizedDescription)
-						self.codeString = ""
-						self.selectedIndex = 0
-						self.unlockCode = ["", "", "", ""]
-						textField.becomeFirstResponder()
+			convertStreet {
+				API.unlockScooterPin(code: self.codeString, street: self.startStreet, location: self.userCoordinates) { result in
+					switch result {
+						case .success:
+							Session.ongoingTrip = true
+							self.onFinishedUnlock?()
+						case .failure(let error):
+							showError(error: error.localizedDescription)
+							self.codeString = ""
+							self.selectedIndex = 0
+							self.unlockCode = ["", "", "", ""]
+							textField.becomeFirstResponder()
+					}
 				}
 			}
 		}
 		textField.sendActions(for: .editingChanged)
 		return false
+	}
+	
+	func convertStreet(_ callback: @escaping () -> Void) {
+		streetGeocode(coordinates: self.userCoordinates, { address in
+			var street = self.startStreet
+			street = address
+			self.startStreet = street
+			callback()
+		})
 	}
 }

@@ -9,22 +9,23 @@ import SwiftUI
 //import SwiftUIPager
 
 struct ScootersRow: View {
-	let scooterList: [Scooter]
+	var scooterList: [Scooter]
 	let onSelectScooter: (Scooter) -> Void
 	
 	private func getScale(proxy: GeometryProxy) -> CGFloat {
-		var scale: CGFloat = 1
+		var scale: CGFloat = 0.9
 		let x = proxy.frame(in: .global).minX
-		let diff = abs(x)
-		if diff < 130 {
-			scale = 1 + (120-diff) / 500
+		let y = proxy.frame(in: .global).minY
+		
+		if abs(x) < 130 || abs(y) > 130 {
+			scale = 0.9 + (130 - abs(x)) / 550
 		}
 		return scale
 	}
 	
 	var body: some View {
 		ScrollView(.horizontal, showsIndicators: false) {
-			HStack(spacing: 70) {
+			HStack(spacing: 30) {
 				ForEach(0..<scooterList.count) { index in
 					GeometryReader { geometry in
 						let scale = getScale(proxy: geometry)
@@ -38,27 +39,7 @@ struct ScootersRow: View {
 				}
 			}
 			.padding(.horizontal, 10)
+			.padding(.trailing, 80)
 		}
 	}
 }
-/*
-VStack {
-Spacer()
-//			Pager(page: self.page, data: self.scooters,  id: \.self) { scooter in
-//				VStack {
-//					Text("Page \(scooter.id)")
-//				}
-//				.frame(width: 300, height: 200)
-//				.background(Color.red)
-//				//ScooterCard(scooter: scooter, onUnlock: {})
-//			}
-//			.horizontal()
-//			.alignment(.end)
-//			.sensitivity(.high)
-//			.itemSpacing(10)
-//			.interactive(rotation: true)
-//			.interactive(scale: 0.8)
-}
-.background(Color.fadePurple2)
-}
-*/

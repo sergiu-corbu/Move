@@ -151,12 +151,14 @@ struct CustomField: View {
 					if showSecured && isSecuredField {
 						SecureField(activeField ? "" : textField, text: $input, onCommit: { activeField = false })
 							.foregroundColor(textColor)
+							.accentColor(textColor)
 							.introspectTextField { textField in
 								textField.returnKeyType = .done }
 							.onTapGesture { activeField = true }
 					} else {
 						TextField(activeField ? "" : textField, text: $input, onCommit: { activeField = false })
 							.foregroundColor(textColor)
+							.accentColor(textColor)
 							.introspectTextField { textField in
 								textField.returnKeyType = .next }
 							.onTapGesture { activeField = true }
@@ -170,10 +172,16 @@ struct CustomField: View {
 				Spacer()
 				if !input.isEmpty && activeField {
 					Button(action: {
-							if isSecuredField { showSecured.toggle() } else { input = "" } }, label: {
-								Image(isSecuredField ? ( showSecured ? "eye-img": "eye-off-img") : "close-img")
-									.padding(.all, 5)
-									.foregroundColor(.fadePurple) })
+							if isSecuredField {
+								showSecured.toggle()
+							} else {
+								input = ""
+							}
+					}, label: {
+							Image(isSecuredField ? ( showSecured ? "eye-img": "eye-off-img") : "close-img")
+								.padding(.all, 5)
+								.foregroundColor(.fadePurple)
+					})
 				}
 			}
 			if let error = self.error {
@@ -196,7 +204,7 @@ struct CustomField: View {
 					Divider()
 						.padding(.bottom, activeField ? 2 : 1)
 						.background(activeField ? Color.white : Color.fadePurple)
-				} //maybe not
+				}
 			} else {
 				Divider()
 					.padding(.bottom, activeField ? 2 : 1)
@@ -281,7 +289,6 @@ struct SharedElements {
 
 	struct ClusterPin: View {
 		let number: Int
-		let onTapCluster: () -> Void
 		
 		var body: some View {
 			Image("pin-fill-img")
@@ -289,12 +296,10 @@ struct SharedElements {
 				.clipShape(Capsule())
 				.overlay(
 					Text(number.description)
+						.foregroundColor(.darkPurple)
 						.font(.caption)
 						.padding(.bottom, 5)
 				)
-				.onTapGesture {
-					onTapCluster()
-				}
 		}
 	}
 }
@@ -312,11 +317,11 @@ struct TripReusable {
 			VStack(alignment: .leading) {
 				Text(infoText)
 					.foregroundColor(.fadePurple)
-					.font(.custom(FontManager.Primary.medium, size: 12))
+					.font(.custom(FontManager.Primary.medium, size: 14))
 					.padding(.bottom, spaceBetween)
 				Text(address)
 					.foregroundColor(.darkPurple)
-					.font(.custom(FontManager.Primary.bold, size: 14))
+					.font(.custom(FontManager.Primary.bold, size: 16))
 					.frame(maxWidth: expandInline ? .infinity : 180, alignment: .leading)
 					.lineLimit(3)
 			}

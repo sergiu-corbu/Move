@@ -6,51 +6,36 @@
 //
 
 import Foundation
+import SwiftUI
 import CoreNFC
 
-class NFCReader: NSObject, NFCTagReaderSessionDelegate, ObservableObject {
+class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
 	
-	@Published var scannedCode: Data?
+	//var onFinished: () -> Void
+	var session: NFCNDEFReaderSession?
 	
-	func tagReaderSessionDidBecomeActive(_ session: NFCTagReaderSession) {
-		//
-	}
-	
-	func tagReaderSession(_ session: NFCTagReaderSession, didInvalidateWithError error: Error) {
-		//
-	}
-	
-	func tagReaderSession(_ session: NFCTagReaderSession, didDetect tags: [NFCTag]) {
-		guard let firstTag = tags.first else {
-			showError(error: "No tags available")
-			return
-		}
-		session.connect(to: firstTag) { (error: Error?) in
-			if error != nil {
-				session.invalidate(errorMessage: "Connection error. Please try again")
-				return
-			}
-			showMessage(message: "connected to tag")
-			switch firstTag {
-				case .iso15693(let discoveredTag):
-					print("Got a iso 15693 tag", discoveredTag.icManufacturerCode)
-					discoveredTag.readSingleBlock(requestFlags: .highDataRate, blockNumber: 1) { result in
-						print(result)
-						//upload it
-					}
-				case .iso7816(let discoveredTag):
-					print("Got a iso 78693 tag", discoveredTag.initialSelectedAID)
-				// handle all cases
-				default:
-					session.invalidate(errorMessage: "Unsuuported tag")
-			}
-		}
-	}
-	
-	
-	func scan() {
-		let session = NFCTagReaderSession(pollingOption: [.iso14443, .iso15693, .iso18092], delegate: self)
+	override init() {
+		super.init()
+		self.session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
 		session?.begin()
 	}
-
+	
+	func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {
+		showError(error: error.localizedDescription)
+	}
+	
+	func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
+		for message in messages {
+			for record in message.records {
+				if let string = String(data: record.payload, encoding: .ascii) {
+					let afterEqual = string.firstIndex(of: "=")
+					let code = string.index(after: afterEqual!)
+					if string[code...] == "sbjelna001" {
+						//onFinished?()
+						showMessage(message: "Success")
+					}
+				}
+			}
+		}
+	}
 }

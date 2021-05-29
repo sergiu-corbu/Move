@@ -34,7 +34,13 @@ struct ValidationInfo: View {
 					Spacer()
 					Buttons.PrimaryButton(text: "Add drivig license", isLoading: userViewModel.isLoading, enabled: true, action: { showActionSheet.toggle() })
 						.sheet(isPresented: $showImagePicker) {
-							ImagePickerController(sourceType: showCamera ? .camera : .photoLibrary, image: imageBinding, isPresented: $showImagePicker)
+							ImagePicker(sourceType: showCamera ? .camera : .photoLibrary) { image in
+								userViewModel.isLoading = true
+								userViewModel.uploadImage2(image: image) {
+									authNavigation(.imageUploadCompleted)
+									self.userViewModel.isLoading = false
+								}
+							}
 						}
 						.actionSheet(isPresented: $showActionSheet, content: {
 							let camera = ActionSheet.Button.default(Text("Take picture")) {
@@ -67,17 +73,17 @@ struct ValidationInfo: View {
 		}
     }
 	
-    var imageBinding: Binding<Image?> {
-        return Binding(get: {
-			return Image("")
-		}, set: { image in
-            if let image = image {
-				userViewModel.isLoading = true
-				userViewModel.uploadImage(image: image) {
-					authNavigation(.imageUploadCompleted)
-					self.userViewModel.isLoading = false
-				}
-			}
-        })
-    }
+//    var imageBinding: Binding<Image?> {
+//        return Binding(get: {
+//			return Image("")
+//		}, set: { image in
+//            if let image = image {
+//				userViewModel.isLoading = true
+//				userViewModel.uploadImage2(image: image) {
+//					authNavigation(.imageUploadCompleted)
+//					self.userViewModel.isLoading = false
+//				}
+//			}
+//        })
+//    }
 }

@@ -3,24 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NFCReaderUsageDescription</key>
-	<string></string>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You  must grant the access for photo selection</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Your location will be displayed on the map and used for directions.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Your location will be displayed on the map and used for directions.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>BaiJamjuree-Regular.ttf</string>
-		<string>BaiJamjuree-SemiBold.ttf</string>
-		<string>BaiJamjuree-Medium.ttf</string>
-		<string>BaiJamjuree-Bold.ttf</string>
-	</array>
+	<string>Allow camera for photo upload</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -39,6 +22,21 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NFCReaderUsageDescription</key>
+	<string>allow nfc</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location will be displayed on the map and used for directions.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location will be displayed on the map and used for directions.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You  must grant the access for photo selection</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>BaiJamjuree-Regular.ttf</string>
+		<string>BaiJamjuree-SemiBold.ttf</string>
+		<string>BaiJamjuree-Medium.ttf</string>
+		<string>BaiJamjuree-Bold.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -77,5 +75,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

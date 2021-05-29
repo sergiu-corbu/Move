@@ -9,7 +9,7 @@ import NavigationStack
 import SwiftUI
 
 struct AuthCoordinator: View {
-	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
+	var navigationStack: NavigationStack
 	
 	var body: some View {
 		Onboarding { authNavigation in
@@ -53,7 +53,7 @@ struct AuthCoordinator: View {
 	}
 	
 	func mapCoodinator() {
-		navigationStack.push(MapCoordinator(bottomContainer: AnyView(EmptyView())))
+		navigationStack.push(MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView())))
 	}
 	
 	func validationSuccess() {

@@ -16,6 +16,7 @@ struct Buttons {
 		var isLoading: Bool = false
 		var enabled: Bool = false
 		var isBlackBackground: Bool = false
+		var smallProggressScale: Bool = false
 		let action: () -> Void
 		
 		var body: some View {
@@ -27,8 +28,8 @@ struct Buttons {
 						.font(enabled ? Font.custom(FontManager.Primary.bold, size: isBlackBackground ? 18 : 16) :
 								Font.custom(FontManager.Primary.medium, size: 16))
 						.frame(maxWidth: .infinity)
-						.padding(.horizontal, 46)
-							.padding(.all, 20)
+						.padding(.vertical, smallProggressScale ? 18 : 20)
+						.padding(.horizontal, smallProggressScale ? 10 : 46)
 						.background(buttonBackground)
 						if isLoading == true {
 							progressView
@@ -68,8 +69,8 @@ struct Buttons {
 		var progressView: some View {
 			ProgressView()
 				.progressViewStyle(CircularProgressViewStyle(tint: .white))
-				.frame(width: 30, height: 30)
-				.scaleEffect(1.5)
+				.frame(width: smallProggressScale ? 15 : 30, height: smallProggressScale ? 15 : 30)
+				.scaleEffect(smallProggressScale ? 1.25 : 1.5)
 				.padding(.trailing, 16)
 		}
 	}

@@ -1,5 +1,5 @@
 //
-//  TripDetail.swift
+//  TripDetails.swift
 //  Move
 //
 //  Created by Sergiu Corbu on 29.04.2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TripDetail: View {
+struct TripDetails: View {
 
 	@EnvironmentObject var tripViewModel: TripViewModel
 	@ObservedObject var stopWatch: StopWatchViewModel
@@ -47,7 +47,7 @@ struct TripDetail: View {
 					.padding(.bottom, 12)
 				HStack(spacing: 60) {
 					ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: stopWatch.tripTime, largeFrame: true)
-					ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.trip.distance.description)
+					ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.ongoingTrip.distance.description)
 				}
 			}
 			tripButtons
@@ -62,7 +62,7 @@ struct TripDetail: View {
 				NavigationBar(title: "Trip Details", color: .darkPurple, backButton: "chevron-down-img", action: {isExpanded=false})
 				ScooterCardComponents.ExpandedCard(infoText: "Battery", imageName: scooter.batteryImage, data: String(scooter.battery)+"%")
 				ScooterCardComponents.ExpandedCard(infoText: "Travel time", imageName: "time-img", data: stopWatch.tripTime)
-				ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: tripViewModel.trip.distance.description, showKMLabel: true)
+				ScooterCardComponents.ExpandedCard(infoText: "Distance", imageName: "map-img", data: tripViewModel.ongoingTrip.distance.description, showKMLabel: true)
 			}
 			tripButtons
 		}

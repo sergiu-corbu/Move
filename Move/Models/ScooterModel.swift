@@ -18,19 +18,22 @@ struct Location: Codable, Hashable {
     }
 }
 
-struct Scooter: Identifiable, Codable, Equatable, Hashable {
-	static func == (lhs: Scooter, rhs: Scooter) -> Bool {
-		return true
+struct GetSooter: Codable {
+	var scooter: Scooter
+
+	enum CodingKeys: String, CodingKey {
+		case scooter = "scooter"
 	}
+}
 
-	let id: String
-    let location: Location
-	let available: Bool
-    let locked: Bool
-	let deviceKey: String
-    let battery: Int
+struct Scooter: Identifiable, Codable, Equatable, Hashable {
+	var id: String
+    var location: Location
+    var locked: Bool
+	var deviceKey: String
+    var battery: Int
 
-    var addressName: String?
+    var addressName: String = ""
     var coordinates: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: location.coordinates[1], longitude: location.coordinates[0])
     }
@@ -57,13 +60,20 @@ struct Scooter: Identifiable, Codable, Equatable, Hashable {
     }
     
     enum CodingKeys: String, CodingKey {
-		case id = "tag"
+		case deviceKey = "uniqueNumber"
         case location = "location"
-		case available = "available"
 		case locked = "locked"
-		case deviceKey = "deviceKey"
-        case battery = "power"
+		case id = "_id"
+        case battery = "battery"
     }
+}
+
+struct Scooters: Codable {
+	var scooters: [Scooter]
+
+	enum CodingKeys: String, CodingKey {
+		case scooters = "scooters"
+	}
 }
 
 struct Cluster: Identifiable {
@@ -100,7 +110,8 @@ struct Ping: Codable {
 	let ping: Bool
 	
 	enum CodingKeys: String, CodingKey {
-		case ping = "ping"
+		case ping = "pinged"
 	}
 }
+
 

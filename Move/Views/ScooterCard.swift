@@ -10,7 +10,8 @@ import SwiftUI
 struct ScooterCard: View {
 	
 	@EnvironmentObject var mapViewModel: MapViewModel
-	let scooter: Scooter
+	
+	@State var scooter: Scooter
 	let onUnlock: () -> Void
 	
 	var body: some View {
@@ -31,28 +32,31 @@ struct ScooterCard: View {
 			}
 			.padding(.horizontal, 24)
 		}
-		.frame(width: 250, height: 290)
+		.frame(width: 240, height: 270)
 		.clipShape(RoundedRectangle(cornerRadius: 29))
 		.padding(.bottom)
 		.background(customBackground)
+		.onAppear {
+			showScooterLocation()
+		}
 	}
+	
     var scooterInfo: some View {
 		VStack(alignment: .trailing, spacing: 7) {
             Text("Scooter")
                 .font(.custom(FontManager.Primary.medium, size: 14))
                 .opacity(0.6)
-			Text("#\(scooter.id)")
+			Text("#\(scooter.deviceKey)")
                 .font(.custom(FontManager.Primary.bold, size: 20))
                 .lineLimit(1)
             HStack {
 				Image(scooter.batteryImage)
 				Text("\(scooter.battery)%")
                     .font(.custom(FontManager.Primary.medium, size: 14))
-			}.padding(.bottom, 15)
-            HStack {
-				Buttons.MapActionButton(image: "bell-img", action: {
-				//	mapViewModel.pingScooter(scooter: scooter)
-                }).padding(.trailing, 20)
+			}
+			.padding(.bottom, 10)
+			HStack(spacing: 10) {
+				Buttons.MapActionButton(image: "bell-img", action: {})
 				Buttons.MapActionButton(image: "getRoute-img", action: {})
             }
         }
@@ -62,10 +66,11 @@ struct ScooterCard: View {
     var location: some View {
         HStack(alignment: .top) {
             Image("pin-img")
-			Text("n/a")
+			Text(scooter.addressName)
                 .foregroundColor(.darkPurple)
                 .font(.custom(FontManager.Primary.medium, size: 16))
-        }.padding(.top)
+        }
+		.padding(.top, 10)
     }
 	
 	var customBackground: some View {
@@ -81,10 +86,17 @@ struct ScooterCard: View {
 				.clipShape(RoundedRectangle(cornerRadius: 29))
 		}
 	}
+	
+	 func showScooterLocation() {
+		let coordinates: [Double] = [scooter.coordinates.latitude, scooter.coordinates.longitude]
+		streetGeocode(coordinates: coordinates) { address in
+			scooter.addressName = address
+		}
+	}
 }
 
 struct ScooterCard_Previews: PreviewProvider {
     static var previews: some View {
-		ScooterCard(scooter: Scooter(id: "asdd", location: Location(coordinates: [10,2], type: "t"), available: true, locked: true, deviceKey: "fsodjn", battery: 90, addressName: nil), onUnlock: {})
+		ScooterCard(scooter: Scooter(id: "asdd", location: Location(coordinates: [10,2], type: "t"), locked: true, deviceKey: "fsodjn", battery: 90, addressName: ""), onUnlock: {})
     }
 }

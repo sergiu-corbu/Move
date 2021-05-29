@@ -39,11 +39,11 @@ struct Account: View {
             Button(action: {
 				API.logout({ result in
 					switch result {
-						case .success:
+						case true:
 							Session.tokenKey = nil
 							accountNavigation(.logoutUser)
-						case .failure(let error):
-							showError(error: error.localizedDescription)
+						case false:
+							showError(error: "Couldn't logout user")
 					}
 				})
             }, label: {
@@ -59,10 +59,4 @@ struct Account: View {
 			.padding(.bottom, 30)
         }
     }
-}
-
-struct AccountView_Previews: PreviewProvider {
-    static var previews: some View {
-		Account { _ in }
-	}
 }

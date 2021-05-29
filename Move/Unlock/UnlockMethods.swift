@@ -36,7 +36,7 @@ struct UnlockMethods: View {
 				})
 		)
 		.onAppear {
-			scooterInRange = mapViewModel.distanceToScooter < 40 ? true : false
+			scooterInRange = mapViewModel.distanceToScooter < 2000 ? true : false
 		}
 		.background(SharedElements.whiteRoundedRectangle)
     }
@@ -45,12 +45,18 @@ struct UnlockMethods: View {
 		HStack(alignment: .bottom) {
             VStack(alignment: .leading) {
 				ScooterCardComponents.scooterTitle
-				ScooterCardComponents.ScooterId.init(id: scooter.id)
+				ScooterCardComponents.ScooterId.init(id: scooter.deviceKey)
 				ScooterCardComponents.ScooterBattery(batteryImage: scooter.batteryImage, battery: scooter.battery)
 					.padding(.bottom, 10)
 				ScooterCardComponents.UnlockMiniButton(image: "bell-img", text: "Ring", showBorder: true, action: {
 					let location = mapViewModel.userLocation.coordinate
-					API.pingScooter(scooterKey: scooter.deviceKey, location: [location.latitude, location.longitude]) { _ in}
+					API.pingScooter(scooterKey: scooter.deviceKey, location: [location.latitude, location.longitude]) { result in
+						switch result {
+							case .success: print("")
+							case .failure(let error):
+								showError(error: error.localizedDescription)
+						}
+					}
 				})
 				.disabled(!scooterInRange)
 				ScooterCardComponents.UnlockMiniButton(image: "missing", text: "Missing", showBorder: true, action: { })

@@ -29,7 +29,7 @@ struct ScooterCardComponents {
 			Image("scooterCard")
 				.resizable()
 				.aspectRatio(contentMode: .fill)
-				.frame(width: 200, height: 200)
+				.frame(width: 180, height: 180)
 		}
 	}
 	
@@ -182,9 +182,9 @@ struct ScooterCardComponents {
 			HStack(spacing: 20) {
 				ScooterCardComponents.TripActionButton(text: isLockedPressed ? "Unlock" : "Lock", icon: isLockedPressed ? "unlock-img" : "lock-img", tripAction: { isLockedPressed ? onUnlockButton() : onLockButton() })
 				//ScooterCardComponents.EndTripButton(endTrip: { onEndTripButton() })
-				Buttons.PrimaryButton(text: "End", isLoading: isLoading, enabled: true, isBlackBackground: false, action: { onEndTripButton() })
+				Buttons.PrimaryButton(text: "End ride", isLoading: isLoading, enabled: true, isBlackBackground: false, smallProggressScale: true, action: { onEndTripButton() })
 			}
-			.padding(.top, 10)
+			.padding(.top, 5)
 		}
 	}
 	

@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import SwiftUI
 
 class LocationManager: NSObject, ObservableObject {
 	
@@ -36,7 +37,9 @@ class LocationManager: NSObject, ObservableObject {
 	func checkLocationAuthorization() {
 		switch locationManager.authorizationStatus {
 			case .authorizedWhenInUse, .authorizedAlways:
-				startTrackingUserLocation()
+				showUserLocation = true
+				locationManager.startUpdatingLocation()
+				geoCode()
 			case .notDetermined:
 				locationManager.requestWhenInUseAuthorization()
 			case .denied, .restricted:
@@ -45,12 +48,6 @@ class LocationManager: NSObject, ObservableObject {
 				assert(false, "handle new added case")
 				break
 		}
-	}
-	
-	func startTrackingUserLocation() {
-		showUserLocation = true
-		geoCode()
-		locationManager.startUpdatingLocation()
 	}
 	
 	func geoCode() {
@@ -77,7 +74,14 @@ extension LocationManager: CLLocationManagerDelegate {
 		DispatchQueue.main.async {
 			self.location = location
 			self.locationManager.startUpdatingLocation()
-			//self.geoCode()
+		}
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		DispatchQueue.main.async {
+			if status == .authorizedAlways || status == .authorizedWhenInUse {
+				self.checkLocationServices()
+			}
 		}
 	}
 }

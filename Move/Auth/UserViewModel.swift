@@ -11,12 +11,11 @@ import NavigationStack
 
 class UserViewModel: ObservableObject {
 	
-	@EnvironmentObject var navigationStack: NavigationStack
 	static var shared: UserViewModel = UserViewModel()
   
-	@Published var email: String = "sergiu_@icloud.com"
+	@Published var email: String = ""
     @Published var username: String = ""
-    @Published var password: String = "123456Ss"
+    @Published var password: String = ""
 	@Published var emailError = ""
 	@Published var passwordError = ""
 	@Published var newPassword: String = ""
@@ -52,7 +51,6 @@ class UserViewModel: ObservableObject {
 					callback()
 				case .failure(let error):
 					showError(error: error.localizedDescription)
-					self.clearFields()
 			}
 			self.isLoading = false
 		}
@@ -67,7 +65,6 @@ class UserViewModel: ObservableObject {
 					callback()
 				case .failure(let error):
 					showError(error: error.localizedDescription)
-					self.clearFields()
 			}
 			self.isLoading = false
 		}
@@ -76,16 +73,16 @@ class UserViewModel: ObservableObject {
 	func resetPasswordCall(_ callback: (() -> Void)? = nil) {
 		API.resetPassword(oldPassword: password, newPassword: newPassword) { result in
 			switch result {
-				case .success:
+				case true:
 					showMessage(message: "Password reset successful")
 					callback?()
-				case .failure(let error):
-					showError(error: error.localizedDescription)
+				case false:
+					showError(error: "Couldn't reset password")
 			}
 		}
 	}
 	
-	func uploadImage(image: Image, _ callback: @escaping () -> Void) {
+	func uploadImage2(image: UIImage, _ callback: @escaping () -> Void) {
 		API.uploadLicense(selectedImage: image) { result in
 			switch result {
 				case .success:
@@ -96,13 +93,7 @@ class UserViewModel: ObservableObject {
 			}
 		}
 	}
-	
-	private func clearFields() {
-		username = ""
-		password = ""
-		email = ""
-	}
-    
+	    
 	//MARK: validation
 	var editCredentialsEnabled: Bool { return email != "" && username != ""}
     var resetPasswordEnabled: Bool { return email != "" }

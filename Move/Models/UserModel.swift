@@ -52,6 +52,6 @@ struct UploadImage: Codable {
 	let licenseKey: String
 	
 	enum CodingKeys: String, CodingKey {
-		case licenseKey = "driverLicenseKey"
+		case licenseKey = "url"
 	}
 }

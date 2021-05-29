@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EC0394F7262EA9CD003668D2 /* ScooterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0394F6262EA9CD003668D2 /* ScooterCard.swift */; };
+		EC0768342661181600B2B13B /* VNDocumentCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0768332661181600B2B13B /* VNDocumentCamera.swift */; };
 		EC0A943B264EC56800F53EE6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0A943A264EC56800F53EE6 /* LocationManager.swift */; };
 		EC0B576526259DF8005F16CB /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B576426259DF8005F16CB /* Login.swift */; };
 		EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0B57732625CC73005F16CB /* ValidationSuccess.swift */; };
@@ -20,7 +21,6 @@
 		EC16143F2637148000931AF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC16143E2637148000931AF0 /* LaunchScreen.storyboard */; };
 		EC1673C42625662C007A180D /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C32625662C007A180D /* ForgotPassword.swift */; };
 		EC1673C72625802D007A180D /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1673C62625802D007A180D /* ResetPassword.swift */; };
-		EC33EABB26590F39001AAB27 /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = EC33EABA26590F39001AAB27 /* SwiftUIPager */; };
 		EC33EABD265952BA001AAB27 /* NavigationPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC33EABC265952BA001AAB27 /* NavigationPaths.swift */; };
 		EC3A259E2654FD920056A725 /* MenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A259D2654FD920056A725 /* MenuCoordinator.swift */; };
 		EC3A25A226555F8B0056A725 /* QRCameraDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3A25A126555F8B0056A725 /* QRCameraDelegate.swift */; };
@@ -31,7 +31,6 @@
 		EC53E18226580CCC00868080 /* NFCReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC53E18126580CCC00868080 /* NFCReader.swift */; };
 		EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */ = {isa = PBXBuildFile; productRef = EC5F17952626D38800A10368 /* BetterSafariView */; };
 		EC5F17992626FB7900A10368 /* ValidationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5F17982626FB7900A10368 /* ValidationInfo.swift */; };
-		EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */; };
 		EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = EC7F0EE026301A30004FF766 /* SwiftMessages */; };
 		EC7F0EE52630385C004FF766 /* UnlockMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EE42630385C004FF766 /* UnlockMethods.swift */; };
 		EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8014F226524BA30085B58A /* MapCoordinator.swift */; };
@@ -39,6 +38,7 @@
 		EC8A841C2654164D00A75BF0 /* QRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8A841B2654164D00A75BF0 /* QRViewModel.swift */; };
 		EC8A842226543DA500A75BF0 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC8A842126543DA500A75BF0 /* ExternalAccessory.framework */; };
 		EC8EDD55264C1A3C00033E9D /* MessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC8EDD54264C1A3C00033E9D /* MessageView.xib */; };
+		EC94ACFA265B91F600329B25 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC94ACF9265B91F600329B25 /* MapView.swift */; };
 		EC9C7BB426255DA200FD5605 /* SessionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */; };
 		EC9C7BB926255E5700FD5605 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C7BB826255E5700FD5605 /* UserViewModel.swift */; };
 		ECA49AB82631F58700D9D701 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49AB72631F58700D9D701 /* MapViewModel.swift */; };
@@ -46,7 +46,7 @@
 		ECA7B5E8263816CD0063C883 /* CodeUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7B5E7263816CD0063C883 /* CodeUnlock.swift */; };
 		ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */; };
 		ECB5991A264AB6A500708241 /* ScootersRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB59919264AB6A500708241 /* ScootersRow.swift */; };
-		ECB7CDBC26295CBE0081B8F4 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerController.swift */; };
+		ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */; };
 		ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC10F48262C988B006FAE6C /* ScooterModel.swift */; };
 		ECD9E5E2264D55CD0046923C /* PaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD9E5E1264D55CD0046923C /* PaymentModel.swift */; };
 		ECDAF11E2643F1C4004FF94F /* TripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */; };
@@ -69,8 +69,9 @@
 		ECDD400126242985003C659F /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD3FFF26242985003C659F /* Onboarding.swift */; };
 		ECDD400626242B49003C659F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD400526242B49003C659F /* UserModel.swift */; };
 		ECE0D234263A8CE7004C448E /* NFCUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D233263A8CE7004C448E /* NFCUnlock.swift */; };
-		ECE0D236263AC810004C448E /* TripDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D235263AC810004C448E /* TripDetail.swift */; };
+		ECE0D236263AC810004C448E /* TripDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE0D235263AC810004C448E /* TripDetails.swift */; };
 		ECE337BC26243A51009EC353 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE337BB26243A51009EC353 /* Api.swift */; };
+		ECF8C813265E4158008B9551 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = ECF8C812265E4158008B9551 /* CodeScanner */; };
 		ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFCA8492642AB5100674750 /* StartRide.swift */; };
 		ECFCA84E2642C10500674750 /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFCA84D2642C10500674750 /* TripModel.swift */; };
 		ECFCA8502642C9F600674750 /* FinishTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFCA84F2642C9F600674750 /* FinishTrip.swift */; };
@@ -78,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		EC0394F6262EA9CD003668D2 /* ScooterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterCard.swift; sourceTree = "<group>"; };
+		EC0768332661181600B2B13B /* VNDocumentCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNDocumentCamera.swift; sourceTree = "<group>"; };
 		EC0A943A264EC56800F53EE6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EC0B576426259DF8005F16CB /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		EC0B57732625CC73005F16CB /* ValidationSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationSuccess.swift; sourceTree = "<group>"; };
@@ -98,13 +100,13 @@
 		EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableScooter.swift; sourceTree = "<group>"; };
 		EC53E18126580CCC00868080 /* NFCReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCReader.swift; sourceTree = "<group>"; };
 		EC5F17982626FB7900A10368 /* ValidationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationInfo.swift; sourceTree = "<group>"; };
-		EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarConfigurator.swift; sourceTree = "<group>"; };
 		EC7F0EE42630385C004FF766 /* UnlockMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockMethods.swift; sourceTree = "<group>"; };
 		EC8014F226524BA30085B58A /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		EC8014F426524BAC0085B58A /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		EC8A841B2654164D00A75BF0 /* QRViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewModel.swift; sourceTree = "<group>"; };
 		EC8A842126543DA500A75BF0 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		EC8EDD54264C1A3C00033E9D /* MessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageView.xib; sourceTree = "<group>"; };
+		EC94ACF9265B91F600329B25 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EC9C7BB326255DA200FD5605 /* SessionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionCredentials.swift; sourceTree = "<group>"; };
 		EC9C7BB826255E5700FD5605 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		ECA49AB72631F58700D9D701 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
@@ -112,7 +114,7 @@
 		ECA7B5E7263816CD0063C883 /* CodeUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeUnlock.swift; sourceTree = "<group>"; };
 		ECA7B5EC263831A30063C883 /* UnlockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockViewModel.swift; sourceTree = "<group>"; };
 		ECB59919264AB6A500708241 /* ScootersRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScootersRow.swift; sourceTree = "<group>"; };
-		ECB7CDBB26295CBE0081B8F4 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
+		ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		ECC10F48262C988B006FAE6C /* ScooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScooterModel.swift; sourceTree = "<group>"; };
 		ECD9E5E1264D55CD0046923C /* PaymentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModel.swift; sourceTree = "<group>"; };
 		ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewModel.swift; sourceTree = "<group>"; };
@@ -135,7 +137,7 @@
 		ECDD3FFF26242985003C659F /* Onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		ECDD400526242B49003C659F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		ECE0D233263A8CE7004C448E /* NFCUnlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCUnlock.swift; sourceTree = "<group>"; };
-		ECE0D235263AC810004C448E /* TripDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetail.swift; sourceTree = "<group>"; };
+		ECE0D235263AC810004C448E /* TripDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetails.swift; sourceTree = "<group>"; };
 		ECE337BB26243A51009EC353 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		ECFCA8492642AB5100674750 /* StartRide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRide.swift; sourceTree = "<group>"; };
 		ECFCA84D2642C10500674750 /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
@@ -147,10 +149,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECF8C813265E4158008B9551 /* CodeScanner in Frameworks */,
 				EC8A842226543DA500A75BF0 /* ExternalAccessory.framework in Frameworks */,
 				ECDD3FE626242951003C659F /* NavigationStack in Frameworks */,
 				ECDD3FE226242943003C659F /* Alamofire in Frameworks */,
-				EC33EABB26590F39001AAB27 /* SwiftUIPager in Frameworks */,
 				EC0EDD5226369312006B6D9D /* Introspect in Frameworks */,
 				EC5F17962626D38800A10368 /* BetterSafariView in Frameworks */,
 				EC7F0EE126301A30004FF766 /* SwiftMessages in Frameworks */,
@@ -177,8 +179,9 @@
 			isa = PBXGroup;
 			children = (
 				EC5F17982626FB7900A10368 /* ValidationInfo.swift */,
-				ECB7CDBB26295CBE0081B8F4 /* ImagePickerController.swift */,
+				ECB7CDBB26295CBE0081B8F4 /* ImagePickerView.swift */,
 				EC0B57732625CC73005F16CB /* ValidationSuccess.swift */,
+				EC0768332661181600B2B13B /* VNDocumentCamera.swift */,
 			);
 			name = Licence;
 			path = Views;
@@ -188,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				ECDD3FFD26242985003C659F /* InteractiveMap.swift */,
+				EC94ACF9265B91F600329B25 /* MapView.swift */,
 				ECA49AB72631F58700D9D701 /* MapViewModel.swift */,
 				EC0A943A264EC56800F53EE6 /* LocationManager.swift */,
 			);
@@ -209,7 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				ECFCA8492642AB5100674750 /* StartRide.swift */,
-				ECE0D235263AC810004C448E /* TripDetail.swift */,
+				ECE0D235263AC810004C448E /* TripDetails.swift */,
 				ECFCA84F2642C9F600674750 /* FinishTrip.swift */,
 				ECDAF11D2643F1C4004FF94F /* TripViewModel.swift */,
 			);
@@ -347,7 +351,6 @@
 				EC33EABC265952BA001AAB27 /* NavigationPaths.swift */,
 				EC3BA58D2639DBAC0032A496 /* ReusableScooter.swift */,
 				EC3BA58B2639DB140032A496 /* ReusableButtons.swift */,
-				EC7F0ED82630147B004FF766 /* StatusBarConfigurator.swift */,
 				EC8EDD54264C1A3C00033E9D /* MessageView.xib */,
 				ECDD3FF226242979003C659F /* Bai_Jamjuree */,
 			);
@@ -397,7 +400,7 @@
 				EC5F17952626D38800A10368 /* BetterSafariView */,
 				EC7F0EE026301A30004FF766 /* SwiftMessages */,
 				EC0EDD5126369312006B6D9D /* Introspect */,
-				EC33EABA26590F39001AAB27 /* SwiftUIPager */,
+				ECF8C812265E4158008B9551 /* CodeScanner */,
 			);
 			productName = Move;
 			productReference = ECDD3FBA26242836003C659F /* Move.app */;
@@ -432,7 +435,7 @@
 				EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */,
 				EC7F0EDF26301A30004FF766 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 				EC0EDD5026369312006B6D9D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				EC33EAB926590F39001AAB27 /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				ECF8C811265E4158008B9551 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = ECDD3FBB26242836003C659F /* Products */;
 			projectDirPath = "";
@@ -472,11 +475,10 @@
 				EC1673C72625802D007A180D /* ResetPassword.swift in Sources */,
 				EC1614182637117C00931AF0 /* Account.swift in Sources */,
 				EC0B57742625CC73005F16CB /* ValidationSuccess.swift in Sources */,
-				ECB7CDBC26295CBE0081B8F4 /* ImagePickerController.swift in Sources */,
-				ECE0D236263AC810004C448E /* TripDetail.swift in Sources */,
+				ECB7CDBC26295CBE0081B8F4 /* ImagePickerView.swift in Sources */,
+				ECE0D236263AC810004C448E /* TripDetails.swift in Sources */,
 				EC16141A2637117C00931AF0 /* History.swift in Sources */,
 				ECA7B5ED263831A30063C883 /* UnlockViewModel.swift in Sources */,
-				EC7F0ED92630147B004FF766 /* StatusBarConfigurator.swift in Sources */,
 				ECDD3FEF26242970003C659F /* ReusableElements.swift in Sources */,
 				ECD9E5E2264D55CD0046923C /* PaymentModel.swift in Sources */,
 				EC8014F326524BA30085B58A /* MapCoordinator.swift in Sources */,
@@ -490,10 +492,12 @@
 				ECDAF120264438C0004FF94F /* StopWatch.swift in Sources */,
 				ECFCA84E2642C10500674750 /* TripModel.swift in Sources */,
 				EC0B576526259DF8005F16CB /* Login.swift in Sources */,
+				EC94ACFA265B91F600329B25 /* MapView.swift in Sources */,
 				ECFCA84A2642AB5100674750 /* StartRide.swift in Sources */,
 				EC0F8FE22638412C009D8CBB /* UnlockSuccesful.swift in Sources */,
 				EC3A25A4265562800056A725 /* QRCameraPreview.swift in Sources */,
 				EC3A259E2654FD920056A725 /* MenuCoordinator.swift in Sources */,
+				EC0768342661181600B2B13B /* VNDocumentCamera.swift in Sources */,
 				ECE337BC26243A51009EC353 /* Api.swift in Sources */,
 				EC8014F526524BAC0085B58A /* AuthCoordinator.swift in Sources */,
 				ECC10F49262C988B006FAE6C /* ScooterModel.swift in Sources */,
@@ -575,7 +579,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -630,7 +634,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -648,15 +652,15 @@
 				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Move/Preview Content\"";
-				DEVELOPMENT_TEAM = 2T3LUD4AA9;
+				DEVELOPMENT_TEAM = G7T599BH7B;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Move/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sergiucorbu.Move;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sergiucorbudev.Move;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -671,15 +675,15 @@
 				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Move/Preview Content\"";
-				DEVELOPMENT_TEAM = 2T3LUD4AA9;
+				DEVELOPMENT_TEAM = G7T599BH7B;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Move/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.sergiucorbu.Move;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sergiucorbudev.Move;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -718,14 +722,6 @@
 				minimumVersion = 0.1.3;
 			};
 		};
-		EC33EAB926590F39001AAB27 /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.0;
-			};
-		};
 		EC5F17942626D38800A10368 /* XCRemoteSwiftPackageReference "BetterSafariView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stleamist/BetterSafariView.git";
@@ -758,6 +754,14 @@
 				minimumVersion = 1.0.3;
 			};
 		};
+		ECF8C811265E4158008B9551 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.7;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -765,11 +769,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EC0EDD5026369312006B6D9D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		EC33EABA26590F39001AAB27 /* SwiftUIPager */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EC33EAB926590F39001AAB27 /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
-			productName = SwiftUIPager;
 		};
 		EC5F17952626D38800A10368 /* BetterSafariView */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -790,6 +789,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ECDD3FE426242951003C659F /* XCRemoteSwiftPackageReference "swiftui-navigation-stack" */;
 			productName = NavigationStack;
+		};
+		ECF8C812265E4158008B9551 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ECF8C811265E4158008B9551 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

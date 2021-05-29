@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVFoundation
+import CodeScanner
 
 struct QRUnlock: View {
 	
@@ -14,13 +15,27 @@ struct QRUnlock: View {
 	@State private var torchOn: Bool = false
 	
 	let onClose: () -> Void
+	let onFinish: () -> Void
 	let unlockMethod: (UnlockType) -> Void
 	
 	var body: some View {
 		ZStack {
-			QRScannerView()
-				.codeFound(callback: self.qrViewModel.onFoundQrCode(code:))
-				.edgesIgnoringSafeArea(.all)
+			CodeScannerView(codeTypes: [.qr]) { result in
+				switch result {
+					case .success(let code):
+						API.unlockScooterQR(code: code, street: "") { result in
+							switch result {
+								case .success:
+									onFinish()
+								case .failure(let error):
+									showError(error: error.localizedDescription)
+							}
+						}
+					case .failure(let error):
+						showError(error: error.localizedDescription)
+				}
+			}
+			.edgesIgnoringSafeArea(.all)
 			VStack {
 				NavigationBar(title: "Unlock scooter", color: .white, flashLight: true, backButton: "close", action: { onClose() }) {
 					if torchOn {

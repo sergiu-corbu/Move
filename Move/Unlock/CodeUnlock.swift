@@ -10,10 +10,9 @@ import Introspect
 import CoreLocation
 
 struct CodeUnlock: View {
-	
 	@StateObject var unlockViewModel: UnlockViewModel
 	@State private var isLoading: Bool = false
-
+	@State var digit: String = ""
 	let onClose: () -> Void
 	let onFinished: () -> Void
 	let unlockMethod: (UnlockType) -> Void
@@ -22,16 +21,22 @@ struct CodeUnlock: View {
 		VStack {
 			NavigationBar(title: "Unlock scooter", color: .white, backButton: "close", action: { onClose() })
 				.padding(.horizontal, 24)
-			UnlockScooterComponents.Title(title: "Enter the scooter's\nserial number")
-			UnlockScooterComponents.SubTitle(subTitle: "You can find it on the\nscooter's front panel")
-			ScrollView(showsIndicators: false) {
-				HStack {
-					ForEach(0..<4) { index in
-						DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
-							.padding(.vertical, 30)
+			GeometryReader { geometry in
+				ScrollView {
+					UnlockScooterComponents.Title(title: "Enter the scooter's\nserial number")
+						.padding(.top, geometry.size.height * 0.05)
+					UnlockScooterComponents.SubTitle(subTitle: "You can find it on the\nscooter's front panel")
+						.padding(.top, geometry.size.height * 0.026)
+					HStack {
+						ForEach(0..<4) { index in
+							DigitField(unlockViewModel: unlockViewModel, digit: digitBinding(index: index), isSelected: index == unlockViewModel.selectedIndex)
+						}
 					}
+					.padding(.top, geometry.size.height * 0.137)
+					.padding(.bottom, geometry.size.height * 0.2)
+					UnlockScooterComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "NFC", action: { unlockMethod(.nfc) }))
 				}
-				UnlockScooterComponents.UnlockRow(unlockButton1: Buttons.UnlockOptionButton(text: "QR", action: { unlockMethod(.qr) }), unlockButton2: Buttons.UnlockOptionButton(text: "NFC", action: { unlockMethod(.nfc) }))
+				.ignoresSafeArea(.keyboard, edges: .bottom)
 			}
 		}
 		.background(SharedElements.purpleBackground)
@@ -41,7 +46,7 @@ struct CodeUnlock: View {
 		.onTapGesture {
 			hideKeyboard()
 		}
-    }
+	}
 	
 	func digitBinding(index: Int) -> Binding<String> {
 		return Binding<String>.init(get: {
@@ -57,10 +62,10 @@ struct DigitField: View {
 	@ObservedObject var unlockViewModel: UnlockViewModel
 	@Binding var digit: String
 	var isSelected: Bool
-
+	
 	var body: some View {
 		TextField("", text: $digit)
-			//.keyboardType(.numberPad)
+			.keyboardType(.numberPad)
 			.accentColor(.black)
 			.autocapitalization(.none)
 			.multilineTextAlignment(.center)
@@ -72,7 +77,6 @@ struct DigitField: View {
 				textfield.delegate = self.unlockViewModel
 				if unlockViewModel.selectedIndex == 0 { textfield.becomeFirstResponder() }
 				if isSelected { textfield.becomeFirstResponder() }
-				if unlockViewModel.selectedIndex == 3 && unlockViewModel.unlockCode[3] != "" { hideKeyboard() }
 			}
 	}
 }

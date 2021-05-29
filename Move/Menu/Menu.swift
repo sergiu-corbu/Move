@@ -32,7 +32,7 @@ struct Menu: View {
         }
 		.background(Color.white.edgesIgnoringSafeArea(.all))
 		.onAppear {
-			tripViewModel.downloadTrips(pageSize: 10)
+			tripViewModel.downloadTrips()
 		}
     }
 	

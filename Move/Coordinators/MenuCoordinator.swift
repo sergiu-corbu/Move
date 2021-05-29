@@ -11,7 +11,7 @@ import NavigationStack
 struct MenuCoordinator: View {
 	
 	@EnvironmentObject var tripViewModel: TripViewModel
-	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
+	@ObservedObject var navigationStack: NavigationStack
 	
     var body: some View {
 		Menu { menuNavigation in
@@ -30,7 +30,7 @@ struct MenuCoordinator: View {
 			case .goToHistory:
 				goToHistory()
 			case .logoutUser:
-				navigationStack.push(AuthCoordinator())
+				navigationStack.push(ContentView())
 		}
 	}
 

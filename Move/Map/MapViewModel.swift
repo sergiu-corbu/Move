@@ -11,14 +11,25 @@ import NavigationStack
 
 class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 	
-	@ObservedObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
-	@Published var locationManager = LocationManager()
+	let locationManager = LocationManager()
 	@Published var clusters: [Cluster] = []
 	@Published var selectedScooter: Scooter?
 	
+	override init() {
+		super.init()
+		self.reloadData()
+	}
+	
+	var location: CLLocationCoordinate2D? {
+		didSet {
+			if oldValue == nil {
+				reloadData()
+			}
+		}
+	}
+	
 	var userLocation: CLLocation {
 		guard let location = locationManager.locationManager.location else {
-			showError(error: "Cannot get user location")
 			return CLLocation(latitude: 0, longitude: 0)
 		}
 		return CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
@@ -43,7 +54,7 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 		for i in 0..<scooters.count {
 			var cluster: Cluster = Cluster()
 			for j in i + 1..<scooters.count {
-				if scooters[i].scooterLocation.distance(from: scooters[j].scooterLocation) < 40 && !scooters[j].isInCluster { // add battery > 20
+				if scooters[i].scooterLocation.distance(from: scooters[j].scooterLocation) < 200 && !scooters[j].isInCluster {
 					if !scooters[i].isInCluster {
 						cluster.scooters.append(scooters[i])
 						cluster.scooters.append(scooters[j])
@@ -62,29 +73,33 @@ class MapViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
 		self.clusters = clusters.filter( { !$0.scooters.isEmpty })
 	}
 	
-	func selectScooter(scooter: Scooter) {
-		locationGeocode(location: scooter.coordinates) { address in
-			var scooter = scooter
-			scooter.addressName = address
-			self.selectedScooter = scooter
+	func reloadData() {
+		if Session.tokenKey != nil {
+			getAvailableScooters()
+			DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+				self.reloadData2()
+			})
 		}
 	}
 	
-	func reloadData() {
-		getAvailableScooters()
-		DispatchQueue.main.asyncAfter(deadline: .now() + 60, execute: {
-			self.reloadData()
-		})
+	func reloadData2() {
+		if Session.tokenKey != nil {
+			getAvailableScooters()
+			DispatchQueue.main.asyncAfter(deadline: .now() + 25) {
+				self.reloadData2()
+			}
+		}
 	}
 	
 	func getAvailableScooters() {
 		API.getScooters(coordinates: userCoordinates) { result in
 			switch result {
 				case .success(let scooters):
-					self.makeClusters(scooterList: scooters)
+					self.makeClusters(scooterList: scooters.scooters)
 				case .failure(let error):
-					handleFailure(error: error, navigationStack: self.navigationStack)
+					showError(error: error.localizedDescription)
 			}
 		}
 	}
 }
+

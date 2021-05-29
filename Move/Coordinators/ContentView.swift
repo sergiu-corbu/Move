@@ -6,18 +6,23 @@
 //
 import SwiftUI
 import NavigationStack
+import MapKit
 
 struct ContentView: View {
-	@StateObject var navigationStack: NavigationStack = SceneDelegate.navigationStack
-
+	
+	@StateObject var navigationStack: NavigationStack = NavigationStack()
+	
 	var body: some View {
 		if Session.tokenKey != nil && Session.licenseVerified {
 			NavigationStackView(navigationStack: navigationStack) {
-				MapCoordinator(bottomContainer: AnyView(EmptyView()))
+				MapCoordinator(navigationStack: navigationStack, bottomContainer: AnyView(EmptyView()))
+					.onReceive(Session.shared.objectWillChange) { _ in
+						navigationStack.push(ContentView())
+				}
 			} } else {
 				NavigationStackView(navigationStack: navigationStack) {
-					AuthCoordinator()
+					AuthCoordinator(navigationStack: navigationStack)
 				}
-			}
+		}
 	}
 }

@@ -12,31 +12,19 @@ import CoreLocation
 struct FinishTrip: View {
 	
 	@EnvironmentObject var tripViewModel: TripViewModel
+	@State private var tripRegion = CLLocationCoordinate2D(latitude: 46.75618, longitude: 23.5948)
 	@State var isLoading: Bool = false
-	@State var tripRegion: MKCoordinateRegion
 	
 	let onFinish: () -> Void
 	
-	var startLocation: TripLocation {
-		return TripLocation(coordinates: CLLocationCoordinate2D(latitude: 46.760628, longitude: 23.586817), image: Image("startArrow"))
-	}
-	
-	var endLocation: TripLocation {
-		return TripLocation(coordinates: CLLocationCoordinate2D(latitude: 46.756210, longitude: 23.594485), image: Image("endPin"))
-
-	}
-	var annotations: [TripLocation] {
-		return [startLocation, endLocation]
-	}
-
     var body: some View {
-		VStack(alignment: .leading, spacing: 30) {
+		VStack(alignment: .leading, spacing: 20) {
 			NavigationBar(title: "Trip Summary", color: .darkPurple)
 			tripMap
 			tripBoundaries
 			tripData
 			Spacer()
-			Buttons.PrimaryButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: { initiatePayment() })
+			Buttons.PrimaryButton(text: "Pay with", isLoading: isLoading, enabled: true, isBlackBackground: true, action: { onFinish() })
 		} 
 		.padding(.horizontal, 24)
 		.background(SharedElements.whiteBackground)
@@ -47,53 +35,41 @@ struct FinishTrip: View {
 			RoundedRectangle(cornerRadius: 16)
 				.fill(Color.fadePurple)
 				.opacity(0.15)
-				.padding(.vertical, 5)
-				.frame(height: 140)
+				.padding(.vertical, 10)
+				.frame(height: 170)
 				.overlay(tripStreets)
 		}
 	}
 	
 	var tripMap: some View {
-		Map(coordinateRegion: $tripRegion, annotationItems: annotations) { item in
-			MapAnnotation(coordinate: item.coordinates) {
-				item.image
-			}
-		}
-		.frame(height: 170)
-		.clipShape(RoundedRectangle(cornerRadius: 16))
+		MapView(centerCoordinate: $tripViewModel.centerCoordinate, locations: tripViewModel.tripLocations)
+			.frame(height: 180)
+			.clipShape(RoundedRectangle(cornerRadius: 30))
+			.padding(.top, 15)
 	}
 	
 	var tripStreets: some View {
 		VStack(alignment: .leading) {
-			TripReusable.TripLocation(infoText: "From", address: tripViewModel.trip.startStreet, spaceBetween: 0.5, expandInline: true)
-				.padding(.top, 10)
-			TripReusable.TripLocation(infoText: "To", address: tripViewModel.trip.startStreet, spaceBetween: 0.5, expandInline: true)
-				.padding(.bottom, 10)
+			TripReusable.TripLocation(infoText: "From", address: tripViewModel.endTrip.startStreet, spaceBetween: 0.5, expandInline: true)
+			TripReusable.TripLocation(infoText: "To", address: tripViewModel.endTrip.endStreet, spaceBetween: 0.5, expandInline: true)
 		}
 	}
 	
 	var tripData: some View {
 		HStack(spacing: 55) {
-			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: convertTime(time: tripViewModel.trip.time), fontSize: 16)
-			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.trip.distance.description, fontSize: 16)
+			ScooterCardComponents.TripInfo(infoText: "Travel time", imageName: "time-img", time: formatTime(string: tripViewModel.endTrip.duration), fontSize: 16)
+			ScooterCardComponents.TripInfo(infoText: "Distance", imageName: "map-img", distance: tripViewModel.endTrip.distance.description, fontSize: 16)
 		}
 	}
 
 	func initiatePayment() {
 		isLoading = true
-		let paymentHander = Payment(totalPrice: tripViewModel.trip.price)
-		paymentHander.startPayment { (success) in
+		let paymentHander = Payment()
+		paymentHander.startPayment(price: "12.4") { (success) in
 			isLoading = false
-			if success {
-				showMessage(message: "Payment done")
-			}
-			else {
-				showError(error: "Paymant Failed")
-			}
-			DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-				onFinish()
-			})
-			
+			if success { showMessage(message: "Payment done") }
+			else { showError(error: "Paymant Failed") }
+			DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { onFinish() })
 		}
 	}
 }

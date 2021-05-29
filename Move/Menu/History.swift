@@ -23,11 +23,11 @@ struct History: View {
 			})
 			ScrollView(showsIndicators: false) {
 				PullToRefresh(coordinateSpace: "pullToRefresh") {
-					tripViewModel.downloadTrips(pageSize: pageSize)
-					self.pageSize += 10
+					tripViewModel.downloadTrips()
+					//self.pageSize += 10
 				}
-				ForEach(0..<tripViewModel.trip.allTrips.count, id: \.self) { index in
-					TripCard(trip: tripViewModel.trip.allTrips[index])
+				ForEach(0..<tripViewModel.tripCount, id: \.self) { index in
+					TripCard(trip: tripViewModel.allTrips[index])
 				}
 			}
 			.coordinateSpace(name: "pullToRefresh")
@@ -39,7 +39,7 @@ struct History: View {
 
 struct TripCard: View {
 	
-	@State var trip: Trip
+	@State var trip: TripsHistory.Booking
 	
 	var body: some View {
 		ZStack {
@@ -73,8 +73,9 @@ struct TripCard: View {
 	
 	var tripTime: some View {
 		VStack(alignment: .leading) {
-			TripReusable.TripData(infoText: "Travel time", data: String(trip.duration/100000), showTime: true)
-			TripReusable.TripData(infoText: "Distance", data: String(trip.distance)).padding(.top, 16)
+			TripReusable.TripData(infoText: "Travel time", data: formatTime(string: trip.tripTime), showTime: true)
+			TripReusable.TripData(infoText: "Distance", data: trip.distance.description)
+				.padding(.top, 16)
 		}
 	}
 }

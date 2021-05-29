@@ -11,7 +11,7 @@ import Introspect
 
 struct Register: View {
 	
-	@StateObject var userViewModel = UserViewModel()
+	@ObservedObject var userViewModel = UserViewModel.shared
     @State private var termsPresented: Bool = false
     @State private var privacyPresented: Bool = false
 	
@@ -27,9 +27,11 @@ struct Register: View {
 				Buttons.PrimaryButton(text: "Get started", isLoading: userViewModel.isLoading, enabled: userViewModel.allfieldsCompletedRegister, action: { buttonTapped() })
 				AuthComponents.SwitchAuthProcess(questionText: "You already have an account? You can", solutionText: "log in here", action: { authNavigation(.switchToLogin)
 				})
+				.ignoresSafeArea(.keyboard, edges: .bottom)
             }
             Spacer()
         }
+		.colorScheme(.dark)
 		.onTapGesture { hideKeyboard() }
         .padding(.horizontal, 24)
 		.background(SharedElements.purpleBackground)
@@ -85,5 +87,6 @@ struct Register: View {
 struct Register_Previews: PreviewProvider {
     static var previews: some View {
 		Register { _ in}
+			
 	}
 }

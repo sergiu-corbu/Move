@@ -21,28 +21,25 @@ func unwrapScooter(scooter: Scooter?, _ callback: @escaping (Scooter) -> Void) {
 	callback(scooter)
 }
 
-func locationGeocode(location coordinates: CLLocationCoordinate2D, _ completion: @escaping (String) -> Void) {
-	let geocoder = CLGeocoder()
-	let scooterLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
-	geocoder.reverseGeocodeLocation(scooterLocation) { (placemarks, error) in
-		if let error = error {
-			showError(error: error.localizedDescription)
-			return
-		}
-		guard let placemark = placemarks?.first else { return }
-		let streetName: String = placemark.thoroughfare ?? "n/a"
-		let streetNumber: String = placemark.subThoroughfare ?? "n/a"
-		let result = streetName + " " + streetNumber
-		completion(result)
-	}
+func formatTime(string: String) -> String {
+	let time: String.SubSequence = string.suffix(5)
+	return String(time)
 }
 
-func handleFailure(error: APIError, navigationStack: NavigationStack, hideError: Bool = false) {
-	if error.localizedDescription == "You are not authorized to access this resource." {
-		navigationStack.push(AuthCoordinator())
-		showError(error: "User suspended")
-	} else if !hideError {
-		showError(error: error.localizedDescription)
+func streetGeocode(coordinates: [Double], _ completion: @escaping (String) -> Void) {
+	let geocoder = CLGeocoder()
+	let locationCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: coordinates[0], longitude: coordinates[1])
+	let location = CLLocation(latitude: locationCoord.latitude, longitude: locationCoord.longitude)
+	
+	geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+		guard let placemark = placemarks?.first else {
+			showError(error: "could not reverse geocode")
+			return
+		}
+		let streetName: String = placemark.thoroughfare ?? ""
+		let streetNumber: String = placemark.subThoroughfare ?? ""
+		let result = streetName + " " + streetNumber
+		completion(result)
 	}
 }
 
@@ -53,7 +50,7 @@ func convertTime(time: Int) -> String {
 //MARK: MapDefaultRegion
 extension MKCoordinateRegion {
 	static var defaultRegion: MKCoordinateRegion {
-		MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.753498, longitude: 23.59), latitudinalMeters: 4000, longitudinalMeters: 4000)
+		MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 46.753498, longitude: 23.59), latitudinalMeters: 2000, longitudinalMeters: 2000)
 	}
 }
 

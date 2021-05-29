@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "CodeScanner",
+        "repositoryURL": "https://github.com/twostraws/CodeScanner",
+        "state": {
+          "branch": null,
+          "revision": "a2144ddaa7c43a6ee00873edd4cc7815ad97942f",
+          "version": "1.0.7"
+        }
+      },
+      {
         "package": "SwiftMessages",
         "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages",
         "state": {
@@ -44,15 +53,6 @@
           "branch": null,
           "revision": "eb95be334b855f682ce8a2f9acb62d2c7123d483",
           "version": "1.0.3"
-        }
-      },
-      {
-        "package": "SwiftUIPager",
-        "repositoryURL": "https://github.com/fermoya/SwiftUIPager.git",
-        "state": {
-          "branch": null,
-          "revision": "80a31d0e6d95f7216eb7bfe16f66d8b533fe857b",
-          "version": "2.2.0"
         }
       }
     ]
