@@ -54,32 +54,6 @@ extension MKCoordinateRegion {
 	}
 }
 
-//MARK: swiftui view to UIView
-extension View {
-	func uiImage() -> UIImage {
-		let controller = UIHostingController(rootView: self)
-		controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
-		UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
-		let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
-		controller.view.bounds = CGRect(origin: .zero, size: size)
-		controller.view.sizeToFit()
-		
-		let image = controller.view.uiImage()
-		controller.view.removeFromSuperview()
-		return image
-	}
-}
-
-//MARK: UIView to UIImage
-extension UIView {
-	func uiImage() -> UIImage {
-		let renderer = UIGraphicsImageRenderer(bounds: bounds)
-		return renderer.image { rendererContext in
-			layer.render(in: rendererContext.cgContext)
-		}
-	}
-}
-
 //MARK: SwiftMessages
 public func showError(error: String) {
 	let view = MessageView.viewFromNib(layout: .messageView, bundle: Bundle.main)
@@ -144,11 +118,17 @@ extension Color {
 
 struct FontManager {
     struct Primary {
-        static let regular = "BaiJamjuree-Regular"
+		static let regular = "BaiJamjuree-Regular"
         static let bold = "BaiJamjuree-Bold"
         static let semiBold = "BaiJamjuree-SemiBold"
         static let medium = "BaiJamjuree-Medium"
     }
+}
+
+extension Font {
+	static var bayJ24: Font {
+		Font.custom("BaiJamjuree-SemiBold", size: 24)
+	}
 }
 
 //MARK: Rounded corners

@@ -16,10 +16,7 @@ class QRCameraDelegate: NSObject, AVCaptureMetadataOutputObjectsDelegate {
 	var mockData: String?
 	
 	func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-		if let metadataObject = metadataObjects.first {
-			guard let readableObject = metadataObjects as? AVMetadataMachineReadableCodeObject else { return }
-			guard let stringValue = readableObject.stringValue else { return  }
-			//found
+		if metadataObjects.first != nil {
 		}
 	}
 	

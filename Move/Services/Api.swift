@@ -206,8 +206,6 @@ class API {
 	static func uploadLicense(selectedImage: UIImage, _ callback: @escaping (Result<UploadImage>) -> Void) {
 		requestBody { header in
 			let path = baseUrl + "user/upload"
-			//let uiImage = selectedImage.uiImage()
-			//let imageData = uiImage.jpegData(compressionQuality: 0.85)
 			let imageData = selectedImage.jpegData(compressionQuality: 0.85)
 			AF.upload(multipartFormData: { multipartFormData in
 						if let data = imageData {
